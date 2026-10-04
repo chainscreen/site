@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AML Crypto Enforcement: EU Fines & Cases | ChainScreen</title>
+<meta name="description" content="Updated 2026 crypto AML enforcement cases: Binance, BitMEX, Tornado Cash, Paxful, Samourai Wallet, Cartier, CySEC. Lessons for EU CASPs.">
+<link rel="canonical" href="https://chainscreen.io/operations/crypto-aml-enforcement-cases-eu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Crypto Compliance Enforcement Cases in the EU: Lessons from Real Penalties">
+<meta property="og:description" content="Real enforcement cases against crypto companies. Binance, BitMEX, Tornado Cash, Paxful, Samourai Wallet, Cartier, and CySEC supervisory signals for small CASPs.">
+<meta property="og:url" content="https://chainscreen.io/operations/crypto-aml-enforcement-cases-eu">
+<meta property="og:image" content="https://chainscreen.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="ChainScreen">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chainscreen.io/og-image.png">
+<script defer src="https://u.vigilcom.dev/script.js" data-website-id="df019ee1-bf37-42db-be6c-93671ff213ec"></script>
+<meta name="twitter:title" content="Crypto Compliance Enforcement Cases in the EU: Lessons from Real Penalties">
+<meta name="twitter:description" content="Real enforcement cases against crypto companies. What went wrong, what regulators found, and how small CASPs can prepare for MiCA inspections.">
+<meta property="article:published_time" content="2026-08-17">
+<meta property="article:modified_time" content="2026-08-17">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Crypto Compliance Enforcement Cases in the EU: Lessons from Real Penalties","description":"Real enforcement cases against crypto companies in Europe and beyond. What went wrong, what regulators found, and how small CASPs can avoid the same fate under MiCA.","datePublished":"2026-03-13","dateModified":"2026-08-17","wordCount":3370,"author":{"@type":"Person","name":"Katerina Bletsch","url":"https://chainscreen.io","jobTitle":"Founder","sameAs":["https://www.linkedin.com/in/katerina-bletsch/"]},"publisher":{"@type":"Organization","name":"ChainScreen","url":"https://chainscreen.io","logo":{"@type":"ImageObject","url":"https://chainscreen.io/og-image.png"}}}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the maximum fine for a CASP under MiCA?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "MiCA (Regulation 2023/1114) requires Member States to give competent authorities powers to impose maximum administrative fines of at least EUR 5,000,000 or a percentage of annual turnover for many legal-entity infringements, depending on the article breached. This is a ceiling framework, not an automatic minimum fine. Natural-person maximums can reach at least EUR 700,000 for many infringements and higher for market-abuse breaches. Member States may set higher maximums."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can directors be held personally liable for AML failures at a crypto company?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. MiCA Article 111 includes penalties and management-function bans for natural persons responsible for infringements, and national AML/criminal law can add further exposure. The BitMEX case demonstrates this in practice: CEO Arthur Hayes pleaded guilty to BSA violations and was sentenced to six months of home detention plus a $10 million personal fine. The three BitMEX co-founders collectively paid $30 million in personal penalties via CFTC proceedings."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Has CySEC fined any CASPs specifically for sanctions screening failures?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "As of July 10, 2026, CySEC has not publicly disclosed fines specifically against CASPs for sanctions screening failures. However, CySEC's March 2025 activity update reported more than 850 on-site and remote thematic audits in 2024 and approximately EUR 2.76 million in total administrative fines across regulated entities. Circular C685 also sets clear expectations for sanctions screening systems. The absence of public CASP-specific cases does not mean the risk is low."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What sanctions lists must an EU-licensed CASP screen against?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "EBA Guidelines GL/2024/15 require CASPs to have systems for compliance with applicable Union and national restrictive measures. The EU consolidated financial sanctions list is the practical source for EU financial-sanctions screening. UN, OFAC, OFSI, or other third-country lists may also be required by local law, group policy, correspondent-banking requirements, or risk appetite, but they are not a universal MiCA requirement."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How often should a CASP re-screen existing customers and wallets against updated sanctions lists?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "EBA Guidelines GL/2024/15 require CASPs to screen existing customers when designations or restrictive measures change and to keep evidence of screening decisions. The EU consolidated list and third-country lists can change without a fixed cadence, so automated list-update triggers are easier to evidence than a purely periodic manual batch."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://chainscreen.io"},{"@type":"ListItem","position":2,"name":"Operations","item":"https://chainscreen.io/operations/"},{"@type":"ListItem","position":3,"name":"Crypto Compliance Enforcement Cases in the EU: Lessons from Real Penalties"}]}
+</script>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-alt: #f8fafc;
+    --surface: #ffffff;
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --text: #0c1d36;
+    --text-body: #475569;
+    --text-muted: #94a3b8;
+    --accent: #0c2340;
+    --accent-hover: #143a65;
+    --accent-light: #edf2f9;
+    --teal: #0f766e;
+    --teal-light: #f0fdf4;
+    --code-bg: #091a30;
+    --code-surface: #0c2340;
+    --red: #dc2626;
+    --red-light: #fef2f2;
+    --font-serif: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-code: 'JetBrains Mono', 'SF Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  
+  header {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: var(--font-code);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--accent-hover); }
+
+  .nav-link {
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover { color: var(--text); }
+
+  
+  .article-header {
+    padding: 80px 0 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .article-header__eyebrow {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--teal);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .article-header h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+
+  .article-header__sub {
+    font-size: 17px;
+    color: var(--text-body);
+    max-width: 640px;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .article-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: var(--font-code);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.01em;
+  }
+
+  .article-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .article-meta__dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--teal);
+    flex-shrink: 0;
+  }
+
+  
+  .article-body {
+    padding: 48px 0 72px;
+  }
+
+  .article-body h2 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-top: 48px;
+    margin-bottom: 16px;
+    line-height: 1.3;
+    color: var(--text);
+  }
+
+  .article-body h3 {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 32px;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+
+  .article-body p {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .article-body ul, .article-body ol {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+    padding-left: 24px;
+  }
+
+  .article-body li {
+    margin-bottom: 6px;
+  }
+
+  .article-body a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+  }
+
+  .article-body a:hover {
+    color: var(--accent-hover);
+  }
+
+  .article-body strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .article-body code {
+    font-family: var(--font-code);
+    font-size: 13px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--accent);
+  }
+
+  
+  .callout {
+    margin: 28px 0;
+    padding: 24px 28px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .callout p {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .callout p:last-child {
+    margin-bottom: 0;
+  }
+
+  .callout--warning {
+    background: var(--red-light);
+    border: 1px solid #fecaca;
+  }
+
+  .callout--warning .callout__label {
+    color: var(--red);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--info {
+    background: var(--accent-light);
+    border: 1px solid #c7d5e8;
+  }
+
+  .callout--info .callout__label {
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--teal {
+    background: var(--teal-light);
+    border: 1px solid #bbf7d0;
+  }
+
+  .callout--teal .callout__label {
+    color: var(--teal);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  
+  .comparison-wrapper {
+    margin: 28px 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .comparison th, .comparison td {
+    padding: 13px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .comparison tr:last-child td { border-bottom: none; }
+
+  .comparison th {
+    color: var(--text-muted);
+    font-family: var(--font-code);
+    font-weight: 500;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--bg-alt);
+  }
+
+  .comparison td:first-child {
+    color: var(--text);
+    font-weight: 500;
+    font-size: 13px;
+  }
+
+  .check { color: var(--teal); font-weight: 600; }
+  .cross { color: var(--red); font-weight: 600; }
+  .na { color: var(--text-muted); }
+
+  
+  .timeline {
+    margin: 28px 0;
+    padding: 0;
+    list-style: none;
+    border-left: 2px solid var(--border);
+    padding-left: 24px;
+  }
+
+  .timeline li {
+    position: relative;
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-body);
+  }
+
+  .timeline li::before {
+    content: '';
+    position: absolute;
+    left: -29px;
+    top: 8px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+  }
+
+  .timeline li strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .timeline .timeline__date {
+    display: block;
+    font-family: var(--font-code);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+    margin-bottom: 2px;
+  }
+
+  
+  blockquote {
+    margin: 24px 0;
+    padding: 20px 24px;
+    border-left: 3px solid var(--border-strong);
+    background: var(--bg-alt);
+    border-radius: 0 8px 8px 0;
+  }
+
+  blockquote p {
+    font-size: 14px;
+    color: var(--text-body);
+    font-style: italic;
+    margin-bottom: 0;
+  }
+
+  blockquote cite {
+    display: block;
+    margin-top: 8px;
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-style: normal;
+    color: var(--text-muted);
+  }
+
+  
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  
+  .cta-banner {
+    margin: 48px 0;
+    padding: 40px 36px;
+    background: var(--code-bg);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .cta-banner h3 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: #f1f5f9;
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .cta-banner p {
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 24px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 28px;
+    background: #fff;
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary:hover {
+    background: #f1f5f9;
+    color: var(--accent);
+  }
+
+  
+  .sources {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .sources h3 {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .sources ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sources li {
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 4px 0;
+    line-height: 1.6;
+  }
+
+  .sources li a {
+    color: var(--text-body);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .sources li a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  
+  .faq-section {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .faq-section h2 {
+    margin-top: 0;
+  }
+
+  .faq-item {
+    margin-bottom: 24px;
+    padding: 20px 24px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+
+  .faq-item h3 {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 0;
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+
+  .faq-item p {
+    font-size: 14px;
+    color: var(--text-body);
+    line-height: 1.7;
+    margin-bottom: 0;
+  }
+
+  
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--text); }
+
+  
+  @media (max-width: 640px) {
+    .article-header { padding: 48px 0 32px; }
+    .article-header h1 { font-size: 1.8rem; }
+    .article-body h2 { font-size: 20px; }
+    .article-meta { gap: 12px; }
+    .comparison { font-size: 11px; }
+    .comparison th, .comparison td { padding: 8px 10px; }
+    .callout { padding: 20px; }
+    .cta-banner { padding: 32px 24px; }
+    .timeline { padding-left: 18px; }
+  }
+
+  
+  .breadcrumb { padding: 12px 0; border-bottom: 1px solid var(--border); background: var(--bg-alt); }
+  .breadcrumb a, .breadcrumb span { font-family: var(--font-code); font-size: 11px; letter-spacing: 0.01em; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb__sep { color: #cbd5e1; margin: 0 6px; }
+  .breadcrumb__current { color: var(--text-body); }
+
+  
+  .nav-links { display: flex; align-items: center; gap: 20px; }
+  .nav-link.active { color: var(--text); }
+  @media (max-width: 640px) { .nav-links { gap: 12px; } .nav-link { font-size: 11px; } }
+
+  
+  .related-articles { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+  .related-articles h3 { font-family: var(--font-code); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 16px; margin-top: 0; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .related-card { display: flex; flex-direction: column; gap: 8px; padding: 20px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; transition: border-color 0.2s; }
+  .related-card:hover { border-color: var(--accent); }
+  .related-card__tag { font-family: var(--font-code); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--teal); }
+  .related-card__title { font-family: var(--font-serif); font-size: 15px; color: var(--text); line-height: 1.35; }
+  .related-card__arrow { font-family: var(--font-code); font-size: 12px; color: var(--text-muted); margin-top: auto; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="/" class="logo">chain<span>screen</span></a>
+    <nav class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/regulations/" class="nav-link">Regulations</a>
+      <a href="/operations/" class="nav-link active">Operations</a>
+      <a href="/tools/" class="nav-link">Tools</a>
+      <a href="/technical/" class="nav-link">Technical</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <div class="container">
+    <a href="/">Home</a><span class="breadcrumb__sep">/</span>
+    <a href="/operations/">Operations</a><span class="breadcrumb__sep">/</span>
+    <span class="breadcrumb__current">Enforcement Cases</span>
+  </div>
+</nav>
+
+<section class="article-header">
+  <div class="container">
+    <div class="article-header__eyebrow">Enforcement &amp; Risk</div>
+    <h1>Crypto Compliance Enforcement Cases in the EU: Lessons from Real Penalties</h1>
+    <p class="article-header__sub">
+      Crypto companies are now firmly in scope for AML and sanctions enforcement. Here are real cases, updated on July 10, 2026, and what they teach small CASPs about what happens when compliance falls short.
+    </p>
+    <div class="article-meta">
+      <span><div class="article-meta__dot"></div> Updated July 2026</span>
+      <span><div class="article-meta__dot"></div> 9 min read</span>
+      <span><div class="article-meta__dot"></div> Sources: DNB, DOJ, FinCEN, Treasury/OFAC, CySEC, EBA, EUR-Lex</span>
+    </div>
+  </div>
+</section>
+
+<article class="article-body">
+  <div class="container">
+
+    <h2>Why is AML enforcement accelerating — and why is crypto next?</h2>
+
+    <p>
+      AML enforcement against financial institutions is not new. What is new is the speed at which regulators are extending that enforcement logic to crypto-asset service providers. The strongest evidence is not aggregate market commentary; it is the official enforcement record: FinCEN's Paxful penalty, DOJ's Samourai Wallet sentences, DOJ's 2026 Cartier sentence, and CySEC's 2024 supervisory activity.
+    </p>
+
+    <p>
+      The pattern is clear: regulators have spent years building frameworks (AMLD5, AMLD6, MiCA, EBA guidelines), and now they are enforcing them. For crypto companies, the question is no longer "will there be enforcement?" but "when will it reach us?"
+    </p>
+
+    <p>
+      The answer, for EU-licensed CASPs, is: the inspection infrastructure is already in place. CySEC's official March 2025 activity update says its Supervision and AML/CFT Departments carried out more than 850 on-site and remote thematic audits in 2024, imposed approximately EUR 2.76 million in administrative fines across regulated entities, requested corrective measures in 321 cases, and instructed more than 70 supervised entities to implement specific AML/CFT measures.
+    </p>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">What changed in 2025-2026</div>
+      <p>
+        The Tornado Cash sanctions status changed: Treasury/OFAC removed the economic sanctions on March 21, 2025. But the criminal cases did not disappear. Roman Storm was convicted on August 6, 2025, and DOJ brought additional crypto AML cases through late 2025 and 2026.
+      </p>
+    </div>
+
+    <p>
+      The cases below are not hypothetical scenarios. Each one represents real regulatory action, real fines, and real consequences for the people involved. They span different jurisdictions and different failure modes, but the lessons for small CASPs are consistent.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>What went wrong in key enforcement cases — and what did it cost?</h2>
+
+    <h3>1. Binance -- EUR 3.3 million fine (Netherlands, 2022)</h3>
+
+    <p>
+      In July 2022, De Nederlandsche Bank (DNB) fined Binance EUR 3.3 million for offering crypto services in the Netherlands without registration. The breach spanned from May 2020 to at least December 2021 -- over 18 months of operating without authorization.
+    </p>
+
+    <p>
+      DNB applied its most severe penalty category (Category 3) and set the fine near the upper limit of the EUR 2-4 million range. The reasons: Binance had a "very large number of customers in the Netherlands," daily trading volumes of $13.7 billion, and gained a competitive advantage by avoiding supervision costs and levies that registered firms paid. DNB reduced the fine by 5% because Binance eventually cooperated and was transparent about its operations.
+    </p>
+
+    <div class="callout callout--info">
+      <div class="callout__label">Lesson for CASPs</div>
+      <p>
+        Registration is not optional. Even if your primary operations are elsewhere, serving customers in an EU member state triggers local registration requirements. "We didn't know we needed to register" is not a defense -- DNB explicitly warned Binance in August 2021 before issuing the fine.
+      </p>
+    </div>
+
+    <p>
+      This was only the beginning for Binance. In November 2023, the U.S. Department of Justice announced a <strong>$4.3 billion</strong> resolution after Binance pleaded guilty to BSA, money-transmission, and sanctions violations. Founder Changpeng "CZ" Zhao pleaded guilty to violating the Bank Secrecy Act, paid a personal $50 million fine, stepped down as CEO, and was sentenced to four months in prison. FinCEN separately assessed a $3.4 billion civil money penalty and later told Congress that Binance failed to file well over 100,000 SARs while instructing staff to never file SARs.
+    </p>
+
+    <h3>2. BitMEX -- $100 million settlement (US, 2021)</h3>
+
+    <p>
+      On August 10, 2021, the CFTC and FinCEN jointly imposed a $100 million civil monetary penalty on BitMEX for violations of the Commodity Exchange Act and the Bank Secrecy Act. This was FinCEN's first enforcement action against a futures commission merchant in the crypto space.
+    </p>
+
+    <p>
+      The failures were systematic. FinCEN found that BitMEX:
+    </p>
+
+    <ul>
+      <li>Failed to implement a written AML program despite leadership being aware of obligations since the company's founding</li>
+      <li>Failed to implement a customer identification program (CIP)</li>
+      <li>Failed to meet SAR reporting obligations and had to conduct a SAR lookback review covering transactions from November 2014 through December 2020</li>
+      <li>Denied law enforcement critical information needed for investigations</li>
+    </ul>
+
+    <p>
+      The penalty structure was notable: $80 million was due immediately, with $20 million suspended pending completion of a SAR lookback review and independent consultant review of BitMEX's AML controls.
+    </p>
+
+    <p>
+      The corporate criminal case continued after the civil settlement. BitMEX pleaded guilty in July 2024 to violating the BSA by willfully failing to establish, implement, and maintain an adequate AML program, and DOJ announced in January 2025 that the company was sentenced to a $100 million fine and two years of probation.
+    </p>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">Personal liability</div>
+      <p>
+        CEO Arthur Hayes pleaded guilty to BSA violations in February 2022. He was sentenced to six months of home detention, two years of probation, and a <strong>$10 million personal fine</strong>. The three BitMEX co-founders collectively paid <strong>$30 million in personal penalties</strong> via a separate CFTC order. Compliance failures are not abstract corporate risks -- they follow individuals.
+      </p>
+    </div>
+
+    <h3>3. Tornado Cash -- OFAC delisting + criminal convictions (US/Netherlands, 2022-2025)</h3>
+
+    <p>
+      On August 8, 2022, OFAC sanctioned Tornado Cash and added 45 Ethereum addresses to the SDN list, alleging the protocol facilitated the laundering of over $7 billion in cryptocurrency. Treasury and OFAC later changed that sanctions status: on March 21, 2025, Treasury said it had removed the economic sanctions against Tornado Cash, and OFAC's same-day recent action deleted Tornado Cash entries from the SDN list.
+    </p>
+
+    <p>
+      In May 2024, a Dutch court at 's-Hertogenbosch convicted Pertsev of money laundering and sentenced him to <strong>64 months in prison</strong> (five years and four months). The court found he had "made a habit of committing money laundering" between July 2019 and August 2022. In addition to imprisonment, Pertsev was ordered to forfeit EUR 1.9 million in cryptocurrency and a Porsche that had been seized.
+    </p>
+
+    <p>
+      Separately in the US, co-founders Roman Storm and Roman Semenov were indicted in August 2023. On August 6, 2025, DOJ announced that Storm had been convicted after trial of willfully conspiring to operate an unlicensed money transmitting business that moved more than $1 billion in criminal proceeds. The key compliance point: the OFAC delisting changed the sanctions status of Tornado Cash, but it did not erase the money-transmission and money-laundering prosecutions.
+    </p>
+
+    <p>
+      Do not treat deleted Tornado Cash protocol/entity addresses as current OFAC SDN hits after March 21, 2025. Continue screening current SDN entries, including Roman Semenov, whose OFAC entry was changed the same day.
+    </p>
+
+    <div class="callout callout--info">
+      <div class="callout__label">Lesson for CASPs</div>
+      <p>
+        The Tornado Cash cases show that facilitating transactions without AML controls can result in criminal charges, not just fines. For CASPs: if your platform processes transactions without adequate screening, you face regulatory risk. If operators continue after learning that criminals are using the service, the risk can become criminal. Sanctions screening is not just a box to check -- it is part of the evidence that management took controls seriously.
+      </p>
+    </div>
+
+    <h3>4. N26 -- EUR 13.45 million in fines + operational restrictions (Germany, 2021-2024)</h3>
+
+    <p>
+      German neobank N26 provides one of the clearest case studies of how AML failures compound over time when not addressed. While N26 is a bank (not a CASP), the pattern is directly relevant because regulators apply the same AML framework across all financial institutions, including CASPs under MiCA.
+    </p>
+
+    <p>
+      The enforcement timeline tells the story:
+    </p>
+
+    <ul class="timeline">
+      <li>
+        <span class="timeline__date">2021</span>
+        <strong>EUR 4.25 million fine</strong> from BaFin for late filing of nearly 50 suspicious activity reports from 2019-2020.
+      </li>
+      <li>
+        <span class="timeline__date">2021-2022</span>
+        <strong>Operational cap imposed</strong> -- BaFin limited N26 to onboarding just 50,000 new customers per month (later raised to 60,000). A special supervisor was assigned to monitor the bank's operations.
+      </li>
+      <li>
+        <span class="timeline__date">2024</span>
+        <strong>EUR 9.2 million fine</strong> for "systematically" submitting late AML reports in 2022. The operational cap was finally lifted in June 2024.
+      </li>
+    </ul>
+
+    <p>
+      Over three years, N26 accumulated at least EUR 13.45 million in fines, had its growth capped (directly impacting revenue), and received a special supervisor. The initial problem -- late SAR filings -- was not complex. It was a process failure that went unfixed.
+    </p>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">The compounding cost</div>
+      <p>
+        N26's customer cap at 50,000/month limited growth for over two years. For a company valued at $9 billion at its peak, the revenue impact of restricted customer acquisition dwarfed the fines themselves. For a small CASP, an equivalent growth restriction could be existential.
+      </p>
+    </div>
+
+    <h3>5. CySEC -- building the precedent (Cyprus, 2024-2026)</h3>
+
+    <p>
+      As of July 10, 2026, CySEC has not publicly disclosed fines specifically against CASPs for sanctions screening failures. But the supervisory direction is clear. CySEC's official March 2025 activity update reported more than 850 on-site and remote thematic audits in 2024, EUR 2.76 million in administrative fines across regulated entities, 321 corrective-measure requests, and more than 70 AML/CFT-specific remedial instructions.
+    </p>
+
+    <p>
+      CySEC's focus on crypto AML compliance has been signaled through five circulars in recent quarters: C679, C685, C686, C687, and C695 -- spanning guidance, consultations, and workshops specifically targeting CASP obligations. Circular <a href="/operations/cysec-sanctions-checklist">C685</a> sets explicit expectations for sanctions screening against UN, EU, US, and UK lists.
+    </p>
+
+    <p>
+      Cyprus's updated sanctions framework entered into force on August 1, 2025, requiring supervised entities to demonstrate that their sanctions controls are "fit for purpose." The inspection infrastructure is in place. The rules are published. CASP-specific enforcement actions are a matter of timing, not intention.
+    </p>
+
+    <h3>6. OKX, Paxful, Samourai Wallet, Cartier -- newer US crypto AML cases (2025-2026)</h3>
+
+    <p>
+      Three recent official actions are useful comparators for EU CASPs because they focus on ordinary controls: registration, AML programs, transaction monitoring, and SARs.
+    </p>
+
+    <ul>
+      <li><strong>OKX (DOJ, February 24, 2025)</strong>: pleaded guilty to operating an unlicensed money transmitting business and agreed to pay more than <strong>$504 million</strong>. DOJ said OKX failed to register as an MSB and facilitated more than $5 billion in suspicious transactions and criminal proceeds.</li>
+      <li><strong>Paxful (FinCEN, December 9, 2025)</strong>: FinCEN assessed a <strong>$3.5 million</strong> civil money penalty for willful BSA violations. FinCEN said Paxful facilitated more than $500 million in suspicious activity and failed to register as an MSB, maintain an effective AML program, and file SARs.</li>
+      <li><strong>Samourai Wallet (DOJ, November 19, 2025)</strong>: DOJ announced that CEO Keonne Rodriguez and CTO William Lonergan Hill were sentenced to <strong>five and four years in prison</strong>, respectively, for a conspiracy to operate a money transmitting business that knowingly transmitted more than $237 million in criminal proceeds.</li>
+      <li><strong>Maximilien de Hoop Cartier (DOJ, April 28, 2026)</strong>: DOJ announced an <strong>eight-year prison sentence</strong> for operating an unlicensed OTC cryptocurrency exchange that laundered more than $470 million through shell companies and crypto accounts.</li>
+    </ul>
+
+    <p>
+      The common thread is not exotic blockchain analytics. It is failure to register where required, failure to maintain effective AML controls, and failure to report suspicious activity.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>What do regulators look for during an AML inspection?</h2>
+
+    <p>
+      Based on <a href="/operations/cysec-sanctions-checklist">CySEC Circular C685</a> and <a href="/regulations/eba-guidelines-casps">EBA Guidelines GL/2024/15</a>, here is what an inspector will ask about your sanctions screening setup. Every one of these items should have documented evidence.
+    </p>
+
+    <div class="comparison-wrapper">
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th>Inspection area</th>
+            <th>What they ask</th>
+            <th>What they want to see</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Sanctions list coverage</td>
+            <td>Which lists do you screen against?</td>
+            <td>Applicable Union and national restrictive measures; document any UN, OFAC, or OFSI coverage used for local-law, banking, group-policy, or risk reasons</td>
+          </tr>
+          <tr>
+            <td>Audit trail</td>
+            <td>Show me the screening record for transaction X</td>
+            <td>Timestamped log with address, list version, result, action taken</td>
+          </tr>
+          <tr>
+            <td>Match handling</td>
+            <td>What happens when you get a positive match?</td>
+            <td>Documented escalation procedure, freeze protocol, SAR filing process</td>
+          </tr>
+          <tr>
+            <td>Re-screening</td>
+            <td>How do you handle list updates?</td>
+            <td>Automated re-screening triggered by list changes, with evidence of each cycle</td>
+          </tr>
+          <tr>
+            <td>Staff training</td>
+            <td>When was your compliance team last trained?</td>
+            <td>Training records with dates, content covered, attestation signatures</td>
+          </tr>
+          <tr>
+            <td>Transaction monitoring</td>
+            <td>What rules trigger alerts?</td>
+            <td>Documented rule set with thresholds, alert volumes, false positive rates</td>
+          </tr>
+          <tr>
+            <td>Risk assessment</td>
+            <td>How do you assess circumvention risk?</td>
+            <td>Written methodology, customer risk scoring, geographic risk factors</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      The common thread across every enforcement case above: regulators did not find sophisticated evasion schemes. They found <strong>missing basics</strong> -- no SAR filings, no registration, no AML program, late reports. The bar is not perfection. The bar is having documented processes and following them consistently.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>What is the penalty framework under MiCA?</h2>
+
+    <p>
+      MiCA (Regulation 2023/1114) introduces a graduated penalty structure in Articles 111-116 that national competent authorities must implement. The key point: MiCA sets minimum levels for the <em>maximum</em> fines national authorities must be able to impose. It does not make EUR 5 million an automatic minimum fine for every serious case.
+    </p>
+
+    <h3>For legal entities (the CASP)</h3>
+
+    <ul>
+      <li><strong>Administrative fines</strong>: maximum fines of at least EUR 5,000,000 or a turnover-based percentage for many legal-entity infringements, depending on the article breached</li>
+      <li><strong>Market-abuse infringements</strong>: maximum fines of at least EUR 15,000,000 or 15% of annual turnover for legal persons for infringements of Articles 89-92</li>
+      <li><strong>Non-monetary sanctions</strong>: temporary or permanent prohibition from offering services, license revocation, removal from EU registers, public censure</li>
+    </ul>
+
+    <h3>For natural persons (directors, compliance officers)</h3>
+
+    <ul>
+      <li><strong>Personal fines</strong>: maximum fines of at least EUR 700,000 for many infringements, with higher ceilings for market-abuse breaches</li>
+      <li><strong>Professional bans</strong>: temporary or permanent prohibition from management functions</li>
+    </ul>
+
+    <p>
+      Member states may set higher maximums in their national transposition. MiCA Article 111 also allows management-function bans for responsible natural persons in relevant CASP infringements -- meaning directors cannot treat enforcement as only a corporate balance-sheet issue.
+    </p>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">Penalty math for a small CASP</div>
+      <p>
+        A CASP with EUR 2 million annual revenue can face a regulator empowered to impose fines far beyond its annual income, even though the exact amount depends on the infringement, national law, facts, and proportionality. For larger CASPs, the percentage-based calculation can be just as material. Either way, a single serious enforcement action can threaten the company's existence.
+      </p>
+    </div>
+
+    <p>
+      Beyond MiCA, national authorities retain their existing powers. CySEC can impose fines under the Prevention and Suppression of Money Laundering Activities Law. BaFin operates under GwG (Geldwaeschegesetz). The AMF in France has its own penalty schedule. A CASP operating across multiple EU jurisdictions could theoretically face enforcement from multiple NCAs simultaneously.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>How do you prepare — what compliance checklist protects you?</h2>
+
+    <p>
+      Every enforcement case above could have been mitigated -- or avoided entirely -- with documented compliance processes. The investment required is not enormous. What regulators want to see is evidence of effort, not perfection. Here is what to prioritize:
+    </p>
+
+    <h3>1. Document everything</h3>
+
+    <p>
+      Write down your AML policy. Write down your sanctions screening procedures. Write down your escalation process. If it is not documented, it does not exist in the eyes of a regulator. BitMEX had no written AML program. That alone was a violation, regardless of whether laundering actually occurred.
+    </p>
+
+    <h3>2. Automate screening with multi-list coverage</h3>
+
+    <p>
+      Configure screening around the restrictive measures that apply to your firm, starting with applicable Union and national measures. Add UN, OFAC, UK OFSI, or other lists where local law, banking partners, group policy, or your risk assessment requires them. Automate re-screening when lists update; a purely periodic manual batch is harder to evidence.
+    </p>
+
+    <h3>3. Build and retain your audit trail</h3>
+
+    <p>
+      Every screening event needs: timestamp, address or name screened, list version at time of screening, result, and action taken. Retain records for the period required by your NCA (typically 5 years under AMLD). N26's problems started with late SAR filings -- a process and record-keeping failure.
+    </p>
+
+    <h3>4. Test your match handling</h3>
+
+    <p>
+      Run a tabletop exercise. What happens when your screening tool returns a positive match at 2 AM on a Saturday? Who gets notified? What transactions are frozen? How quickly can you file a SAR? If you do not know the answers, your team will not either.
+    </p>
+
+    <h3>5. Train your team and document the training</h3>
+
+    <p>
+      Schedule regular AML and sanctions training. Keep records: date, attendees, material covered, any assessments completed. Training records are one of the first things an inspector reviews. They are cheap to create and expensive to lack.
+    </p>
+
+    <h3>6. Conduct internal audits before the regulator does</h3>
+
+    <p>
+      Run your own inspection. Use the table above ("What regulators look for") as your checklist. Find your own gaps before CySEC, BaFin, or the AMF does. Document the audit and the remediation. Self-identified and corrected issues are viewed far more favorably than issues found during inspection.
+    </p>
+
+    <div class="callout callout--teal">
+      <div class="callout__label">The cost comparison</div>
+      <p>
+        A sanctions screening setup still requires budget for tooling, staff time, evidence retention, and periodic testing. MiCA and national AML laws can expose the same firm to fines, restrictions, public findings, and management consequences if those controls are missing or ineffective.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <div class="cta-banner">
+      <h3>Is your screening ready for inspection?</h3>
+      <p>Take our 2-minute compliance self-check. Ten questions based on EBA GL/2024/15 and CySEC C685 -- see where you stand before your next regulatory review.</p>
+      <a href="/regulations/" class="btn-primary">
+        Read the regulatory guides &rarr;
+      </a>
+    </div>
+
+    <div class="faq-section">
+      <h2>Frequently asked questions</h2>
+
+      <div class="faq-item">
+        <h3>What is the maximum fine for a CASP under MiCA?</h3>
+        <p>
+          MiCA (Regulation 2023/1114) requires Member States to give national competent authorities powers to impose maximum administrative fines of at least EUR 5,000,000 or a turnover-based percentage for many legal-entity infringements, depending on the article breached. This is a maximum-fine framework, not an automatic minimum fine. For natural persons (e.g., directors), maximums can reach at least EUR 700,000 for many infringements and higher for market-abuse breaches. These penalties are in addition to non-monetary sanctions like license revocation and public censure.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Can directors be held personally liable for AML failures at a crypto company?</h3>
+        <p>
+          Yes. MiCA Article 111 includes penalties and management-function bans for natural persons responsible for infringements, and national AML/criminal law can add further exposure. The BitMEX case demonstrates this in practice: CEO Arthur Hayes pleaded guilty to BSA violations and was sentenced to six months of home detention plus a $10 million personal fine. The three BitMEX co-founders collectively paid $30 million in personal penalties via CFTC proceedings.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Has CySEC fined any CASPs specifically for sanctions screening failures?</h3>
+        <p>
+          As of July 10, 2026, CySEC has not publicly disclosed fines specifically against CASPs for sanctions screening failures. However, CySEC's March 2025 activity update reported more than 850 on-site and remote thematic audits in 2024 and approximately EUR 2.76 million in total administrative fines across regulated entities. Circular C685 also sets clear expectations for sanctions screening systems. The absence of public CASP-specific cases does not mean the risk is low.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>What sanctions lists must an EU-licensed CASP screen against?</h3>
+        <p>
+          EBA Guidelines GL/2024/15 require CASPs to have systems for compliance with applicable Union and national restrictive measures. The EU consolidated financial sanctions list is the practical source for EU financial-sanctions screening. UN, OFAC, OFSI, or other third-country lists may also be required by local law, group policy, correspondent-banking requirements, or risk appetite, but they are not a universal MiCA requirement.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>How often should a CASP re-screen existing customers and wallets against updated sanctions lists?</h3>
+        <p>
+          EBA Guidelines GL/2024/15 require CASPs to screen existing customers when designations or restrictive measures change and to keep evidence of screening decisions. The EU consolidated list and third-country lists can change without a fixed cadence, so automated list-update triggers are easier to evidence than a purely periodic manual batch.
+        </p>
+      </div>
+    </div>
+
+    <div class="sources">
+      <h3>Sources</h3>
+      <ul>
+        <li><a href="https://www.dnb.nl/algemeen-nieuws/handhavingsmaatregel-2022/boete-voor-binance-holdings-ltd-vanwege-het-zonder-de-wettelijk-vereiste-registratie-aanbieden-van-cryptodiensten/" target="_blank" rel="noopener">DNB -- Administrative fine against Binance Holdings Ltd. (Jul 2022)</a></li>
+        <li><a href="https://www.justice.gov/criminal/case/united-states-v-binance-holdings-limited-dba-binancecom" target="_blank" rel="noopener">DOJ -- United States v. Binance Holdings Limited, $4.3 Billion Resolution (Nov 2023)</a></li>
+        <li><a href="https://www.fincen.gov/news/news-releases/fincen-announces-largest-settlement-us-treasury-department-history-virtual-asset" target="_blank" rel="noopener">FinCEN -- Binance $3.4 Billion Civil Money Penalty (Nov 2023)</a></li>
+        <li><a href="https://www.fincen.gov/news/testimony/statement-fincen-director-andrea-gacki-house-committee-financial-services" target="_blank" rel="noopener">FinCEN -- Director testimony on Binance SAR failures (Feb 2024)</a></li>
+        <li><a href="https://www.fincen.gov/news/news-releases/fincen-announces-100-million-enforcement-action-against-unregistered-futures" target="_blank" rel="noopener">FinCEN -- $100 Million Enforcement Action Against BitMEX (Aug 2021)</a></li>
+        <li><a href="https://www.cftc.gov/PressRoom/PressReleases/8412-21" target="_blank" rel="noopener">CFTC -- Federal Court Orders BitMEX to Pay $100 Million (Aug 2021)</a></li>
+        <li><a href="https://www.justice.gov/usao-sdny/pr/founder-and-ceo-shore-cryptocurrency-derivatives-platform-sentenced-violating-bank" target="_blank" rel="noopener">DOJ -- Arthur Hayes Sentenced for Violating Bank Secrecy Act (May 2022)</a></li>
+        <li><a href="https://www.cftc.gov/PressRoom/PressReleases/8522-22" target="_blank" rel="noopener">CFTC -- BitMEX Co-Founders Ordered to Pay $30 Million (2022)</a></li>
+        <li><a href="https://www.justice.gov/usao-sdny/pr/global-cryptocurrency-exchange-bitmex-fined-100-million-violating-bank-secrecy-act" target="_blank" rel="noopener">DOJ -- BitMEX Sentenced to $100 Million Fine (Jan 2025)</a></li>
+        <li><a href="https://home.treasury.gov/news/press-releases/jy0916" target="_blank" rel="noopener">Treasury -- Tornado Cash Sanctions Designation (Aug 2022)</a></li>
+        <li><a href="https://home.treasury.gov/news/press-releases/sb0057" target="_blank" rel="noopener">Treasury -- Tornado Cash Delisting (Mar 2025)</a></li>
+        <li><a href="https://ofac.treasury.gov/recent-actions/20250321" target="_blank" rel="noopener">OFAC -- Tornado Cash SDN List Deletions (Mar 2025)</a></li>
+        <li><a href="https://www.justice.gov/usao-sdny/pr/okx-pleads-guilty-violating-us-anti-money-laundering-laws-and-agrees-pay-penalties" target="_blank" rel="noopener">DOJ -- OKX guilty plea and penalties (Feb 2025)</a></li>
+        <li><a href="https://www.rechtspraak.nl/organisatie-en-contact/organisatie/rechtbanken/rechtbank-oost-brabant/nieuws/2024/05/developer-of-tornado-cash-gets-jail-sentence-for-laundering-billions-of-dollars-in-cryptocurrency" target="_blank" rel="noopener">Rechtspraak -- Tornado Cash developer sentenced to 5 years and 4 months (May 2024)</a></li>
+        <li><a href="https://www.justice.gov/usao-sdny/pr/founder-tornado-cash-crypto-mixing-service-convicted-knowingly-transmitting-criminal" target="_blank" rel="noopener">DOJ -- Roman Storm Convicted (Aug 2025)</a></li>
+        <li><a href="https://www.bafin.de/SharedDocs/Veroeffentlichungen/DE/Massnahmen/60b_KWG_84_WpIG_und_57_GwG/meldung_240521_N26_Bank_AG.html" target="_blank" rel="noopener">BaFin -- Administrative Fine Against N26 Bank AG (May 2024)</a></li>
+        <li><a href="https://www.finextra.com/newsarticle/38923/n26-fined-425-million-over-aml-failings" target="_blank" rel="noopener">Finextra -- N26 Fined EUR 4.25 Million Over AML Failings (2021)</a></li>
+        <li><a href="https://www.fincen.gov/news/news-releases/fincen-assesses-35-million-penalty-against-paxful-facilitating-suspicious" target="_blank" rel="noopener">FinCEN -- Paxful $3.5 Million Civil Money Penalty (Dec 2025)</a></li>
+        <li><a href="https://www.justice.gov/usao-sdny/pr/founders-samourai-wallet-cryptocurrency-mixing-service-sentenced-five-and-four-years" target="_blank" rel="noopener">DOJ -- Samourai Wallet Founders Sentenced (Nov 2025)</a></li>
+        <li><a href="https://www.justice.gov/usao-sdny/pr/french-national-sentenced-eight-years-prison-laundering-hundreds-millions-dollars" target="_blank" rel="noopener">DOJ -- Maximilien de Hoop Cartier Sentenced (Apr 2026)</a></li>
+        <li><a href="https://www.cysec.gov.cy/CMSPages/GetFile.aspx?guid=afcb8d81-07d2-48a4-a3e2-97f045804aa3" target="_blank" rel="noopener">CySEC -- 2024 Activity Update: Audits and Administrative Fines (Mar 2025)</a></li>
+        <li><a href="https://www.cysec.gov.cy/en-GB/public-info/circulars/supervised/casp-circulars/99064/" target="_blank" rel="noopener">CySEC -- C685 Guidance on Sanctions Screening Systems (Feb 2025)</a></li>
+        <li><a href="https://eur-lex.europa.eu/eli/reg/2023/1114/oj/eng" target="_blank" rel="noopener">EUR-Lex -- MiCA Regulation 2023/1114 (Articles 111-116)</a></li>
+        <li><a href="https://www.eba.europa.eu/activities/single-rulebook/regulatory-activities/anti-money-laundering-and-countering-financing-terrorism/guidelines-internal-policies-procedures-and-controls-ensure-implementation-union-and-national" target="_blank" rel="noopener">EBA -- Guidelines on Restrictive Measures (GL/2024/14 and GL/2024/15)</a></li>
+      </ul>
+    </div>
+
+  
+
+    <div class="related-articles">
+      <h3>Related articles</h3>
+      <div class="related-grid">
+        <a href="/operations/cysec-sanctions-checklist" class="related-card">
+          <span class="related-card__tag">Operations</span>
+          <span class="related-card__title">CySEC CASP Compliance Checklist: Sanctions Screening in 2026</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+        <a href="/regulations/eba-guidelines-casps" class="related-card">
+          <span class="related-card__tag">Regulations</span>
+          <span class="related-card__title">EBA Guidelines on Restrictive Measures: What Every Small CASP Must Do</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+<div style="margin: 40px 0; padding: 24px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; text-align: center;">
+  <p style="font-size: 15px; color: #475569; margin-bottom: 12px;">Need screening records and audit-ready evidence, not just a binary check?</p>
+  <a href="mailto:info@chainscreen.io" style="display: inline-block; padding: 12px 24px; background: #0c2340; color: #fff; border-radius: 8px; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600;">Contact ChainScreen</a>
+</div>
+
+
+<footer>
+  <div class="container">
+    &copy; 2026 DailyMind LTD &middot; HE 439959 &middot; Limassol, Cyprus
+    &nbsp;&middot;&nbsp;
+    <span>Information only; not legal advice</span>
+    &nbsp;&middot;&nbsp;
+    <a href="/privacy">Privacy</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://dailymind.eu">dailymind.eu</a>
+  </div>
+</footer>
+<script data-goatcounter="https://gc-chainscreen.vigilcom.dev/count"
+        async src="//gc.vigilcom.dev/count.js"></script>
+<script src="/nav.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MiCA Compliance Timeline 2026-2028 for CASPs | ChainScreen</title>
+<meta name="description" content="EU crypto regulation roadmap: MiCA post-transition enforcement in July 2026, AMLR application in 2027, AMLA supervision in 2028. Every key date your CASP needs to know.">
+<link rel="canonical" href="https://chainscreen.io/regulations/eu-crypto-regulatory-roadmap-2026-2028">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EU Crypto Regulatory Roadmap 2026-2028: What CASPs Must Prepare For">
+<meta property="og:description" content="MiCA is just the beginning. Between 2026 and 2028, EU CASPs face AMLA direct supervision, new AML rules (AMLR), and Travel Rule enforcement. Here's the complete timeline.">
+<meta property="og:url" content="https://chainscreen.io/regulations/eu-crypto-regulatory-roadmap-2026-2028">
+<meta property="og:image" content="https://chainscreen.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="ChainScreen">
+<meta name="article:published_time" content="2026-08-17">
+<meta property="article:modified_time" content="2026-08-17">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"EU Crypto Regulatory Roadmap 2026-2028: What CASPs Must Prepare For","description":"Complete timeline of EU crypto regulation from 2026 to 2028: MiCA post-transition enforcement, AMLR application, AMLA direct supervision.","datePublished":"2026-03-13","dateModified":"2026-08-17","wordCount":2927,"author":{"@type":"Person","name":"Katerina Bletsch","url":"https://chainscreen.io","jobTitle":"Founder","sameAs":["https://www.linkedin.com/in/katerina-bletsch/"]},"publisher":{"@type":"Organization","name":"ChainScreen","url":"https://chainscreen.io","logo":{"@type":"ImageObject","url":"https://chainscreen.io/og-image.png"}}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"When did the MiCA transitional period end for CASPs?","acceptedAnswer":{"@type":"Answer","text":"The maximum MiCA transitional period ended on 1 July 2026. After this date, CASPs must hold a MiCA authorization to operate in the EU. ESMA expects unauthorised CASPs to wind down EU activities, stop onboarding new EU clients, cease marketing and solicitation, and limit services to what is necessary for an orderly exit."}},{"@type":"Question","name":"What is the AMLR and when does it apply to crypto?","acceptedAnswer":{"@type":"Answer","text":"The Anti-Money Laundering Regulation (AMLR, Regulation EU 2024/1624) is a directly applicable EU regulation replacing AMLD4/5. It applies from 10 July 2027 and brings CASPs fully into the AML obliged entity framework with requirements including enhanced CDD for self-hosted wallet transfers over EUR 1,000 and a ban on anonymous crypto accounts."}},{"@type":"Question","name":"Will AMLA directly supervise crypto companies?","acceptedAnswer":{"@type":"Answer","text":"Yes. Starting in 2028, AMLA will directly supervise up to 40 high-risk obliged entities, which can include CASPs. AMLA's 2026 reporting package supports the identification of provisionally eligible entities, and the first selection process takes place in 2027 based on criteria including cross-border activity in at least six Member States and high residual risk profile."}},{"@type":"Question","name":"What is the Travel Rule for crypto in the EU?","acceptedAnswer":{"@type":"Answer","text":"The EU Travel Rule (Regulation 2023/1113, also called TFR) requires CASPs to collect and transmit originator and beneficiary information with every crypto transfer — similar to SWIFT messages in traditional banking. It has applied since 30 December 2024, with EBA Guidelines (GL/2024/11) specifying implementation details."}},{"@type":"Question","name":"How should a small CASP prepare for the 2026-2028 regulatory wave?","acceptedAnswer":{"@type":"Answer","text":"First confirm the post-transition MiCA position: authorised CASPs should keep Travel Rule compliance fully operational and build toward AMLR requirements in July 2027, while unauthorised CASPs should follow wind-down and client-protection expectations. Compliance infrastructure should scale across sanctions screening, transaction monitoring, CDD evidence, and audit trails."}}]}
+</script>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chainscreen.io/og-image.png">
+<script defer src="https://u.vigilcom.dev/script.js" data-website-id="df019ee1-bf37-42db-be6c-93671ff213ec"></script>
+<meta name="twitter:title" content="EU Crypto Regulatory Roadmap 2026-2028: What CASPs Must Prepare For">
+<meta name="twitter:description" content="MiCA is just the beginning. AMLR, AMLA, Travel Rule enforcement — here's the complete timeline for EU CASPs.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://chainscreen.io"},{"@type":"ListItem","position":2,"name":"Regulations","item":"https://chainscreen.io/regulations/"},{"@type":"ListItem","position":3,"name":"EU Crypto Regulatory Roadmap 2026-2028: What CASPs Must Prepare For"}]}
+</script>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-alt: #f8fafc;
+    --surface: #ffffff;
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --text: #0c1d36;
+    --text-body: #475569;
+    --text-muted: #94a3b8;
+    --accent: #0c2340;
+    --accent-hover: #143a65;
+    --accent-light: #edf2f9;
+    --teal: #0f766e;
+    --teal-light: #f0fdf4;
+    --code-bg: #091a30;
+    --code-surface: #0c2340;
+    --red: #dc2626;
+    --red-light: #fef2f2;
+    --font-serif: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-code: 'JetBrains Mono', 'SF Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  
+  header {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: var(--font-code);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--accent-hover); }
+
+  .nav-link {
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover { color: var(--text); }
+
+  
+  .article-header {
+    padding: 80px 0 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .article-header__eyebrow {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--teal);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .article-header h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+
+  .article-header__sub {
+    font-size: 17px;
+    color: var(--text-body);
+    max-width: 640px;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .article-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: var(--font-code);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.01em;
+  }
+
+  .article-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .article-meta__dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--teal);
+    flex-shrink: 0;
+  }
+
+  
+  .article-body {
+    padding: 48px 0 72px;
+  }
+
+  .article-body h2 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-top: 48px;
+    margin-bottom: 16px;
+    line-height: 1.3;
+    color: var(--text);
+  }
+
+  .article-body h3 {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 32px;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+
+  .article-body p {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .article-body ul, .article-body ol {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+    padding-left: 24px;
+  }
+
+  .article-body li {
+    margin-bottom: 6px;
+  }
+
+  .article-body a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+  }
+
+  .article-body a:hover {
+    color: var(--accent-hover);
+  }
+
+  .article-body strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .article-body code {
+    font-family: var(--font-code);
+    font-size: 13px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--accent);
+  }
+
+  
+  .callout {
+    margin: 28px 0;
+    padding: 24px 28px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .callout p {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .callout p:last-child {
+    margin-bottom: 0;
+  }
+
+  .callout--warning {
+    background: var(--red-light);
+    border: 1px solid #fecaca;
+  }
+
+  .callout--warning .callout__label {
+    color: var(--red);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--info {
+    background: var(--accent-light);
+    border: 1px solid #c7d5e8;
+  }
+
+  .callout--info .callout__label {
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--teal {
+    background: var(--teal-light);
+    border: 1px solid #bbf7d0;
+  }
+
+  .callout--teal .callout__label {
+    color: var(--teal);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  
+  .timeline {
+    margin: 28px 0;
+    padding: 0;
+    list-style: none;
+    border-left: 3px solid var(--border-strong);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding: 0 0 28px 28px;
+  }
+
+  .timeline-item:last-child {
+    padding-bottom: 0;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 4px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: var(--accent-light);
+    border: 3px solid var(--accent);
+  }
+
+  .timeline-item--active::before {
+    background: var(--teal);
+    border-color: var(--teal);
+  }
+
+  .timeline-item--upcoming::before {
+    background: var(--bg);
+    border-color: var(--border-strong);
+  }
+
+  .timeline-date {
+    font-family: var(--font-code);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+  }
+
+  .timeline-item--active .timeline-date {
+    color: var(--teal);
+  }
+
+  .timeline-item--upcoming .timeline-date {
+    color: var(--text-muted);
+  }
+
+  .timeline-title {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .timeline-desc {
+    font-size: 14px;
+    color: var(--text-body);
+    line-height: 1.6;
+  }
+
+  
+  .comparison-wrapper {
+    margin: 28px 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .comparison th, .comparison td {
+    padding: 13px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .comparison tr:last-child td { border-bottom: none; }
+
+  .comparison th {
+    color: var(--text-muted);
+    font-family: var(--font-code);
+    font-weight: 500;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--bg-alt);
+  }
+
+  .comparison td:first-child {
+    color: var(--text);
+    font-weight: 500;
+    font-size: 13px;
+  }
+
+  .check { color: var(--teal); font-weight: 600; }
+  .cross { color: var(--red); font-weight: 600; }
+  .na { color: var(--text-muted); }
+
+  
+  blockquote {
+    margin: 24px 0;
+    padding: 20px 24px;
+    border-left: 3px solid var(--border-strong);
+    background: var(--bg-alt);
+    border-radius: 0 8px 8px 0;
+  }
+
+  blockquote p {
+    font-size: 14px;
+    color: var(--text-body);
+    font-style: italic;
+    margin-bottom: 0;
+  }
+
+  blockquote cite {
+    display: block;
+    margin-top: 8px;
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-style: normal;
+    color: var(--text-muted);
+  }
+
+  
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  
+  .cta-banner {
+    margin: 48px 0;
+    padding: 40px 36px;
+    background: var(--code-bg);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .cta-banner h3 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: #f1f5f9;
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .cta-banner p {
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 24px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 28px;
+    background: #fff;
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary:hover {
+    background: #f1f5f9;
+    color: var(--accent);
+  }
+
+  
+  .sources {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .sources h3 {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .sources ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sources li {
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 4px 0;
+    line-height: 1.6;
+  }
+
+  .sources li a {
+    color: var(--text-body);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .sources li a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--text); }
+
+  
+  @media (max-width: 640px) {
+    .article-header { padding: 48px 0 32px; }
+    .article-header h1 { font-size: 1.8rem; }
+    .article-body h2 { font-size: 20px; }
+    .article-meta { gap: 12px; }
+    .comparison { font-size: 11px; }
+    .comparison th, .comparison td { padding: 8px 10px; }
+    .callout { padding: 20px; }
+    .cta-banner { padding: 32px 24px; }
+    .timeline-item { padding-left: 20px; }
+  }
+
+  
+  .breadcrumb { padding: 12px 0; border-bottom: 1px solid var(--border); background: var(--bg-alt); }
+  .breadcrumb a, .breadcrumb span { font-family: var(--font-code); font-size: 11px; letter-spacing: 0.01em; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb__sep { color: #cbd5e1; margin: 0 6px; }
+  .breadcrumb__current { color: var(--text-body); }
+
+  
+  .nav-links { display: flex; align-items: center; gap: 20px; }
+  .nav-link.active { color: var(--text); }
+  @media (max-width: 640px) { .nav-links { gap: 12px; } .nav-link { font-size: 11px; } }
+
+  
+  .related-articles { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+  .related-articles h3 { font-family: var(--font-code); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 16px; margin-top: 0; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .related-card { display: flex; flex-direction: column; gap: 8px; padding: 20px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; transition: border-color 0.2s; }
+  .related-card:hover { border-color: var(--accent); }
+  .related-card__tag { font-family: var(--font-code); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--teal); }
+  .related-card__title { font-family: var(--font-serif); font-size: 15px; color: var(--text); line-height: 1.35; }
+  .related-card__arrow { font-family: var(--font-code); font-size: 12px; color: var(--text-muted); margin-top: auto; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="/" class="logo">chain<span>screen</span></a>
+    <nav class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/regulations/" class="nav-link active">Regulations</a>
+      <a href="/operations/" class="nav-link">Operations</a>
+      <a href="/tools/" class="nav-link">Tools</a>
+      <a href="/technical/" class="nav-link">Technical</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <div class="container">
+    <a href="/">Home</a><span class="breadcrumb__sep">/</span>
+    <a href="/regulations/">Regulations</a><span class="breadcrumb__sep">/</span>
+    <span class="breadcrumb__current">Regulatory Roadmap</span>
+  </div>
+</nav>
+
+<section class="article-header">
+  <div class="container">
+    <div class="article-header__eyebrow">Regulatory roadmap</div>
+    <h1>EU Crypto Regulatory Roadmap 2026-2028: What CASPs Must Prepare For</h1>
+    <p class="article-header__sub">
+      MiCA is just the beginning. Between 2026 and 2028, EU CASPs face AMLA direct supervision, new AML rules under the AMLR, and full Travel Rule enforcement. Here's the complete timeline -- and what to build now so you're not scrambling later.
+    </p>
+    <div class="article-meta">
+      <span><div class="article-meta__dot"></div> Updated 17 Aug 2026</span>
+      <span><div class="article-meta__dot"></div> 9 min read</span>
+      <span><div class="article-meta__dot"></div> Sources: EUR-Lex, ESMA, EBA, AMLA</span>
+    </div>
+  </div>
+</section>
+
+<article class="article-body">
+  <div class="container">
+
+    <p>
+      If you're running a crypto asset service provider in the EU, the compliance calendar through 2028 is the most consequential since the sector began. MiCA authorization is now the baseline for staying in the EU market -- but it's only the first layer. Behind it sits a complete overhaul of anti-money laundering rules, a new supranational supervisor, and a Travel Rule that's already in force but widely under-implemented.
+    </p>
+
+    <p>
+      This article lays out the full regulatory timeline from 2024 through 2028, explains what each milestone means in operational terms, and identifies the infrastructure decisions you should be making now -- not when the deadline arrives.
+    </p>
+
+    <h2>What is the complete regulatory timeline from 2024 to 2028?</h2>
+
+    <p>
+      Five major regulatory instruments converge between 2024 and 2028. Here they are in chronological order, with the dates that matter for compliance planning.
+    </p>
+
+    <ul class="timeline">
+      <li class="timeline-item timeline-item--active">
+        <div class="timeline-date">30 Dec 2024 -- Already in effect</div>
+        <div class="timeline-title">Travel Rule (TFR) applies</div>
+        <div class="timeline-desc">Regulation (EU) 2023/1113 requires CASPs to collect and transmit originator and beneficiary information with every crypto transfer. EBA Guidelines GL/2024/11 specify implementation details, including self-hosted wallet verification above EUR 1,000.</div>
+      </li>
+      <li class="timeline-item timeline-item--active">
+        <div class="timeline-date">Jul 2025 -- Operational</div>
+        <div class="timeline-title">AMLA begins operations in Frankfurt</div>
+        <div class="timeline-desc">The EU Anti-Money Laundering Authority (Regulation EU 2024/1620) becomes operational. Initial focus: indirect supervision of financial institutions, oversight of non-financial sector, and developing the selection methodology for direct supervision targets.</div>
+      </li>
+      <li class="timeline-item timeline-item--active">
+        <div class="timeline-date">1 Jul 2026 -- Transition ended</div>
+        <div class="timeline-title">MiCA transitional period ends</div>
+        <div class="timeline-desc">Maximum deadline under Article 143(3) of Regulation (EU) 2023/1114. CASPs must hold MiCA authorization to keep operating in the EU. ESMA expects unauthorised CASPs to wind down EU activities, stop onboarding new EU clients, cease marketing and solicitation, and limit services to what is necessary for orderly exit.</div>
+      </li>
+      <li class="timeline-item timeline-item--upcoming">
+        <div class="timeline-date">Jul-Aug 2026</div>
+        <div class="timeline-title">AMLA direct-supervision data standards</div>
+        <div class="timeline-desc">AMLA finalised draft ITS under Article 15(3) AMLAR in July 2026. The standards now move to Commission adoption before Official Journal publication; CASPs and groups operating in at least six Member States should treat direct-supervision data readiness as a 2026 task.</div>
+      </li>
+      <li class="timeline-item timeline-item--upcoming">
+        <div class="timeline-date">10 Jul 2027</div>
+        <div class="timeline-title">AMLR applies (Regulation EU 2024/1624)</div>
+        <div class="timeline-desc">The Anti-Money Laundering Regulation replaces AMLD4/5 as directly applicable law across all EU Member States. New CDD requirements, self-hosted wallet rules, anonymous account ban, and privacy coin restrictions take effect for all CASPs.</div>
+      </li>
+      <li class="timeline-item timeline-item--upcoming">
+        <div class="timeline-date">H2 2027</div>
+        <div class="timeline-title">AMLA selects direct supervision targets</div>
+        <div class="timeline-desc">AMLA conducts its first selection of up to 40 high-risk obliged entities for direct supervision, based on cross-border activity (minimum six Member States) and residual risk profile. CASPs are explicitly in scope.</div>
+      </li>
+      <li class="timeline-item timeline-item--upcoming">
+        <div class="timeline-date">1 Jan 2028</div>
+        <div class="timeline-title">AMLA direct supervision begins</div>
+        <div class="timeline-desc">Selected entities transfer to EU-level supervision. AMLA conducts on-site inspections, issues binding decisions, and can impose penalties directly -- bypassing national supervisors.</div>
+      </li>
+    </ul>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">Key risk</div>
+      <p>
+        These five instruments are not independent. They stack. A CASP that obtained MiCA authorization by July 2026 has less than 12 months before the AMLR rewrites its CDD obligations, and about 18 months before it could face direct AMLA supervision. Building compliance infrastructure for today's minimums means rebuilding it within a year.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>What changed when the MiCA transition ended in July 2026?</h2>
+
+    <p>
+      The MiCA transitional period (Article 143(3) of Regulation 2023/1114) allowed CASPs operating under national law to continue providing services while applying for authorization. That window closed on 1 July 2026, at most. After that date, four things changed simultaneously.
+    </p>
+
+    <h3>End of grandfathering</h3>
+
+    <p>
+      CASPs that were operating under national registration regimes must now hold a full MiCA authorization to keep providing crypto-asset services in the EU. Operating without one is not a post-deadline growth strategy: ESMA's 23 June 2026 public statement expects unauthorised CASPs to wind down EU activities in an orderly manner, stop onboarding new EU clients, cease marketing and solicitation, and limit services to actions necessary to sell or transfer crypto-assets, reallocate assets, or close positions.
+    </p>
+
+    <p>
+      Do not confuse this with <a href="https://www.eba.europa.eu/publications-and-media/press-releases/eba-advises-national-authorities-actions-take-end-transition-period-under-its-no-action-letter" target="_blank" rel="noopener">EBA/OP/2026/01</a>. That opinion addressed the separate PSD2/MiCA no-action-letter transition for CASPs transacting e-money tokens (EMTs) that qualify as payment services. That transition ended on 2026-03-02; it was not a general MiCA grandfathering extension.
+    </p>
+
+    <h3>NCA authorization rounds</h3>
+
+    <p>
+      National Competent Authorities are still processing applications, ownership changes, and post-authorization notifications. But the operational posture changed after 1 July 2026: a pending application is not a passport. If authorization has not been granted, the plan should be client protection and orderly exit, not continued expansion under the old national regime.
+    </p>
+
+    <h3>Cross-border passporting</h3>
+
+    <p>
+      MiCA-authorized CASPs have the right to passport services across all EU/EEA Member States -- the single market for crypto that the industry has been waiting for. This is a significant competitive advantage for authorized firms. A CASP authorized in Lithuania can serve clients in Germany, France, and Spain without separate national licenses. For more on the authorization requirements, see our <a href="/regulations/eba-guidelines-casps">EBA Guidelines breakdown</a>.
+    </p>
+
+    <h3>Reverse solicitation restrictions tighten</h3>
+
+    <p>
+      ESMA published final guidelines on reverse solicitation on 26 February 2025. The guidelines state that they apply 60 calendar days after publication on ESMA's website in all official EU languages. The definition of "solicitation" is extremely broad: websites, social media, SEO, influencer marketing, sponsorships, and even push notifications directed at EU clients all qualify. The reverse solicitation exemption -- where services are provided at the client's own exclusive initiative -- is narrow and strictly enforced. Third-country firms that relied on this loophole will find it largely closed.
+    </p>
+
+    <div class="callout callout--info">
+      <div class="callout__label">Strategic note</div>
+      <p>
+        Passporting is the carrot; the end of grandfathering and reverse solicitation crackdown is the stick. Together, they restructure the market: authorized EU CASPs gain scale, while unlicensed competitors lose access. After July 2026, the question is no longer whether the transition will close -- it has -- but whether your compliance infrastructure can absorb the next layer.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>What is AMLR and what does it replace?</h2>
+
+    <p>
+      The Anti-Money Laundering Regulation (Regulation EU 2024/1624) is the most consequential piece of the puzzle for day-to-day operations. Unlike AMLD4 and AMLD5, which were directives requiring national transposition (and resulting in 27 different implementations), the AMLR is a <strong>regulation</strong> -- directly applicable in all Member States from 10 July 2027, with no national interpretation layer.
+    </p>
+
+    <p>
+      For CASPs, this means the compliance rules in Estonia, Cyprus, Germany, and Lithuania will be identical. No more regulatory arbitrage through jurisdictional differences in AML implementation.
+    </p>
+
+    <h3>New customer due diligence requirements</h3>
+
+    <p>
+      The AMLR brings CASPs fully into the obliged entity framework. Key CDD changes include:
+    </p>
+
+    <ul>
+      <li><strong>Occasional transactions at or above EUR 1,000</strong> trigger full CDD measures -- customer identification and verification.</li>
+      <li><strong>Below EUR 1,000</strong>, CASPs must still identify the customer (though verification is simplified).</li>
+      <li><strong>Self-hosted wallet transfers above EUR 1,000</strong> require the CASP to verify that the customer controls the wallet -- using cryptographic proof (signed message) or a micro-transaction ("Satoshi test"), per EBA GL/2024/11 Guideline 8.</li>
+      <li><strong>Anonymous crypto accounts are banned.</strong> No more pseudonymous-only relationships.</li>
+    </ul>
+
+    <h3>Enhanced screening obligations</h3>
+
+    <p>
+      CASPs become subject to the same enhanced due diligence triggers as banks: politically exposed persons (PEPs), high-risk third countries, complex ownership structures, and unusual transaction patterns. The screening must be ongoing, not just at onboarding. For a detailed comparison of screening versus monitoring obligations, see our analysis of <a href="/tools/screening-vs-risk-scoring">sanctions screening vs. transaction monitoring</a>.
+    </p>
+
+    <h3>Privacy coins and anonymous instruments</h3>
+
+    <p>
+      The AMLR prohibits CASPs from maintaining accounts or facilitating transactions involving crypto-assets designed to be untraceable. This effectively bans EU-regulated CASPs from listing or supporting privacy coins. Whether specific tokens fall under this prohibition will depend on AMLA's guidance and individual NCA interpretations -- but the direction is clear.
+    </p>
+
+    <h3>The EUR 10,000 reporting threshold</h3>
+
+    <p>
+      Consistent with the cash payment limit for traditional finance, the AMLR introduces a EUR 10,000 threshold that triggers enhanced scrutiny for crypto transactions. This aligns crypto oversight with the broader financial system's reporting framework.
+    </p>
+
+    <div class="callout callout--teal">
+      <div class="callout__label">Directly applicable = no excuses</div>
+      <p>
+        Because the AMLR is a regulation (not a directive), there is no national transposition period. On 10 July 2027, the rules apply uniformly. CASPs cannot wait for "national guidance" or "implementing measures" -- the regulation is the implementing measure.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>What is AMLA and how will it supervise CASPs?</h2>
+
+    <p>
+      The EU Anti-Money Laundering Authority (Regulation EU 2024/1620) is headquartered in Frankfurt and has been operational since mid-2025. Its direct supervisory power begins in 2028, but the selection machinery is already moving in 2026-2027.
+    </p>
+
+    <h3>What AMLA does</h3>
+
+    <p>
+      AMLA serves three functions:
+    </p>
+
+    <ol>
+      <li><strong>Direct supervision</strong> of the highest-risk cross-border obliged entities (up to 40, starting 2028)</li>
+      <li><strong>Indirect supervision</strong> -- coordinating and overseeing how national supervisors (CySEC, BaFin, AMF, etc.) enforce AML rules</li>
+      <li><strong>Standard-setting</strong> -- issuing guidelines, regulatory technical standards (RTS), and opinions that shape how the AMLR is applied in practice</li>
+    </ol>
+
+    <h3>2026 reporting package</h3>
+
+    <p>
+      AMLA's 2026 work is no longer just staffing and setup. On 12 May 2026, AMLA published a reporting package for identifying provisionally eligible obliged entities for direct supervision. In July 2026, AMLA finalised draft ITS under Article 15(3) AMLAR; the standards now move to Commission adoption before Official Journal publication. The 10 June webinar materials, published on 16 June 2026, are practical guidance for obliged entities that may be asked to report.
+    </p>
+
+    <h3>Selection criteria for direct supervision</h3>
+
+    <p>
+      The first selection process takes place in 2027. Entities are selected based on:
+    </p>
+
+    <ul>
+      <li><strong>Cross-border presence</strong> -- active in at least six EU Member States</li>
+      <li><strong>High residual risk profile</strong> -- assessed through AMLA's risk assessment models and supervisory methodology</li>
+      <li><strong>Asset volume and transaction throughput</strong> -- the largest entities are the most likely targets</li>
+    </ul>
+
+    <p>
+      CASPs are explicitly in scope. A large exchange operating across multiple EU jurisdictions with high transaction volumes is a prime candidate.
+    </p>
+
+    <h3>What changes under direct supervision</h3>
+
+    <p>
+      If your CASP is selected, you no longer answer primarily to your national supervisor. AMLA becomes your lead AML/CFT regulator. This means:
+    </p>
+
+    <ul>
+      <li><strong>On-site inspections</strong> conducted by AMLA staff, with AMLA targeting about 430 staff by end-2027</li>
+      <li><strong>Binding decisions</strong> that override national supervisory measures if they conflict</li>
+      <li><strong>Direct penalty powers</strong> -- AMLA can impose fines without routing through the NCA</li>
+      <li><strong>Standardized reporting</strong> -- the 2026 eligibility package is an early preview of more uniform templates, frequencies, and data formats</li>
+    </ul>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">Even if you're not selected</div>
+      <p>
+        AMLA's indirect supervision function means it will review how your NCA supervises you. If AMLA finds that CySEC, BaFin, or any other NCA is being too lenient, it can issue opinions and recommendations requiring stricter enforcement. The standard rises for everyone, not just the 40 directly supervised entities.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>How do these regulations stack together?</h2>
+
+    <p>
+      The real challenge isn't any single regulation -- it's the compounding effect. Here's what a CASP's compliance obligations look like at each stage:
+    </p>
+
+    <div class="comparison-wrapper">
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th>Obligation</th>
+            <th>10 Jul 2026</th>
+            <th>H2 2026</th>
+            <th>Jul 2027</th>
+            <th>Jan 2028</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>MiCA authorization</td>
+            <td><strong style="color: var(--text);">Required / wind-down</strong></td>
+            <td><strong style="color: var(--text);">Required</strong></td>
+            <td><strong style="color: var(--text);">Required</strong></td>
+            <td><strong style="color: var(--text);">Required</strong></td>
+          </tr>
+          <tr>
+            <td>Travel Rule (TFR)</td>
+            <td class="check">In effect</td>
+            <td class="check">In effect</td>
+            <td class="check">In effect</td>
+            <td class="check">In effect</td>
+          </tr>
+          <tr>
+            <td>AMLR CDD obligations</td>
+            <td class="na">AMLD4/5</td>
+            <td class="na">AMLD4/5</td>
+            <td><strong style="color: var(--text);">AMLR applies</strong></td>
+            <td><strong style="color: var(--text);">AMLR applies</strong></td>
+          </tr>
+          <tr>
+            <td>Privacy coin ban</td>
+            <td class="cross">Not yet</td>
+            <td class="cross">Not yet</td>
+            <td><strong style="color: var(--text);">Prohibited</strong></td>
+            <td><strong style="color: var(--text);">Prohibited</strong></td>
+          </tr>
+          <tr>
+            <td>Self-hosted wallet CDD</td>
+            <td class="na">TFR only</td>
+            <td class="na">TFR only</td>
+            <td><strong style="color: var(--text);">AMLR + TFR</strong></td>
+            <td><strong style="color: var(--text);">AMLR + TFR</strong></td>
+          </tr>
+          <tr>
+            <td>AMLA direct supervision</td>
+            <td class="na">Eligibility reporting</td>
+            <td class="na">Provisional list</td>
+            <td class="na">Selection</td>
+            <td><strong style="color: var(--text);">Active</strong></td>
+          </tr>
+          <tr>
+            <td>EU sanctions screening</td>
+            <td class="check">EBA GL/2024/15</td>
+            <td class="check">EBA GL/2024/15</td>
+            <td class="check">EBA + AMLR</td>
+            <td class="check">EBA + AMLR + AMLA</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Notice the pattern: each layer adds requirements on top of the previous ones. Nothing gets replaced -- everything accumulates. A CASP that built compliance only to clear July 2026 will need to harden for July 2027, and potentially again for January 2028.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>What should CASPs do now to prepare?</h2>
+
+    <p>
+      The compliance teams that will navigate 2026-2028 successfully are the ones making infrastructure decisions today that anticipate the full stack, not just the next deadline. Three principles should guide your planning.
+    </p>
+
+    <h3>1. Build scalable compliance infrastructure</h3>
+
+    <p>
+      Your sanctions screening, CDD workflows, and transaction monitoring systems need to handle increasing scope. Today's requirement is EU Consolidated List screening (<a href="/regulations/eba-guidelines-casps">EBA GL/2024/15</a>). By 2027, it's full AMLR CDD with self-hosted wallet verification, enhanced PEP screening, and automated privacy coin detection. By 2028, it may need to satisfy AMLA's standardized reporting formats.
+    </p>
+
+    <p>
+      Choose tools and vendors that can grow with you. A sanctions screening tool that gives you a binary check without audit trails today will not survive a CySEC inspection tomorrow. For a detailed analysis of what free tools actually provide versus what regulators require, see our <a href="/tools/chainalysis-oracle-limitations">Chainalysis Oracle analysis</a>.
+    </p>
+
+    <h3>2. Don't optimize for current minimums</h3>
+
+    <p>
+      A setup built only to clear MiCA authorization in July 2026 will not be the cheapest compliant setup for the AMLR in July 2027. If you build a bare-minimum CDD system now and a separate AMLR-compliant system next year, you pay twice -- in money, engineering time, and regulatory risk during the transition.
+    </p>
+
+    <p>
+      Instead, build for the AMLR standard before it is required. The regulation text is already published (<a href="https://eur-lex.europa.eu/eli/reg/2024/1624/oj/eng" target="_blank" rel="noopener">EUR-Lex: Regulation 2024/1624</a>). The requirements are known. Implementing them during the remaining runway reduces disruption when the regulation applies.
+    </p>
+
+    <h3>3. Choose tools that compose</h3>
+
+    <p>
+      The 2026-2028 regulatory stack requires sanctions screening, transaction monitoring, CDD/KYC workflows, audit trail systems, and regulatory reporting -- each with its own data requirements and legal basis. You need tools that integrate cleanly with each other and with your existing tech stack.
+    </p>
+
+    <p>
+      The right architecture looks like a pipeline: screening feeds into risk scoring, risk scoring feeds into monitoring, monitoring feeds into audit trail generation, and audit trails feed into regulatory reports. Each component should be replaceable without rewiring the others. For a comparison of how screening and risk scoring fit together operationally, see our <a href="/tools/screening-vs-risk-scoring">screening vs. risk scoring analysis</a>.
+    </p>
+
+    <div class="callout callout--teal">
+      <div class="callout__label">The remaining AMLR runway</div>
+      <p>
+        As of 10 July 2026, the MiCA transition has ended and the AMLR applies on 10 July 2027. You have one year to harden CDD, wallet-control verification, sanctions screening evidence, and reporting paths before the next layer applies.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>Frequently asked questions</h2>
+
+    <h3>When did the MiCA transitional period end for CASPs?</h3>
+
+    <p>
+      The maximum MiCA transitional period ended on <strong>1 July 2026</strong>, per Article 143(3) of Regulation (EU) 2023/1114. After this date, CASPs must hold a MiCA authorization to operate in the EU. ESMA expects unauthorised CASPs to wind down EU activities, stop onboarding new EU clients, cease marketing and solicitation, and limit services to what is necessary for an orderly exit. Some Member States chose shorter transitional periods -- <a href="https://www.esma.europa.eu/sites/default/files/2024-12/List_of_MiCA_grandfathering_periods_art._143_3.pdf" target="_blank" rel="noopener">ESMA maintains a list</a> -- so check your national regulator's specific deadline.
+    </p>
+
+    <h3>What is the AMLR and when does it apply to crypto?</h3>
+
+    <p>
+      The Anti-Money Laundering Regulation (<a href="https://eur-lex.europa.eu/eli/reg/2024/1624/oj/eng" target="_blank" rel="noopener">Regulation EU 2024/1624</a>) is a directly applicable EU regulation that replaces the AMLD4/5 directive framework. It applies from <strong>10 July 2027</strong>. For CASPs, it introduces uniform CDD requirements, enhanced due diligence for self-hosted wallet transfers above EUR 1,000, a ban on anonymous crypto accounts, and restrictions on privacy-preserving crypto-assets.
+    </p>
+
+    <h3>Will AMLA directly supervise crypto companies?</h3>
+
+    <p>
+      Yes. Starting in <strong>January 2028</strong>, AMLA will directly supervise up to 40 high-risk obliged entities, which can include CASPs. AMLA's 2026 reporting package supports the identification of provisionally eligible entities, and the first selection process takes place in 2027 based on criteria including cross-border activity in at least six EU Member States and a high residual risk profile. Even CASPs not selected for direct supervision will be affected, because AMLA will oversee how national supervisors apply AML rules.
+    </p>
+
+    <h3>What is the Travel Rule for crypto in the EU?</h3>
+
+    <p>
+      The EU Travel Rule (<a href="https://eur-lex.europa.eu/eli/reg/2023/1113/oj/eng" target="_blank" rel="noopener">Regulation 2023/1113</a>, also called TFR) requires CASPs to collect and transmit originator and beneficiary information with every crypto-asset transfer -- analogous to SWIFT messages in traditional banking. It has applied since <strong>30 December 2024</strong>. EBA Guidelines GL/2024/11 specify implementation details, including acceptable methods for verifying self-hosted wallet ownership.
+    </p>
+
+    <h3>How should a small CASP prepare for the 2026-2028 regulatory wave?</h3>
+
+    <p>
+      Start by confirming your post-transition MiCA position: authorized CASPs should keep Travel Rule compliance fully operational and build toward AMLR requirements in July 2027; unauthorised CASPs should prioritize wind-down, client protection, and regulator communication. The most efficient approach is to choose compliance infrastructure that scales -- <a href="/tools/screening-vs-risk-scoring">sanctions screening, transaction monitoring</a>, CDD evidence, and audit trail systems that can grow with the regulatory requirements rather than needing replacement at each milestone.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>Bottom line</h2>
+
+    <p>
+      The period between July 2026 and January 2028 represents the densest concentration of crypto regulatory change in EU history. MiCA authorization is now the baseline; the AMLR's directly applicable AML framework and AMLA's direct supervision powers arrive next -- each building on the last, none replacing the others.
+    </p>
+
+    <p>
+      CASPs that treat MiCA as the finish line will be caught off guard when the AMLR applies on 10 July 2027. CASPs that treat compliance as a series of minimum-viable checkboxes will rebuild their infrastructure at every deadline. The winning strategy is to build once for the 2028 standard and use the intervening milestones as validation checkpoints.
+    </p>
+
+    <p>
+      The regulatory texts are published. The MiCA transition has closed. The remaining variable is how quickly you use the next year.
+    </p>
+
+    <div class="cta-banner">
+      <h3>Does your screening infrastructure scale to AMLR?</h3>
+      <p>Take our 2-minute compliance self-check. Ten questions based on EBA GL/2024/15 and AMLR requirements -- see where you stand before 10 July 2027.</p>
+      <a href="/regulations/" class="btn-primary">
+        Read the regulatory guides &rarr;
+      </a>
+    </div>
+
+    <div class="sources">
+      <h3>Sources</h3>
+      <ul>
+        <li><a href="https://eur-lex.europa.eu/eli/reg/2023/1114/oj/eng" target="_blank" rel="noopener">EUR-Lex -- Regulation (EU) 2023/1114 (MiCA)</a></li>
+        <li><a href="https://eur-lex.europa.eu/eli/reg/2024/1624/oj/eng" target="_blank" rel="noopener">EUR-Lex -- Regulation (EU) 2024/1624 (AMLR)</a></li>
+        <li><a href="https://eur-lex.europa.eu/eli/reg/2024/1620/oj/eng" target="_blank" rel="noopener">EUR-Lex -- Regulation (EU) 2024/1620 (AMLA Regulation)</a></li>
+        <li><a href="https://eur-lex.europa.eu/eli/reg/2023/1113/oj/eng" target="_blank" rel="noopener">EUR-Lex -- Regulation (EU) 2023/1113 (TFR / Travel Rule)</a></li>
+        <li><a href="https://www.esma.europa.eu/esmas-activities/digital-finance-and-innovation/markets-crypto-assets-regulation-mica" target="_blank" rel="noopener">ESMA -- Markets in Crypto-Assets Regulation (MiCA)</a></li>
+        <li><a href="https://www.esma.europa.eu/sites/default/files/2024-12/List_of_MiCA_grandfathering_periods_art._143_3.pdf" target="_blank" rel="noopener">ESMA -- List of MiCA grandfathering periods by Member State</a></li>
+        <li><a href="https://www.esma.europa.eu/sites/default/files/2026-06/ESMA75-113276571-1710_Public_Statement_MiCA_transitional_period_ends.pdf" target="_blank" rel="noopener">ESMA -- Public statement on MiCA transitional period ending (23 Jun 2026)</a></li>
+        <li><a href="https://www.esma.europa.eu/sites/default/files/2025-02/ESMA35-1872330276-2030_Guidelines_on_reverse_solicitation_under_MiCA.pdf" target="_blank" rel="noopener">ESMA -- Guidelines on reverse solicitation under MiCA (Feb 2025)</a></li>
+        <li><a href="https://www.eba.europa.eu/activities/single-rulebook/regulatory-activities/anti-money-laundering-and-countering-financing-terrorism/guidelines-information-requirements-relation-transfers-funds-and-certain-crypto-assets-transfers" target="_blank" rel="noopener">EBA -- Travel Rule Guidelines (GL/2024/11)</a></li>
+        <li><a href="https://www.eba.europa.eu/publications-and-media/press-releases/eba-publishes-final-guidelines-internal-policies-procedures-and-controls-ensure-implementation" target="_blank" rel="noopener">EBA -- Guidelines on Restrictive Measures (GL/2024/15)</a></li>
+        <li><a href="https://www.eba.europa.eu/publications-and-media/press-releases/eba-advises-national-authorities-actions-take-end-transition-period-under-its-no-action-letter" target="_blank" rel="noopener">EBA -- PSD2/MiCA No-Action Letter transition opinion (EBA/OP/2026/01)</a></li>
+        <li><a href="https://www.amla.europa.eu/about-amla_en" target="_blank" rel="noopener">AMLA -- About AMLA</a></li>
+        <li><a href="https://www.amla.europa.eu/amla-takes-next-step-toward-2027-selection-entities-direct-supervision_en" target="_blank" rel="noopener">AMLA -- Reporting package for 2027 direct supervision selection</a></li>
+        <li><a href="https://www.amla.europa.eu/webinar-materials-now-available-identifying-obliged-entities-eligible-direct-supervision_en" target="_blank" rel="noopener">AMLA -- Webinar materials on eligible entities reporting package</a></li>
+        <li><a href="https://www.amla.europa.eu/document/download/523b7780-4035-40c4-9d64-f1947ca0259a_en?filename=Final+report+-+ITS+under+Article+15%283%29+AMLAR.pdf" target="_blank" rel="noopener">AMLA -- Final report on draft ITS under Article 15(3) AMLAR (July 2026)</a></li>
+        <li><a href="https://www.amla.europa.eu/document/download/27549516-d110-4e91-b1ed-d3552b8f9661_en?filename=AMLA+SPD+2026-2028.pdf" target="_blank" rel="noopener">AMLA -- Single Programming Document 2026-2028</a></li>
+      </ul>
+    </div>
+
+  
+
+    <div class="related-articles">
+      <h3>Related articles</h3>
+      <div class="related-grid">
+        <a href="/regulations/mica-compliance-checklist-small-casp" class="related-card">
+          <span class="related-card__tag">Regulations</span>
+          <span class="related-card__title">MiCA Compliance Checklist for Small CASPs in 2026</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+        <a href="/regulations/mica-casp-license-requirements-2026" class="related-card">
+          <span class="related-card__tag">Regulations</span>
+          <span class="related-card__title">MiCA CASP License Requirements: Capital, Governance, and Application Process</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+<div style="margin: 40px 0; padding: 24px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; text-align: center;">
+  <p style="font-size: 15px; color: #475569; margin-bottom: 12px;">Need screening records and audit-ready evidence, not just a binary check?</p>
+  <a href="mailto:info@chainscreen.io" style="display: inline-block; padding: 12px 24px; background: #0c2340; color: #fff; border-radius: 8px; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600;">Contact ChainScreen</a>
+</div>
+
+
+<footer>
+  <div class="container">
+    &copy; 2026 DailyMind LTD &middot; HE 439959 &middot; Limassol, Cyprus
+    &nbsp;&middot;&nbsp;
+    <span>Information only; not legal advice</span>
+    &nbsp;&middot;&nbsp;
+    <a href="/privacy">Privacy</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://dailymind.eu">dailymind.eu</a>
+  </div>
+</footer>
+<script data-goatcounter="https://gc-chainscreen.vigilcom.dev/count"
+        async src="//gc.vigilcom.dev/count.js"></script>
+<script src="/nav.js" defer></script>
+</body>
+</html>

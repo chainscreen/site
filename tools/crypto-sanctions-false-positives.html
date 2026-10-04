@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crypto Sanctions False Positives Explained | ChainScreen</title>
+<meta name="description" content="Crypto sanctions alerts often mix exact address hits, fuzzy name screening, stale list data, and blockchain risk scoring. How to triage false positives correctly.">
+<link rel="canonical" href="https://chainscreen.io/tools/crypto-sanctions-false-positives">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Why Your Crypto Sanctions Tool Cries Wolf (And How Address Screening Actually Works)">
+<meta property="og:description" content="Exact address matching is not the same as fuzzy name screening. Learn where crypto sanctions alert noise actually comes from and what regulators expect.">
+<meta property="og:url" content="https://chainscreen.io/tools/crypto-sanctions-false-positives">
+<meta property="og:image" content="https://chainscreen.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="ChainScreen">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Why Your Crypto Sanctions Tool Cries Wolf (And How Address Screening Actually Works)","description":"Exact crypto address screening is different from fuzzy name screening. Alert noise usually comes from stale list data, mixed risk-scoring queues, or applying name-screening logic to wallet identifiers.","datePublished":"2026-03-15","dateModified":"2026-08-17","author":{"@type":"Person","name":"Katerina Bletsch","url":"https://chainscreen.io","jobTitle":"Founder","sameAs":["https://www.linkedin.com/in/katerina-bletsch/"]},"publisher":{"@type":"Organization","name":"ChainScreen","url":"https://chainscreen.io","logo":{"@type":"ImageObject","url":"https://chainscreen.io/og-image.png"}}}
+</script>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chainscreen.io/og-image.png">
+<script defer src="https://u.vigilcom.dev/script.js" data-website-id="df019ee1-bf37-42db-be6c-93671ff213ec"></script>
+<meta name="twitter:title" content="Why Your Crypto Sanctions Tool Cries Wolf (And How Address Screening Actually Works)">
+<meta name="twitter:description" content="Exact address matching is not the same as fuzzy name screening. Learn where crypto sanctions alert noise actually comes from.">
+<meta name="article:published_time" content="2026-03-15">
+<meta name="article:modified_time" content="2026-08-17">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://chainscreen.io"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://chainscreen.io/tools/"},{"@type":"ListItem","position":3,"name":"Why Your Crypto Sanctions Tool Cries Wolf"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why do crypto sanctions screening tools produce false positives?","acceptedAnswer":{"@type":"Answer","text":"False positives can come from several sources that are often grouped under one sanctions label: fuzzy name-screening matches, stale or duplicated list data, wallet-address normalization errors, ownership/control analysis, and blockchain risk-scoring alerts. A direct wallet-address lookup should use exact matching on the normalized address identifier, not fuzzy name logic."}},{"@type":"Question","name":"Why should exact wallet-address screening produce fewer false positives than name screening?","acceptedAnswer":{"@type":"Answer","text":"Name screening compares human names that may have aliases, transliterations, spelling variants, and homonyms, so fuzzy matching and manual review are expected. Wallet-address screening compares a fixed technical identifier against listed wallet addresses. The match itself should be exact, but teams still need current lists, correct chain/address normalization, and a separate review workflow for ownership/control or risk-scoring alerts."}},{"@type":"Question","name":"What is the difference between name screening and address screening in crypto compliance?","acceptedAnswer":{"@type":"Answer","text":"Name screening checks a person or entity name against designated names and aliases, usually with fuzzy matching. Address screening checks a wallet address against wallet identifiers that appear in official or vendor-maintained sanctions data. Applying fuzzy name logic to wallet addresses creates noisy near-match alerts without proving a sanctions nexus."}},{"@type":"Question","name":"How can a small CASP reduce manual review workload from sanctions alerts?","acceptedAnswer":{"@type":"Answer","text":"First, verify that wallet addresses are normalized and exact-matched rather than screened through a fuzzy name pipeline. Second, separate exact listed-address alerts from customer name alerts and blockchain risk-scoring alerts. Third, maintain list-update evidence and alert-decision records so analysts are not re-reviewing duplicate, stale, or untraceable results."}},{"@type":"Question","name":"Does sanctions list screening cover all crypto risk?","acceptedAnswer":{"@type":"Answer","text":"No. Sanctions list screening answers whether a customer, party, or wallet identifier appears in applicable sanctions data. It does not by itself assess source of funds, exposure to mixers, darknet markets, ransomware wallets, or attempted circumvention patterns. Those questions belong to transaction monitoring and blockchain analytics, which use different evidence and review thresholds."}}]}
+</script>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-alt: #f8fafc;
+    --surface: #ffffff;
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --text: #0c1d36;
+    --text-body: #475569;
+    --text-muted: #94a3b8;
+    --accent: #0c2340;
+    --accent-hover: #143a65;
+    --accent-light: #edf2f9;
+    --teal: #0f766e;
+    --teal-light: #f0fdf4;
+    --code-bg: #091a30;
+    --code-surface: #0c2340;
+    --font-serif: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-code: 'JetBrains Mono', 'SF Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  
+  header {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: var(--font-code);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--accent-hover); }
+
+  nav a {
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  nav a:hover { color: var(--text); }
+
+  
+  .article-header {
+    padding: 80px 0 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .article-header__eyebrow {
+    font-family: var(--font-code);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--teal);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .article-header h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    font-family: var(--font-code);
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .article-meta__sep {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--border-strong);
+  }
+
+  .article-body {
+    padding: 48px 0;
+  }
+
+  .article-body h2 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin: 48px 0 16px;
+    line-height: 1.3;
+    color: var(--text);
+  }
+
+  .article-body h2:first-child {
+    margin-top: 0;
+  }
+
+  .article-body h3 {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+    margin: 32px 0 12px;
+    color: var(--text);
+  }
+
+  .article-body p {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .article-body strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .article-body ul, .article-body ol {
+    margin: 0 0 16px 24px;
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  .article-body li {
+    margin-bottom: 8px;
+  }
+
+  .article-body a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-color: var(--border-strong);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.2s;
+  }
+
+  .article-body a:hover {
+    text-decoration-color: var(--accent);
+  }
+
+  
+  .article-body blockquote {
+    margin: 28px 0;
+    padding: 24px 28px;
+    background: var(--bg-alt);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+  }
+
+  .article-body blockquote p {
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 8px;
+  }
+
+  .article-body blockquote p:last-child {
+    margin-bottom: 0;
+  }
+
+  .article-body blockquote cite {
+    display: block;
+    font-family: var(--font-code);
+    font-size: 11px;
+    color: var(--text-muted);
+    font-style: normal;
+    margin-top: 8px;
+  }
+
+  
+  .table-wrapper {
+    margin: 24px 0 32px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .article-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .article-table th,
+  .article-table td {
+    padding: 13px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .article-table tr:last-child td { border-bottom: none; }
+
+  .article-table th {
+    color: var(--text-muted);
+    font-family: var(--font-code);
+    font-weight: 500;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--bg-alt);
+    white-space: nowrap;
+  }
+
+  .article-table td {
+    color: var(--text-body);
+    line-height: 1.6;
+    vertical-align: top;
+  }
+
+  .article-table td:first-child {
+    color: var(--text);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .article-table .highlight-col {
+    background: var(--accent-light);
+  }
+
+  
+  .callout {
+    margin: 28px 0;
+    padding: 24px 28px;
+    border-radius: 8px;
+    border: 1px solid;
+  }
+
+  .callout--warning {
+    background: #fffbeb;
+    border-color: #fde68a;
+  }
+
+  .callout--info {
+    background: var(--accent-light);
+    border-color: #c7d9f0;
+  }
+
+  .callout--danger {
+    background: #fef2f2;
+    border-color: #fecaca;
+  }
+
+  .callout__label {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--warning .callout__label { color: #92400e; }
+  .callout--info .callout__label { color: var(--accent); }
+  .callout--danger .callout__label { color: #991b1b; }
+
+  .callout p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--text-body);
+    margin-bottom: 8px;
+  }
+
+  .callout p:last-child { margin-bottom: 0; }
+
+  .callout ul {
+    margin: 8px 0 8px 20px;
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--text-body);
+  }
+
+  .callout li { margin-bottom: 4px; }
+
+  
+  .article-body code {
+    font-family: var(--font-code);
+    font-size: 12px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--accent);
+  }
+
+  
+  .article-cta {
+    margin: 48px 0;
+    padding: 40px 36px;
+    background: var(--code-bg);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .article-cta h3 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: #f1f5f9;
+    margin: 0 0 12px;
+  }
+
+  .article-cta p {
+    font-size: 14px;
+    color: #94a3b8;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 28px;
+    background: #fff;
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary:hover {
+    background: #f1f5f9;
+    color: var(--accent);
+  }
+
+  
+  .sources {
+    padding: 32px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .sources__title {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  .sources ol {
+    margin: 0 0 0 20px;
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+
+  .sources a {
+    color: var(--text-muted);
+    text-decoration: underline;
+    text-decoration-color: var(--border);
+    text-underline-offset: 2px;
+  }
+
+  .sources a:hover { color: var(--text-body); }
+
+  
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--text); }
+
+  
+  @media (max-width: 640px) {
+    .article-header { padding: 48px 0 32px; }
+    .article-header h1 { font-size: 1.75rem; }
+    .article-body { padding: 32px 0; }
+    .article-body h2 { font-size: 20px; margin-top: 36px; }
+    .article-table th, .article-table td { padding: 10px 14px; font-size: 12px; }
+    .article-cta { padding: 32px 24px; }
+    .callout { padding: 20px 20px; }
+    .article-meta { gap: 12px; }
+  }
+
+  
+  .breadcrumb { padding: 12px 0; border-bottom: 1px solid var(--border); background: var(--bg-alt); }
+  .breadcrumb a, .breadcrumb span { font-family: var(--font-code); font-size: 11px; letter-spacing: 0.01em; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb__sep { color: #cbd5e1; margin: 0 6px; }
+  .breadcrumb__current { color: var(--text-body); }
+
+  
+  .nav-links { display: flex; align-items: center; gap: 20px; }
+  .nav-link.active { color: var(--text); }
+  @media (max-width: 640px) { .nav-links { gap: 12px; } .nav-link { font-size: 11px; } }
+
+  
+  .related-articles { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+  .related-articles h3 { font-family: var(--font-code); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 16px; margin-top: 0; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .related-card { display: flex; flex-direction: column; gap: 8px; padding: 20px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; transition: border-color 0.2s; }
+  .related-card:hover { border-color: var(--accent); }
+  .related-card__tag { font-family: var(--font-code); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--teal); }
+  .related-card__title { font-family: var(--font-serif); font-size: 15px; color: var(--text); line-height: 1.35; }
+  .related-card__arrow { font-family: var(--font-code); font-size: 12px; color: var(--text-muted); margin-top: auto; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="/" class="logo">chain<span>screen</span></a>
+    <nav class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/regulations/" class="nav-link">Regulations</a>
+      <a href="/operations/" class="nav-link">Operations</a>
+      <a href="/tools/" class="nav-link active">Tools</a>
+      <a href="/technical/" class="nav-link">Technical</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <div class="container">
+    <a href="/">Home</a><span class="breadcrumb__sep">/</span>
+    <a href="/tools/">Tools</a><span class="breadcrumb__sep">/</span>
+    <span class="breadcrumb__current">Why Your Crypto Sanctions Tool Cries Wolf</span>
+  </div>
+</nav>
+
+<section class="article-header">
+  <div class="container">
+    <div class="article-header__eyebrow">Tools</div>
+    <h1>Why Your Crypto Sanctions Tool Cries Wolf (And How Address Screening Actually Works)</h1>
+    <div class="article-meta">
+      <span>Katerina Bletsch</span>
+      <div class="article-meta__sep"></div>
+      <span>Updated: July 10, 2026</span>
+      <div class="article-meta__sep"></div>
+      <span>Reading time: 6 min</span>
+    </div>
+  </div>
+</section>
+
+<article class="article-body">
+  <div class="container">
+
+    <h2>Why is there a false positive problem that shouldn't exist?</h2>
+
+    <p>Ask any compliance officer at a financial institution what their biggest operational headache is and you'll hear the same answer: <strong>manual review workload from false positive alerts</strong>. In crypto sanctions operations, that workload is often misdiagnosed because one alert queue may contain fuzzy name matches, exact listed-address matches, stale-list artifacts, duplicate records, and blockchain risk-scoring alerts under the same label.</p>
+
+    <p>Here is the key distinction: <strong>screening a wallet address is not the same matching problem as screening a person or entity name.</strong></p>
+
+    <p>If your crypto compliance tooling is flooding your queue with false sanctions alerts on addresses, first verify what generated the alert: an exact list lookup, ownership/control analysis, or a transaction-monitoring rule. This article explains what "address screening" actually means at a technical level and how to separate it from adjacent crypto risk controls.</p>
+
+    <h2>What are the two completely different matching problems?</h2>
+
+    <p>The root of the false positive crisis in traditional AML is <strong>name screening</strong>. When you check a customer name against a sanctions list, you're comparing human-readable strings that have ambiguity baked in:</p>
+
+    <ul>
+      <li>"Mohammed Al-Rashid" vs "Muhammad al Rasheed" vs "M. Alrashid" — all could be the same person</li>
+      <li>Cyrillic names transliterated into Latin produce multiple valid spellings</li>
+      <li>Patronymics, honorifics, legal vs common names — the variants multiply fast</li>
+    </ul>
+
+    <p>Name-screening systems therefore use fuzzy matching. If you only ran exact string matches, genuine sanctions hits could slip through on name variants. So tools add phonetic algorithms, Levenshtein distance scoring, transliteration normalization — and then tune thresholds to reduce the resulting noise. It's an arms race between catch rate and false positive rate.</p>
+
+    <p><strong>Wallet addresses don't have the same ambiguity.</strong> A Bitcoin address like <code>bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</code> is a fixed technical identifier. It has chain-specific encoding and validation rules, not aliases, transliterations, or homonyms. OFAC's Sanctions List Search reflects that distinction: the ID # / Digital Currency Address field does not use fuzzy logic and returns only exact matches.</p>
+
+    <p>Checking a wallet address against a list of designated wallet addresses should therefore be an <strong>exact identifier lookup</strong>: normalize the chain/address format, compare it against the current dataset, and record the result. That does not mean every alert is operationally finished. Teams still need to confirm the chain, list source, designation context, ownership/control implications, and required reporting action.</p>
+
+    <div class="callout callout--info">
+      <div class="callout__label">The core insight</div>
+      <p>Name screening requires fuzzy matching and manual review. Address screening should use exact matching on normalized wallet identifiers. These are different data types that demand different matching logic. Applying name-screening logic to address screening is a category error.</p>
+    </div>
+
+    <h2>Why do legacy tools get this wrong?</h2>
+
+    <p>The false positive problem in crypto address screening usually traces back to one of three root causes.</p>
+
+    <h3>1. Fuzzy matching applied to address fields</h3>
+
+    <p>Many compliance platforms were originally built for traditional financial institutions screening names, entities, and document numbers. Wallet address screening was bolted on later — often by feeding addresses into the same matching pipeline as names. The tool sees a long alphanumeric string and runs its fuzzy matching algorithms on it. The result is alerts on addresses that merely <em>resemble</em> listed addresses — a condition that is not a sanctions-list match but still consumes analyst time.</p>
+
+    <p>A tool that alerts on an address 4 characters away from an OFAC-listed address is not identifying a listed wallet. It's telling you that <code>bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</code> looks a bit like <code>bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlg</code>. Without an exact listed-address match or other evidence linking the wallet to a designated party, that alert should not be treated as a sanctions hit.</p>
+
+    <h3>2. Stale or duplicate list data</h3>
+
+    <p>OFAC, EU, UN, and national sanctions data change when designations are adopted, amended, or lifted. OFAC may add digital currency addresses to the SDN List, but says those address listings are not likely to be exhaustive. The European Commission's consolidated financial sanctions list is updated whenever necessary to reflect Official Journal texts, and the UN publishes current consolidated-list files in XML, HTML, and PDF. A tool running stale or duplicated data may generate repeated or outdated alerts, or miss new listings.</p>
+
+    <p>For OFAC's own search tool, digital currency address lookup is an exact <code>ID #</code> search. OFAC also warns listed digital currency addresses are not likely to be exhaustive, so an exact OFAC miss is not the same as a complete ownership or risk assessment.</p>
+
+    <h3>3. Risk score alerts misclassified as sanctions hits</h3>
+
+    <p>This is a common source of confusion. Many tools bundle <strong>blockchain analytics risk scoring</strong> alongside sanctions screening in a single alert queue. A risk score alert ("this address has exposure to a high-risk exchange") is a fundamentally different signal from a sanctions hit ("this address appears on an applicable sanctions list"). When these are mixed together, compliance teams report "sanctions false positives" when what they're actually seeing is blockchain analytics alerts — which require a different review workflow entirely.</p>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">Common misdiagnosis</div>
+      <p>If your team is reporting a high false positive rate on "sanctions screening," verify first: are these alerts from the sanctions list lookup, or from the risk scoring engine? They require entirely different remediation. Conflating them inflates your reported false positive rate and obscures the real problem.</p>
+    </div>
+
+    <h2>What does the correct architecture look like?</h2>
+
+    <p>A properly built crypto sanctions screening system separates two distinct operations with different logic:</p>
+
+    <div class="table-wrapper">
+      <table class="article-table">
+        <thead>
+          <tr>
+            <th>Operation</th>
+            <th>Data type</th>
+            <th>Matching method</th>
+            <th>Alert noise profile</th>
+            <th>Alert meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Name / entity screening</td>
+            <td>Human name, entity name</td>
+            <td>Fuzzy match (phonetic, transliteration, Levenshtein)</td>
+            <td>Higher — tune thresholds and review</td>
+            <td>Possible match — investigate</td>
+          </tr>
+          <tr>
+            <td>Address screening</td>
+            <td>Wallet address (hex/bech32)</td>
+            <td>Exact match on normalized identifier</td>
+            <td>Low if list data is current; not fuzzy-score driven</td>
+            <td>Listed-address match — hold and escalate under policy</td>
+          </tr>
+          <tr>
+            <td>Risk scoring</td>
+            <td>Address, transaction, cluster</td>
+            <td>Graph analysis, heuristics, ML</td>
+            <td>Varies by threshold</td>
+            <td>Elevated risk — review context</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>When these three operations feed into separate alert queues with different SLAs and review procedures, compliance teams can triage intelligently. A listed-address alert should trigger an immediate hold and escalation under policy, followed by confirmation of the match and required freeze/reporting action under applicable law. A risk score alert on a medium-risk address requires a different response: review context, apply the risk-based approach, document your reasoning.</p>
+
+    <p>Mixing them into one queue means everything gets the same slow manual review process — which is exactly where the workload explosion comes from.</p>
+
+    <h2>What should you actually be screening for?</h2>
+
+    <p>There is no single universal three-list mandate for every CASP. Build coverage from the regimes that apply to your entity, customers, currencies, jurisdictions, and transfer flows. For an EU-regulated CASP with US-dollar or US-person exposure, the usual baseline includes:</p>
+
+    <ul>
+      <li><strong>OFAC SDN and other OFAC lists</strong> — required for US persons and persons otherwise subject to OFAC jurisdiction; relevant to non-US firms where transactions involve a US nexus. OFAC may list digital currency addresses, but says these address listings are not likely to be exhaustive.</li>
+      <li><strong>EU restrictive measures and the EU consolidated financial sanctions list</strong> — EU restrictive measures are binding on persons and entities under EU jurisdiction; the Commission's consolidated financial sanctions list is a practical data source that reflects Official Journal texts. Under EBA GL/2024/15, CASPs should screen all crypto-asset transfers before making crypto-assets available to the beneficiary and should screen wallet addresses where available in official lists.</li>
+      <li><strong>UN Security Council Consolidated List</strong> — Member States are obliged to implement the measures specific to each listed name. EU and national frameworks transpose or implement applicable UN measures, so CASPs should verify how UN listings are reflected in the regimes that apply to them.</li>
+    </ul>
+
+    <p>The Chainalysis sanctions oracle is a useful example of binary address screening: its documentation describes a smart contract method, <code>isSanctioned(address)</code>, that returns true or false and is updated for sanctions designations from sources including the US, EU, or UN. Chainalysis also says it cannot guarantee the accuracy, timeliness, suitability, or validity of the data. Use an oracle result as an input or control, not as the whole evidence layer for a regulated CASP.</p>
+
+    <div class="callout callout--danger">
+      <div class="callout__label">Evidence is not optional</div>
+      <p>EBA GL/2024/15 expects PSPs and CASPs to understand and document screening-system capabilities and limitations, maintain list-management and calibration procedures, investigate potential matches without delay, and document alert decisions under their record-keeping policy. For auditability, retain the input, source/list update batch, timestamp, result, and analyst decision where review occurred.</p>
+    </div>
+
+    <h2>Why do you need both sanctions screening and blockchain analytics?</h2>
+
+    <p>A low-noise exact-address screening workflow is not a weakness. It tells you something important about scope: sanctions list screening answers one narrow question: <em>does this address, customer, or transfer party match applicable sanctions data?</em></p>
+
+    <p>It doesn't tell you whether the address has transacted with a mixer, received funds from a darknet market, or been used in a ransomware payment. Those are blockchain analytics questions — a different tool solving a different problem. Expecting your sanctions screening API to catch exposure to high-risk counterparties is asking it to do something it was never designed to do.</p>
+
+    <p>The correct mental model: sanctions screening is a compliance gate (list-based, deterministic for exact identifiers), and blockchain analytics is a risk intelligence layer (heuristic or probabilistic, risk-based, requires judgment). EBA GL/2024/15 requires screening and says CASPs should consider blockchain analysis for transaction monitoring where appropriate based on the volume and number of crypto-asset transfers. Neither replaces the other.</p>
+
+    <h2>How do you diagnose your own screening tool?</h2>
+
+    <p>If your team is reporting high false positive rates on crypto address screening, run this checklist:</p>
+
+    <ol>
+      <li><strong>Check the matching method.</strong> Does your tool use fuzzy matching on address fields? If yes, that's the source of your false positives.</li>
+      <li><strong>Separate alert types.</strong> Are you mixing sanctions hits with risk score alerts? Separate the queues and recount.</li>
+      <li><strong>Verify list coverage.</strong> Are you screening against the applicable EU, OFAC, UN, and national measures for your business, or OFAC only?</li>
+      <li><strong>Check list freshness.</strong> When was the last list update? How frequently does your tool sync?</li>
+      <li><strong>Verify audit trail.</strong> Can you produce retained records showing inputs, source/list update batch, result, timestamp, and alert decisions where review happened?</li>
+    </ol>
+
+    <p>If any of these fail, you have a tool problem — not a data problem. The fix is architectural, not operational. Training analysts to dismiss more alerts faster is treating the symptom while the cause stays in place.</p>
+
+    <div class="article-cta">
+      <h3>Screening that works the way it should</h3>
+      <p>Exact-match address screening should reduce fuzzy-match noise, retain evidence, and separate listed-address alerts from risk-scoring alerts. If your tool cannot show those records, the problem is architectural.</p>
+      <a href="/regulations/" class="btn-primary">
+        Read regulatory guides &rarr;
+      </a>
+    </div>
+
+    <div class="sources">
+      <div class="sources__title">Sources &amp; references</div>
+      <ol>
+        <li>OFAC — Sanctions List Search and exact digital currency address lookup. <a href="https://ofac.treasury.gov/faqs/594">US Treasury OFAC</a></li>
+        <li>OFAC — Virtual currency sanctions compliance guidance and digital currency address FAQs. <a href="https://ofac.treasury.gov/faqs/topic/1626">US Treasury OFAC</a></li>
+        <li>European Commission — Sanctions resources and consolidated financial sanctions list. <a href="https://finance.ec.europa.eu/eu-and-world/sanctions-restrictive-measures/overview-sanctions-and-related-resources_en">European Commission</a></li>
+        <li>UN Security Council — Consolidated List of individuals and entities subject to sanctions. <a href="https://main.un.org/securitycouncil/en/content/un-sc-consolidated-list">United Nations</a></li>
+        <li>EBA GL/2024/14 and GL/2024/15 — Guidelines on internal policies, procedures and controls to ensure the implementation of Union and national restrictive measures. <a href="https://www.eba.europa.eu/sites/default/files/2024-11/eaeae49d-81a5-4154-8af9-5014f6ee8881/Final%20Report%20Guidelines%20restrictive%20measures%20.pdf">EBA</a></li>
+        <li>Chainalysis — Sanctions oracle documentation and data disclaimer. <a href="https://go.chainalysis.com/chainalysis-oracle-docs.html">Chainalysis</a></li>
+      </ol>
+    </div>
+
+    <div class="related-articles">
+      <h3>Related articles</h3>
+      <div class="related-grid">
+        <a href="/tools/sanctions-screening-tools-comparison" class="related-card">
+          <span class="related-card__tag">Tools</span>
+          <span class="related-card__title">Sanctions Screening Tools: Price and Feature Comparison</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+        <a href="/tools/screening-vs-risk-scoring" class="related-card">
+          <span class="related-card__tag">Regulations</span>
+          <span class="related-card__title">Sanctions Screening vs. Transaction Monitoring: What Does Your EU Regulator Actually Require?</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+        <a href="/tools/chainalysis-oracle-limitations" class="related-card">
+          <span class="related-card__tag">Tools</span>
+          <span class="related-card__title">Chainalysis Free Oracle: What It Covers and What It Doesn't</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+<div style="margin: 40px 0; padding: 24px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; text-align: center;">
+  <p style="font-size: 15px; color: #475569; margin-bottom: 12px;">Need screening records and audit-ready evidence, not just a binary check?</p>
+  <a href="mailto:info@chainscreen.io" style="display: inline-block; padding: 12px 24px; background: #0c2340; color: #fff; border-radius: 8px; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600;">Contact ChainScreen</a>
+</div>
+
+
+<footer>
+  <div class="container">
+    &copy; 2026 DailyMind LTD &middot; HE 439959 &middot; Limassol, Cyprus
+    &nbsp;&middot;&nbsp;
+    <span>Information only; not legal advice</span>
+    &nbsp;&middot;&nbsp;
+    <a href="/privacy">Privacy</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://dailymind.eu">dailymind.eu</a>
+  </div>
+</footer>
+<script data-goatcounter="https://gc-chainscreen.vigilcom.dev/count"
+        async src="//gc.vigilcom.dev/count.js"></script>
+<script src="/nav.js" defer></script>
+</body>
+</html>

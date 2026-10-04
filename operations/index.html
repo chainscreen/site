@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crypto AML Compliance Cost & Operations | ChainScreen</title>
+<meta name="description" content="Crypto compliance costs 100-250K EUR/yr. Implementation guides, AML budget breakdowns, CySEC checklists, Chainalysis alternatives, enforcement cases.">
+<link rel="canonical" href="https://chainscreen.io/operations/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Crypto Compliance Operations — ChainScreen">
+<meta property="og:description" content="Implementation guides, cost breakdowns, CySEC checklists, and enforcement case studies for EU CASPs.">
+<meta property="og:url" content="https://chainscreen.io/operations/">
+<meta property="og:image" content="https://chainscreen.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="ChainScreen">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chainscreen.io/og-image.png">
+<script defer src="https://u.vigilcom.dev/script.js" data-website-id="df019ee1-bf37-42db-be6c-93671ff213ec"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"CollectionPage","name":"Crypto Compliance Operations","description":"Building a compliant crypto operation costs EUR 100-250K/year for a small CASP. Implementation guides, cost breakdowns, CySEC inspection checklists, and lessons from real enforcement cases.","url":"https://chainscreen.io/operations/","isPartOf":{"@type":"WebSite","name":"ChainScreen","url":"https://chainscreen.io"},"mainEntity":{"@type":"ItemList","numberOfItems":9,"itemListElement":[{"@type":"ListItem","position":1,"url":"https://chainscreen.io/operations/sanctions-screening-implementation-guide","name":"Sanctions Screening Implementation Guide: From Excel to API in 30 Days"},{"@type":"ListItem","position":2,"url":"https://chainscreen.io/operations/crypto-compliance-cost-small-casp","name":"How Much Does Crypto Compliance Cost for a Small EU CASP?"},{"@type":"ListItem","position":3,"url":"https://chainscreen.io/operations/crypto-aml-enforcement-cases-eu","name":"Crypto Compliance Enforcement Cases in the EU: Lessons from Real Penalties"},{"@type":"ListItem","position":4,"url":"https://chainscreen.io/operations/cysec-sanctions-checklist","name":"CySEC CASP Compliance Checklist: Sanctions Screening Requirements in 2026"},{"@type":"ListItem","position":5,"url":"https://chainscreen.io/operations/chainalysis-alternative-eu-casp","name":"Affordable Chainalysis Alternatives for EU CASPs in 2026"},{"@type":"ListItem","position":6,"url":"https://chainscreen.io/operations/cysec-inspection-documents","name":"CySEC Crypto Audit: 8 Documents You Need"},{"@type":"ListItem","position":7,"url":"https://chainscreen.io/operations/crypto-compliance-budget-small-casp","name":"Crypto Compliance Budget for Small CASPs"},{"@type":"ListItem","position":8,"url":"https://chainscreen.io/operations/why-banks-reject-crypto-companies","name":"Why Banks Reject Crypto Companies (and How to Fix It)"},{"@type":"ListItem","position":9,"url":"https://chainscreen.io/operations/sanctions-screening-evidence-for-banks","name":"Sanctions Screening Evidence: What to Show Your Bank"}]}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://chainscreen.io"},{"@type":"ListItem","position":2,"name":"Operations","item":"https://chainscreen.io/operations/"}]}
+</script>
+
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-alt: #f8fafc;
+    --surface: #ffffff;
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --text: #0c1d36;
+    --text-body: #475569;
+    --text-muted: #94a3b8;
+    --accent: #0c2340;
+    --accent-hover: #143a65;
+    --accent-light: #edf2f9;
+    --teal: #0f766e;
+    --teal-light: #f0fdf4;
+    --code-bg: #091a30;
+    --code-surface: #0c2340;
+    --red: #dc2626;
+    --red-light: #fef2f2;
+    --font-serif: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-code: 'JetBrains Mono', 'SF Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  header {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: var(--font-code);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--accent-hover); }
+
+  .nav-links { display: flex; align-items: center; gap: 20px; }
+  .nav-link {
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+  .nav-link:hover { color: var(--text); }
+  .nav-link.active { color: var(--text); }
+  @media (max-width: 640px) { .nav-links { gap: 12px; } .nav-link { font-size: 11px; } }
+
+  .breadcrumb { padding: 12px 0; border-bottom: 1px solid var(--border); background: var(--bg-alt); }
+  .breadcrumb a, .breadcrumb span { font-family: var(--font-code); font-size: 11px; letter-spacing: 0.01em; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb__sep { color: #cbd5e1; margin: 0 6px; }
+  .breadcrumb__current { color: var(--text-body); }
+
+  .category-header {
+    padding: 64px 0 48px;
+  }
+
+  .category-header__eyebrow {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--teal);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .category-header h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+
+  .category-header__intro {
+    font-size: 17px;
+    color: var(--text-body);
+    max-width: 640px;
+    line-height: 1.7;
+  }
+
+  .article-list {
+    padding: 0 0 80px;
+  }
+
+  .article-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+    margin-bottom: 24px;
+    transition: border-color 0.2s;
+  }
+
+  .article-card:hover { border-color: var(--accent); }
+
+  .article-card a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .article-card__tag {
+    display: inline-block;
+    font-family: var(--font-code);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: var(--bg-alt);
+    color: var(--teal);
+    margin-right: 8px;
+    margin-bottom: 8px;
+  }
+
+  .article-card h2 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .article-card p {
+    font-size: 15px;
+    color: var(--text-body);
+    margin-bottom: 12px;
+    line-height: 1.6;
+  }
+
+  .article-card__meta {
+    font-family: var(--font-code);
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--text); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="/" class="logo">chain<span>screen</span></a>
+    <nav class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/regulations/" class="nav-link">Regulations</a>
+      <a href="/operations/" class="nav-link active">Operations</a>
+      <a href="/tools/" class="nav-link">Tools</a>
+      <a href="/technical/" class="nav-link">Technical</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <div class="container">
+    <a href="/">Home</a><span class="breadcrumb__sep">/</span>
+    <span class="breadcrumb__current">Operations</span>
+  </div>
+</nav>
+
+<section class="category-header">
+  <div class="container">
+    <div class="category-header__eyebrow">Operations</div>
+    <h1>Crypto Compliance Operations</h1>
+    <p class="category-header__intro">Building a compliant crypto operation costs EUR 100-250K/year for a small CASP. These articles cover the practical side: implementation guides, cost breakdowns, CySEC inspection checklists, and lessons from real enforcement cases across the EU.</p>
+  </div>
+</section>
+
+<section class="article-list">
+  <div class="container">
+
+    <div class="article-card">
+      <a href="/operations/sanctions-screening-implementation-guide">
+        <span class="article-card__tag">Implementation</span><span class="article-card__tag">Technical</span>
+        <h2>Sanctions Screening Implementation Guide: From Excel to API in 30 Days</h2>
+        <p>4 maturity levels of sanctions screening. 30-day roadmap. Audit trail requirements. API examples. Common mistakes that fail CySEC inspections.</p>
+        <div class="article-card__meta">March 2026 · 11 min read</div>
+      </a>
+    </div>
+
+    <div class="article-card">
+      <a href="/operations/crypto-compliance-cost-small-casp">
+        <span class="article-card__tag">Budgeting</span><span class="article-card__tag">Pricing</span>
+        <h2>How Much Does Crypto Compliance Cost for a Small EU CASP?</h2>
+        <p>EUR 100,000-250,000/yr -- the exact breakdown. Staff, legal, technology, audit, insurance, and regulatory fees by line item. Cost comparison across 5 EU jurisdictions.</p>
+        <div class="article-card__meta">March 2026 · 9 min read</div>
+      </a>
+    </div>
+
+    <div class="article-card">
+      <a href="/operations/crypto-aml-enforcement-cases-eu">
+        <span class="article-card__tag">Enforcement</span><span class="article-card__tag">Case Studies</span>
+        <h2>Crypto Compliance Enforcement Cases in the EU: Lessons from Real Penalties</h2>
+        <p>Real cases: Binance Netherlands, BitMEX, Tornado Cash, N26. What regulators inspect. MiCA penalty framework up to EUR 5M.</p>
+        <div class="article-card__meta">March 2026 · 9 min read</div>
+      </a>
+    </div>
+
+    <div class="article-card">
+      <a href="/operations/cysec-sanctions-checklist">
+        <span class="article-card__tag">CySEC</span><span class="article-card__tag">Checklist</span>
+        <h2>CySEC CASP Compliance Checklist: Sanctions Screening Requirements in 2026</h2>
+        <p>All 11 registered CASPs, Circular C685 inspection findings, 10-point actionable checklist, MiCA transition timeline, penalty framework, and compliance budget breakdown.</p>
+        <div class="article-card__meta">March 2026 · 10 min read</div>
+      </a>
+    </div>
+
+    <div class="article-card">
+      <a href="/operations/chainalysis-alternative-eu-casp">
+        <span class="article-card__tag">Comparison</span><span class="article-card__tag">Pricing</span>
+        <h2>Affordable Chainalysis Alternatives for EU CASPs in 2026</h2>
+        <p>Chainalysis charges $21K+/seat annually. Compare 7 alternatives for EU CASPs that need sanctions screening without enterprise pricing. Decision framework included.</p>
+        <div class="article-card__meta">March 2026 · 9 min read</div>
+      </a>
+    </div>
+
+    <div class="article-card">
+      <a href="/operations/cysec-inspection-documents">
+        <span class="article-card__tag">CySEC</span><span class="article-card__tag">Audit</span>
+        <h2>CySEC Crypto Audit: 8 Documents You Need</h2>
+        <p>CySEC inspects sanctions screening logs, list versions, match resolution records, and training proof. Most CASPs have 1 of 4. All 8 documents listed.</p>
+        <div class="article-card__meta">March 2026 · 6 min read</div>
+      </a>
+    </div>
+
+    <div class="article-card">
+      <a href="/operations/crypto-compliance-budget-small-casp">
+        <span class="article-card__tag">Budgeting</span><span class="article-card__tag">Cost Analysis</span>
+        <h2>Crypto Compliance Budget for Small CASPs</h2>
+        <p>Enterprise AML compliance costs $693K/yr average. Small CASPs can get MiCA-compliant for under $15K/yr in tools. What you need vs what vendors sell you.</p>
+        <div class="article-card__meta">March 2026 · 6 min read</div>
+      </a>
+    </div>
+
+    <div class="article-card">
+      <a href="/operations/why-banks-reject-crypto-companies">
+        <span class="article-card__tag">Banking</span><span class="article-card__tag">Bank Account Kit</span>
+        <h2>Why Banks Reject Crypto Companies (and How to Fix It)</h2>
+        <p>7 reasons banks reject crypto company applications and how to fix each one. Documentation checklist, the positioning trick, and the compliance evidence package approach.</p>
+        <div class="article-card__meta">April 2026 · 8 min read</div>
+      </a>
+    </div>
+
+    <div class="article-card">
+      <a href="/operations/sanctions-screening-evidence-for-banks">
+        <span class="article-card__tag">Banking</span><span class="article-card__tag">Evidence Package</span>
+        <h2>Sanctions Screening Evidence: What to Show Your Bank</h2>
+        <p>Your bank asked for "sanctions screening documentation." The 5 elements of a complete evidence package: methodology, sample reports, policy, audit logs, vendor attestation.</p>
+        <div class="article-card__meta">April 2026 · 8 min read</div>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    &copy; 2026 DailyMind LTD &middot; HE 439959 &middot; Limassol, Cyprus
+    &nbsp;&middot;&nbsp;
+    <span>Information only; not legal advice</span>
+    &nbsp;&middot;&nbsp;
+    <a href="/privacy">Privacy</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://dailymind.eu">dailymind.eu</a>
+  </div>
+</footer>
+<script data-goatcounter="https://gc-chainscreen.vigilcom.dev/count"
+        async src="//gc.vigilcom.dev/count.js"></script>
+<script src="/nav.js" defer></script>
+</body>
+</html>

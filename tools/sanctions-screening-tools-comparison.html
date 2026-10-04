@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>9 Crypto Sanctions Screening Tools Compared | ChainScreen</title>
+<meta name="description" content="Independent comparison of 9 crypto sanctions screening tools: Chainalysis, Elliptic, TRM Labs, and alternatives. Pricing, features, coverage for CASPs.">
+<link rel="canonical" href="https://chainscreen.io/tools/sanctions-screening-tools-comparison">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sanctions Screening Tools for Small CASPs: A Neutral Comparison (2026)">
+<meta property="og:description" content="Independent pricing and feature comparison of 9 sanctions screening solutions for crypto companies. From free OFAC tools to enterprise suites.">
+<meta property="og:url" content="https://chainscreen.io/tools/sanctions-screening-tools-comparison">
+<meta property="og:site_name" content="ChainScreen">
+<meta property="og:image" content="https://chainscreen.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Sanctions Screening Tools for Small CASPs: A Neutral Price & Feature Comparison (2026)","description":"Independent comparison of 9 blockchain sanctions screening tools for small CASPs.","datePublished":"2026-03-09","dateModified":"2026-08-17","wordCount":2174,"author":{"@type":"Person","name":"Katerina Bletsch","url":"https://chainscreen.io","jobTitle":"Founder","sameAs":["https://www.linkedin.com/in/katerina-bletsch/"]},"publisher":{"@type":"Organization","name":"ChainScreen","url":"https://chainscreen.io","logo":{"@type":"ImageObject","url":"https://chainscreen.io/og-image.png"}}}
+</script>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chainscreen.io/og-image.png">
+<script defer src="https://u.vigilcom.dev/script.js" data-website-id="df019ee1-bf37-42db-be6c-93671ff213ec"></script>
+<meta name="twitter:title" content="Sanctions Screening Tools for Small CASPs: A Neutral Comparison (2026)">
+<meta name="twitter:description" content="Independent pricing and feature comparison of 9 sanctions screening solutions for crypto companies.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://chainscreen.io"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://chainscreen.io/tools/"},{"@type":"ListItem","position":3,"name":"Sanctions Screening Tools for Small CASPs: A Neutral Price & Feature Comparison (2026)"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the cheapest sanctions screening tool that covers EU sanctions lists?","acceptedAnswer":{"@type":"Answer","text":"The cheapest verified options are direct official list data and OpenSanctions API access at EUR 0.10 per successful query, but both require you to build or operate screening controls. Some commercial vendors offer pricing calculators or entry packages, but current public pages often require a quote or account login before showing final prices."}},{"@type":"Question","name":"Do free sanctions screening tools meet EU compliance requirements?","acceptedAnswer":{"@type":"Answer","text":"A free data source or binary oracle is not enough by itself. EBA GL/2024/15 applies from 30 December 2025 and expects PSPs and CASPs to maintain policies, list-update controls, documented alert decisions, understanding of system limitations, and regular testing. Free tools can be useful inputs, but the CASP remains responsible for the surrounding control framework."}},{"@type":"Question","name":"How much does Chainalysis cost for a small CASP?","acceptedAnswer":{"@type":"Answer","text":"Chainalysis does not publish standard prices for paid compliance products. A small CASP should request a direct quote and check whether wallet screening can be bought without unused investigation or analytics modules."}},{"@type":"Question","name":"What features should a CASP prioritize when selecting a screening tool?","acceptedAnswer":{"@type":"Answer","text":"Priority features for EU CASPs: coverage for applicable EU and national restrictive measures, reliable list-update controls, API access for pre-transfer screening, documented alert decisions and exports, regular re-screening or batch screening, and clear documentation of the tool's capabilities and limitations. OFAC, UK, UN, and other lists may also be needed depending on jurisdiction, customers, counterparties, and risk appetite."}},{"@type":"Question","name":"Can a small CASP use multiple screening tools together?","acceptedAnswer":{"@type":"Answer","text":"Yes. A small CASP can combine official list data, a free wallet oracle, and a commercial screening system, provided the compliance procedure states which source is authoritative for each control, how false positives are handled, how list updates trigger re-screening, and where evidence is retained for supervisory review."}}]}
+</script>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-alt: #f8fafc;
+    --surface: #ffffff;
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --text: #0c1d36;
+    --text-body: #475569;
+    --text-muted: #94a3b8;
+    --accent: #0c2340;
+    --accent-hover: #143a65;
+    --accent-light: #edf2f9;
+    --teal: #0f766e;
+    --teal-light: #f0fdf4;
+    --code-bg: #091a30;
+    --code-surface: #0c2340;
+    --font-serif: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-code: 'JetBrains Mono', 'SF Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  
+  header {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: var(--font-code);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--accent-hover); }
+
+  nav a {
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  nav a:hover { color: var(--text); }
+
+  
+  .article-hero {
+    padding: 80px 0 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .article-hero__eyebrow {
+    font-family: var(--font-code);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--teal);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .article-hero h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.18;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+
+  .article-hero__sub {
+    font-size: 17px;
+    color: var(--text-body);
+    max-width: 640px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: var(--font-code);
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.01em;
+  }
+
+  .article-meta__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .article-meta__dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--teal);
+    flex-shrink: 0;
+  }
+
+  
+  .article-body {
+    padding: 48px 0 72px;
+  }
+
+  .article-body h2 {
+    font-family: var(--font-serif);
+    font-size: 26px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin: 48px 0 16px;
+    line-height: 1.25;
+    color: var(--text);
+  }
+
+  .article-body h2:first-child {
+    margin-top: 0;
+  }
+
+  .article-body h3 {
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 600;
+    margin: 32px 0 10px;
+    color: var(--text);
+  }
+
+  .article-body p {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .article-body strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .article-body a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+  }
+
+  .article-body a:hover {
+    color: var(--accent-hover);
+  }
+
+  .article-body ul, .article-body ol {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+    padding-left: 24px;
+  }
+
+  .article-body li {
+    margin-bottom: 6px;
+  }
+
+  
+  .toc {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-bottom: 40px;
+  }
+
+  .toc__title {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  .toc ol {
+    list-style: none;
+    padding: 0;
+    counter-reset: toc-counter;
+  }
+
+  .toc li {
+    counter-increment: toc-counter;
+    margin-bottom: 6px;
+  }
+
+  .toc li::before {
+    content: counter(toc-counter) ".";
+    font-family: var(--font-code);
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-right: 8px;
+  }
+
+  .toc a {
+    font-size: 14px;
+    color: var(--text-body);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .toc a:hover {
+    color: var(--accent);
+  }
+
+  
+  .table-wrapper {
+    margin: 24px 0 32px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table-wrapper table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    min-width: 680px;
+  }
+
+  .table-wrapper th,
+  .table-wrapper td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .table-wrapper tr:last-child td {
+    border-bottom: none;
+  }
+
+  .table-wrapper th {
+    color: var(--text-muted);
+    font-family: var(--font-code);
+    font-weight: 500;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--bg-alt);
+    white-space: nowrap;
+    position: sticky;
+    top: 0;
+  }
+
+  .table-wrapper td {
+    color: var(--text-body);
+    line-height: 1.5;
+  }
+
+  .table-wrapper td:first-child {
+    color: var(--text);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .check { color: var(--teal); font-weight: 600; }
+  .cross { color: #cbd5e1; }
+  .est { font-style: italic; color: var(--text-muted); }
+  .confirmed { color: var(--teal); }
+
+  
+  .tier-label {
+    display: inline-block;
+    font-family: var(--font-code);
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+
+  .tier-label--enterprise {
+    background: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+  }
+
+  .tier-label--mid {
+    background: #fffbeb;
+    color: #d97706;
+    border: 1px solid #fde68a;
+  }
+
+  .tier-label--budget {
+    background: var(--teal-light);
+    color: var(--teal);
+    border: 1px solid #bbf7d0;
+  }
+
+  
+  .vendor-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+  }
+
+  .vendor-card:hover {
+    border-color: var(--border-strong);
+  }
+
+  .vendor-card__name {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .vendor-card__pricing {
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .vendor-card__pricing .confirmed {
+    color: var(--teal);
+  }
+
+  .vendor-card__pricing .est {
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  .vendor-card__detail {
+    font-size: 14px;
+    color: var(--text-body);
+    line-height: 1.65;
+  }
+
+  .vendor-card__detail ul {
+    padding-left: 18px;
+    margin-top: 8px;
+    margin-bottom: 0;
+  }
+
+  .vendor-card__detail li {
+    margin-bottom: 4px;
+    font-size: 14px;
+  }
+
+  
+  .callout {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 20px 24px;
+    margin: 28px 0;
+  }
+
+  .callout--teal {
+    border-left-color: var(--teal);
+  }
+
+  .callout--red {
+    border-left-color: #dc2626;
+    background: #fefefe;
+  }
+
+  .callout__title {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .callout p {
+    font-size: 14px;
+    color: var(--text-body);
+    line-height: 1.65;
+    margin-bottom: 0;
+  }
+
+  
+  .rec-tier {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-bottom: 12px;
+  }
+
+  .rec-tier__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .rec-tier__budget {
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .rec-tier__desc {
+    font-size: 14px;
+    color: var(--text-body);
+    line-height: 1.65;
+  }
+
+  .rec-tier__desc ul {
+    padding-left: 18px;
+    margin-top: 8px;
+    margin-bottom: 0;
+  }
+
+  .rec-tier__desc li {
+    margin-bottom: 4px;
+    font-size: 14px;
+  }
+
+  
+  .article-cta {
+    background: var(--code-bg);
+    border-radius: 8px;
+    padding: 48px 40px;
+    text-align: center;
+    margin: 48px 0 0;
+  }
+
+  .article-cta h3 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 400;
+    color: #f1f5f9;
+    margin-bottom: 12px;
+  }
+
+  .article-cta p {
+    color: #94a3b8;
+    font-size: 15px;
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 28px;
+    background: #fff;
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary:hover {
+    background: #f1f5f9;
+    color: var(--accent);
+  }
+
+  
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--text); }
+
+  
+  @media (max-width: 640px) {
+    .article-hero { padding: 48px 0 32px; }
+    .article-hero h1 { font-size: 1.75rem; }
+    .article-body { padding: 32px 0 48px; }
+    .article-body h2 { font-size: 22px; margin-top: 36px; }
+    .article-meta { gap: 12px; }
+    .vendor-card { padding: 20px; }
+    .article-cta { padding: 32px 20px; }
+    .rec-tier { padding: 20px; }
+    .table-wrapper { font-size: 12px; }
+  }
+
+  
+  .breadcrumb { padding: 12px 0; border-bottom: 1px solid var(--border); background: var(--bg-alt); }
+  .breadcrumb a, .breadcrumb span { font-family: var(--font-code); font-size: 11px; letter-spacing: 0.01em; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb__sep { color: #cbd5e1; margin: 0 6px; }
+  .breadcrumb__current { color: var(--text-body); }
+
+  
+  .nav-links { display: flex; align-items: center; gap: 20px; }
+  .nav-link.active { color: var(--text); }
+  @media (max-width: 640px) { .nav-links { gap: 12px; } .nav-link { font-size: 11px; } }
+
+  
+  .related-articles { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+  .related-articles h3 { font-family: var(--font-code); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 16px; margin-top: 0; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .related-card { display: flex; flex-direction: column; gap: 8px; padding: 20px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; transition: border-color 0.2s; }
+  .related-card:hover { border-color: var(--accent); }
+  .related-card__tag { font-family: var(--font-code); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--teal); }
+  .related-card__title { font-family: var(--font-serif); font-size: 15px; color: var(--text); line-height: 1.35; }
+  .related-card__arrow { font-family: var(--font-code); font-size: 12px; color: var(--text-muted); margin-top: auto; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="/" class="logo">chain<span>screen</span></a>
+    <nav class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/regulations/" class="nav-link">Regulations</a>
+      <a href="/operations/" class="nav-link">Operations</a>
+      <a href="/tools/" class="nav-link active">Tools</a>
+      <a href="/technical/" class="nav-link">Technical</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <div class="container">
+    <a href="/">Home</a><span class="breadcrumb__sep">/</span>
+    <a href="/tools/">Tools</a><span class="breadcrumb__sep">/</span>
+    <span class="breadcrumb__current">Tools Comparison</span>
+  </div>
+</nav>
+
+<section class="article-hero">
+  <div class="container">
+    <div class="article-hero__eyebrow">Market Analysis</div>
+    <h1>Sanctions Screening Tools for Small CASPs: A Neutral Price &amp; Feature Comparison (2026)</h1>
+    <p class="article-hero__sub">
+      An independent look at 9 sanctions screening solutions &mdash; from official list data and free wallet checks to enterprise suites &mdash; with confirmed and estimated pricing, feature coverage, and practical recommendations for EU crypto companies.
+    </p>
+    <div class="article-meta">
+      <div class="article-meta__item">
+        <div class="article-meta__dot"></div>
+        <span>Published: March 2026</span>
+      </div>
+      <div class="article-meta__item">
+        <div class="article-meta__dot"></div>
+        <span>Reading time: 12 min</span>
+      </div>
+      <div class="article-meta__item">
+        <div class="article-meta__dot"></div>
+        <span>Sources: EBA, ESMA, OFAC, EU data portal, vendor docs</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<article class="article-body">
+  <div class="container">
+
+    <div class="toc">
+      <div class="toc__title">Contents</div>
+      <ol>
+        <li><a href="#market-overview">Market overview: three pricing tiers</a></li>
+        <li><a href="#vendor-details">Detailed vendor profiles</a></li>
+        <li><a href="#feature-matrix">Feature comparison matrix</a></li>
+        <li><a href="#free-options">Free options analysis</a></li>
+        <li><a href="#manual-costs">The real cost of manual screening</a></li>
+        <li><a href="#non-compliance">Cost of non-compliance</a></li>
+        <li><a href="#recommendations">Recommendations by budget</a></li>
+        <li><a href="#methodology">Methodology note</a></li>
+      </ol>
+    </div>
+
+    <p>
+      If you run a small or mid-sized Crypto-Asset Service Provider in the EU, you already know you need sanctions screening. What's less clear is which tool to use and how much to pay. Enterprise vendors don't publish prices. Free tools have silent gaps. And the compliance cost of choosing wrong can be material.
+    </p>
+    <p>
+      This article maps the landscape as of 10 July 2026 &mdash; vendors, pricing, features, and trade-offs &mdash; so you can make a decision based on data rather than sales calls.
+    </p>
+
+    <div class="callout">
+      <div class="callout__title">Disclosure</div>
+      <p>ChainScreen now publishes content only. The former ChainScreen API and product pages were retired on 2026-05-12, so ChainScreen is no longer included as a vendor option. We've marked all remaining pricing as confirmed or estimated. If you spot an error, email <a href="mailto:info@chainscreen.io">info@chainscreen.io</a> and we'll correct it.</p>
+    </div>
+
+    <h2 id="market-overview">1. What are the three pricing tiers in the market?</h2>
+
+    <p>
+      For buying decisions, it is useful to group the sanctions screening market for crypto companies into three tiers. The gap between official data sources, focused screening tools, and enterprise blockchain analytics suites is significant.
+    </p>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Tier</th>
+            <th>Annual Cost</th>
+            <th>Vendors</th>
+            <th>Best For</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tier-label tier-label--enterprise">Enterprise</span></td>
+            <td>Quote required</td>
+            <td>Chainalysis, TRM Labs, Elliptic</td>
+            <td>Exchanges, custodians, banks with crypto exposure</td>
+          </tr>
+          <tr>
+            <td><span class="tier-label tier-label--mid">Mid-market</span></td>
+            <td>Published/estimated $6K+</td>
+            <td>Scorechain, Crystal Intelligence, Merkle Science</td>
+            <td>Licensed CASPs with moderate volume</td>
+          </tr>
+          <tr>
+            <td><span class="tier-label tier-label--budget">Budget</span></td>
+            <td>Free, usage-based, or quote</td>
+            <td>sanctions.io, OpenSanctions, AMLBot</td>
+            <td>Small CASPs, startups, compliance-first ops</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Enterprise tools bundle sanctions screening with transaction monitoring (KYT), risk scoring, investigation tools, and case management. If you only need a narrow sanctions-list control, you may be paying for features you do not use; if you are an EU PSP or CASP, EBA GL/2024/15 still expects the surrounding procedures, alert handling, list-update controls, and system testing to be documented.
+    </p>
+
+    <h2 id="vendor-details">2. What do the detailed vendor profiles look like?</h2>
+
+    <h3>Enterprise tier (quote required)</h3>
+
+    <div class="vendor-card">
+      <div class="vendor-card__name">Chainalysis</div>
+      <div class="vendor-card__pricing"><span class="est">Quote required &bull; paid products are typically bundled</span></div>
+      <div class="vendor-card__detail">
+        <p>Enterprise blockchain analytics vendor. Full compliance suite: KYT (Know Your Transaction), Reactor investigation tool, Kryptos risk intelligence, and sanctions screening.</p>
+        <ul>
+          <li><strong>Chains:</strong> Multi-chain coverage; Chainalysis does not publish a current chain count for Address Screening on the public product page.</li>
+          <li><strong>Free tier:</strong> On-chain sanctions oracle and free API access advertised for address checks. The oracle documentation says it is updated for designations from economic/trade embargo lists including the US, EU, or UN. Binary yes/no result, no audit trail, no risk scoring.</li>
+          <li><strong>Paid tier:</strong> Multi-list screening, KYT, investigation, risk scoring</li>
+          <li><strong>Pricing model:</strong> Annual contract, typically bundled. Request a direct quote for wallet screening versus full-suite access.</li>
+          <li><strong>Note:</strong> The free oracle/API can be a useful control input, but it is not a substitute for documented screening procedures, alert decision records, list-update controls, and system testing expected under EBA GL/2024/15.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="vendor-card">
+      <div class="vendor-card__name">TRM Labs</div>
+      <div class="vendor-card__pricing"><span class="est">Quote required &bull; enterprise contracts only</span></div>
+      <div class="vendor-card__detail">
+        <p>Enterprise intelligence platform with a heavy focus on investigations, fraud detection, and cross-chain tracing.</p>
+        <ul>
+          <li><strong>Chains:</strong> TRM's public Wallet Screening page says 184+ blockchains and 1.9B+ digital assets; a July 2026 TRM article says 65+ chains are indexed in real time.</li>
+          <li><strong>Free tier:</strong> TRM announced a free sanctions screening tool in 2022. Current public product pages should be checked before relying on free access or chain coverage.</li>
+          <li><strong>Pricing model:</strong> Enterprise only. No public price schedule; request a direct quote.</li>
+          <li><strong>Best for:</strong> Large teams that need deep investigations, fraud detection, and cross-chain tracing</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="vendor-card">
+      <div class="vendor-card__name">Elliptic</div>
+      <div class="vendor-card__pricing"><span class="est">Quote required &bull; no public price schedule</span></div>
+      <div class="vendor-card__detail">
+        <p>UK-headquartered blockchain intelligence vendor. Public product pages describe Lens for wallet and transaction screening, Discovery for VASP due diligence, and Investigator for cross-chain investigations.</p>
+        <ul>
+          <li><strong>Chains:</strong> 60+ blockchains</li>
+          <li><strong>Products:</strong> Lens (analytics), Navigator (KYT), Investigator (tracing)</li>
+          <li><strong>Differentiator:</strong> Holistic Screening for multi-asset and cross-chain risk exposure, with auditability built into the platform according to Elliptic's public materials.</li>
+          <li><strong>Pricing model:</strong> Annual contracts. No public price schedule.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Mid-market tier (published/estimated $6K+)</h3>
+
+    <div class="vendor-card">
+      <div class="vendor-card__name">Scorechain</div>
+      <div class="vendor-card__pricing"><span class="confirmed">From EUR 500/mo (EUR 6,000/yr) &mdash; listed on Capterra</span></div>
+      <div class="vendor-card__detail">
+        <p>Luxembourg-headquartered. Public materials position Scorechain as an all-in-one crypto AML and blockchain analytics platform; Capterra lists an entry price of EUR 500 per user/month.</p>
+        <ul>
+          <li><strong>Chains:</strong> Major blockchains + stablecoins</li>
+          <li><strong>Products:</strong> Transaction monitoring, risk scoring, sanctions screening, reporting &mdash; all included</li>
+          <li><strong>Differentiator:</strong> One of the few mid-market vendors with public third-party pricing data. Confirm included modules, users, API limits, and support level before relying on the entry price.</li>
+          <li><strong>Pricing model:</strong> Monthly/annual subscription. Public vendor pages do not show a full price schedule.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="vendor-card">
+      <div class="vendor-card__name">Crystal Intelligence</div>
+      <div class="vendor-card__pricing"><span class="est">Quote required &bull; no public price schedule</span></div>
+      <div class="vendor-card__detail">
+        <p>Originally Bitfury's analytics arm. Public materials emphasize broad blockchain coverage and real-time sanctions screening.</p>
+        <ul>
+          <li><strong>Chains:</strong> 330+ blockchains</li>
+          <li><strong>Products:</strong> Transaction monitoring, risk scoring, investigation, sanctions screening</li>
+          <li><strong>Differentiator:</strong> Extreme chain breadth. If you operate on niche or emerging blockchains, verify whether Crystal supports the specific chain with attribution, risk scoring, and investigation depth, not only address lookup.</li>
+          <li><strong>Pricing model:</strong> Annual contract. Pricing not publicly available.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="vendor-card">
+      <div class="vendor-card__name">Merkle Science</div>
+      <div class="vendor-card__pricing"><span class="est">Quote required &bull; no public price schedule</span></div>
+      <div class="vendor-card__detail">
+        <p>Singapore-headquartered. Differentiates on behavior-based analytics rather than purely list-based screening.</p>
+        <ul>
+          <li><strong>Chains:</strong> Major blockchains + DeFi protocols</li>
+          <li><strong>Products:</strong> Compass (transaction monitoring), Tracker (investigation), sanctions screening</li>
+          <li><strong>Differentiator:</strong> Predictive risk detection &mdash; attempts to flag suspicious behavior before an address appears on a sanctions list</li>
+          <li><strong>Pricing model:</strong> Annual contract. Pricing not publicly available.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Budget / usage-based tier</h3>
+
+    <div class="vendor-card">
+      <div class="vendor-card__name">sanctions.io</div>
+      <div class="vendor-card__pricing"><span class="est">Pricing calculator / quote required &mdash; public page no longer shows a fixed entry price</span></div>
+      <div class="vendor-card__detail">
+        <p>Pure-play sanctions screening. Not blockchain-specific but covers crypto-related designations.</p>
+        <ul>
+          <li><strong>Coverage:</strong> 75+ sanctions and watchlists from 30+ jurisdictions, plus PEP, criminal watchlist, and adverse media options</li>
+          <li><strong>API:</strong> REST API, batch screening, webhook notifications</li>
+          <li><strong>Differentiator:</strong> Focused name-screening tool with broad sanctions-list coverage. Covers regional and sectoral lists that blockchain-specific tools may not expose clearly in public materials.</li>
+          <li><strong>Limitation:</strong> No blockchain-specific features (no wallet-to-entity mapping, no transaction monitoring). Screens names/entities, not addresses directly against blockchain data.</li>
+          <li><strong>Pricing model:</strong> Quote-based pricing calculator; confirm current minimums and annual volume bands before procurement.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="vendor-card">
+      <div class="vendor-card__name">OpenSanctions</div>
+      <div class="vendor-card__pricing"><span class="confirmed">EUR 0.10/successful API query; bulk/self-hosted license by quote &mdash; confirmed (vendor website)</span></div>
+      <div class="vendor-card__detail">
+        <p>Open-source sanctions data aggregator. API page lists 410+ sources from sanctions, PEP, and enforcement watchlist data.</p>
+        <ul>
+          <li><strong>Coverage:</strong> 410+ data sources aggregated and normalized</li>
+          <li><strong>API:</strong> REST API with matching and entity resolution</li>
+          <li><strong>Differentiator:</strong> Open-source core and documented matching API. Commercial users need the appropriate license; self-hosting avoids per-query metering but still requires a bulk data license.</li>
+          <li><strong>Limitation:</strong> Not blockchain-specific. No wallet-to-entity resolution. You'd need to combine it with a blockchain analytics tool for full coverage.</li>
+          <li><strong>Pricing model:</strong> Pay-per-query for the hosted API; quote-based license for self-hosted/bulk use.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="vendor-card">
+      <div class="vendor-card__name">AMLBot</div>
+      <div class="vendor-card__pricing"><span class="est">Usage-based packages; account or sales contact required for current business pricing</span></div>
+      <div class="vendor-card__detail">
+        <p>Pay-per-check model. Blockchain-native with a focus on simplicity.</p>
+        <ul>
+          <li><strong>Chains:</strong> Public API docs list BTC, TRX, ETH, BSC, ARB, AVAX, and more depending on check mode and package</li>
+          <li><strong>Products:</strong> Address risk scoring, sanctions screening, source-of-funds analysis</li>
+          <li><strong>Differentiator:</strong> Retail-style packages and API documentation make it practical for low-volume wallet checks.</li>
+          <li><strong>Limitation:</strong> Business pricing, supported networks, and report depth vary by package. Model total cost at your expected daily check volume before choosing it over a subscription product.</li>
+          <li><strong>Pricing model:</strong> Usage-based packages plus business plans; current public pages do not publish a complete price table.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 id="feature-matrix">3. How do the tools compare feature by feature?</h2>
+
+    <p>
+      This matrix covers the core capabilities that matter for sanctions compliance. "KYT" refers to Know Your Transaction &mdash; continuous transaction monitoring beyond simple list screening.
+    </p>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Solution</th>
+            <th>Annual Cost</th>
+            <th>KYT</th>
+            <th>OFAC</th>
+            <th>EU</th>
+            <th>UN</th>
+            <th>API</th>
+            <th>Audit Trail</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Chainalysis</td>
+            <td><span class="est">Quote required</span></td>
+            <td class="check">&#10003;</td>
+            <td class="check">&#10003;</td>
+            <td class="check">&#10003;</td>
+            <td class="check">&#10003;</td>
+            <td class="check">&#10003;</td>
+            <td class="check">&#10003;</td>
+          </tr>
+          <tr>
+            <td>Chainalysis Free</td>
+            <td>Free</td>
+            <td class="cross">&#10007;</td>
+            <td class="check">&#10003;</td>
+            <td class="check">&#10003;</td>
+            <td class="check">&#10003;</td>
+            <td class="check">&#10003;</td>
+            <td class="cross">&#10007;</td>
+          </tr>
+          <tr>
+            <td>TRM Labs</td>
+            <td><span class="est">Quote required</span></td>
+            <td class="check">&#10003;</td>
+            <td>Verify</td>
+            <td>Verify</td>
+            <td>Verify</td>
+            <td class="check">&#10003;</td>
+            <td class="check">&#10003;</td>
+          </tr>
+          <tr>
+            <td>TRM Labs Free</td>
+            <td>Availability unclear</td>
+            <td class="cross">&#10007;</td>
+            <td>Unclear</td>
+            <td>Unclear</td>
+            <td>Unclear</td>
+            <td>Limited</td>
+            <td class="cross">&#10007;</td>
+          </tr>
+          <tr>
+            <td>Elliptic</td>
+            <td><span class="est">Quote</span></td>
+            <td class="check">&#10003;</td>
+            <td>Verify</td>
+            <td>Verify</td>
+            <td>Verify</td>
+            <td class="check">&#10003;</td>
+            <td class="check">&#10003;</td>
+          </tr>
+          <tr>
+            <td>Crystal Intelligence</td>
+            <td><span class="est">Quote</span></td>
+            <td class="check">&#10003;</td>
+            <td class="check">&#10003;</td>
+            <td class="check">&#10003;</td>
+            <td class="check">&#10003;</td>
+            <td class="check">&#10003;</td>
+            <td class="check">&#10003;</td>
+          </tr>
+          <tr>
+            <td>Scorechain</td>
+            <td><span class="confirmed">EUR 6K+</span></td>
+            <td class="check">&#10003;</td>
+            <td>Verify</td>
+            <td>Verify</td>
+            <td>Verify</td>
+            <td class="check">&#10003;</td>
+            <td class="check">&#10003;</td>
+          </tr>
+          <tr>
+            <td>Merkle Science</td>
+            <td><span class="est">Quote</span></td>
+            <td class="check">&#10003;</td>
+            <td>Verify</td>
+            <td>Verify</td>
+            <td>Verify</td>
+            <td class="check">&#10003;</td>
+            <td class="check">&#10003;</td>
+          </tr>
+          <tr>
+            <td>sanctions.io</td>
+            <td><span class="est">Quote</span></td>
+            <td class="cross">&#10007;</td>
+            <td class="check">&#10003;</td>
+            <td class="check">&#10003;</td>
+            <td class="check">&#10003;</td>
+            <td class="check">&#10003;</td>
+            <td class="check">&#10003;</td>
+          </tr>
+          <tr>
+            <td>OpenSanctions</td>
+            <td><span class="confirmed">EUR 0.10/query</span></td>
+            <td class="cross">&#10007;</td>
+            <td class="check">&#10003;</td>
+            <td class="check">&#10003;</td>
+            <td class="check">&#10003;</td>
+            <td class="check">&#10003;</td>
+            <td class="cross">&#10007;</td>
+          </tr>
+          <tr>
+            <td>AMLBot</td>
+            <td><span class="est">Usage-based</span></td>
+            <td class="cross">&#10007;</td>
+            <td>Varies</td>
+            <td>Varies</td>
+            <td>Varies</td>
+            <td class="check">&#10003;</td>
+            <td>Limited</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-size: 12px; color: var(--text-muted); margin-top: -16px;">
+      <em>Italic pricing = quote required or estimated from public third-party listings. Green pricing = confirmed from vendor website or public pricing data. "Verify" means current public pages confirm sanctions screening generally, but not that exact list set.</em>
+    </p>
+
+    <h2 id="free-options">4. What are the free screening options and their limitations?</h2>
+
+    <p>
+      Several free options exist. Each has real value but also significant gaps that compliance teams should understand before relying on them.
+    </p>
+
+    <h3>Chainalysis Free Sanctions API &amp; Oracle</h3>
+    <ul>
+      <li><strong>What it does:</strong> Screens blockchain addresses against sanctions designations from economic/trade embargo lists including the US, EU, or UN. REST API access is advertised separately; the on-chain oracle is available for smart contract integration.</li>
+      <li><strong>What it doesn't do:</strong> No retained evidence package. No risk scoring. No historical screening records. No batch processing. Binary yes/no result only.</li>
+      <li><strong>Verdict:</strong> Useful as a free address check. But a binary result without documented alert handling, list-update controls, and retained evidence is not enough on its own for an EU-regulated CASP's restrictive-measures control framework.</li>
+    </ul>
+
+    <h3>OFAC SDN List (direct download)</h3>
+    <ul>
+      <li><strong>What it does:</strong> The official OFAC Specially Designated Nationals list, downloadable in XML, CSV, and other formats. Free. Updated frequently (multiple times per week).</li>
+      <li><strong>What it doesn't do:</strong> Official SDN/SLS data and search access only; no wallet-to-entity analytics, case management, retained audit trail, or alert workflow. Digital currency address searches in OFAC's Sanctions List Search use the <code>ID #</code> field and return exact matches only.</li>
+      <li><strong>Verdict:</strong> A data source, not a screening tool. Requires significant engineering to use effectively.</li>
+    </ul>
+
+    <h3>EU Consolidated Sanctions List (direct download)</h3>
+    <ul>
+      <li><strong>What it does:</strong> The official EU restrictive measures list. XML/CSV downloads from the European Commission. Free. Updated when new measures are adopted.</li>
+      <li><strong>What it doesn't do:</strong> Same limitations as OFAC direct download. No blockchain-specific identifiers (addresses are rarely listed directly &mdash; entities are).</li>
+      <li><strong>Verdict:</strong> Essential data source for EU compliance, but requires entity-to-address resolution that only specialized tools provide.</li>
+    </ul>
+
+    <div class="callout callout--teal">
+      <div class="callout__title">The free tier gap</div>
+      <p>Free tools can cover multiple sanctions lists, but list coverage is only part of the control. EBA GL/2024/15 applies from 30 December 2025 and expects PSPs and CASPs to choose an adequate screening system, specify applicable restrictive measures, update screening data when measures change, document alert decisions, understand system limitations, and test the system regularly. Free tools rarely provide that full operating framework.</p>
+    </div>
+
+    <h2 id="manual-costs">5. What is the real cost of manual screening?</h2>
+
+    <p>
+      Some small CASPs still screen manually &mdash; a compliance officer checks addresses against downloaded lists, searches OFAC's website, and records results in a spreadsheet. This feels free. It is not.
+    </p>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Volume</th>
+            <th>Time per Day</th>
+            <th>Annual Labor Cost</th>
+            <th>Equivalent Tool Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>10 checks/day</td>
+            <td>20&ndash;45 min</td>
+            <td>$4,000&ndash;9,000</td>
+            <td>Most tools are comparable</td>
+          </tr>
+          <tr>
+            <td>50 checks/day</td>
+            <td>1.5&ndash;4 hours</td>
+            <td>$20,000&ndash;50,000</td>
+            <td>Tools are cheaper at this point</td>
+          </tr>
+          <tr>
+            <td>100 checks/day</td>
+            <td>3&ndash;8 hours</td>
+            <td>$40,000&ndash;100,000</td>
+            <td>Even enterprise tools are cheaper</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      <em>Assumptions: Compliance officer salary EUR 35&ndash;55K/yr in Cyprus, 2&ndash;5 minutes per manual check including documentation, 250 working days/year.</em>
+    </p>
+
+    <p>
+      Beyond the labor cost, manual screening carries hidden risks:
+    </p>
+
+    <ul>
+      <li><strong>Human error:</strong> Typos, missed matches, inconsistent name matching. An automated tool checks the same way every time.</li>
+      <li><strong>No real-time updates:</strong> If OFAC adds an address at 2pm and your team downloads lists weekly, you have a gap.</li>
+      <li><strong>Weak audit trail:</strong> A spreadsheet is a weak audit trail unless access, changes, timestamps, and evidence attachments are controlled. When an NCA asks "show me the screening record for transaction X on date Y," a manual process can struggle to answer quickly.</li>
+      <li><strong>Opportunity cost:</strong> Your compliance officer should be building policies and managing risk &mdash; not copy-pasting addresses into search boxes.</li>
+    </ul>
+
+    <p>
+      <strong>The break-even point is roughly 50 checks per day.</strong> Below that, manual screening is defensible (if well-documented). Above that, tools are both cheaper and more reliable.
+    </p>
+
+    <h2 id="non-compliance">6. What is the cost of non-compliance?</h2>
+
+    <p>
+      For context on why this matters, here is what inadequate sanctions compliance can cost a crypto business:
+    </p>
+
+    <div class="callout callout--red">
+      <div class="callout__title">No reliable MiCA fine average</div>
+      <p>
+        There is no reliable public "average MiCA sanctions fine" for 2024, and MiCA does not make OFAC, UK, UN, and EU list coverage universally mandatory for every EU CASP. The relevant baseline is narrower and more fact-specific: applicable Union and national restrictive measures, plus any additional regimes that apply because of your jurisdiction, customers, counterparties, banking partners, or risk appetite.
+      </p>
+    </div>
+
+    <p>
+      Sanctions failures can still trigger blocked assets, delayed withdrawals, customer harm, reporting obligations, supervisory findings, remediation costs, and in some jurisdictions civil or criminal enforcement. The right comparison is not just tool price versus fine size; it is tool price versus the cost of operating and evidencing a defensible control manually.
+    </p>
+
+    <p>
+      More practically: an EU national competent authority can ask how you chose the screening system, which restrictive measures you apply, when lists are updated, how alerts are investigated, and where decisions are recorded. A tool that exports evidence is useful only if your written procedure explains how that evidence is produced, reviewed, and retained.
+    </p>
+
+    <h2 id="recommendations">7. Which tool is recommended for your budget?</h2>
+
+    <div class="rec-tier">
+      <div class="rec-tier__header">
+        <span class="tier-label tier-label--budget">Budget</span>
+        <span class="rec-tier__budget">&lt; EUR 5,000/yr</span>
+      </div>
+      <div class="rec-tier__desc">
+        <p><strong>Recommended stack:</strong> official list data and/or a free wallet oracle + your own evidence and alert workflow.</p>
+        <ul>
+          <li>Use official EU/OFAC list data, OpenSanctions API access, and/or a free address oracle as inputs</li>
+          <li>You'll need to build your own evidence store, alert workflow, list-update process, and compliance reporting</li>
+          <li><strong>Gap:</strong> No KYT (transaction monitoring). No unified evidence trail. Significant engineering and compliance effort to build the operating framework EBA expects.</li>
+          <li>This works for very small operations (&lt;20 checks/day) with engineering capacity to build the compliance infrastructure around free or low-cost inputs</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rec-tier">
+      <div class="rec-tier__header">
+        <span class="tier-label tier-label--mid">Mid-range</span>
+        <span class="rec-tier__budget">EUR 6,000&ndash;15,000/yr</span>
+      </div>
+      <div class="rec-tier__desc">
+        <p><strong>Recommended:</strong> Scorechain for an all-in-one platform, or a focused screening vendor if sanctions screening is the only immediate gap.</p>
+        <ul>
+          <li><strong>Scorechain</strong> has public third-party pricing at EUR 6K/yr; verify included modules, users, API limits, and support before treating that as total cost</li>
+          <li>Focused screening vendors can be cheaper than full KYT platforms, but you must verify audit trail, list-update controls, and data-processing commitments before relying on them</li>
+          <li>Confirm EU and applicable national restrictive-measures coverage first; add OFAC, UK, UN, and other lists where your exposure assessment or counterparties require them</li>
+          <li>This tier suits licensed CASPs with 50&ndash;500 checks/day</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rec-tier">
+      <div class="rec-tier__header">
+        <span class="tier-label tier-label--enterprise">Enterprise</span>
+        <span class="rec-tier__budget">Direct quote</span>
+      </div>
+      <div class="rec-tier__desc">
+        <p><strong>Recommended:</strong> Chainalysis, Elliptic, or TRM Labs &mdash; depending on your chain coverage needs and procurement preferences.</p>
+        <ul>
+          <li><strong>Chainalysis</strong> for a mature KYT and investigation suite</li>
+          <li><strong>Elliptic</strong> for 60+ chain coverage, Holistic Screening, and cross-chain investigation workflows</li>
+          <li><strong>TRM Labs</strong> for broad wallet-screening coverage and investigation capabilities</li>
+          <li><strong>Crystal Intelligence</strong> if you need 330+ chain coverage and should verify quote, depth of attribution, and audit exports for your specific chains</li>
+          <li>At this tier, you get full KYT, investigation tools, case management, and dedicated support</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 id="methodology">8. What methodology was used for this comparison?</h2>
+
+    <p>
+      Pricing data in this article was compiled from the following sources:
+    </p>
+    <ul>
+      <li><strong>Vendor websites and docs</strong> &mdash; for public product claims and current published pricing where available</li>
+      <li><strong>Capterra</strong> &mdash; public third-party pricing data for Scorechain</li>
+      <li><strong>EBA / ESMA</strong> &mdash; for EU regulatory scope, application dates, and screening-control expectations</li>
+      <li><strong>OFAC / European Commission data portal</strong> &mdash; for official sanctions list availability</li>
+    </ul>
+
+    <div class="callout">
+      <div class="callout__title">Important caveat</div>
+      <p>Most vendors in this space do not publish complete pricing. Estimates marked in <em>italics</em> are derived from public vendor pages, pricing calculators, and third-party listings. They may not reflect your specific quote. <strong>Always request a direct quote from the vendor</strong> before making a purchasing decision. Prices may vary based on volume, contract length, features selected, users, API limits, support level, and negotiation.</p>
+    </div>
+
+    <p>
+      This article was last updated on 10 July 2026. The sanctions screening market is evolving rapidly &mdash; new tools launch, pricing changes, and regulatory requirements shift. If you notice outdated information, email <a href="mailto:info@chainscreen.io">info@chainscreen.io</a>.
+    </p>
+
+    <hr class="section-divider">
+
+    <div class="article-cta">
+      <h3>Not sure which tools cover your requirements?</h3>
+      <p>Take our free compliance self-check. 10 questions, 2 minutes. See exactly where your sanctions screening has gaps.</p>
+      <a href="https://chainscreen.io/" class="btn-primary">
+        Free compliance self-check &rarr;
+      </a>
+    </div>
+
+  
+
+    <div class="related-articles">
+      <h3>Related articles</h3>
+      <div class="related-grid">
+        <a href="/operations/chainalysis-alternative-eu-casp" class="related-card">
+          <span class="related-card__tag">Tools</span>
+          <span class="related-card__title">Affordable Chainalysis Alternatives for EU CASPs in 2026</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+        <a href="/tools/screening-vs-risk-scoring" class="related-card">
+          <span class="related-card__tag">Tools</span>
+          <span class="related-card__title">Sanctions Screening vs. Transaction Monitoring</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+        <a href="/tools/chainalysis-oracle-limitations" class="related-card">
+          <span class="related-card__tag">Tools</span>
+          <span class="related-card__title">Chainalysis Free Oracle: What It Covers and What It Doesn't</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+<div style="margin: 40px 0; padding: 24px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; text-align: center;">
+  <p style="font-size: 15px; color: #475569; margin-bottom: 12px;">Need screening records and audit-ready evidence, not just a binary check?</p>
+  <a href="mailto:info@chainscreen.io" style="display: inline-block; padding: 12px 24px; background: #0c2340; color: #fff; border-radius: 8px; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600;">Contact ChainScreen</a>
+</div>
+
+
+<footer>
+  <div class="container">
+    &copy; 2026 DailyMind LTD &middot; HE 439959 &middot; Limassol, Cyprus
+    &nbsp;&middot;&nbsp;
+    <span>Information only; not legal advice</span>
+    &nbsp;&middot;&nbsp;
+    <a href="/privacy">Privacy</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://dailymind.eu">dailymind.eu</a>
+  </div>
+</footer>
+<script data-goatcounter="https://gc-chainscreen.vigilcom.dev/count"
+        async src="//gc.vigilcom.dev/count.js"></script>
+<script src="/nav.js" defer></script>
+</body>
+</html>

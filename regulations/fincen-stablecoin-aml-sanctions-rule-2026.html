@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FinCEN Stablecoin AML & Sanctions Rule 2026 | ChainScreen</title>
+<meta name="description" content="Updated August 17, 2026: FinCEN/OFAC stablecoin AML/sanctions NPRM remains proposed; PPSI CIP NPRM comments due August 21.">
+<link rel="canonical" href="https://chainscreen.io/regulations/fincen-stablecoin-aml-sanctions-rule-2026">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FinCEN Stablecoin Rule Explained: AML and Sanctions Requirements">
+<meta property="og:description" content="Updated August 17, 2026: Treasury's proposed AML/sanctions rules, closed FINCEN-2026-0100 comment window, and the open PPSI CIP NPRM due August 21.">
+<meta property="og:url" content="https://chainscreen.io/regulations/fincen-stablecoin-aml-sanctions-rule-2026">
+<meta property="og:image" content="https://chainscreen.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="ChainScreen">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"FinCEN Stablecoin Rule Explained: AML and Sanctions Requirements","description":"Updated August 17, 2026: FinCEN/OFAC's April 2026 AML and sanctions NPRM for stablecoin issuers, the closed FINCEN-2026-0100 comment window, and the June 2026 PPSI CIP NPRM with comments due August 21.","datePublished":"2026-04-10","dateModified":"2026-08-17","author":{"@type":"Person","name":"Katerina Bletsch","url":"https://chainscreen.io","jobTitle":"Founder","sameAs":["https://www.linkedin.com/in/katerina-bletsch/"]},"publisher":{"@type":"Organization","name":"ChainScreen","url":"https://chainscreen.io","logo":{"@type":"ImageObject","url":"https://chainscreen.io/og-image.png"}},"wordCount":2520}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the FinCEN stablecoin rule published in April 2026?","acceptedAnswer":{"@type":"Answer","text":"A joint FinCEN/OFAC proposed rule (docket FINCEN-2026-0100; 91 FR 18582) implementing the GENIUS Act's AML/CFT and sanctions compliance requirements for permitted payment stablecoin issuers. Comments closed on June 9, 2026. A separate June 22, 2026 CIP proposal (FINCEN-2026-0101; 91 FR 37234) covers customer identification program requirements."}},{"@type":"Question","name":"What are the five OFAC sanctions compliance elements?","acceptedAnswer":{"@type":"Answer","text":"(1) Senior management commitment, (2) risk assessment, (3) risk-based internal controls including technical capabilities and written policies and procedures, (4) independent testing and auditing, and (5) risk-based training performed at least annually and at a frequency appropriate to the PPSI's risk profile."}},{"@type":"Question","name":"What does block, freeze, reject mean for on-chain transactions?","acceptedAnswer":{"@type":"Answer","text":"PPSIs must maintain technical capabilities, policies, and procedures to block, freeze, or reject specific or impermissible transactions when required by Federal or State law, sanctions rules, regulations, or lawful orders. The proposed rule does not prescribe one token-contract design; it frames the obligation as risk-based internal controls supported by records and testing."}},{"@type":"Question","name":"Are comments still open?","acceptedAnswer":{"@type":"Answer","text":"For FINCEN-2026-0100, no: comments closed on June 9, 2026. For the PPSI Customer Identification Program NPRM, comments are due August 21, 2026 under FINCEN-2026-0101."}},{"@type":"Question","name":"What are the penalties for non-compliance?","acceptedAnswer":{"@type":"Answer","text":"Civil: up to $100,000 per day per violation ($200,000/day willful). Criminal: up to $1,000,000 and 5 years per violation. OFAC penalties apply separately -- up to $368,136 per violation or twice the transaction value. Liability extends to officers, directors, and control persons."}}]}
+</script>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chainscreen.io/og-image.png">
+<script defer src="https://u.vigilcom.dev/script.js" data-website-id="df019ee1-bf37-42db-be6c-93671ff213ec"></script>
+<meta name="twitter:title" content="FinCEN Stablecoin Rule Explained: AML and Sanctions Requirements">
+<meta name="twitter:description" content="Updated August 17, 2026: AML/sanctions NPRM remains proposed; PPSI CIP NPRM comments due August 21.">
+<meta name="article:published_time" content="2026-04-10">
+<meta name="article:modified_time" content="2026-08-17">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://chainscreen.io"},{"@type":"ListItem","position":2,"name":"Regulations","item":"https://chainscreen.io/regulations/"},{"@type":"ListItem","position":3,"name":"FinCEN Stablecoin Rule"}]}
+</script>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-alt: #f8fafc;
+    --surface: #ffffff;
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --text: #0c1d36;
+    --text-body: #475569;
+    --text-muted: #94a3b8;
+    --accent: #0c2340;
+    --accent-hover: #143a65;
+    --accent-light: #edf2f9;
+    --teal: #0f766e;
+    --teal-light: #f0fdf4;
+    --code-bg: #091a30;
+    --code-surface: #0c2340;
+    --red: #dc2626;
+    --red-light: #fef2f2;
+    --font-serif: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-code: 'JetBrains Mono', 'SF Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  
+  header {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: var(--font-code);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--accent-hover); }
+
+  .nav-link {
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover { color: var(--text); }
+
+  
+  .article-header {
+    padding: 80px 0 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .article-header__eyebrow {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--teal);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .article-header h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+
+  .article-header__sub {
+    font-size: 17px;
+    color: var(--text-body);
+    max-width: 640px;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .article-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: var(--font-code);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.01em;
+  }
+
+  .article-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .article-meta__dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--teal);
+    flex-shrink: 0;
+  }
+
+  
+  .article-body {
+    padding: 48px 0 72px;
+  }
+
+  .article-body h2 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-top: 48px;
+    margin-bottom: 16px;
+    line-height: 1.3;
+    color: var(--text);
+  }
+
+  .article-body h3 {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 32px;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+
+  .article-body p {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .article-body ul, .article-body ol {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+    padding-left: 24px;
+  }
+
+  .article-body li {
+    margin-bottom: 6px;
+  }
+
+  .article-body a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+  }
+
+  .article-body a:hover {
+    color: var(--accent-hover);
+  }
+
+  .article-body strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .article-body code {
+    font-family: var(--font-code);
+    font-size: 13px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--accent);
+  }
+
+  
+  .callout {
+    margin: 28px 0;
+    padding: 24px 28px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .callout p {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .callout p:last-child {
+    margin-bottom: 0;
+  }
+
+  .callout--warning {
+    background: var(--red-light);
+    border: 1px solid #fecaca;
+  }
+
+  .callout--warning .callout__label {
+    color: var(--red);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--info {
+    background: var(--accent-light);
+    border: 1px solid #c7d5e8;
+  }
+
+  .callout--info .callout__label {
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--teal {
+    background: var(--teal-light);
+    border: 1px solid #bbf7d0;
+  }
+
+  .callout--teal .callout__label {
+    color: var(--teal);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  
+  .comparison-wrapper {
+    margin: 28px 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .comparison th, .comparison td {
+    padding: 13px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .comparison tr:last-child td { border-bottom: none; }
+
+  .comparison th {
+    color: var(--text-muted);
+    font-family: var(--font-code);
+    font-weight: 500;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--bg-alt);
+  }
+
+  .comparison td:first-child {
+    color: var(--text);
+    font-weight: 500;
+    font-size: 13px;
+  }
+
+  .check { color: var(--teal); font-weight: 600; }
+  .cross { color: var(--red); font-weight: 600; }
+  .na { color: var(--text-muted); }
+
+  
+  blockquote {
+    margin: 24px 0;
+    padding: 20px 24px;
+    border-left: 3px solid var(--border-strong);
+    background: var(--bg-alt);
+    border-radius: 0 8px 8px 0;
+  }
+
+  blockquote p {
+    font-size: 14px;
+    color: var(--text-body);
+    font-style: italic;
+    margin-bottom: 0;
+  }
+
+  blockquote cite {
+    display: block;
+    margin-top: 8px;
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-style: normal;
+    color: var(--text-muted);
+  }
+
+  
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  
+  .cta-banner {
+    margin: 48px 0;
+    padding: 40px 36px;
+    background: var(--code-bg);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .cta-banner h3 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: #f1f5f9;
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .cta-banner p {
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 24px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 28px;
+    background: #fff;
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary:hover {
+    background: #f1f5f9;
+    color: var(--accent);
+  }
+
+  
+  .sources {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .sources h3 {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .sources ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sources li {
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 4px 0;
+    line-height: 1.6;
+  }
+
+  .sources li a {
+    color: var(--text-body);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .sources li a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--text); }
+
+  
+  .checklist {
+    counter-reset: checklist-counter;
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .checklist > li {
+    counter-increment: checklist-counter;
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: 28px;
+  }
+
+  .checklist > li::before {
+    content: counter(checklist-counter);
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 28px;
+    height: 28px;
+    background: var(--accent-light);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-code);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .checklist > li strong {
+    display: block;
+    color: var(--text);
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+
+  .checklist > li p {
+    margin-bottom: 8px;
+  }
+
+  
+  @media (max-width: 640px) {
+    .article-header { padding: 48px 0 32px; }
+    .article-header h1 { font-size: 1.8rem; }
+    .article-body h2 { font-size: 20px; }
+    .article-meta { gap: 12px; }
+    .comparison { font-size: 11px; }
+    .comparison th, .comparison td { padding: 8px 10px; }
+    .callout { padding: 20px; }
+    .cta-banner { padding: 32px 24px; }
+  }
+
+  
+  .breadcrumb { padding: 12px 0; border-bottom: 1px solid var(--border); background: var(--bg-alt); }
+  .breadcrumb a, .breadcrumb span { font-family: var(--font-code); font-size: 11px; letter-spacing: 0.01em; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb__sep { color: #cbd5e1; margin: 0 6px; }
+  .breadcrumb__current { color: var(--text-body); }
+
+  
+  .nav-links { display: flex; align-items: center; gap: 20px; }
+  .nav-link.active { color: var(--text); }
+  @media (max-width: 640px) { .nav-links { gap: 12px; } .nav-link { font-size: 11px; } }
+
+  
+  .related-articles { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+  .related-articles h3 { font-family: var(--font-code); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 16px; margin-top: 0; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .related-card { display: flex; flex-direction: column; gap: 8px; padding: 20px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; transition: border-color 0.2s; }
+  .related-card:hover { border-color: var(--accent); }
+  .related-card__tag { font-family: var(--font-code); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--teal); }
+  .related-card__title { font-family: var(--font-serif); font-size: 15px; color: var(--text); line-height: 1.35; }
+  .related-card__arrow { font-family: var(--font-code); font-size: 12px; color: var(--text-muted); margin-top: auto; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="/" class="logo">chain<span>screen</span></a>
+    <nav class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/regulations/" class="nav-link active">Regulations</a>
+      <a href="/operations/" class="nav-link">Operations</a>
+      <a href="/tools/" class="nav-link">Tools</a>
+      <a href="/technical/" class="nav-link">Technical</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <div class="container">
+    <a href="/">Home</a><span class="breadcrumb__sep">/</span>
+    <a href="/regulations/">Regulations</a><span class="breadcrumb__sep">/</span>
+    <span class="breadcrumb__current">FinCEN Stablecoin Rule</span>
+  </div>
+</nav>
+
+<section class="article-header">
+  <div class="container">
+    <div class="article-header__eyebrow">US stablecoin regulation</div>
+    <h1>FinCEN Stablecoin Rule Explained: AML and Sanctions Requirements</h1>
+    <p class="article-header__sub">
+      Updated August 17, 2026: Treasury's April AML and sanctions proposal remains at proposed-rule stage after its comment deadline, and a separate June Customer Identification Program proposal is open for comment until August 21.
+    </p>
+    <div class="article-meta">
+      <span><div class="article-meta__dot"></div> April 10, 2026</span>
+      <span><div class="article-meta__dot"></div> Updated August 17, 2026</span>
+      <span><div class="article-meta__dot"></div> 10 min read</span>
+      <span><div class="article-meta__dot"></div> Sources: Treasury, FinCEN, OFAC, Federal Register</span>
+    </div>
+  </div>
+</section>
+
+<article class="article-body">
+  <div class="container">
+
+    <p>
+      <strong>Stablecoin issuers are being brought into the BSA perimeter.</strong> On April 8, 2026, the Financial Crimes Enforcement Network (FinCEN) and the Office of Foreign Assets Control (OFAC) announced a <a href="https://home.treasury.gov/news/press-releases/sb0435" target="_blank" rel="noopener">joint Notice of Proposed Rulemaking</a> (docket <a href="https://www.regulations.gov/docket/FINCEN-2026-0100" target="_blank" rel="noopener">FINCEN-2026-0100</a>; <a href="https://www.govinfo.gov/content/pkg/FR-2026-04-10/pdf/2026-06963.pdf" target="_blank" rel="noopener">91 FR 18582</a>) that spells out how anti-money laundering and sanctions compliance obligations apply to permitted payment stablecoin issuers (PPSIs) under the <a href="https://www.congress.gov/bill/119th-congress/senate-bill/1582/text" target="_blank" rel="noopener">GENIUS Act</a>.
+    </p>
+
+    <p>
+      The <a href="https://www.fincen.gov/system/files/2026-04/PPSI-AMLCFT-NPRM.pdf" target="_blank" rel="noopener">303-page proposed rule</a> classifies PPSIs as financial institutions under the Bank Secrecy Act (BSA), requires them to maintain five-element OFAC sanctions compliance programs, requires technical capabilities, policies, and procedures to block, freeze, or reject specific impermissible transactions, and proposes SAR filing, CDD, recordkeeping, information-sharing, and Travel Rule obligations. The FINCEN-2026-0100 comment period <strong>closed on June 9, 2026</strong>.
+    </p>
+
+    <p>
+      A second rulemaking now fills in the customer identification piece. On June 22, 2026, FinCEN and the banking agencies published the <a href="https://www.federalregister.gov/documents/2026/06/22/2026-12460/permitted-payment-stablecoin-issuer-customer-identification-program" target="_blank" rel="noopener">PPSI Customer Identification Program NPRM</a> (docket <a href="https://www.regulations.gov/docket/FINCEN-2026-0101" target="_blank" rel="noopener">FINCEN-2026-0101</a>; 91 FR 37234). Comments on that CIP proposal are due <strong>August 21, 2026</strong>.
+    </p>
+
+    <p>
+      As of <strong>August 17, 2026</strong>, FINCEN-2026-0100 is closed and remains a proposed rule; FINCEN-2026-0101 remains open for comments until <strong>August 21, 2026</strong>.
+    </p>
+
+    <p>
+      This is the implementing regulation the industry has been waiting for since the GENIUS Act became law on July 18, 2025. Below is a section-by-section breakdown of what the rule requires, who it covers, and what you need to build.
+    </p>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">Penalty exposure</div>
+      <p>
+        Unlicensed stablecoin issuance: <strong>$100,000/day</strong> civil penalty per violation ($200,000/day for willful noncompliance). Knowing participation: up to <strong>$1,000,000 per violation</strong>, up to <strong>5 years imprisonment</strong>, or both. OFAC sanctions violations carry separate penalties up to $368,136 per violation or twice the transaction value. Criminal liability extends personally to officers, directors, employees, agents, and control persons.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>Who is covered by the proposed rule?</h2>
+
+    <p>
+      The rule would apply to <strong>permitted payment stablecoin issuers (PPSIs)</strong> as defined by the GENIUS Act. A PPSI is any entity authorized to issue payment stablecoins under one of three regulatory pathways:
+    </p>
+
+    <div class="comparison-wrapper">
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th>Issuer type</th>
+            <th>Primary regulator</th>
+            <th>Threshold</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Subsidiary of insured depository institution</td>
+            <td>Federal banking regulator (OCC, FDIC, Fed)</td>
+            <td>No cap</td>
+          </tr>
+          <tr>
+            <td>Nonbank, uninsured national bank, federal branch of foreign bank</td>
+            <td>OCC</td>
+            <td>No cap</td>
+          </tr>
+          <tr>
+            <td>Nonbank with &lt;$10B outstanding stablecoins</td>
+            <td>State regulator (if framework is "substantially similar")</td>
+            <td>&lt;$10B</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      The proposed AML/CFT program requirements and OFAC sanctions compliance elements are identical across all three categories. The difference lies in who examines you -- not what you would need to build.
+    </p>
+
+    <div class="callout callout--info">
+      <div class="callout__label">DeFi exemption</div>
+      <p>
+        The GENIUS Act explicitly excludes distributed ledger protocols, development activities, immutable and self-custodial wallet interfaces, and liquidity pool participation from the definition of "digital asset service provider." If you are building non-custodial DeFi infrastructure, you are not a PPSI and these requirements do not apply to you.
+      </p>
+    </div>
+
+    <h3>Non-US issuers</h3>
+
+    <p>
+      Foreign issuers of USD-denominated payment stablecoins must register with the OCC, hold reserves in a US financial institution, and operate under a home jurisdiction the Treasury Secretary deems "comparable" to US standards. They cannot be domiciled in a comprehensively sanctioned country or a jurisdiction of primary money laundering concern (<a href="https://www.congress.gov/bill/119th-congress/senate-bill/1582/text" target="_blank" rel="noopener">GENIUS Act Section 18</a>).
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>What are the five OFAC sanctions compliance elements?</h2>
+
+    <p>
+      The proposed OFAC rule requires every PPSI to maintain a sanctions compliance program built around <strong>five mandatory elements</strong>. These mirror OFAC's existing <a href="https://ofac.treasury.gov/media/16331/download?inline" target="_blank" rel="noopener">Framework for OFAC Compliance Commitments</a>, but the proposed rule makes them legally binding for stablecoin issuers -- not just best practice:
+    </p>
+
+    <ol class="checklist">
+      <li>
+        <strong>Senior management commitment</strong>
+        <p>
+          Your board or senior leadership must formally approve the sanctions compliance program, allocate adequate resources, and designate a compliance officer with sufficient authority and autonomy. OFAC examines whether management actively supports compliance or merely signs off on a document. The proposed rule requires this commitment to be documented and reviewable.
+        </p>
+      </li>
+
+      <li>
+        <strong>Risk assessment</strong>
+        <p>
+          Conduct a sanctions-specific risk assessment covering your products, services, customer base, geographic exposure, and counterparty types. For stablecoin issuers, this means assessing the risk profile of every blockchain your token operates on, bridging mechanisms, OTC desks, and any jurisdictions where your stablecoin circulates. The assessment must be updated when your risk profile changes -- not just annually.
+        </p>
+      </li>
+
+      <li>
+        <strong>Internal controls -- the bullseye requirement</strong>
+        <p>
+          Build systems and procedures to identify, interdict, escalate, and report sanctioned activity. <strong>Section 502.201(b)(3)</strong> would require PPSIs to establish and maintain risk-based internal controls -- including technical capabilities and written policies and procedures -- to identify, block, and/or reject transactions that may violate or would violate US sanctions. For on-chain issuers, this is a core product-control requirement, but the proposal does not prescribe a single token-contract design.
+        </p>
+      </li>
+
+      <li>
+        <strong>Testing and auditing</strong>
+        <p>
+          Maintain an independent testing or audit function for your sanctions compliance program -- both the technology (does your screening tool catch what it should?) and the procedures (do your staff follow the escalation process?). The function needs sufficient resources, expertise, and authority to identify sanctions compliance weaknesses and feed them back into the program.
+        </p>
+      </li>
+
+      <li>
+        <strong>Training</strong>
+        <p>
+          Maintain risk-based sanctions compliance training for all relevant personnel and stakeholders, performed at least annually and at a frequency appropriate to the PPSI's risk profile. Training should cover OFAC regulations, your internal procedures, red flags specific to stablecoin transactions (chain-hopping, mixing services, sanctioned jurisdiction exposure), and consequences of violations. Document everything -- training records are a standard OFAC audit request.
+        </p>
+      </li>
+    </ol>
+
+    <hr class="section-divider">
+
+    <h2>What technical capabilities must issuers build?</h2>
+
+    <p>
+      Beyond the five-element program, the proposed rule imposes specific <strong>technical requirements</strong> that directly affect your engineering team:
+    </p>
+
+    <h3>Block, freeze, reject</h3>
+
+    <p>
+      The April NPRM and the GENIUS Act require PPSIs to maintain technical capabilities, policies, and procedures to block, freeze, or reject specific or impermissible transactions that violate Federal or State law, rules, or regulations, and to comply with lawful orders. For issuers with smart contract-based tokens, this may require transfer-control, freeze, burn, redemption, or account-level controls that can be applied when legally required. The official language is capability-based and risk-based; it is not a mandate to use one particular contract pattern.
+    </p>
+
+    <h3>Real-time screening</h3>
+
+    <p>
+      Sanctions controls need to be fast enough to identify prohibited activity and support required blocking, freezing, rejection, reporting, and lawful-order responses. For high-throughput stablecoins, batch-only review after risk has already materialized is a weak control. Screening should cover OFAC-administered sanctions lists, including the SDN list and other applicable programs, and should be calibrated to the issuer's products, counterparties, geographies, chains, and secondary-market exposure.
+    </p>
+
+    <h3>Audit trail</h3>
+
+    <p>
+      Screening and interdiction events should produce timestamped records: what was screened, against which list version, what the result was, and what action was taken. If OFAC or FinCEN requests records for a specific address, customer, transaction, or time period, you need to produce them. "We screened it but did not log the result" is not a defensible position.
+    </p>
+
+    <div class="callout callout--teal">
+      <div class="callout__label">Vendor vs. in-house</div>
+      <p>
+        The proposed rule allows sanctions compliance tools to be developed internally or sourced from a vendor. The Chainalysis sanctions oracle -- the most widely used free on-chain screening tool -- checks addresses against OFAC, EU, and UN sanctions designations. However, the free oracle provides <a href="https://go.chainalysis.com/chainalysis-oracle-docs.html" target="_blank" rel="noopener">address-level lookups only</a>, without the audit trail, compliance certificates, or match-handling workflow a PPSI will need to evidence its program. Free screening tells you if an address is sanctioned; it does not produce the documentation trail that proves your compliance program works.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>What AML program requirements apply?</h2>
+
+    <p>
+      Under the proposed BSA framework, PPSIs would maintain a full AML/CFT program. The proposed rule specifies these core obligations:
+    </p>
+
+    <h3>Suspicious Activity Reports (SARs)</h3>
+
+    <p>
+      PPSIs would register with FinCEN's BSA E-Filing system and file SARs for suspicious transactions. The crypto industry already files approximately <strong>55,000 crypto-related SARs annually</strong> (<a href="https://home.treasury.gov/news/press-releases/sb0435" target="_blank" rel="noopener">Treasury press release</a>). Filing deadlines: 30 calendar days from detection (60 days if no suspect identified).
+    </p>
+
+    <h3>Customer due diligence (CDD) and CIP</h3>
+
+    <p>
+      The April AML/CFT NPRM proposes risk-based CDD obligations, including understanding customer relationships, monitoring for suspicious transactions, and maintaining and updating customer information, including beneficial ownership information for legal entity customers. The June 22 CIP NPRM then proposes the account-opening mechanics: a written CIP appropriate for the PPSI's size and business, risk-based procedures to verify each customer's identity, collection of name, date of birth or formation, address, and identifying number before account opening, verification within a reasonable time, recordkeeping, government-list comparison, customer notice, and limited reliance on another federally regulated financial institution. Comments on these CIP mechanics are due August 21, 2026 under FINCEN-2026-0101.
+    </p>
+
+    <h3>Travel Rule</h3>
+
+    <p>
+      Stablecoin transfers above the applicable threshold would require transmittal of originator and beneficiary information -- a capability many issuers lack today.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>How does this affect small issuers vs. large issuers?</h2>
+
+    <p>
+      The proposed rule does not differentiate compliance obligations by issuer size. A PPSI with $50 million in outstanding stablecoins has the same five-element OFAC program requirement as one with $50 billion. However, the practical impact differs significantly:
+    </p>
+
+    <div class="comparison-wrapper">
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th>Factor</th>
+            <th>Large issuers ($10B+)</th>
+            <th>Small issuers (&lt;$10B)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Existing compliance team</td>
+            <td>Established (Tether, Circle already have full programs)</td>
+            <td>Often minimal or absent</td>
+          </tr>
+          <tr>
+            <td>Screening infrastructure</td>
+            <td>Enterprise vendors already deployed</td>
+            <td>May rely on free tools without audit trails</td>
+          </tr>
+          <tr>
+            <td>Block/freeze capability</td>
+            <td>Often already supported through issuer-controlled transfer restrictions</td>
+            <td>May require contract upgrade or migration</td>
+          </tr>
+          <tr>
+            <td>SAR filing experience</td>
+            <td>Already filing SARs as MSBs</td>
+            <td>New obligation -- must register with FinCEN</td>
+          </tr>
+          <tr>
+            <td>Cost of compliance</td>
+            <td>Incremental -- adding PPSI-specific procedures to existing programs</td>
+            <td>Step-function increase -- building a new PPSI compliance program</td>
+          </tr>
+          <tr>
+            <td>Primary regulator</td>
+            <td>Federal (OCC, FDIC, Fed)</td>
+            <td>State regulator (if "substantially similar" framework exists)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      The proposed rule creates a compliance floor. Issuers that cannot meet it may need to exit the market or consolidate.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>Comment status and open CIP docket</h2>
+
+    <p>
+      The April AML/sanctions NPRM comment window has closed. FINCEN-2026-0100 comments were due on <strong>June 9, 2026</strong>, so do not treat that docket as an open submission opportunity as of this July 10 update.
+    </p>
+
+    <p>
+      The open rulemaking is now the June 22 PPSI Customer Identification Program proposal. If the proposed account-opening, verification, recordkeeping, government-list comparison, or reliance mechanics create technical or operational issues for your issuer model, submit those comments under FINCEN-2026-0101 before <strong>August 21, 2026</strong>.
+    </p>
+
+    <h3>Submission details</h3>
+
+    <ul>
+      <li><strong>AML/sanctions NPRM:</strong> FINCEN-2026-0100; 91 FR 18582; comments closed June 9, 2026</li>
+      <li><strong>CIP NPRM:</strong> FINCEN-2026-0101; 91 FR 37234; comments due August 21, 2026</li>
+      <li><strong>Electronic submission for CIP:</strong> <a href="https://www.regulations.gov/docket/FINCEN-2026-0101" target="_blank" rel="noopener">regulations.gov/docket/FINCEN-2026-0101</a></li>
+      <li><strong>Mail:</strong> Policy Division, Financial Crimes Enforcement Network, P.O. Box 39, Vienna, VA 22183</li>
+    </ul>
+
+    <h3>What remains worth commenting on</h3>
+
+    <p>
+      For the open CIP docket, the highest-signal comments will be specific and operational:
+    </p>
+
+    <ul>
+      <li>How "account" and "customer" should map to direct issuer relationships, APIs, wallets, and redemption flows</li>
+      <li>How identity verification should work for non-individual customers and high-volume institutional accounts</li>
+      <li>When reliance on another federally regulated financial institution is reasonable</li>
+      <li>How government-list comparison and sanctions screening should interact with a PPSI's broader OFAC program</li>
+      <li>Whether smaller PPSIs need clearer implementation expectations for records, notices, and vendor workflows</li>
+    </ul>
+
+    <p>
+      Industry comments still carry weight, but the target has changed: FINCEN-2026-0100 is closed; FINCEN-2026-0101 is open.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>What is the timeline?</h2>
+
+    <div class="comparison-wrapper">
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Event</th>
+            <th>Action required</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>July 18, 2025</td>
+            <td>GENIUS Act signed into law</td>
+            <td>Statutory clock starts</td>
+          </tr>
+          <tr>
+            <td>April 8, 2026</td>
+            <td>FinCEN + OFAC announce AML/sanctions NPRM (FINCEN-2026-0100)</td>
+            <td>Review proposed rules, begin building compliance program</td>
+          </tr>
+          <tr>
+            <td>April 10, 2026</td>
+            <td>AML/sanctions NPRM published in the Federal Register (91 FR 18582)</td>
+            <td>60-day comment clock begins</td>
+          </tr>
+          <tr>
+            <td>June 9, 2026</td>
+            <td>FINCEN-2026-0100 comment period closed</td>
+            <td>Closed docket; monitor final rule</td>
+          </tr>
+          <tr>
+            <td>June 22, 2026</td>
+            <td>PPSI Customer Identification Program NPRM published (FINCEN-2026-0101; 91 FR 37234)</td>
+            <td>Review CIP, verification, recordkeeping, government-list comparison, and reliance mechanics</td>
+          </tr>
+          <tr>
+            <td>July 18, 2026</td>
+            <td>Statutory implementing-rule target passed</td>
+            <td>Track final rules; AML/sanctions remains proposed-rule stage in the Aug. 14, 2026 Unified Agenda</td>
+          </tr>
+          <tr>
+            <td>August 21, 2026</td>
+            <td>FINCEN-2026-0101 CIP comments due</td>
+            <td>Submit CIP comments via regulations.gov</td>
+          </tr>
+          <tr>
+            <td><strong>January 18, 2027</strong></td>
+            <td><strong>Outside statutory effective date</strong> (18 months from GENIUS Act enactment)</td>
+            <td><strong>Act can take effect earlier if final regulations trigger the 120-day date</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      The outside statutory effective date is <strong>January 18, 2027</strong>. The GENIUS Act takes effect earlier if final implementing regulations issue and 120 days pass before that date, so issuers should not treat January 18 as guaranteed extra time.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>Frequently asked questions</h2>
+
+    <h3>What is the FinCEN stablecoin rule published in April 2026?</h3>
+    <p>
+      A joint FinCEN/OFAC proposed rule (docket FINCEN-2026-0100; 91 FR 18582) implementing the GENIUS Act's AML/CFT and sanctions requirements for permitted payment stablecoin issuers. The 303-page rule classifies PPSIs as BSA financial institutions and proposes AML/CFT programs, five-element OFAC programs, SAR filing, CDD, recordkeeping, information-sharing, and Travel Rule obligations. Comments closed June 9, 2026.
+    </p>
+
+    <h3>What are the five OFAC sanctions compliance elements?</h3>
+    <p>
+      (1) Senior management commitment, (2) risk assessment, (3) risk-based internal controls including technical capabilities and written policies and procedures, (4) independent testing and auditing, and (5) risk-based training performed at least annually and at a frequency appropriate to the PPSI's risk profile.
+    </p>
+
+    <h3>What does block, freeze, reject mean for on-chain transactions?</h3>
+    <p>
+      PPSIs must maintain technical capabilities, policies, and procedures to block, freeze, or reject specific or impermissible transactions when required by Federal or State law, sanctions rules, regulations, or lawful orders. The proposal does not prescribe one token-contract design; it frames the obligation as risk-based internal controls supported by records, testing, and escalation.
+    </p>
+
+    <h3>Are comments still open?</h3>
+    <p>
+      For FINCEN-2026-0100, no: comments closed on June 9, 2026. For the separate PPSI Customer Identification Program NPRM, comments are due August 21, 2026 under <a href="https://www.regulations.gov/docket/FINCEN-2026-0101" target="_blank" rel="noopener">FINCEN-2026-0101</a>.
+    </p>
+
+    <h3>What are the penalties for non-compliance?</h3>
+    <p>
+      Civil: up to <strong>$100,000/day</strong> per violation ($200,000/day willful). Criminal: up to <strong>$1,000,000</strong> and <strong>5 years</strong> per violation. OFAC penalties apply separately -- up to $368,136 per violation or twice the transaction value. Liability extends to officers, directors, and control persons.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>Bottom line</h2>
+
+    <p>
+      The FinCEN/OFAC proposed rule transforms stablecoin issuance from a patchwork of state-level requirements into a federally supervised financial activity with BSA-grade obligations. The five-element OFAC sanctions compliance program is the core framework. The block/freeze/reject and lawful-order capability requirements are the hardest technical requirements, but they should be described in the rule's own terms: risk-based controls, technical capabilities, policies, and procedures. The SAR filing, CDD, CIP, and Travel Rule obligations bring stablecoin issuers in line with the rest of the regulated financial system.
+    </p>
+
+    <p>
+      The AML/sanctions comment deadline has passed. The CIP comment window remains open until August 21, 2026, and the outside statutory effective date is January 18, 2027 unless final regulations make the 120-day effective-date trigger earlier.
+    </p>
+
+    <p>
+      ChainScreen will track the final AML/sanctions rule and the open CIP docket as the GENIUS Act implementation clock runs.
+    </p>
+
+    <blockquote>
+      <p>Analysis by ChainScreen. Published April 10, 2026. Updated August 17, 2026.</p>
+    </blockquote>
+
+    <div class="cta-banner">
+      <h3>Sanctions screening evidence for stablecoin issuers</h3>
+      <p>Section 502.201(b)(3) makes documentation as important as the screening result: keep timestamped records, list-version evidence, and freeze/escalation decisions.</p>
+      <a href="/regulations/" class="btn-primary">
+        Read regulatory guides &rarr;
+      </a>
+    </div>
+
+    <div class="sources">
+      <h3>Sources</h3>
+      <ul>
+        <li><a href="https://home.treasury.gov/news/press-releases/sb0435" target="_blank" rel="noopener">Treasury Proposes Rule to Implement the GENIUS Act's Requirements to Counter Illicit Finance -- U.S. Treasury (April 8, 2026)</a></li>
+        <li><a href="https://www.govinfo.gov/content/pkg/FR-2026-04-10/pdf/2026-06963.pdf" target="_blank" rel="noopener">Permitted Payment Stablecoin Issuer AML/CFT and Sanctions Compliance Program Requirements -- Federal Register, 91 FR 18582 (April 10, 2026)</a></li>
+        <li><a href="https://www.fincen.gov/system/files/2026-04/PPSI-AMLCFT-NPRM.pdf" target="_blank" rel="noopener">FinCEN/OFAC Proposed Rule: AML/CFT Program Requirements for PPSIs (FINCEN-2026-0100) -- 303-page PDF</a></li>
+        <li><a href="https://www.fincen.gov/system/files/2026-04/FactSheet-PPSI-program-NPRM.pdf" target="_blank" rel="noopener">FinCEN Fact Sheet: GENIUS Act AML Obligations and Sanctions Compliance Program Requirements (April 2026)</a></li>
+        <li><a href="https://www.regulations.gov/docket/FINCEN-2026-0100" target="_blank" rel="noopener">Docket FINCEN-2026-0100 -- Regulations.gov (comments closed June 9, 2026)</a></li>
+        <li><a href="https://www.federalregister.gov/documents/2026/06/22/2026-12460/permitted-payment-stablecoin-issuer-customer-identification-program" target="_blank" rel="noopener">Permitted Payment Stablecoin Issuer Customer Identification Program -- Federal Register, 91 FR 37234 (June 22, 2026)</a></li>
+        <li><a href="https://www.fincen.gov/news/news-releases/fincen-agencies-propose-rule-implement-genius-act-customer-identification" target="_blank" rel="noopener">FinCEN, Agencies Propose Rule to Implement GENIUS Act Customer Identification Program Requirement (June 18, 2026)</a></li>
+        <li><a href="https://www.fincen.gov/system/files/2026-06/GENIUS-CIP-NPRM-FactSheet.pdf" target="_blank" rel="noopener">FinCEN Fact Sheet: GENIUS Act Customer Identification Program Requirements (June 2026)</a></li>
+        <li><a href="https://www.regulations.gov/docket/FINCEN-2026-0101" target="_blank" rel="noopener">Docket FINCEN-2026-0101 -- Regulations.gov (comments due August 21, 2026)</a></li>
+        <li><a href="https://www.congress.gov/bill/119th-congress/senate-bill/1582/text" target="_blank" rel="noopener">S.1582 -- GENIUS Act of 2025 -- Full text -- Congress.gov</a></li>
+        <li><a href="https://ofac.treasury.gov/media/16331/download?inline" target="_blank" rel="noopener">A Framework for OFAC Compliance Commitments -- OFAC</a></li>
+        <li><a href="https://go.chainalysis.com/chainalysis-oracle-docs.html" target="_blank" rel="noopener">Chainalysis Sanctions Oracle Documentation -- Chainalysis</a></li>
+      </ul>
+    </div>
+
+    <div class="related-articles">
+      <h3>Related articles</h3>
+      <div class="related-grid">
+        <a href="/regulations/genius-act-stablecoin-compliance-2026" class="related-card">
+          <span class="related-card__tag">Regulations</span>
+          <span class="related-card__title">GENIUS Act Compliance for Small Stablecoin Issuers in 2026</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+        <a href="/regulations/which-sanctions-lists-mica-requires" class="related-card">
+          <span class="related-card__tag">Regulations</span>
+          <span class="related-card__title">Which Sanctions Lists Does MiCA Require? OFAC vs EU Consolidated</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+        <a href="/operations/sanctions-screening-implementation-guide" class="related-card">
+          <span class="related-card__tag">Operations</span>
+          <span class="related-card__title">Sanctions Screening Implementation Guide: From Excel to API in 30 Days</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+<div style="margin: 40px 0; padding: 24px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; text-align: center;">
+  <p style="font-size: 15px; color: #475569; margin-bottom: 12px;">Screen any wallet against OFAC, EU, and UN sanctions -- free, no signup.</p>
+  <a href="mailto:info@chainscreen.io" style="display: inline-block; padding: 12px 24px; background: #0c2340; color: #fff; border-radius: 8px; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600;">Contact ChainScreen</a>
+</div>
+
+
+<footer>
+  <div class="container">
+    &copy; 2026 DailyMind LTD &middot; HE 439959 &middot; Limassol, Cyprus
+    &nbsp;&middot;&nbsp;
+    <span>Information only; not legal advice</span>
+    &nbsp;&middot;&nbsp;
+    <a href="/privacy">Privacy</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://dailymind.eu">dailymind.eu</a>
+  </div>
+</footer>
+<script data-goatcounter="https://gc-chainscreen.vigilcom.dev/count"
+        async src="//gc.vigilcom.dev/count.js"></script>
+<script src="/nav.js" defer></script>
+</body>
+</html>

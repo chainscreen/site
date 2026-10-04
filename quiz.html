@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AML Screening Compliance Check for CASPs | ChainScreen</title>
+<meta name="description" content="Is your crypto sanctions screening MiCA-compliant? 2-minute self-check for EU CASPs based on EBA Guidelines on Restrictive Measures (Dec 2025).">
+<link rel="canonical" href="https://chainscreen.io/quiz">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sanctions Screening Self-Check for EU CASPs">
+<meta property="og:description" content="Are you really compliant? 2-minute self-check based on EBA Guidelines on Restrictive Measures (Dec 2025). 10 questions, instant gap analysis.">
+<meta property="og:url" content="https://chainscreen.io/quiz">
+<meta property="og:image" content="https://chainscreen.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="ChainScreen">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chainscreen.io/og-image.png">
+<script defer src="https://u.vigilcom.dev/script.js" data-website-id="df019ee1-bf37-42db-be6c-93671ff213ec"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"Sanctions Screening Self-Check","description":"2-minute compliance self-check for EU CASPs based on EBA Guidelines on Restrictive Measures.","url":"https://chainscreen.io/quiz","isPartOf":{"@type":"WebSite","name":"ChainScreen","url":"https://chainscreen.io"},"publisher":{"@type":"Organization","name":"ChainScreen","url":"https://chainscreen.io","logo":{"@type":"ImageObject","url":"https://chainscreen.io/og-image.png"}}}
+</script>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-alt: #f8fafc;
+    --border: #e2e8f0;
+    --text: #0c1d36;
+    --text-body: #475569;
+    --text-muted: #94a3b8;
+    --accent: #0c2340;
+    --accent-hover: #143a65;
+    --teal: #0f766e;
+    --red: #dc2626;
+    --amber: #d97706;
+    --green: #16a34a;
+    --font-serif: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-code: 'JetBrains Mono', 'SF Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  .container { max-width: 640px; margin: 0 auto; padding: 0 24px; }
+
+  header {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: var(--font-code);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--accent-hover); }
+
+  .nav-links { display: flex; align-items: center; gap: 20px; }
+  .nav-link {
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+  .nav-link:hover { color: var(--text); }
+  @media (max-width: 640px) { .nav-links { gap: 10px; } .nav-link { font-size: 11px; } }
+
+  .hero {
+    padding: 60px 0 40px;
+    text-align: center;
+  }
+
+  .hero__eyebrow {
+    font-family: var(--font-code);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--teal);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .hero h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .hero p {
+    color: var(--text-body);
+    font-size: 15px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  
+  .quiz {
+    padding: 20px 0 60px;
+  }
+
+  .quiz-item {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .quiz-item:hover {
+    border-color: var(--accent);
+  }
+
+  .quiz-item.checked {
+    background: #f0fdf4;
+    border-color: var(--green);
+  }
+
+  .quiz-item.unchecked {
+    background: #fef2f2;
+    border-color: var(--red);
+  }
+
+  .quiz-checkbox {
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    font-size: 14px;
+  }
+
+  .quiz-item.checked .quiz-checkbox {
+    background: var(--green);
+    border-color: var(--green);
+    color: #fff;
+  }
+
+  .quiz-item.unchecked .quiz-checkbox {
+    background: #fee2e2;
+    border-color: var(--red);
+    color: var(--red);
+  }
+
+  .quiz-content { flex: 1; }
+
+  .quiz-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .quiz-detail {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    display: none;
+  }
+
+  .quiz-item.unchecked .quiz-detail,
+  .quiz-item.checked .quiz-detail {
+    display: block;
+  }
+
+  .quiz-number {
+    font-family: var(--font-code);
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+
+  
+  .results {
+    display: none;
+    padding: 40px 0 60px;
+    text-align: center;
+  }
+
+  .results.visible { display: block; }
+
+  .score {
+    font-family: var(--font-serif);
+    font-size: 64px;
+    font-weight: 400;
+    margin-bottom: 8px;
+  }
+
+  .score-label {
+    font-family: var(--font-code);
+    font-size: 13px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 24px;
+  }
+
+  .score-red { color: var(--red); }
+  .score-amber { color: var(--amber); }
+  .score-green { color: var(--green); }
+
+  .result-message {
+    font-size: 15px;
+    color: var(--text-body);
+    max-width: 480px;
+    margin: 0 auto 32px;
+    line-height: 1.7;
+  }
+
+  .result-gaps {
+    text-align: left;
+    max-width: 480px;
+    margin: 0 auto 32px;
+    padding: 24px;
+    background: #fef2f2;
+    border-radius: 8px;
+    border: 1px solid #fecaca;
+  }
+
+  .result-gaps h3 {
+    font-family: var(--font-code);
+    font-size: 12px;
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 12px;
+  }
+
+  .result-gaps li {
+    font-size: 14px;
+    color: var(--text-body);
+    margin-bottom: 8px;
+    padding-left: 4px;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 28px;
+    background: var(--accent);
+    color: #fff;
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .btn-primary:hover { background: var(--accent-hover); color: #fff; }
+
+  .btn-secondary {
+    display: inline-flex;
+    padding: 13px 28px;
+    background: transparent;
+    color: var(--text-body);
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-left: 12px;
+  }
+
+  .show-results-btn {
+    display: none;
+    margin: 32px auto;
+    padding: 15px 36px;
+    background: var(--accent);
+    color: #fff;
+    font-family: var(--font-code);
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .show-results-btn.visible { display: block; }
+  .show-results-btn:hover { background: var(--accent-hover); }
+
+  .source {
+    margin-top: 32px;
+    padding: 20px;
+    background: var(--bg-alt);
+    border-radius: 8px;
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: left;
+  }
+
+  .source a { color: var(--accent); }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  footer a { color: var(--text-muted); text-decoration: none; }
+  footer a:hover { color: var(--text); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="/" class="logo">chain<span>screen</span></a>
+    <nav class="nav-links">
+      <a href="/regulations/" class="nav-link">Regulations</a>
+      <a href="/operations/" class="nav-link">Operations</a>
+      <a href="/tools/" class="nav-link">Tools</a>
+      <a href="/technical/" class="nav-link">Technical</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero__eyebrow">2-minute self-check</div>
+    <h1>Think you're compliant?</h1>
+    <p>EBA Guidelines on Restrictive Measures took effect Dec 30, 2025. Check which requirements your sanctions screening actually covers.</p>
+  </div>
+</section>
+
+<section class="quiz">
+  <div class="container">
+
+    <div class="quiz-item" onclick="toggle(this)" data-gap="EBA requires EU Consolidated List coverage with documented audit trails — this is what CySEC inspects. A binary yes/no from a free tool without audit records is not sufficient.">
+      <div class="quiz-checkbox"></div>
+      <div class="quiz-content">
+        <div class="quiz-number">01</div>
+        <div class="quiz-title">We screen against the EU Consolidated Sanctions List</div>
+        <div class="quiz-detail"></div>
+      </div>
+    </div>
+
+    <div class="quiz-item" onclick="toggle(this)" data-gap="OFAC SDN is not a universal MiCA/EBA baseline, but it may be required where you have a US nexus, bank requirement, group policy, or documented risk exposure. Document why it is in or out of scope.">
+      <div class="quiz-checkbox"></div>
+      <div class="quiz-content">
+        <div class="quiz-number">02</div>
+        <div class="quiz-title">We screen against the OFAC SDN List</div>
+        <div class="quiz-detail"></div>
+      </div>
+    </div>
+
+    <div class="quiz-item" onclick="toggle(this)" data-gap="UN screening may be required by national law, supervisor guidance, or policy. EBA GL/2024/15 frames the CASP baseline around applicable Union and national restrictive measures, so document how UN measures are covered.">
+      <div class="quiz-checkbox"></div>
+      <div class="quiz-content">
+        <div class="quiz-number">03</div>
+        <div class="quiz-title">We screen against the UN Consolidated Sanctions List</div>
+        <div class="quiz-detail"></div>
+      </div>
+    </div>
+
+    <div class="quiz-item" onclick="toggle(this)" data-gap="EBA requires screening BEFORE releasing funds. Screening after = you already processed a sanctioned transaction.">
+      <div class="quiz-checkbox"></div>
+      <div class="quiz-content">
+        <div class="quiz-number">04</div>
+        <div class="quiz-title">We screen before releasing funds to the recipient</div>
+        <div class="quiz-detail"></div>
+      </div>
+    </div>
+
+    <div class="quiz-item" onclick="toggle(this)" data-gap="OFAC updates the SDN list multiple times per week. EU list changes with every new sanctions package. Manual downloads = gaps.">
+      <div class="quiz-checkbox"></div>
+      <div class="quiz-content">
+        <div class="quiz-number">05</div>
+        <div class="quiz-title">Our sanctions lists update automatically (not manual downloads)</div>
+        <div class="quiz-detail"></div>
+      </div>
+    </div>
+
+    <div class="quiz-item" onclick="toggle(this)" data-gap="CySEC can ask: 'Show me every screening you did last quarter, which list version was used, and the result.' Without timestamps + list versions = no proof.">
+      <div class="quiz-checkbox"></div>
+      <div class="quiz-content">
+        <div class="quiz-number">06</div>
+        <div class="quiz-title">Every screening is logged with timestamp and list version used</div>
+        <div class="quiz-detail"></div>
+      </div>
+    </div>
+
+    <div class="quiz-item" onclick="toggle(this)" data-gap="EBA requires documented freeze procedures. If you find a match and do nothing — that's worse than not screening at all.">
+      <div class="quiz-checkbox"></div>
+      <div class="quiz-content">
+        <div class="quiz-number">07</div>
+        <div class="quiz-title">We have a documented freeze procedure when a match is found</div>
+        <div class="quiz-detail"></div>
+      </div>
+    </div>
+
+    <div class="quiz-item" onclick="toggle(this)" data-gap="Addresses that were clean yesterday can be sanctioned today. Re-screening existing customers is required — not just onboarding.">
+      <div class="quiz-checkbox"></div>
+      <div class="quiz-content">
+        <div class="quiz-number">08</div>
+        <div class="quiz-title">We re-screen existing addresses when lists are updated</div>
+        <div class="quiz-detail"></div>
+      </div>
+    </div>
+
+    <div class="quiz-item" onclick="toggle(this)" data-gap="EBA requires a circumvention risk policy — how do you detect attempts to bypass sanctions through structured transactions?">
+      <div class="quiz-checkbox"></div>
+      <div class="quiz-content">
+        <div class="quiz-number">09</div>
+        <div class="quiz-title">We have a policy for sanctions circumvention risk assessment</div>
+        <div class="quiz-detail"></div>
+      </div>
+    </div>
+
+    <div class="quiz-item" onclick="toggle(this)" data-gap="Can you pull a compliance report for CySEC in under 5 minutes? If it takes hours of manual work — you'll struggle during an inspection.">
+      <div class="quiz-checkbox"></div>
+      <div class="quiz-content">
+        <div class="quiz-number">10</div>
+        <div class="quiz-title">We can generate an audit report for regulators in minutes</div>
+        <div class="quiz-detail"></div>
+      </div>
+    </div>
+
+    <button class="show-results-btn" onclick="showResults()">See your score</button>
+  </div>
+</section>
+
+<section class="results" id="results">
+  <div class="container">
+    <div class="score" id="score"></div>
+    <div class="score-label">out of 10 requirements covered</div>
+    <div class="result-message" id="result-message"></div>
+    <div class="result-gaps" id="result-gaps" style="display:none">
+      <h3>Your gaps</h3>
+      <ol id="gaps-list"></ol>
+    </div>
+    <a href="mailto:info@chainscreen.io?subject=Compliance%20Self-Check%20—%20Want%20to%20discuss&body=My%20score%3A%20%2F10%0ACompany%3A%20%0ABiggest%20gap%3A%20" class="btn-primary">
+      Discuss your gaps with us &rarr;
+    </a>
+    <a href="/" class="btn-secondary">Learn about ChainScreen</a>
+
+    <div class="source">
+      <strong>Source:</strong> Based on EBA Final Guidelines on implementation of restrictive measures under Directive (EU) 2015/849, applicable from 30 December 2025. These guidelines apply to all CASPs authorized under MiCA or operating under transitional provisions.<br><br>
+      <a href="https://www.eba.europa.eu/activities/single-rulebook/regulatory-activities/anti-money-laundering-and-countering-financing" target="_blank">EBA Regulatory Activities — AML/CFT</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    &copy; 2026 DailyMind LTD &middot; HE 439959 &middot; Limassol, Cyprus
+    &nbsp;&middot;&nbsp;
+    <span>Information only; not legal advice</span>
+    &nbsp;&middot;&nbsp;
+    <a href="/privacy">Privacy</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://dailymind.eu">dailymind.eu</a>
+  </div>
+</footer>
+
+<script>
+  let clicked = 0;
+  const total = document.querySelectorAll('.quiz-item').length;
+
+  function toggle(el) {
+    if (!el.classList.contains('checked') && !el.classList.contains('unchecked')) {
+      clicked++;
+    } else if (el.classList.contains('checked')) {
+      el.classList.remove('checked');
+      el.classList.add('unchecked');
+      updateDetail(el);
+      updateButton();
+      return;
+    } else {
+      el.classList.remove('unchecked');
+      el.classList.add('checked');
+      updateDetail(el);
+      updateButton();
+      return;
+    }
+
+    el.classList.add('checked');
+    updateDetail(el);
+    updateButton();
+  }
+
+  function updateDetail(el) {
+    const detail = el.querySelector('.quiz-detail');
+    if (el.classList.contains('unchecked')) {
+      detail.textContent = el.dataset.gap;
+      el.querySelector('.quiz-checkbox').textContent = '!';
+    } else {
+      detail.textContent = '';
+      el.querySelector('.quiz-checkbox').textContent = '\u2713';
+    }
+  }
+
+  function updateButton() {
+    const btn = document.querySelector('.show-results-btn');
+    if (clicked >= total) {
+      btn.classList.add('visible');
+    }
+  }
+
+  function showResults() {
+    const items = document.querySelectorAll('.quiz-item');
+    let score = 0;
+    const gaps = [];
+
+    items.forEach(item => {
+      if (item.classList.contains('checked')) {
+        score++;
+      } else {
+        gaps.push(item.dataset.gap);
+      }
+    });
+
+    const scoreEl = document.getElementById('score');
+    const msgEl = document.getElementById('result-message');
+    const gapsEl = document.getElementById('result-gaps');
+    const gapsList = document.getElementById('gaps-list');
+
+    scoreEl.textContent = score;
+
+    if (score <= 3) {
+      scoreEl.className = 'score score-red';
+      msgEl.innerHTML = '<strong>Critical gaps.</strong> Your sanctions screening has significant holes that a CySEC inspection would flag. The EBA Guidelines are mandatory since Dec 2025 — this needs attention now.';
+    } else if (score <= 6) {
+      scoreEl.className = 'score score-amber';
+      msgEl.innerHTML = '<strong>Partial coverage.</strong> You have some screening in place, but key requirements are missing. A CySEC inspector would likely issue observations on the gaps below.';
+    } else if (score <= 9) {
+      scoreEl.className = 'score score-green';
+      msgEl.innerHTML = '<strong>Good coverage.</strong> You\'re ahead of most small CASPs. A few gaps remain — closing them would make your next inspection straightforward.';
+    } else {
+      scoreEl.className = 'score score-green';
+      msgEl.innerHTML = '<strong>Fully covered.</strong> Your sanctions screening meets all EBA requirements. Make sure to maintain this as lists and regulations evolve.';
+    }
+
+    if (gaps.length > 0) {
+      gapsEl.style.display = 'block';
+      gapsList.innerHTML = gaps.map(g => '<li>' + g + '</li>').join('');
+    }
+
+    document.getElementById('results').classList.add('visible');
+    document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+  }
+</script>
+
+<script data-goatcounter="https://gc-chainscreen.vigilcom.dev/count"
+        async src="//gc.vigilcom.dev/count.js"></script>
+<script src="/nav.js" defer></script>
+</body>
+</html>

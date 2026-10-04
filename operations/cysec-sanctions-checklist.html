@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CySEC Inspection Checklist: 10 Sanctions Items | ChainScreen</title>
+<meta name="description" content="10-point CySEC sanctions screening checklist for crypto CASPs. Circular C685 findings, MiCA post-transition status, penalty framework.">
+<link rel="canonical" href="https://chainscreen.io/operations/cysec-sanctions-checklist">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CySEC CASP Compliance Checklist: Sanctions Screening Requirements in 2026">
+<meta property="og:description" content="10-point sanctions screening compliance checklist for CySEC-supervised crypto entities. Covers Circular C685 findings, MiCA post-transition status, penalty framework, and budget benchmarks.">
+<meta property="og:url" content="https://chainscreen.io/operations/cysec-sanctions-checklist">
+<meta property="og:site_name" content="ChainScreen">
+<meta property="og:image" content="https://chainscreen.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"CySEC CASP Compliance Checklist: Sanctions Screening Requirements in 2026","description":"10-point sanctions screening compliance checklist for CySEC-supervised crypto entities.","datePublished":"2026-03-09","dateModified":"2026-08-17","wordCount":1588,"author":{"@type":"Person","name":"Katerina Bletsch","url":"https://chainscreen.io","jobTitle":"Founder","sameAs":["https://www.linkedin.com/in/katerina-bletsch/"]},"publisher":{"@type":"Organization","name":"ChainScreen","url":"https://chainscreen.io","logo":{"@type":"ImageObject","url":"https://chainscreen.io/og-image.png"}}}
+</script>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chainscreen.io/og-image.png">
+<script defer src="https://u.vigilcom.dev/script.js" data-website-id="df019ee1-bf37-42db-be6c-93671ff213ec"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://chainscreen.io"},{"@type":"ListItem","position":2,"name":"Operations","item":"https://chainscreen.io/operations/"},{"@type":"ListItem","position":3,"name":"CySEC CASP Compliance Checklist: Sanctions Screening Requirements in 2026"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does CySEC list crypto entities as of 17 August 2026?","acceptedAnswer":{"@type":"Answer","text":"CySEC now separates crypto entities across several official pages: the national-regime CASP Register, MiCAR Authorised CASPs under Article 63, Article 60 notifications by certain financial entities, and MiCAR member-state entities. As of 17 August 2026, the visible national-regime register lists 9 entries and the Article 63 authorised CASP page lists 14 entries. Do not add the categories together."}},{"@type":"Question","name":"What did CySEC find during its 2024 sanctions screening inspections?","acceptedAnswer":{"@type":"Answer","text":"CySEC conducted thematic inspections between April and November 2024 and published Circular C685 and the related guidance on 27 February 2025. The inspections covered a sample of regulated entities across entity types, with CASPs represented. Key deficiencies included poor system tuning for fuzzy matching, over-reliance on manual screening, excessive false positives causing alert fatigue, and irregular testing of screening systems."}},{"@type":"Question","name":"What sanctions lists does CySEC expect CASPs to screen against?","acceptedAnswer":{"@type":"Answer","text":"CySEC C685 focused on legal requirements from UN Sanctions and EU Restrictive Measures, plus relevant screening practices for U.S. and UK sanctions lists. EBA GL/2024/15 frames the CASP transfer-screening obligation around Union and national restrictive measures. Screening against only one source, such as OFAC alone, is insufficient."}},{"@type":"Question","name":"What are the penalties for sanctions compliance failures in Cyprus?","acceptedAnswer":{"@type":"Answer","text":"Since August 2025, Cyprus has a comprehensive penalty framework. Individuals face up to 5 years imprisonment and fines up to EUR 100,000. Legal entities face fines up to 5% of annual global turnover or EUR 40 million, whichever is greater, plus potential asset freezes. Both CySEC and the NSIU have enforcement authority, meaning a single failure can trigger parallel investigations."}},{"@type":"Question","name":"What is the MiCA transition status for Cyprus CASPs?","acceptedAnswer":{"@type":"Answer","text":"The MiCA transitional period ended on 1 July 2026. CySEC Circular C790, dated 7 July 2026, states that firms are now required to obtain MiCAR-compliant CASP authorisation to continue providing crypto-asset services within the European Union."}}]}
+</script>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-alt: #f8fafc;
+    --surface: #ffffff;
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --text: #0c1d36;
+    --text-body: #475569;
+    --text-muted: #94a3b8;
+    --accent: #0c2340;
+    --accent-hover: #143a65;
+    --accent-light: #edf2f9;
+    --teal: #0f766e;
+    --teal-light: #f0fdf4;
+    --code-bg: #091a30;
+    --code-surface: #0c2340;
+    --font-serif: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-code: 'JetBrains Mono', 'SF Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  
+  header {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: var(--font-code);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--accent-hover); }
+
+  .nav-link {
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover { color: var(--text); }
+
+  
+  .article-header {
+    padding: 80px 0 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .article-header__eyebrow {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--teal);
+    margin-bottom: 20px;
+  }
+
+  .article-header h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+
+  .article-header__sub {
+    font-size: 17px;
+    color: var(--text-body);
+    max-width: 640px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  .article-meta {
+    font-family: var(--font-code);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.01em;
+    line-height: 1.8;
+  }
+
+  .article-meta span + span::before {
+    content: '|';
+    margin: 0 10px;
+    color: var(--border);
+  }
+
+  
+  .article-body {
+    padding: 48px 0;
+  }
+
+  .article-body h2 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin: 48px 0 16px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .article-body h2:first-child {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .article-body h3 {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+    margin: 32px 0 12px;
+    color: var(--text);
+  }
+
+  .article-body p {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .article-body strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .article-body a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .article-body a:hover {
+    color: var(--accent-hover);
+  }
+
+  .article-body ul, .article-body ol {
+    margin: 16px 0;
+    padding-left: 24px;
+  }
+
+  .article-body li {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 8px;
+  }
+
+  .article-body li strong {
+    color: var(--text);
+  }
+
+  
+  .callout {
+    margin: 28px 0;
+    padding: 24px 28px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--bg-alt);
+  }
+
+  .callout--warning {
+    background: #fffbeb;
+    border-color: #fde68a;
+  }
+
+  .callout--danger {
+    background: #fef2f2;
+    border-color: #fecaca;
+  }
+
+  .callout--teal {
+    background: var(--teal-light);
+    border-color: #bbf7d0;
+  }
+
+  .callout__label {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--warning .callout__label { color: #b45309; }
+  .callout--danger .callout__label { color: #dc2626; }
+  .callout--teal .callout__label { color: var(--teal); }
+
+  .callout p {
+    font-size: 14px;
+    line-height: 1.65;
+    margin-bottom: 8px;
+  }
+
+  .callout p:last-child { margin-bottom: 0; }
+
+  
+  .reg-table-wrapper {
+    margin: 24px 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    overflow-x: auto;
+  }
+
+  .reg-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .reg-table th, .reg-table td {
+    padding: 12px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .reg-table tr:last-child td { border-bottom: none; }
+
+  .reg-table th {
+    color: var(--text-muted);
+    font-family: var(--font-code);
+    font-weight: 500;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--bg-alt);
+  }
+
+  .reg-table td {
+    color: var(--text-body);
+  }
+
+  .reg-table td:first-child {
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .reg-table .reg-num {
+    font-family: var(--font-code);
+    font-size: 12px;
+    color: var(--teal);
+    font-weight: 500;
+  }
+
+  
+  .checklist {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0;
+    counter-reset: checklist-counter;
+  }
+
+  .checklist li {
+    counter-increment: checklist-counter;
+    padding: 20px 24px 20px 28px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+
+  .checklist li:hover {
+    border-color: var(--accent);
+  }
+
+  .checklist__num {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--teal);
+    letter-spacing: 0.02em;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .checklist__title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .checklist__detail {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  
+  .budget-table-wrapper {
+    margin: 24px 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    overflow-x: auto;
+  }
+
+  .budget-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .budget-table th, .budget-table td {
+    padding: 12px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .budget-table tr:last-child td { border-bottom: none; }
+
+  .budget-table th {
+    color: var(--text-muted);
+    font-family: var(--font-code);
+    font-weight: 500;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--bg-alt);
+  }
+
+  .budget-table td {
+    color: var(--text-body);
+  }
+
+  .budget-table td:first-child {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .budget-table td:last-child {
+    font-family: var(--font-code);
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 500;
+    text-align: right;
+  }
+
+  .budget-table tfoot td {
+    font-weight: 600;
+    color: var(--text);
+    border-top: 2px solid var(--border-strong);
+  }
+
+  .budget-table tfoot td:last-child {
+    color: var(--accent);
+    font-size: 13px;
+  }
+
+  
+  .timeline {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0;
+    border-left: 2px solid var(--border);
+    padding-left: 28px;
+  }
+
+  .timeline li {
+    position: relative;
+    padding-bottom: 24px;
+    font-size: 14px;
+    color: var(--text-body);
+    line-height: 1.6;
+  }
+
+  .timeline li:last-child { padding-bottom: 0; }
+
+  .timeline li::before {
+    content: '';
+    position: absolute;
+    left: -34px;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+  }
+
+  .timeline li.timeline--past::before {
+    background: var(--teal);
+  }
+
+  .timeline li.timeline--danger::before {
+    background: #dc2626;
+  }
+
+  .timeline__date {
+    font-family: var(--font-code);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .timeline__tag {
+    display: inline-block;
+    font-family: var(--font-code);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 8px;
+  }
+
+  .timeline__tag--passed {
+    background: #fef2f2;
+    color: #dc2626;
+  }
+
+  
+  .article-cta {
+    margin: 48px 0;
+    padding: 40px 36px;
+    background: var(--code-bg);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .article-cta h2 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 400;
+    color: #f1f5f9;
+    margin: 0 0 12px;
+    padding: 0;
+    border: none;
+  }
+
+  .article-cta p {
+    color: #94a3b8;
+    font-size: 14px;
+    margin-bottom: 24px;
+    line-height: 1.65;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 28px;
+    background: #fff;
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary:hover {
+    background: #f1f5f9;
+    color: var(--accent);
+  }
+
+  
+  .sources {
+    margin: 32px 0 0;
+    padding: 24px 0 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .sources__title {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  .sources ol {
+    padding-left: 20px;
+    margin: 0;
+  }
+
+  .sources li {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 4px;
+  }
+
+  .sources a {
+    color: var(--text-muted);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .sources a:hover { color: var(--text-body); }
+
+  
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--text); }
+
+  
+  @media (max-width: 640px) {
+    .article-header { padding: 48px 0 32px; }
+    .article-header h1 { font-size: 1.8rem; }
+    .article-body h2 { font-size: 20px; }
+    .reg-table th, .reg-table td { padding: 8px 12px; }
+    .budget-table th, .budget-table td { padding: 8px 12px; }
+    .checklist li { padding: 16px 18px 16px 18px; }
+    .article-cta { padding: 32px 24px; }
+    .article-meta span { display: block; }
+    .article-meta span + span::before { content: ''; margin: 0; }
+  }
+
+  
+  @media print {
+    header, footer, .article-cta { display: none; }
+    .article-header { padding: 24px 0; }
+    .article-body h2 { break-after: avoid; }
+    .checklist li { break-inside: avoid; }
+    .callout { break-inside: avoid; }
+    body { font-size: 12px; }
+  }
+
+  
+  .breadcrumb { padding: 12px 0; border-bottom: 1px solid var(--border); background: var(--bg-alt); }
+  .breadcrumb a, .breadcrumb span { font-family: var(--font-code); font-size: 11px; letter-spacing: 0.01em; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb__sep { color: #cbd5e1; margin: 0 6px; }
+  .breadcrumb__current { color: var(--text-body); }
+
+  
+  .nav-links { display: flex; align-items: center; gap: 20px; }
+  .nav-link.active { color: var(--text); }
+  @media (max-width: 640px) { .nav-links { gap: 12px; } .nav-link { font-size: 11px; } }
+
+  
+  .related-articles { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+  .related-articles h3 { font-family: var(--font-code); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 16px; margin-top: 0; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .related-card { display: flex; flex-direction: column; gap: 8px; padding: 20px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; transition: border-color 0.2s; }
+  .related-card:hover { border-color: var(--accent); }
+  .related-card__tag { font-family: var(--font-code); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--teal); }
+  .related-card__title { font-family: var(--font-serif); font-size: 15px; color: var(--text); line-height: 1.35; }
+  .related-card__arrow { font-family: var(--font-code); font-size: 12px; color: var(--text-muted); margin-top: auto; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="/" class="logo">chain<span>screen</span></a>
+    <nav class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/regulations/" class="nav-link">Regulations</a>
+      <a href="/operations/" class="nav-link active">Operations</a>
+      <a href="/tools/" class="nav-link">Tools</a>
+      <a href="/technical/" class="nav-link">Technical</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <div class="container">
+    <a href="/">Home</a><span class="breadcrumb__sep">/</span>
+    <a href="/operations/">Operations</a><span class="breadcrumb__sep">/</span>
+    <span class="breadcrumb__current">CySEC Checklist</span>
+  </div>
+</nav>
+
+<section class="article-header">
+  <div class="container">
+    <div class="article-header__eyebrow">Compliance Guide</div>
+    <h1>CySEC CASP Compliance Checklist: Sanctions Screening Requirements in 2026</h1>
+    <p class="article-header__sub">
+      CySEC's 2024 thematic inspections found sanctions screening deficiencies across a sample of regulated entities, with CASPs represented. Here is what they found, what they expect now, and a 10-point checklist your compliance team can use today.
+    </p>
+    <div class="article-meta">
+      <span>Published: March 2026</span>
+      <span>Reading time: 10 min</span>
+      <span>Updated: 17 August 2026</span>
+      <span>Sources: CySEC registers, Circulars C685/C790, EBA GL/2024/15</span>
+    </div>
+  </div>
+</section>
+
+<div class="article-body">
+  <div class="container">
+
+    <h2>What does the CySEC CASP landscape look like?</h2>
+
+    <p>
+      As of <strong>17 August 2026</strong>, the Cyprus Securities and Exchange Commission (CySEC) no longer publishes one simple CASP list. The official pages split crypto entities into the <strong>national-regime CASP Register</strong>, <strong>MiCAR Authorised CASPs under Article 63</strong>, <strong>Article 60 notifications by certain financial entities</strong>, and <strong>MiCAR member-state entities</strong>. The visible national-regime register lists <strong>9 entries</strong>, while the Article 63 authorised CASP page lists <strong>14 entries</strong>.
+    </p>
+
+    <div class="reg-table-wrapper">
+      <table class="reg-table">
+        <thead>
+          <tr>
+            <th>Company</th>
+            <th>Reg. Number</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>ComplyCrypto Depository EU Ltd</td><td class="reg-num">020/24</td></tr>
+          <tr><td>Krypto Knight Ltd</td><td class="reg-num">015/24</td></tr>
+          <tr><td>Montes Auri Ltd</td><td class="reg-num">008/23</td></tr>
+          <tr><td>Naga X Ltd</td><td class="reg-num">009/23</td></tr>
+          <tr><td>Noemon Tech Ltd</td><td class="reg-num">014/24</td></tr>
+          <tr><td>Ronin Em Ltd</td><td class="reg-num">017/24</td></tr>
+          <tr><td>Tria Bridge Ltd</td><td class="reg-num">013/24</td></tr>
+          <tr><td>Unlimit Crypto Ltd</td><td class="reg-num">018/24</td></tr>
+          <tr><td>Zero21 Ltd</td><td class="reg-num">016/24</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Do not add these categories together as if they were one register: some names can appear on more than one CySEC page, and each page answers a different regulatory question. Circular C685 should still be treated as current supervisory context for CASPs because its sanctions-screening expectations apply across regulated entities.
+    </p>
+
+    <h2>What did CySEC find during thematic inspections (Circular C685)?</h2>
+
+    <p>
+      On <strong>27 February 2025</strong>, CySEC published <strong>Circular C685</strong> and a guidance paper following thematic inspections conducted between <strong>April and November 2024</strong>. The inspections assessed a <strong>sample of regulated entities</strong> across entity types, including CASPs; they were not a register-wide CASP inspection.
+    </p>
+
+    <h3>What they tested</h3>
+    <p>
+      CySEC tested both <strong>exact match detection</strong> and <strong>fuzzy matching</strong> capabilities. Inspectors submitted manipulated and misspelled names to evaluate whether screening systems could catch deliberate evasion attempts &mdash; not just direct hits.
+    </p>
+
+    <h3>Deficiencies identified</h3>
+    <ul>
+      <li><strong>Poor system tuning</strong> &mdash; screening systems were not calibrated to detect variations in sanctioned names</li>
+      <li><strong>Over-reliance on manual screening</strong> &mdash; staff performing lookups by hand instead of using automated systems</li>
+      <li><strong>Excessive false positives</strong> &mdash; systems flagging too many legitimate transactions, leading to alert fatigue and missed real matches</li>
+      <li><strong>Irregular testing</strong> &mdash; companies not routinely testing their screening systems to verify they work as expected</li>
+    </ul>
+
+    <h3>Best practices CySEC expects</h3>
+    <ul>
+      <li><strong>Automated screening systems</strong> &mdash; not manual lookups</li>
+      <li><strong>Real-time, ongoing screening</strong> &mdash; not periodic batch runs</li>
+      <li><strong>Regular calibration</strong> &mdash; tuning fuzzy matching thresholds and testing with known names</li>
+      <li><strong>Dedicated compliance teams</strong> &mdash; not a shared responsibility dumped on operations staff</li>
+      <li><strong>Senior management oversight</strong> &mdash; board-level awareness and reporting on sanctions screening effectiveness</li>
+    </ul>
+
+    <h3>Sanctions lists to screen against</h3>
+    <p>CySEC's official wording distinguishes legal requirements from relevant wider practices:</p>
+    <ul>
+      <li><strong>UN Sanctions and EU Restrictive Measures</strong> &mdash; the legal requirements C685 focused on for screening designated persons</li>
+      <li><strong>Relevant U.S. and UK sanctions practices</strong> &mdash; C685 discusses these as relevant screening practices, especially where business exposure makes them important</li>
+      <li><strong>Union and national restrictive measures</strong> &mdash; the wording used by EBA GL/2024/15 for PSP and CASP controls when performing transfers of funds or crypto-assets</li>
+    </ul>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">Key takeaway</div>
+      <p>CySEC is not asking whether you screen. They are testing <em>how well</em> your screening works &mdash; including deliberate evasion scenarios. Manual lookups and poorly tuned systems will not pass inspection.</p>
+    </div>
+
+    <h2>What are CySEC’s organizational requirements beyond the EU baseline?</h2>
+
+    <p>
+      Cyprus imposes requirements on CASPs that go beyond what MiCA mandates at the EU level. If you are establishing or maintaining a CASP in Cyprus, these are non-negotiable:
+    </p>
+
+    <ul>
+      <li><strong>Minimum 4 directors</strong> &mdash; at least 2 executive and 2 independent non-executive directors</li>
+      <li><strong>Majority Cyprus-based</strong> &mdash; the majority of the board must be based and resident in Cyprus</li>
+      <li><strong>Dedicated Compliance Officer</strong> &mdash; must be Cyprus-resident, cannot be shared with another entity</li>
+      <li><strong>Dedicated MLRO (Money Laundering Reporting Officer)</strong> &mdash; also Cyprus-resident</li>
+      <li><strong>Physical office</strong> &mdash; virtual offices are not accepted; CySEC requires a staffed physical presence</li>
+      <li><strong>Capital requirements</strong> &mdash; EUR 50,000 to EUR 150,000 depending on the class of services provided</li>
+    </ul>
+
+    <p>
+      These requirements mean that compliance is not just a technology problem. You need people on the ground in Cyprus, with the authority and budget to implement proper sanctions screening.
+    </p>
+
+    <h2>What are the critical MiCA transition deadlines?</h2>
+
+    <p>
+      The Markets in Crypto-Assets Regulation (MiCA) is now the governing framework for CASPs across the EU. For Cyprus-registered CASPs that were operating under the national transitional regime, the transition has ended.
+    </p>
+
+    <ul class="timeline">
+      <li class="timeline--past">
+        <span class="timeline__date">27 February 2026 <span class="timeline__tag timeline__tag--passed">Passed</span></span>
+        CySEC's deadline for Cyprus CASPs operating under national rules to submit a MiCA authorisation application. After the transition, the application deadline is no longer the live issue; authorisation status is.
+      </li>
+      <li class="timeline--danger">
+        <span class="timeline__date">1 July 2026 <span class="timeline__tag timeline__tag--passed">Ended</span></span>
+        End of the transitional period. CySEC Circular C790, dated 7 July 2026, states that firms must obtain MiCAR-compliant CASP authorisation to continue providing crypto-asset services within the European Union.
+      </li>
+    </ul>
+
+    <div class="callout callout--danger">
+      <div class="callout__label">Post-transition status</div>
+      <p>After 1 July 2026, the operative question is authorisation status, customer migration, and wind-down risk. C790 also flags ML/TF risks from unauthorised VASPs exiting the market and customer relationships moving to authorised CASPs.</p>
+    </div>
+
+    <h2>What does non-compliance cost under the penalty framework?</h2>
+
+    <p>
+      Since <strong>1 August 2025</strong>, Cyprus has a comprehensive penalty framework for AML/sanctions violations by CASPs. The penalties are severe and designed to be dissuasive:
+    </p>
+
+    <h3>For individuals</h3>
+    <ul>
+      <li>Up to <strong>5 years imprisonment</strong></li>
+      <li>Fines up to <strong>EUR 100,000</strong></li>
+    </ul>
+
+    <h3>For legal entities</h3>
+    <ul>
+      <li>Fines up to <strong>5% of annual global turnover</strong> or <strong>EUR 40 million</strong>, whichever is greater</li>
+      <li>Asset freezes and confiscations</li>
+    </ul>
+
+    <h3>Dual enforcement</h3>
+    <p>
+      Both <strong>NSIU</strong> (National Sanctions Implementation Unit) and <strong>CySEC</strong> have enforcement authority. This means a single compliance failure can trigger parallel investigations and penalties from two separate bodies.
+    </p>
+
+    <div class="callout callout--danger">
+      <div class="callout__label">Personal liability</div>
+      <p>Directors and compliance officers face personal criminal liability. This is not a fine absorbed by the company &mdash; individuals can be imprisoned for up to 5 years for sanctions compliance failures.</p>
+    </div>
+
+    <h2>Why are CASPs the #2 MOKAS reporting sector?</h2>
+
+    <p>
+      MOKAS (the Cyprus Financial Intelligence Unit) reported that CASPs submitted <strong>760 Suspicious Activity Reports (SARs) in 2024</strong>, representing <strong>19.64% of all SARs filed</strong>. This makes CASPs the second-largest reporting sector in Cyprus &mdash; a significant compliance burden for a small, fast-changing market.
+    </p>
+
+    <p>
+      When designated assets are discovered, CASPs must report to MOKAS <strong>within 2 weeks</strong>. Delays in reporting can themselves constitute a compliance violation.
+    </p>
+
+    <div class="callout">
+      <div class="callout__label" style="color: var(--accent);">In practice</div>
+      <p>The denominator changed during the MiCA transition, so a simple per-CASP average is misleading. Your screening system still needs to produce actionable alerts &mdash; not thousands of false positives that paralyze your compliance team, and not so few that you are clearly under-reporting.</p>
+    </div>
+
+    <h2>What is the 10-point sanctions screening compliance checklist?</h2>
+
+    <p>
+      This checklist is derived directly from CySEC Circular C685 findings, EBA Guidelines on Restrictive Measures, and Cyprus AML/CFT law requirements. Use it as a working document for your next internal audit or board compliance review.
+    </p>
+
+    <ol class="checklist">
+      <li>
+        <span class="checklist__num">01</span>
+        <div class="checklist__title">Automated screening system deployed</div>
+        <div class="checklist__detail">CySEC explicitly flagged manual screening reliance as a deficiency. Your system must be automated, not dependent on staff performing manual lookups against downloaded lists. Verify: can you screen an address or name without human intervention?</div>
+      </li>
+      <li>
+        <span class="checklist__num">02</span>
+        <div class="checklist__title">UN/EU legal requirements plus relevant U.S./UK practices</div>
+        <div class="checklist__detail">CySEC C685 focuses on UN Sanctions and EU Restrictive Measures, and also refers to relevant U.S. and UK sanctions screening practices. EBA GL/2024/15 uses the frame of Union and national restrictive measures. Verify: does your system cover the lists required by law and policy for your exposure, and can you prove it with timestamped records and list versions in an audit?</div>
+      </li>
+      <li>
+        <span class="checklist__num">03</span>
+        <div class="checklist__title">Real-time pre-transaction screening</div>
+        <div class="checklist__detail">Screening must happen before a transaction is processed, not after. Post-transaction screening means you have already processed a potentially sanctioned transfer. Verify: is screening a blocking step in your transaction flow?</div>
+      </li>
+      <li>
+        <span class="checklist__num">04</span>
+        <div class="checklist__title">Fuzzy matching enabled and tested</div>
+        <div class="checklist__detail">CySEC inspectors submitted misspelled and manipulated names during their 2024 inspections. Exact-match-only systems will fail. Verify: test your system with deliberate misspellings of known sanctioned names. Does it catch them?</div>
+      </li>
+      <li>
+        <span class="checklist__num">05</span>
+        <div class="checklist__title">Regular re-screening on list updates</div>
+        <div class="checklist__detail">Sanctions lists update frequently. Addresses and names that were clean yesterday can be designated today. Verify: when a list updates, do you automatically re-screen your existing customer base and stored addresses?</div>
+      </li>
+      <li>
+        <span class="checklist__num">06</span>
+        <div class="checklist__title">Documented match handling procedures</div>
+        <div class="checklist__detail">When a potential match is identified, what happens next must be documented. High-risk matches should require four-eyes review (two independent reviewers). Verify: do you have a written procedure for true matches, potential matches, and false positives? Is there a senior sign-off for high-risk cases?</div>
+      </li>
+      <li>
+        <span class="checklist__num">07</span>
+        <div class="checklist__title">Audit trail with 5-year retention</div>
+        <div class="checklist__detail">Every screening check must be logged with timestamp, list version used, result, and action taken. Cyprus AML law requires 5-year record retention. Verify: can you pull a complete screening history for any customer or address going back 5 years?</div>
+      </li>
+      <li>
+        <span class="checklist__num">08</span>
+        <div class="checklist__title">Staff training with documented assessment</div>
+        <div class="checklist__detail">Compliance staff must be trained on sanctions screening procedures, list updates, and escalation protocols. Training must be documented and assessed &mdash; not just a slide deck sent by email. Verify: do you have dated training records with assessment scores for every relevant team member?</div>
+      </li>
+      <li>
+        <span class="checklist__num">09</span>
+        <div class="checklist__title">Annual system review and calibration</div>
+        <div class="checklist__detail">CySEC flagged irregular testing as a deficiency. Your screening system must be reviewed and calibrated at least annually. This means testing with known sanctioned names, adjusting fuzzy matching thresholds, and documenting the results. Verify: when was your last calibration? Is it documented?</div>
+      </li>
+      <li>
+        <span class="checklist__num">10</span>
+        <div class="checklist__title">Senior management oversight and reporting</div>
+        <div class="checklist__detail">Board-level oversight is not optional. Senior management must receive regular reports on screening effectiveness, match rates, false positive rates, and system changes. Verify: does your board receive a quarterly sanctions screening report? Is there a named senior manager responsible for sanctions compliance?</div>
+      </li>
+    </ol>
+
+    <div class="callout callout--teal">
+      <div class="callout__label">How to use this checklist</div>
+      <p>Print this page and go through each item with your compliance officer. For every item you cannot answer "yes" with documentation to prove it, you have a gap that CySEC's next thematic inspection will likely identify.</p>
+    </div>
+
+    <h2>What is the compliance budget reality — EUR 100–250K per year?</h2>
+
+    <p>
+      Compliance is the largest operational cost for a small CASP after staff salaries. Here is a realistic annual budget breakdown based on Cyprus market rates and vendor pricing as of 2026:
+    </p>
+
+    <div class="budget-table-wrapper">
+      <table class="budget-table">
+        <thead>
+          <tr>
+            <th>Cost Item</th>
+            <th>Annual Range (EUR)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>CySEC annual supervisory fee</td><td>5,000</td></tr>
+          <tr><td>Compliance Officer (full-time, Cyprus-based)</td><td>60,000 &ndash; 90,000</td></tr>
+          <tr><td>Sanctions screening tools</td><td>12,000 &ndash; 36,000</td></tr>
+          <tr><td>KYC/CDD platform</td><td>6,000 &ndash; 24,000</td></tr>
+          <tr><td>Blockchain analytics</td><td>12,000 &ndash; 36,000</td></tr>
+          <tr><td>External legal and advisory</td><td>24,000 &ndash; 48,000</td></tr>
+          <tr><td>Annual audit</td><td>10,000 &ndash; 25,000</td></tr>
+          <tr><td>Staff training and certification</td><td>3,000 &ndash; 8,000</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><td>Total estimated range</td><td>132,000 &ndash; 272,000</td></tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <p>
+      Sanctions screening tools represent <strong>9&ndash;13% of total compliance spend</strong>. This is where tool selection matters most: enterprise solutions at EUR 30,000+ per year eat into your budget significantly, while purpose-built tools covering the same list requirements can reduce this line item by 60&ndash;70%.
+    </p>
+
+    <div class="article-cta">
+      <h2>How do you score against this checklist?</h2>
+      <p>Take our 2-minute compliance self-check. Answer 10 questions, get your compliance score and a gap analysis you can share with your board.</p>
+      <a href="https://chainscreen.io" class="btn-primary">Take the compliance self-check &rarr;</a>
+    </div>
+
+    <div class="sources">
+      <div class="sources__title">Sources</div>
+      <ol>
+        <li><a href="https://www.cysec.gov.cy/en-GB/entities/crypto-asset-services-providers-casps/casp-register/">CySEC CASP Register</a> &mdash; National regime</li>
+        <li><a href="https://www.cysec.gov.cy/en-GB/entities/Crypto-Assets-Entities-%28MiCAR%29/MiCAR-CASPs/Licensees-%28Article-63%29/">CySEC Authorised CASPs</a> &mdash; MiCAR Article 63</li>
+        <li><a href="https://www.cysec.gov.cy/en-GB/entities/Crypto-Assets-Entities-%28MiCAR%29/MiCAR-CASPs/Notification-%28Article-60%29/">CySEC Article 60 notifications</a> &mdash; Certain financial entities</li>
+        <li><a href="https://www.cysec.gov.cy/en-GB/entities/Crypto-Assets-Entities-%28MiCAR%29/MiCAR-CASPs/Crypto-Assets-Entities-MiCAR-Member-States/">CySEC Crypto-Assets Entities (MiCAR) (Member States)</a></li>
+        <li><a href="https://www.cysec.gov.cy/CMSPages/GetFile.aspx?guid=72f9c65f-79c3-480b-8801-58d506f05f3e">CySEC Circular C685</a>, 27 February 2025 &mdash; Guidance on Sanctions Screening Systems</li>
+        <li><a href="https://www.cysec.gov.cy/en-GB/Files/AML/98989.aspx/">CySEC guidance paper</a>, 27 February 2025 &mdash; Maintaining effective and efficient sanctions screening systems</li>
+        <li><a href="https://www.cysec.gov.cy/CMSPages/GetFile.aspx?guid=3cb93299-6630-455c-8034-d8d2f75b9f95">CySEC Circular C790</a>, 7 July 2026 &mdash; ML/TF risks following the end of the MiCA transitional period</li>
+        <li><a href="https://www.eba.europa.eu/activities/single-rulebook/regulatory-activities/anti-money-laundering-and-countering-financing-terrorism/guidelines-internal-policies-procedures-and-controls-ensure-implementation-union-and-national">EBA GL/2024/15</a> &mdash; Union and national restrictive measures for PSPs and CASPs</li>
+        <li>MOKAS Annual Report 2024 &mdash; Suspicious Activity Report statistics by sector</li>
+      </ol>
+    </div>
+
+  </div>
+</div>
+
+<div class="container">
+<div class="related-articles">
+  <h3>Related articles</h3>
+  <div class="related-grid">
+    <a href="/regulations/eba-guidelines-casps" class="related-card">
+      <span class="related-card__tag">Regulations</span>
+      <span class="related-card__title">EBA Guidelines on Restrictive Measures: What Every Small CASP Must Do</span>
+      <span class="related-card__arrow">Read &rarr;</span>
+    </a>
+    <a href="/operations/sanctions-screening-implementation-guide" class="related-card">
+      <span class="related-card__tag">Operations</span>
+      <span class="related-card__title">Sanctions Screening Implementation Guide: From Excel to API in 30 Days</span>
+      <span class="related-card__arrow">Read &rarr;</span>
+    </a>
+    <a href="/operations/cysec-inspection-documents" class="related-card">
+      <span class="related-card__tag">Operations</span>
+      <span class="related-card__title">CySEC Crypto Audit: 8 Documents You Need</span>
+      <span class="related-card__arrow">Read &rarr;</span>
+    </a>
+  </div>
+</div>
+</div>
+
+<div style="margin: 40px 0; padding: 24px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; text-align: center;">
+  <p style="font-size: 15px; color: #475569; margin-bottom: 12px;">Need screening records and audit-ready evidence, not just a binary check?</p>
+  <a href="mailto:info@chainscreen.io" style="display: inline-block; padding: 12px 24px; background: #0c2340; color: #fff; border-radius: 8px; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600;">Contact ChainScreen</a>
+</div>
+
+
+<footer>
+  <div class="container">
+    &copy; 2026 DailyMind LTD &middot; HE 439959 &middot; Limassol, Cyprus
+    &nbsp;&middot;&nbsp;
+    <span>Information only; not legal advice</span>
+    &nbsp;&middot;&nbsp;
+    <a href="/privacy">Privacy</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://dailymind.eu">dailymind.eu</a>
+  </div>
+</footer>
+<script data-goatcounter="https://gc-chainscreen.vigilcom.dev/count"
+        async src="//gc.vigilcom.dev/count.js"></script>
+<script src="/nav.js" defer></script>
+</body>
+</html>

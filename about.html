@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About ChainScreen: Crypto Compliance Research | ChainScreen</title>
+<meta name="description" content="Founded in Limassol, Cyprus. ChainScreen publishes practical crypto sanctions compliance research for EU CASPs and small crypto teams.">
+<link rel="canonical" href="https://chainscreen.io/about">
+<meta property="og:type" content="website">
+<meta property="og:title" content="About — ChainScreen">
+<meta property="og:description" content="Sanctions screening for EU CASPs shouldn't require enterprise contracts. Founded by Kat Bletsch in Limassol, Cyprus.">
+<meta property="og:url" content="https://chainscreen.io/about">
+<meta property="og:image" content="https://chainscreen.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="ChainScreen">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="About — ChainScreen">
+<meta name="twitter:description" content="Sanctions screening for EU CASPs shouldn't require enterprise contracts. Founded by Kat Bletsch in Limassol, Cyprus.">
+<meta name="twitter:image" content="https://chainscreen.io/og-image.png">
+<script defer src="https://u.vigilcom.dev/script.js" data-website-id="df019ee1-bf37-42db-be6c-93671ff213ec"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"AboutPage","name":"About ChainScreen","description":"Practical sanctions compliance research for EU CASPs and small crypto teams. Founded by Kat Bletsch in Limassol, Cyprus.","url":"https://chainscreen.io/about","isPartOf":{"@type":"WebSite","name":"ChainScreen","url":"https://chainscreen.io"},"mainEntity":{"@type":"Person","name":"Katerina Bletsch","jobTitle":"Founder","url":"https://chainscreen.io/about","sameAs":["https://www.linkedin.com/in/katerina-bletsch","https://github.com/insideself"],"worksFor":{"@type":"Organization","name":"DailyMind LTD","url":"https://dailymind.eu"}}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://chainscreen.io"},{"@type":"ListItem","position":2,"name":"About"}]}
+</script>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-alt: #f8fafc;
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --text: #0c1d36;
+    --text-body: #475569;
+    --text-muted: #94a3b8;
+    --accent: #0c2340;
+    --accent-hover: #143a65;
+    --accent-light: #edf2f9;
+    --teal: #0f766e;
+    --teal-light: #f0fdf4;
+    --font-serif: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-code: 'JetBrains Mono', 'SF Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  header {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: var(--font-code);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--accent-hover); }
+
+  .nav-links { display: flex; align-items: center; gap: 20px; }
+  .nav-link {
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+  .nav-link:hover { color: var(--text); }
+  .nav-link.active { color: var(--text); }
+  @media (max-width: 640px) { .nav-links { gap: 12px; } .nav-link { font-size: 11px; } }
+
+  main { padding: 64px 0 72px; }
+
+  .breadcrumb { padding: 12px 0; border-bottom: 1px solid var(--border); background: var(--bg-alt); }
+  .breadcrumb a, .breadcrumb span { font-family: var(--font-code); font-size: 11px; letter-spacing: 0.01em; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb__sep { color: #cbd5e1; margin: 0 6px; }
+  .breadcrumb__current { color: var(--text-body); }
+
+  h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 28px;
+    color: var(--text);
+  }
+
+  .founder-card {
+    display: flex;
+    gap: 28px;
+    align-items: flex-start;
+    padding: 32px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 48px;
+  }
+
+  .founder-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-serif);
+    font-size: 32px;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .founder-info { flex: 1; min-width: 0; }
+
+  .founder-name {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .founder-title {
+    font-family: var(--font-code);
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.01em;
+    margin-bottom: 12px;
+  }
+
+  .founder-bio {
+    font-size: 15px;
+    color: var(--text-body);
+    line-height: 1.7;
+  }
+
+  .founder-links {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .founder-links a {
+    font-family: var(--font-code);
+    font-size: 12px;
+    color: var(--text-muted);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+  }
+
+  .founder-links a:hover { color: var(--accent); }
+
+  .founder-links svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    stroke-width: 1.75;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  @media (max-width: 560px) {
+    .founder-card { flex-direction: column; align-items: center; text-align: center; padding: 24px; }
+    .founder-links { justify-content: center; }
+  }
+
+  h2 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 400;
+    margin-top: 48px;
+    margin-bottom: 16px;
+    color: var(--text);
+  }
+
+  p, li {
+    font-size: 15px;
+    color: var(--text-body);
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  ul {
+    padding-left: 24px;
+    margin-bottom: 16px;
+  }
+
+  li { margin-bottom: 6px; }
+
+  a { color: var(--accent); }
+  a:hover { color: var(--accent-hover); }
+
+  strong { color: var(--text); font-weight: 600; }
+
+  code {
+    font-family: var(--font-code);
+    font-size: 13px;
+    background: var(--bg-alt);
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+
+  .callout--teal {
+    margin: 28px 0;
+    padding: 24px 28px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.7;
+    background: var(--teal-light);
+    border: 1px solid #bbf7d0;
+  }
+
+  .callout--teal .callout__label {
+    color: var(--teal);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--teal p {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .callout--teal p:last-child { margin-bottom: 0; }
+
+  .company-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 32px;
+    font-size: 14px;
+  }
+
+  .company-table td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .company-table td:first-child {
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+    width: 35%;
+  }
+
+  .company-table td:last-child {
+    color: var(--text-body);
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--text); }
+</style>
+</head>
+<body>
+
+<header>
+</header>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <div class="container">
+    <a href="/">Home</a><span class="breadcrumb__sep">/</span>
+    <span class="breadcrumb__current">About</span>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <h1>About ChainScreen</h1>
+
+    <div class="founder-card">
+      <div class="founder-avatar">K</div>
+      <div class="founder-info">
+        <div class="founder-name">Katerina Bletsch</div>
+        <div class="founder-title">Founder &amp; CEO &middot; Limassol, Cyprus</div>
+        <p class="founder-bio">Background in compliance infrastructure and crypto operations. ChainScreen now publishes practical research for small EU crypto firms that need to understand sanctions screening evidence without enterprise-tool noise.</p>
+        <div class="founder-links">
+          <a href="https://www.linkedin.com/in/katerina-bletsch" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="3"/><line x1="8" y1="11" x2="8" y2="16"/><line x1="8" y1="8" x2="8" y2="8.5"/><line x1="12" y1="16" x2="12" y2="13"/><path d="M12 11a2 2 0 0 1 2 2v3"/></svg>
+            LinkedIn
+          </a>
+          <a href="https://github.com/insideself" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.93 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.8c.85.004 1.71.115 2.51.34 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.92.36.31.68.92.68 1.85v2.74c0 .27.16.59.67.5A10.02 10.02 0 0 0 22 12c0-5.523-4.477-10-10-10z"/></svg>
+            GitHub
+          </a>
+          <a href="mailto:kat@chainscreen.io">
+            <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+            kat@chainscreen.io
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <h2>Why ChainScreen exists</h2>
+
+    <p>MiCA and the EBA Guidelines on Restrictive Measures require every EU CASP to screen blockchain addresses against sanctions lists. OFAC SDN, EU Consolidated, UN Consolidated. The lists are public. The screening logic is a lookup. The compliance requirement is clear.</p>
+
+    <p>The problem isn't list coverage -- Chainalysis even offers a free binary check against US, EU, and UN lists. The problem is everything else a regulator, auditor, or banking partner needs. Enterprise tools bundle sanctions screening with tracing, monitoring, risk scoring, and cluster analytics into contracts that many small firms neither need nor fully use. And the free tier gives you a binary yes/no without the retained evidence a reviewer actually asks for. What matters is: did you check the address, which lists did you check, and can you prove it later with defensible records?</p>
+
+    <p>ChainScreen exists to solve that evidence problem. The main story is audit-ready screening guidance for small EU crypto firms that need proof without enterprise-tool sprawl.</p>
+
+    <div class="callout--teal">
+      <div class="callout__label">The principle</div>
+      <p>Sanctions screening is a compliance requirement, not a competitive advantage. Small CASPs should be able to keep a defensible screening process without buying a giant analytics stack. If a regulator needs proof that you screened an address against OFAC, EU, and UN lists before processing a transaction, that proof should be simple, repeatable, and affordable.</p>
+    </div>
+
+    <h2>What we build</h2>
+
+    <p>ChainScreen is now a content-only compliance research hub. The guides explain sanctions screening obligations, audit evidence, list-version records, GDPR/data-residency issues, and vendor selection for small EU crypto firms.</p>
+
+    <ul>
+      <li><strong>Regulatory coverage</strong> -- MiCA, EBA restrictive-measures guidance, CySEC expectations, Travel Rule, and GDPR</li>
+      <li><strong>Evidence focus</strong> -- what to keep, why it matters, and how regulators evaluate screening records</li>
+      <li><strong>Operator framing</strong> -- written for small teams that need practical compliance decisions, not vendor marketing</li>
+      <li><strong>Content-only status</strong> -- the former ChainScreen API and product pages were retired on 2026-05-12</li>
+    </ul>
+
+    <h2>Company</h2>
+
+    <table class="company-table">
+      <tbody>
+      <tr><td>Legal entity</td><td>DailyMind LTD</td></tr>
+      <tr><td>Registration</td><td>HE 439959 (Cyprus)</td></tr>
+      <tr><td>Location</td><td>Limassol, Cyprus</td></tr>
+      <tr><td>Website</td><td><a href="https://chainscreen.io">chainscreen.io</a></td></tr>
+      <tr><td>Contact</td><td><a href="mailto:info@chainscreen.io">info@chainscreen.io</a></td></tr>
+      <tr><td>Privacy</td><td><a href="mailto:privacy@chainscreen.io">privacy@chainscreen.io</a></td></tr>
+      </tbody>
+    </table>
+
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    &copy; 2026 DailyMind LTD &middot; HE 439959 &middot; Limassol, Cyprus
+    &nbsp;&middot;&nbsp;
+    <span>Information only; not legal advice</span>
+    &nbsp;&middot;&nbsp;
+    <a href="/privacy">Privacy</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://dailymind.eu">dailymind.eu</a>
+  </div>
+</footer>
+<script src="/nav.js" defer></script>
+<script data-goatcounter="https://gc-chainscreen.vigilcom.dev/count"
+        async src="//gc.vigilcom.dev/count.js"></script>
+</body>
+</html>

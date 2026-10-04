@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CySEC Crypto Audit: 8 Documents You Need | ChainScreen</title>
+<meta name="description" content="CySEC inspects sanctions screening logs, list versions, match resolution records, and training proof. Most CASPs have 1 of 4. All 8 documents listed.">
+<link rel="canonical" href="https://chainscreen.io/operations/cysec-inspection-documents">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CySEC Inspection Day: The 8 Documents You Need for Your Sanctions Screening Audit">
+<meta property="og:description" content="CySEC inspects your screening logs, list versions, match resolution records, and staff training proof. Most small CASPs have 1 of 4. Here are all 8 documents you need on inspection day.">
+<meta property="og:url" content="https://chainscreen.io/operations/cysec-inspection-documents">
+<meta property="og:site_name" content="ChainScreen">
+<meta property="og:image" content="https://chainscreen.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"CySEC Inspection Day: The 8 Documents You Need for Your Sanctions Screening Audit","description":"CySEC inspects your screening logs, list versions, match resolution records, and staff training proof. Most small CASPs have 1 of 4. Here are all 8 documents you need on inspection day.","datePublished":"2026-03-15","dateModified":"2026-08-17","wordCount":1380,"author":{"@type":"Person","name":"Katerina Bletsch","url":"https://chainscreen.io","jobTitle":"Founder","sameAs":["https://www.linkedin.com/in/katerina-bletsch/"]},"publisher":{"@type":"Organization","name":"ChainScreen","url":"https://chainscreen.io","logo":{"@type":"ImageObject","url":"https://chainscreen.io/og-image.png"}}}
+</script>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chainscreen.io/og-image.png">
+<script defer src="https://u.vigilcom.dev/script.js" data-website-id="df019ee1-bf37-42db-be6c-93671ff213ec"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://chainscreen.io"},{"@type":"ListItem","position":2,"name":"Operations","item":"https://chainscreen.io/operations/"},{"@type":"ListItem","position":3,"name":"CySEC Inspection Day: The 8 Documents You Need for Your Sanctions Screening Audit"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What documents does CySEC actually ask for during a sanctions screening inspection?","acceptedAnswer":{"@type":"Answer","text":"Based on CySEC Circular C685 (February 2025) and thematic inspection findings from a sample of regulated entities, inspectors focus on eight categories: per-transaction screening logs, sanctions list version records, match resolution documentation, escalation policies, staff training records with assessments, a sanctions risk assessment, SAR filing procedures, and audit trail retention evidence covering the past 5 years under Cyprus AML record-keeping rules."}},{"@type":"Question","name":"How long do CASPs need to retain sanctions screening records under Cyprus law?","acceptedAnswer":{"@type":"Answer","text":"Cyprus AML law sets a minimum 5-year record-keeping baseline. This includes screening checks, the sanctions or restrictive-measures list version used at the time, the result of the check, and any follow-up actions taken. EBA/GL/2024/15, dated 14 November 2024 and applying from 30 December 2025, separately sets PSP/CASP expectations for documenting alert decisions under general record-keeping policies."}},{"@type":"Question","name":"What is a sanctions list version log and why does CySEC require it?","acceptedAnswer":{"@type":"Answer","text":"A sanctions list version log records which version of each UN Sanctions List, EU Restrictive Measures list, and any relevant U.S. or UK list used by the CASP was active at the time each screening check was performed. CySEC requires this because if a transaction is later questioned, you must be able to prove that you screened against the correct, up-to-date list at that exact moment. Without version tracking, you cannot defend a clean result - you cannot prove the list was current."}},{"@type":"Question","name":"What does a match resolution workflow document need to contain?","acceptedAnswer":{"@type":"Answer","text":"A compliant match resolution workflow must document: (1) the criteria for classifying an alert as a true match, potential match, or false positive; (2) the review process including who is authorized to clear alerts at each level; (3) a four-eyes requirement for high-risk matches; (4) the escalation path to senior management; and (5) how and when MOKAS is notified for confirmed matches. CySEC inspectors check whether this procedure exists in writing and whether your actual alert disposition records follow it."}},{"@type":"Question","name":"Did CySEC inspect the whole CASP population in the 2024 thematic review?","acceptedAnswer":{"@type":"Answer","text":"No. Circular C685 says CySEC inspected a sample of regulated entities between April and November 2024. All types of regulated entities were subject to the inspections, including CASPs, but the circular does not say that each CASP was inspected."}}]}
+</script>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-alt: #f8fafc;
+    --surface: #ffffff;
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --text: #0c1d36;
+    --text-body: #475569;
+    --text-muted: #94a3b8;
+    --accent: #0c2340;
+    --accent-hover: #143a65;
+    --accent-light: #edf2f9;
+    --teal: #0f766e;
+    --teal-light: #f0fdf4;
+    --code-bg: #091a30;
+    --code-surface: #0c2340;
+    --font-serif: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-code: 'JetBrains Mono', 'SF Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  
+  header {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: var(--font-code);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--accent-hover); }
+
+  .nav-link {
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover { color: var(--text); }
+
+  
+  .article-header {
+    padding: 80px 0 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .article-header__eyebrow {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--teal);
+    margin-bottom: 20px;
+  }
+
+  .article-header h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+
+  .article-header__sub {
+    font-size: 17px;
+    color: var(--text-body);
+    max-width: 640px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  .article-meta {
+    font-family: var(--font-code);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.01em;
+    line-height: 1.8;
+  }
+
+  .article-meta span + span::before {
+    content: '|';
+    margin: 0 10px;
+    color: var(--border);
+  }
+
+  
+  .article-body {
+    padding: 48px 0;
+  }
+
+  .article-body h2 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin: 48px 0 16px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .article-body h2:first-child {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .article-body h3 {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+    margin: 32px 0 12px;
+    color: var(--text);
+  }
+
+  .article-body p {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .article-body strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .article-body a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .article-body a:hover {
+    color: var(--accent-hover);
+  }
+
+  .article-body ul, .article-body ol {
+    margin: 16px 0;
+    padding-left: 24px;
+  }
+
+  .article-body li {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 8px;
+  }
+
+  .article-body li strong {
+    color: var(--text);
+  }
+
+  
+  .callout {
+    margin: 28px 0;
+    padding: 24px 28px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--bg-alt);
+  }
+
+  .callout--warning {
+    background: #fffbeb;
+    border-color: #fde68a;
+  }
+
+  .callout--danger {
+    background: #fef2f2;
+    border-color: #fecaca;
+  }
+
+  .callout--teal {
+    background: var(--teal-light);
+    border-color: #bbf7d0;
+  }
+
+  .callout__label {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--warning .callout__label { color: #b45309; }
+  .callout--danger .callout__label { color: #dc2626; }
+  .callout--teal .callout__label { color: var(--teal); }
+
+  .callout p {
+    font-size: 14px;
+    line-height: 1.65;
+    margin-bottom: 8px;
+  }
+
+  .callout p:last-child { margin-bottom: 0; }
+
+  
+  .checklist {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0;
+    counter-reset: checklist-counter;
+  }
+
+  .checklist li {
+    counter-increment: checklist-counter;
+    padding: 20px 24px 20px 28px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+
+  .checklist li:hover {
+    border-color: var(--accent);
+  }
+
+  .checklist__num {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--teal);
+    letter-spacing: 0.02em;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .checklist__title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .checklist__detail {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  .checklist__tag {
+    display: inline-block;
+    font-family: var(--font-code);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-top: 8px;
+    background: var(--teal-light);
+    color: var(--teal);
+  }
+
+  
+  .article-cta {
+    margin: 48px 0;
+    padding: 40px 36px;
+    background: var(--code-bg);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .article-cta h2 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 400;
+    color: #f1f5f9;
+    margin: 0 0 12px;
+    padding: 0;
+    border: none;
+  }
+
+  .article-cta p {
+    color: #94a3b8;
+    font-size: 14px;
+    margin-bottom: 24px;
+    line-height: 1.65;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 28px;
+    background: #fff;
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary:hover {
+    background: #f1f5f9;
+    color: var(--accent);
+  }
+
+  
+  .sources {
+    margin: 32px 0 0;
+    padding: 24px 0 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .sources__title {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  .sources ol {
+    padding-left: 20px;
+    margin: 0;
+  }
+
+  .sources li {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 4px;
+  }
+
+  .sources a {
+    color: var(--text-muted);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .sources a:hover { color: var(--text-body); }
+
+  
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--text); }
+
+  
+  @media (max-width: 640px) {
+    .article-header { padding: 48px 0 32px; }
+    .article-header h1 { font-size: 1.8rem; }
+    .article-body h2 { font-size: 20px; }
+    .checklist li { padding: 16px 18px 16px 18px; }
+    .article-cta { padding: 32px 24px; }
+    .article-meta span { display: block; }
+    .article-meta span + span::before { content: ''; margin: 0; }
+  }
+
+  
+  @media print {
+    header, footer, .article-cta { display: none; }
+    .article-header { padding: 24px 0; }
+    .article-body h2 { break-after: avoid; }
+    .checklist li { break-inside: avoid; }
+    .callout { break-inside: avoid; }
+    body { font-size: 12px; }
+  }
+
+  
+  .breadcrumb { padding: 12px 0; border-bottom: 1px solid var(--border); background: var(--bg-alt); }
+  .breadcrumb a, .breadcrumb span { font-family: var(--font-code); font-size: 11px; letter-spacing: 0.01em; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb__sep { color: #cbd5e1; margin: 0 6px; }
+  .breadcrumb__current { color: var(--text-body); }
+
+  
+  .nav-links { display: flex; align-items: center; gap: 20px; }
+  .nav-link.active { color: var(--text); }
+  @media (max-width: 640px) { .nav-links { gap: 12px; } .nav-link { font-size: 11px; } }
+
+  
+  .related-articles { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+  .related-articles h3 { font-family: var(--font-code); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 16px; margin-top: 0; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .related-card { display: flex; flex-direction: column; gap: 8px; padding: 20px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; transition: border-color 0.2s; }
+  .related-card:hover { border-color: var(--accent); }
+  .related-card__tag { font-family: var(--font-code); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--teal); }
+  .related-card__title { font-family: var(--font-serif); font-size: 15px; color: var(--text); line-height: 1.35; }
+  .related-card__arrow { font-family: var(--font-code); font-size: 12px; color: var(--text-muted); margin-top: auto; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="/" class="logo">chain<span>screen</span></a>
+    <nav class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/regulations/" class="nav-link">Regulations</a>
+      <a href="/operations/" class="nav-link active">Operations</a>
+      <a href="/tools/" class="nav-link">Tools</a>
+      <a href="/technical/" class="nav-link">Technical</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <div class="container">
+    <a href="/">Home</a><span class="breadcrumb__sep">/</span>
+    <a href="/operations/">Operations</a><span class="breadcrumb__sep">/</span>
+    <span class="breadcrumb__current">CySEC Inspection Day: The 8 Documents</span>
+  </div>
+</nav>
+
+<section class="article-header">
+  <div class="container">
+    <div class="article-header__eyebrow">Audit Preparation</div>
+    <h1>CySEC Inspection Day: The 8 Documents You Need for Your Sanctions Screening Audit</h1>
+    <p class="article-header__sub">
+      CySEC inspectors do not ask whether you have sanctions screening. They ask to see the paper trail. Most small CASPs can produce one of the four things inspectors actually check. Here is what they ask for and how to have it ready.
+    </p>
+    <div class="article-meta">
+      <span>Katerina Bletsch</span>
+      <span>Published: 15 March 2026</span>
+      <span>Updated: 10 July 2026</span>
+      <span>Reading time: 8 min</span>
+      <span>Category: Operations</span>
+    </div>
+  </div>
+</section>
+
+<div class="article-body">
+  <div class="container">
+
+    <h2>What actually happens during a CySEC sanctions screening inspection?</h2>
+
+    <p>
+      CySEC conducted thematic inspections of the sanctions screening systems used by a sample of regulated entities between April and November 2024. All types of regulated entities were represented, including CASPs. The findings, published in <strong>Circular C685 on 27 February 2025</strong>, were direct: deficient system tuning, manual screening reliance, alert fatigue from excessive false positives, and irregular testing. These are not abstract regulatory concerns. They are the specific things CySEC tested and chose to publish as inspection benchmarks.
+    </p>
+
+    <p>
+      What the circular does not spell out — but what every compliance officer who has been through an inspection will tell you — is that CySEC does not just ask whether you have a screening system. They ask you to prove it worked, document how you handled what it found, and show that your team knows what they are doing. That proof lives in documents.
+    </p>
+
+    <div class="callout callout--danger">
+      <div class="callout__label">The gap most CASPs have</div>
+      <p>A screening system running in the background is not the same as a documented sanctions compliance programme. CySEC's thematic sample found regulated entities whose screening systems and controls required improvement. If a CASP screens transactions but cannot produce a single piece of paper showing what happened when a match was flagged, that is a deficiency. It is also fixable &mdash; before the inspector arrives.</p>
+    </div>
+
+    <p>
+      Below are the eight categories of documentation that a CySEC sanctions screening audit will touch. The first three can be generated automatically if your screening tool is built for compliance. The remaining five require deliberate effort from your compliance officer, regardless of which tool you use.
+    </p>
+
+    <h2>What are the 8 documents CySEC inspectors ask for?</h2>
+
+    <ol class="checklist">
+      <li>
+        <span class="checklist__num">DOC 01</span>
+        <div class="checklist__title">Screening logs: one record per transaction</div>
+        <div class="checklist__detail">
+          Every transaction your CASP processes must have a corresponding screening record. That record needs to show: the name or address screened, which lists were checked, the timestamp, and the result (clean, flagged, or matched). Inspectors will pull a sample of transactions and verify that a screening record exists for each one. If your system does not log individual transaction checks automatically, you have a fundamental gap.
+        </div>
+        <span class="checklist__tag">Required evidence</span>
+      </li>
+      <li>
+        <span class="checklist__num">DOC 02</span>
+        <div class="checklist__title">Sanctions list version log</div>
+        <div class="checklist__detail">
+          When was your EU Consolidated List last updated? Which UN Sanctions and EU Restrictive Measures data were active at 14:32 on 7 January 2026? If your programme also applies relevant U.S. or UK sanctions-list practices, which versions were used? CySEC expects you to be able to answer those questions. Every screening check must reference the specific list version that was current at that moment. Without version tracking, a clean screening result is legally undefendable &mdash; you cannot prove the list was current when you ran the check. This is one of the most commonly missing documents in small CASP audits.
+        </div>
+        <span class="checklist__tag">Required evidence</span>
+      </li>
+      <li>
+        <span class="checklist__num">DOC 03</span>
+        <div class="checklist__title">Match resolution records</div>
+        <div class="checklist__detail">
+          For every alert your system generates, there must be a written record of what happened next. Was it a true match, a potential match, or a false positive? Who reviewed it? What was their conclusion and on what basis? High-risk matches require four-eyes review &mdash; two independent reviewers must sign off. If you cleared 200 alerts last month and have no resolution records, CySEC will treat that as 200 unresolved matches.
+        </div>
+        <span class="checklist__tag">Required evidence</span>
+      </li>
+      <li>
+        <span class="checklist__num">DOC 04</span>
+        <div class="checklist__title">Escalation policy (written, approved, dated)</div>
+        <div class="checklist__detail">
+          Your escalation policy defines what triggers escalation, who it goes to, how fast, and what authority they have. It must be a signed document &mdash; not a Slack message, not "we have a process," not something that lives only in your compliance officer's head. CySEC will ask to see it. It must be dated and approved by senior management. If it has never been reviewed since you wrote it, that is a problem too: a policy last updated in 2022 that does not reference current list requirements will raise questions.
+        </div>
+      </li>
+      <li>
+        <span class="checklist__num">DOC 05</span>
+        <div class="checklist__title">Staff training records with assessment scores</div>
+        <div class="checklist__detail">
+          Training your compliance team is not enough. You need to document that it happened, when it happened, who attended, what was covered, and how they performed in any assessment. A slide deck sent by email is not a training record. A dated attendance log with an assessment result attached is. CySEC inspectors specifically called out the lack of documented training as a deficiency. Every person who touches sanctions screening decisions needs a training record showing they understood what they were doing.
+        </div>
+      </li>
+      <li>
+        <span class="checklist__num">DOC 06</span>
+        <div class="checklist__title">Sanctions risk assessment</div>
+        <div class="checklist__detail">
+          Your business-level sanctions risk assessment documents the specific risks your CASP faces based on your customer types, transaction volumes, geographies, and service mix. It is not a generic template. It should reflect your actual customer base and explain why your screening configuration is calibrated the way it is. Inspectors use this to evaluate whether your screening approach is proportionate to your risk profile. A risk assessment that says "low risk" for a CASP servicing high-risk jurisdictions will get scrutinised heavily.
+        </div>
+      </li>
+      <li>
+        <span class="checklist__num">DOC 07</span>
+        <div class="checklist__title">SAR filing procedure</div>
+        <div class="checklist__detail">
+          When you confirm a sanctions match, your obligation does not end at blocking the transaction. You must report to MOKAS within two weeks. Your SAR filing procedure documents exactly how that report is prepared, who prepares it, who authorises it, and what your internal record of the filing looks like. CySEC will check that your procedure exists and that your actual filings are consistent with it. Circular C781, dated 21 May 2026, points regulated entities to revised MOKAS STR/SAR/AIF reporting guidelines and the MOKAS Annual Report 2025. The 2025 report shows the scale now facing CASPs: 20,570 STRs/SARs were submitted by CASPs in 2025, out of 24,092 total reports to MOKAS. Your procedure must be capable of handling volume without delays.
+        </div>
+      </li>
+      <li>
+        <span class="checklist__num">DOC 08</span>
+        <div class="checklist__title">Audit trail retention evidence (5-year minimum)</div>
+        <div class="checklist__detail">
+          Cyprus AML record-keeping rules set a minimum five-year retention baseline. EBA/GL/2024/15, dated 14 November 2024 and applying from 30 December 2025, adds PSP/CASP expectations for controls that implement Union and national restrictive measures when performing transfers of funds and crypto-assets, including documenting decisions taken on alerts under the firm's general record-keeping policy. You must be able to demonstrate &mdash; not just assert &mdash; that your records are retained for the required period and are retrievable. During an inspection, you may be asked to pull a complete screening history for a specific customer or wallet address. If your records are in spreadsheets, email threads, or a system with no export function, you have a retention problem.
+        </div>
+      </li>
+    </ol>
+
+    <div class="callout callout--info">
+      <div class="callout__label">Post-MiCA migration file</div>
+      <p>
+        If customers migrated from unauthorised VASPs after the MiCA transition ended, keep a separate migration risk file: individual customer risk assessments, CDD refresh decisions, enhanced monitoring capacity checks, and evidence that the firm did not use a blanket de-risking policy.
+      </p>
+    </div>
+
+    <h2>What does a CySEC inspection actually look like?</h2>
+
+    <p>
+      CySEC thematic inspections are not surprise audits in the traditional sense. You will receive advance notice. But advance notice does not mean time to prepare documentation that should have existed already &mdash; inspectors know the difference between a compliance programme that has been running and documentation that was created the week before they arrived.
+    </p>
+
+    <p>
+      During the 2024 round, inspectors tested systems directly. They submitted misspelled versions of sanctioned names to verify fuzzy matching capability. They checked whether systems would catch deliberate evasion attempts, not just exact hits. Your documentation needs to demonstrate this capability too &mdash; your calibration records (Document 06, your risk assessment, your system configuration) should show that you have tuned your matching thresholds and tested them against known cases.
+    </p>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">The inspector's first question</div>
+      <p>"Can you show me the screening log for this transaction?" is a reasonable first question in any audit. If your answer requires more than a minute to produce a result, that is a signal worth paying attention to before inspection day. The documentation gap is almost always a tooling and process gap &mdash; not a deliberate oversight.</p>
+    </div>
+
+    <h3>The four things CySEC checks most often</h3>
+    <p>
+      Based on Circular C685 findings, four areas receive the most scrutiny:
+    </p>
+    <ul>
+      <li><strong>Screening logs per transaction</strong> &mdash; does a record exist for every processed transaction?</li>
+      <li><strong>List version at time of screening</strong> &mdash; can you prove the list was current when you ran the check?</li>
+      <li><strong>Match resolution documentation</strong> &mdash; what happened to every alert your system generated?</li>
+      <li><strong>Staff training evidence</strong> &mdash; do the people making compliance decisions have documented qualifications to do so?</li>
+    </ul>
+    <p>
+      Most small CASPs, when pressed, can produce evidence for one of these four. That is the gap this document is designed to close.
+    </p>
+
+    <h2>What is the 5-year retention requirement and what does it mean in practice?</h2>
+
+    <p>
+      Five years of records is not a theoretical requirement. If a sanctioned party transacted through your platform in 2022 and an investigation opens in 2026, you will be required to produce the screening record from that transaction. "We did not keep records that far back" is not a defence. It is evidence of a compliance failure.
+    </p>
+
+    <p>
+      Practically, this means:
+    </p>
+
+    <ul>
+      <li>Your screening tool must have persistent storage, not rolling logs that overwrite after 90 days</li>
+      <li>You need a documented data retention policy that references the 5-year requirement explicitly</li>
+      <li>Records must be exportable &mdash; stored in a format that can be produced on demand to a regulator</li>
+      <li>Backups must be tested: a retention policy that exists only on paper, backed by a database nobody has tested restoring, is a liability</li>
+    </ul>
+
+    <div class="callout callout--teal">
+      <div class="callout__label">Quick gap check</div>
+      <p>Pick any transaction from 18 months ago. Can you, right now, produce: (1) the screening log entry for that transaction, (2) the list version that was current when it was screened, and (3) the resolution record if any alert was generated? If the answer to any of these is "I would need to check," you have a documentation gap to close before your next audit.</p>
+    </div>
+
+    <div class="article-cta">
+      <h2>Start with the three records CySEC asks for first</h2>
+      <p>Your screening file should show the transaction-level screening log, the sanctions list version in force at the time, and the match-resolution record if an alert was generated. If any of those records require reconstruction, close that gap before inspection day.</p>
+      <a href="/operations/" class="btn-primary">Read operations guides &rarr;</a>
+    </div>
+
+    <div class="sources">
+      <div class="sources__title">Sources</div>
+      <ol>
+        <li><a href="https://www.cysec.gov.cy/CMSPages/GetFile.aspx?guid=72f9c65f-79c3-480b-8801-58d506f05f3e">CySEC Circular C685</a>, 27 February 2025 &mdash; Guidance on Sanctions Screening Systems; thematic inspections of a sample of regulated entities, with all entity types represented</li>
+        <li><a href="https://www.eba.europa.eu/sites/default/files/2024-11/eaeae49d-81a5-4154-8af9-5014f6ee8881/Final%20Report%20Guidelines%20restrictive%20measures%20.pdf">European Banking Authority Guidelines EBA/GL/2024/15</a>, 14 November 2024 &mdash; PSP/CASP controls for implementation of Union and national restrictive measures under Regulation (EU) 2023/1113; applies from 30 December 2025</li>
+        <li><a href="https://www.cysec.gov.cy/CMSPages/GetFile.aspx?guid=11c6010c-dfb5-4702-a6a2-ab6a92d46dcf">CySEC Circular C781</a>, 21 May 2026 &mdash; MOKAS Revised Guidelines, Strategic Reports and Annual Report 2025</li>
+        <li><a href="https://www.law.gov.cy/Law/MOKAS/mokas.nsf/All/7A1609569CA47E29C2258DF8001E4CB1/$file/CyFIU_ANNUAL%20REPORT%202026_EN.pdf?OpenElement">MOKAS Annual Report 2025</a> &mdash; 2025 STR/SAR reporting volumes and sector breakdown</li>
+        <li>Cyprus AML/CFT Law (Law 188(I)/2007 as amended) &mdash; Record retention requirements, 5-year minimum</li>
+      </ol>
+    </div>
+
+  </div>
+</div>
+
+<div class="container">
+<div class="related-articles">
+  <h3>Related articles</h3>
+  <div class="related-grid">
+    <a href="/operations/cysec-sanctions-checklist" class="related-card">
+      <span class="related-card__tag">Operations</span>
+      <span class="related-card__title">CySEC CASP Compliance Checklist: Sanctions Screening Requirements in 2026</span>
+      <span class="related-card__arrow">Read &rarr;</span>
+    </a>
+    <a href="/regulations/eba-guidelines-casps" class="related-card">
+      <span class="related-card__tag">Regulations</span>
+      <span class="related-card__title">EBA Guidelines on Restrictive Measures: What Every Small CASP Must Do</span>
+      <span class="related-card__arrow">Read &rarr;</span>
+    </a>
+    <a href="/operations/sanctions-screening-implementation-guide" class="related-card">
+      <span class="related-card__tag">Operations</span>
+      <span class="related-card__title">Sanctions Screening Implementation Guide: From Excel to API in 30 Days</span>
+      <span class="related-card__arrow">Read &rarr;</span>
+    </a>
+  </div>
+</div>
+</div>
+
+<div style="margin: 40px 0; padding: 24px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; text-align: center;">
+  <p style="font-size: 15px; color: #475569; margin-bottom: 12px;">Need screening records and audit-ready evidence, not just a binary check?</p>
+  <a href="mailto:info@chainscreen.io" style="display: inline-block; padding: 12px 24px; background: #0c2340; color: #fff; border-radius: 8px; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600;">Contact ChainScreen</a>
+</div>
+
+
+<footer>
+  <div class="container">
+    &copy; 2026 DailyMind LTD &middot; HE 439959 &middot; Limassol, Cyprus
+    &nbsp;&middot;&nbsp;
+    <span>Information only; not legal advice</span>
+    &nbsp;&middot;&nbsp;
+    <a href="/privacy">Privacy</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://dailymind.eu">dailymind.eu</a>
+  </div>
+</footer>
+<script data-goatcounter="https://gc-chainscreen.vigilcom.dev/count"
+        async src="//gc.vigilcom.dev/count.js"></script>
+<script src="/nav.js" defer></script>
+</body>
+</html>

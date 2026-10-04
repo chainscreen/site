@@ -1,0 +1,7 @@
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: interest-cohort=(), camera=(), microphone=(), geolocation=()
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' u.vigilcom.dev gc.vigilcom.dev static.cloudflareinsights.com www.clarity.ms; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self' u.vigilcom.dev gc.vigilcom.dev gc-chainscreen.vigilcom.dev cloudflareinsights.com www.clarity.ms

@@ -1,0 +1,22 @@
+name = "chainscreen-online-counter"
+main = "src/index.js"
+compatibility_date = "2026-07-09"
+workers_dev = false
+
+routes = [
+  { pattern = "chainscreen.io/api/online*", zone_name = "chainscreen.io" },
+  { pattern = "www.chainscreen.io/api/online*", zone_name = "chainscreen.io" },
+]
+
+[vars]
+CF_ZONE_ID = "81541ae7461abc123344e1e3aa16639d"
+CF_ANALYTICS_CACHE_TTL_MS = "86400000"
+CF_ANALYTICS_WINDOW_DAYS = "30"
+
+[[durable_objects.bindings]]
+name = "ONLINE_PRESENCE"
+class_name = "OnlinePresence"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["OnlinePresence"]

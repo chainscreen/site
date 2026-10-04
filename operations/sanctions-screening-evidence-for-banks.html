@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanctions Screening Evidence for Banks | ChainScreen</title>
+<meta name="description" content="5 practical elements of a sanctions screening evidence package for bank review: methodology, sample reports, policy, audit logs, vendor attestation.">
+<link rel="canonical" href="https://chainscreen.io/operations/sanctions-screening-evidence-for-banks">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sanctions Screening Evidence: What to Show Your Bank">
+<meta property="og:description" content="Banks ask crypto companies for 'sanctions screening documentation' but rarely specify the format. Here are 5 practical elements of an evidence package for bank review.">
+<meta property="og:url" content="https://chainscreen.io/operations/sanctions-screening-evidence-for-banks">
+<meta property="og:image" content="https://chainscreen.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="ChainScreen">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Sanctions Screening Evidence: What to Show Your Bank","description":"Banks ask crypto companies for sanctions screening documentation but rarely specify the format. Here are 5 practical elements of a bank-facing evidence package: methodology statement, sample screening reports, screening policy, historical audit logs, and vendor attestation.","datePublished":"2026-04-10","dateModified":"2026-07-10","author":{"@type":"Person","name":"Katerina Bletsch","url":"https://chainscreen.io","jobTitle":"Founder","sameAs":["https://www.linkedin.com/in/katerina-bletsch/"]},"publisher":{"@type":"Organization","name":"ChainScreen","url":"https://chainscreen.io","logo":{"@type":"ImageObject","url":"https://chainscreen.io/og-image.png"}},"wordCount":2979}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What sanctions screening documentation do banks ask for from crypto companies?","acceptedAnswer":{"@type":"Answer","text":"There is no universal bank format. A practical evidence package usually includes: (1) a methodology statement covering applicable sanctions regimes, data sources, update frequency, and matching logic; (2) sample screening reports that are timestamped and show the input, result, and list source; (3) a written screening policy with escalation and reporting procedures; (4) historical audit logs showing that screening is operational over time; and (5) vendor attestation or provider documentation where a third-party tool is used."}},{"@type":"Question","name":"Why do bank reviews stall even when a crypto company screens for sanctions?","acceptedAnswer":{"@type":"Answer","text":"Reviews often stall because the applicant can state that screening happens but cannot show how it happens, when it happened, which data was checked, and how alerts are handled. A pass/fail result without a timestamp, list source, retained log, or escalation record gives the bank limited evidence for its own due diligence file."}},{"@type":"Question","name":"Can I use free sanctions screening tools for bank compliance evidence?","acceptedAnswer":{"@type":"Answer","text":"Public or free screening tools can be useful for point checks, but bank evidence depends on the current provider documentation and on your own logging. If a tool returns only a pass/fail result, or does not retain timestamped reports and audit logs, supplement it with your own records or use a workflow that can generate exportable, retained evidence."}},{"@type":"Question","name":"How far back do banks want to see sanctions screening history?","acceptedAnswer":{"@type":"Answer","text":"There is no fixed regulatory lookback period for a bank evidence pack. A bank may ask for recent history, a longer lookback, or the period since launch depending on its risk assessment and the relationship. The important point is continuity: explain the period covered, any gaps, and whether full underlying logs are available on request."}},{"@type":"Question","name":"What is a sanctions screening methodology statement?","acceptedAnswer":{"@type":"Answer","text":"A methodology statement explains how your company performs sanctions screening: applicable sanctions regimes, data sources, blockchain networks, matching logic, update frequency, screening triggers, alert investigation, and record retention. For EU CASPs and PSPs, EBA/GL/2024/15 under Regulation (EU) 2023/1113 focuses on Union and national restrictive measures for transfers; OFAC, UK, UN, or other regimes should be included where they apply to your business, bank, counterparties, or legal footprint."}}]}
+</script>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chainscreen.io/og-image.png">
+<script defer src="https://u.vigilcom.dev/script.js" data-website-id="df019ee1-bf37-42db-be6c-93671ff213ec"></script>
+<meta name="twitter:title" content="Sanctions Screening Evidence: What to Show Your Bank">
+<meta name="twitter:description" content="Your bank asked for sanctions screening documentation. Here are 5 practical elements of a bank-facing evidence package.">
+<meta name="article:published_time" content="2026-04-10">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://chainscreen.io"},{"@type":"ListItem","position":2,"name":"Operations","item":"https://chainscreen.io/operations/"},{"@type":"ListItem","position":3,"name":"Sanctions Screening Evidence: What to Show Your Bank"}]}
+</script>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-alt: #f8fafc;
+    --surface: #ffffff;
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --text: #0c1d36;
+    --text-body: #475569;
+    --text-muted: #94a3b8;
+    --accent: #0c2340;
+    --accent-hover: #143a65;
+    --accent-light: #edf2f9;
+    --teal: #0f766e;
+    --teal-light: #f0fdf4;
+    --code-bg: #091a30;
+    --code-surface: #0c2340;
+    --red: #dc2626;
+    --red-light: #fef2f2;
+    --font-serif: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-code: 'JetBrains Mono', 'SF Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  
+  header {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: var(--font-code);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--accent-hover); }
+
+  .nav-link {
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover { color: var(--text); }
+
+  
+  .article-header {
+    padding: 80px 0 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .article-header__eyebrow {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--teal);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .article-header h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+
+  .article-header__sub {
+    font-size: 17px;
+    color: var(--text-body);
+    max-width: 640px;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .article-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: var(--font-code);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.01em;
+  }
+
+  .article-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .article-meta__dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--teal);
+    flex-shrink: 0;
+  }
+
+  
+  .article-body {
+    padding: 48px 0 72px;
+  }
+
+  .article-body h2 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-top: 48px;
+    margin-bottom: 16px;
+    line-height: 1.3;
+    color: var(--text);
+  }
+
+  .article-body h3 {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 32px;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+
+  .article-body p {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .article-body ul, .article-body ol {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+    padding-left: 24px;
+  }
+
+  .article-body li {
+    margin-bottom: 6px;
+  }
+
+  .article-body a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+  }
+
+  .article-body a:hover {
+    color: var(--accent-hover);
+  }
+
+  .article-body strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .article-body code {
+    font-family: var(--font-code);
+    font-size: 13px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--accent);
+  }
+
+  
+  .callout {
+    margin: 28px 0;
+    padding: 24px 28px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .callout p {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .callout p:last-child {
+    margin-bottom: 0;
+  }
+
+  .callout--warning {
+    background: var(--red-light);
+    border: 1px solid #fecaca;
+  }
+
+  .callout--warning .callout__label {
+    color: var(--red);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--info {
+    background: var(--accent-light);
+    border: 1px solid #c7d5e8;
+  }
+
+  .callout--info .callout__label {
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--teal {
+    background: var(--teal-light);
+    border: 1px solid #bbf7d0;
+  }
+
+  .callout--teal .callout__label {
+    color: var(--teal);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  
+  .comparison-wrapper {
+    margin: 28px 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .comparison th, .comparison td {
+    padding: 13px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .comparison tr:last-child td { border-bottom: none; }
+
+  .comparison th {
+    color: var(--text-muted);
+    font-family: var(--font-code);
+    font-weight: 500;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--bg-alt);
+  }
+
+  .comparison td:first-child {
+    color: var(--text);
+    font-weight: 500;
+    font-size: 13px;
+  }
+
+  .check { color: var(--teal); font-weight: 600; }
+  .cross { color: var(--red); font-weight: 600; }
+  .na { color: var(--text-muted); }
+
+  
+  blockquote {
+    margin: 24px 0;
+    padding: 20px 24px;
+    border-left: 3px solid var(--border-strong);
+    background: var(--bg-alt);
+    border-radius: 0 8px 8px 0;
+  }
+
+  blockquote p {
+    font-size: 14px;
+    color: var(--text-body);
+    font-style: italic;
+    margin-bottom: 0;
+  }
+
+  blockquote cite {
+    display: block;
+    margin-top: 8px;
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-style: normal;
+    color: var(--text-muted);
+  }
+
+  
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  
+  .cta-banner {
+    margin: 48px 0;
+    padding: 40px 36px;
+    background: var(--code-bg);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .cta-banner h3 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: #f1f5f9;
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .cta-banner p {
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 24px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 28px;
+    background: #fff;
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary:hover {
+    background: #f1f5f9;
+    color: var(--accent);
+  }
+
+  
+  .sources {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .sources h3 {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .sources ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sources li {
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 4px 0;
+    line-height: 1.6;
+  }
+
+  .sources li a {
+    color: var(--text-body);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .sources li a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--text); }
+
+  
+  .checklist {
+    counter-reset: checklist-counter;
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .checklist > li {
+    counter-increment: checklist-counter;
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: 28px;
+  }
+
+  .checklist > li::before {
+    content: counter(checklist-counter);
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 28px;
+    height: 28px;
+    background: var(--accent-light);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-code);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .checklist > li strong {
+    display: block;
+    color: var(--text);
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+
+  .checklist > li p {
+    margin-bottom: 8px;
+  }
+
+  
+  @media (max-width: 640px) {
+    .article-header { padding: 48px 0 32px; }
+    .article-header h1 { font-size: 1.8rem; }
+    .article-body h2 { font-size: 20px; }
+    .article-meta { gap: 12px; }
+    .comparison { font-size: 11px; }
+    .comparison th, .comparison td { padding: 8px 10px; }
+    .callout { padding: 20px; }
+    .cta-banner { padding: 32px 24px; }
+  }
+
+  
+  .breadcrumb { padding: 12px 0; border-bottom: 1px solid var(--border); background: var(--bg-alt); }
+  .breadcrumb a, .breadcrumb span { font-family: var(--font-code); font-size: 11px; letter-spacing: 0.01em; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb__sep { color: #cbd5e1; margin: 0 6px; }
+  .breadcrumb__current { color: var(--text-body); }
+
+  
+  .nav-links { display: flex; align-items: center; gap: 20px; }
+  .nav-link.active { color: var(--text); }
+  @media (max-width: 640px) { .nav-links { gap: 12px; } .nav-link { font-size: 11px; } }
+
+  
+  .related-articles { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+  .related-articles h3 { font-family: var(--font-code); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 16px; margin-top: 0; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .related-card { display: flex; flex-direction: column; gap: 8px; padding: 20px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; transition: border-color 0.2s; }
+  .related-card:hover { border-color: var(--accent); }
+  .related-card__tag { font-family: var(--font-code); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--teal); }
+  .related-card__title { font-family: var(--font-serif); font-size: 15px; color: var(--text); line-height: 1.35; }
+  .related-card__arrow { font-family: var(--font-code); font-size: 12px; color: var(--text-muted); margin-top: auto; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="/" class="logo">chain<span>screen</span></a>
+    <nav class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/regulations/" class="nav-link">Regulations</a>
+      <a href="/operations/" class="nav-link active">Operations</a>
+      <a href="/tools/" class="nav-link">Tools</a>
+      <a href="/technical/" class="nav-link">Technical</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <div class="container">
+    <a href="/">Home</a><span class="breadcrumb__sep">/</span>
+    <a href="/operations/">Operations</a><span class="breadcrumb__sep">/</span>
+    <span class="breadcrumb__current">Sanctions Screening Evidence for Banks</span>
+  </div>
+</nav>
+
+<section class="article-header">
+  <div class="container">
+    <div class="article-header__eyebrow">Banking &amp; compliance operations</div>
+    <h1>Sanctions Screening Evidence: What to Show Your Bank</h1>
+    <p class="article-header__sub">
+      Your bank asked for "sanctions screening documentation." They did not tell you what format, what depth, or what exactly they need to see. Here is a practical evidence package -- five elements -- that gives bank compliance teams something concrete to review.
+    </p>
+    <div class="article-meta">
+      <span><div class="article-meta__dot"></div> Updated July 2026</span>
+      <span><div class="article-meta__dot"></div> 8 min read</span>
+      <span><div class="article-meta__dot"></div> Sources: FATF, EBA, TFR/MiCA, CySEC</span>
+    </div>
+  </div>
+</section>
+
+<article class="article-body">
+  <div class="container">
+
+    <p>
+      <strong>A common problem in crypto banking reviews is not the absence of screening -- it is the absence of evidence that screening is systematic.</strong> A screenshot of a green checkmark or a one-line "no results found" rarely gives a bank enough information to understand what was screened, when it was screened, which data source was used, and how the result was retained.
+    </p>
+
+    <p>
+      This is not only a technology problem. It is a documentation problem. A bank reviewing a crypto client has to understand the client's controls, make a risk-based decision, and keep enough records to support that decision during a <a href="https://www.eba.europa.eu/legacy/regulation-and-policy/regulatory-activities/anti-money-laundering-and-countering-financing-6" target="_blank" rel="noopener">supervisory review</a>.
+    </p>
+
+    <p>
+      This guide covers the evidence bank compliance teams commonly ask for and how to assemble a screening package without overstating what the law requires.
+    </p>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">As of July 2026</div>
+      <p>
+        For Cyprus and other EU-facing firms, the MiCA transition is no longer a future deadline. <a href="https://www.cysec.gov.cy/CMSPages/GetFile.aspx?guid=e26d5753-bab0-427b-84aa-f0223ce26935" target="_blank" rel="noopener">CySEC Circular C790</a> states that the MiCA transitional period ended on 1 July 2026 and that firms need MiCAR-compliant CASP authorisation to continue providing crypto-asset services in the EU. That does not create a universal sanctions-list checklist, but it makes authorisation status, AML/CFT controls, and sanctions evidence more visible in bank reviews.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>What bank compliance teams actually evaluate</h2>
+
+    <p>
+      Bank relationship managers often ask for "KYC documents" and "compliance documentation." The compliance team behind that request is usually evaluating something more specific: <strong>can this client demonstrate a systematic, ongoing, auditable sanctions screening process?</strong>
+    </p>
+
+    <p>
+      The word "systematic" matters. A one-time check says little about tomorrow. The word "ongoing" matters. Screening at onboarding but not at relevant transaction or data-change events may be a gap. The word "auditable" matters most. If the bank's reviewer asks "how do you know client X screens for sanctions?", the answer should be in the file.
+    </p>
+
+    <p>
+      FATF's <a href="https://www.fatf-gafi.org/content/dam/fatf/documents/recommendations/Updated-Guidance-VA-VASP.pdf" target="_blank" rel="noopener">risk-based approach for virtual assets and VASPs</a> gives banks and supervisors a practical frame for this review: identify the risks, understand the controls, and decide whether residual risk fits the bank's risk appetite.
+    </p>
+
+    <p>
+      That question is answered by documentation, not conversation.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>The 5 elements of a practical screening evidence package</h2>
+
+    <p>
+      A useful sanctions screening evidence package contains five sections. Each addresses a different concern that bank compliance teams may have when evaluating crypto company accounts. Missing one does not automatically mean denial, but it creates a follow-up question the bank will need to resolve.
+    </p>
+
+    <ol class="checklist">
+
+      <li>
+        <strong>Methodology statement</strong>
+        <p>
+          A 2-4 page document explaining <em>how</em> your screening works. This covers: which sanctions regimes and data sources you screen against, which blockchain networks you monitor, how frequently sanctions data is updated in your system, and what matching logic you use (exact match, fuzzy match, phonetic matching for name screening).
+        </p>
+        <p>
+          For EU PSPs and CASPs, the legal anchor is <a href="https://eur-lex.europa.eu/eli/reg/2023/1113/oj/eng" target="_blank" rel="noopener">Regulation (EU) 2023/1113</a> and <a href="https://www.eba.europa.eu/activities/single-rulebook/regulatory-activities/anti-money-laundering-and-countering-financing-terrorism/guidelines-internal-policies-procedures-and-controls-ensure-implementation-union-and-national" target="_blank" rel="noopener">EBA/GL/2024/15</a>, which apply from 30 December 2025 and focus on Union and national restrictive measures when performing transfers of funds and crypto-assets. They do not create a universal MiCA rule that every CASP must screen against EU, UN, OFAC, and UK lists in every case. Include OFAC, UK, UN, or other regimes where they apply to your legal footprint, counterparties, currencies, correspondent banking arrangements, or the bank's stated risk appetite.
+        </p>
+        <p>
+          Your methodology should also specify screening triggers: customer onboarding, regular customer database screening, changes in sanctions data or customer due diligence data, transaction screening, and escalation when there are reasonable grounds to suspect circumvention. <strong>What banks look for:</strong> specificity. "We screen against all major sanctions lists" is not a methodology. "We screen customers and transfer parties against EU and Cyprus restrictive measures, update internal screening data immediately after a measure enters into force or changes, and add OFAC/UK screening for USD/GBP exposure and requested bank coverage" is much more useful.
+        </p>
+      </li>
+
+      <li>
+        <strong>Sample screening report</strong>
+        <p>
+          A concrete example of what your screening output looks like -- a single screening event rendered as a document. It should include: a timestamp (date and time, with timezone), the identifier screened (wallet address, transaction hash, or entity name), which data source was checked, the list version or publication date used, the screening result, and a unique report identifier.
+        </p>
+        <p>
+          The sample report demonstrates two things: that your screening produces actual documentation (not just a UI indicator), and that the documentation contains enough detail to reconstruct the screening decision later. If your screening tool returns only "sanctioned" or "not sanctioned" with no additional context, you do not have a screening report -- you have a boolean.
+        </p>
+        <p>
+          <strong>What banks look for:</strong> the report should be exportable (PDF or structured data), timestamped, and ideally signed or integrity-verified so the bank can confirm it has not been altered after the fact.
+        </p>
+      </li>
+
+      <li>
+        <strong>Screening policy document</strong>
+        <p>
+          Your internal policy governing when screening happens, who is responsible, and what occurs when a potential match is found. This is distinct from the methodology (which covers <em>how</em>) -- the policy covers <em>when, who, and what then</em>.
+        </p>
+        <p>
+          A screening policy typically includes: screening triggers (onboarding, transfer or transaction events, periodic customer re-screening, ad hoc checks), escalation procedures for potential matches, the decision-making authority for true positive vs. false positive determinations, reporting to sanctions authorities and SAR/STR filing where applicable, record retention periods, and the review cycle for the policy itself.
+        </p>
+        <p>
+          <strong>What banks look for:</strong> evidence that screening is not ad hoc. The policy should be board-approved or signed by senior management, dated, and version-controlled. An undated Word document does not inspire confidence.
+        </p>
+      </li>
+
+      <li>
+        <strong>Historical audit log</strong>
+        <p>
+          This is the element that is hardest to reconstruct after the fact. The audit log is proof that screening has been happening continuously -- not just on the day you prepared the evidence package. It shows a history of screening events over time: how many checks were performed, when, against which data sources, and what the outcomes were.
+        </p>
+        <p>
+          There is no fixed regulatory lookback period for a bank evidence pack. A bank may ask for recent history, a longer lookback, or the period since launch depending on its risk assessment and the relationship. The format does not need to be complex -- a CSV export or summary dashboard showing screening volume by day/week, list coverage, and match rates may be enough for a first review. What matters is <strong>continuity</strong>: explain the period covered, any gaps, and whether full underlying logs are available on request.
+        </p>
+        <p>
+          <strong>What banks look for:</strong> evidence of continuous operation. A log showing 10,000 screening events over 8 months, with consistent daily volume and zero unexplained gaps, is far more convincing than a log showing 50,000 events all on the same day (which looks like a bulk backfill).
+        </p>
+      </li>
+
+      <li>
+        <strong>Vendor attestation</strong>
+        <p>
+          If you use a third-party screening provider, the bank wants to know who provides the screening, what services they provide to you, and what data sources and update commitments apply. A vendor attestation or provider documentation can confirm: the services provided, the sanctions data included, update frequency, data retention, and any relevant certifications.
+        </p>
+        <p>
+          Vendor documentation does not transfer your compliance responsibility to the vendor. EBA/GL/2024/15 says the ultimate responsibility for compliance with restrictive measures remains with the PSP or CASP even when functions are outsourced. If your provider is less known, include more detail on data sources, uptime, update handling, alert workflow, and audit-log exports.
+        </p>
+        <p>
+          <strong>What banks look for:</strong> that the provider documentation matches your methodology. The attestation should confirm coverage, data freshness, and -- critically -- whether the vendor provides audit-trail-grade output or only pass/fail results.
+        </p>
+      </li>
+
+    </ol>
+
+    <hr class="section-divider">
+
+    <h2>Point-check tools vs. evidence-grade screening</h2>
+
+    <p>
+      Public or free screening tools can be useful for spot checks, especially when you need a quick answer on a wallet address or name. Before relying on any tool in a bank evidence pack, check the provider's current documentation for list coverage, update frequency, export options, retention, and terms of use.
+    </p>
+
+    <p>
+      The gap is often not the point-check result itself. It is whether the check creates retained evidence that a bank can review later:
+    </p>
+
+    <div class="comparison-wrapper">
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th>Evidence element</th>
+            <th>Point-check tools</th>
+            <th>Evidence-grade process</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>List coverage</td>
+            <td class="na">Depends on provider documentation</td>
+            <td class="check">Mapped to applicable legal and bank-requested regimes</td>
+          </tr>
+          <tr>
+            <td>Screening accuracy</td>
+            <td class="na">Depends on data entered and matching model</td>
+            <td class="check">Documented matching, tuning, and false-positive handling</td>
+          </tr>
+          <tr>
+            <td>Timestamped reports</td>
+            <td class="cross">Often unavailable unless you capture it separately</td>
+            <td class="check">Exportable PDF/JSON or structured record</td>
+          </tr>
+          <tr>
+            <td>Historical audit log</td>
+            <td class="cross">Often no retained log</td>
+            <td class="check">Screening history with retention</td>
+          </tr>
+          <tr>
+            <td>Compliance certificates</td>
+            <td class="na">Not a legal requirement; tool-dependent</td>
+            <td class="na">Available only if provider offers it</td>
+          </tr>
+          <tr>
+            <td>Vendor attestation letter</td>
+            <td class="na">Usually limited to public documentation</td>
+            <td class="check">Maintained where vendor provides it</td>
+          </tr>
+          <tr>
+            <td>Match investigation workflow</td>
+            <td class="cross">Often outside the tool</td>
+            <td class="check">Case management + decision trail</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      This is not about one tool being "better" than another. A point-check tool can answer a narrow screening question. A bank evidence package has to answer the documentation question: what was checked, against what source, when, by whom or by which system, what result came back, what alert handling followed, and where the record is retained.
+    </p>
+
+    <div class="callout callout--info">
+      <div class="callout__label">Practical approach</div>
+      <p>
+        If you use a point-check tool, capture your own evidence: input value, timestamp, operator or system, data source, result, screenshot or export, and retention location. If you use a paid screening provider, do not assume the bank will accept the brand name alone; attach the methodology, logs, and provider documentation.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>Template: what a screening evidence package looks like</h2>
+
+    <p>
+      When assembling your evidence package for a bank, structure it as a single submission with clearly labeled sections. Here is the structure that addresses all five compliance concerns:
+    </p>
+
+    <h3>1. Cover letter (1 page)</h3>
+    <p>
+      Brief overview of your company, your current regulatory status (for example, MiCAR-authorised CASP, non-EU VASP, or other applicable status), and a summary of your sanctions compliance program. State which sanctions regimes you screen for and why they apply to your business.
+    </p>
+
+    <h3>2. Sanctions screening methodology (2-4 pages)</h3>
+    <p>
+      Lists screened, update frequency, matching logic, blockchain coverage, screening triggers. Reference your screening provider by name. Include a version number and approval date.
+    </p>
+
+    <h3>3. Screening policy (3-5 pages)</h3>
+    <p>
+      Internal procedures: when screening occurs, escalation matrix, reporting to sanctions authorities and SAR/STR filing where applicable, record retention aligned to your legal obligations, review cycle. Board-approved or senior-management-approved, dated, signed.
+    </p>
+
+    <h3>4. Sample screening reports (2-5 pages)</h3>
+    <p>
+      Two or three example reports showing: a clean result (no match), a false positive investigation (match flagged, investigated, cleared with reasoning), and optionally a demonstration of re-screening on a list update. Each report timestamped, with unique identifiers.
+    </p>
+
+    <h3>5. Audit log summary (1-3 pages)</h3>
+    <p>
+      Aggregate statistics for the period requested by the bank or the most recent period you can substantiate: total screening events, daily/weekly volume, list coverage per check, match rate, false positive rate, and investigation status. Present as a table or dashboard screenshot. Do not send raw log files by default -- summarize for readability, but note that full logs are available on request.
+    </p>
+
+    <h3>6. Vendor attestation (1-2 pages)</h3>
+    <p>
+      Letter, certificate, or provider documentation confirming: services provided, sanctions data covered, update frequency, data retention, and any relevant certifications or assurance reports.
+    </p>
+
+    <div class="callout callout--teal">
+      <div class="callout__label">Timing matters</div>
+      <p>
+        Submit the evidence package <strong>proactively</strong> if the bank's application process allows it. Do not wait for a generic "compliance documentation" request to start gathering logs. A package prepared from records created in ordinary operations is more credible than one assembled from screenshots after the fact.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>Why this specific package works</h2>
+
+    <p>
+      The five-element structure maps to common bank due diligence questions and to the <a href="https://www.fatf-gafi.org/content/dam/fatf/documents/recommendations/Updated-Guidance-VA-VASP.pdf" target="_blank" rel="noopener">FATF guidance on VASPs</a>. It is not a legal safe harbour and it does not guarantee account approval. It simply makes the review easier to evidence:
+    </p>
+
+    <ul>
+      <li><strong>Methodology</strong> answers "what do you screen, when, and against which applicable regimes"</li>
+      <li><strong>Sample reports</strong> answer "what does your screening output look like" -- the question compliance teams always ask but rarely formalize</li>
+      <li><strong>Policy document</strong> answers "governance and oversight" sections in any due diligence questionnaire</li>
+      <li><strong>Audit log</strong> answers "is this operating over time, not only during onboarding"</li>
+      <li><strong>Vendor attestation</strong> answers "what third-party service is used, and what remains your responsibility"</li>
+    </ul>
+
+    <p>
+      The <a href="https://www.eba.europa.eu/legacy/regulation-and-policy/regulatory-activities/anti-money-laundering-and-countering-financing-6" target="_blank" rel="noopener">EBA access-to-financial-services guidelines</a> make clear that credit and financial institutions should manage ML/TF risks through policies, procedures, and controls rather than unsubstantiated de-risking. Your evidence package helps the bank make a documented, risk-based decision instead of guessing.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>Common documentation gaps banks may challenge</h2>
+
+    <p>
+      These documentation gaps commonly create follow-up questions in bank reviews:
+    </p>
+
+    <ul>
+      <li><strong>Submitting a screenshot instead of a report.</strong> A browser screenshot of "No results found" is not evidence. It has no timestamp verification, no list version, no integrity guarantee, and no way for the bank to file it as a formal compliance record.</li>
+      <li><strong>Claiming screening without audit trail.</strong> "We use [tool name] for sanctions screening" is a statement, not evidence. If you cannot export a log showing that screening actually happened on specific dates for specific identifiers, the statement is unverifiable.</li>
+      <li><strong>Screening only at onboarding.</strong> A policy that only screens at customer onboarding leaves no evidence of what happens when sanctions measures change or when relevant transfers occur. For EU PSPs and CASPs, <a href="/regulations/eba-guidelines-casps">EBA/GL/2024/15</a> sets out regular customer database screening, event-based customer screening, and transfer screening against applicable restrictive measures.</li>
+      <li><strong>No match investigation process.</strong> If you have never had a potential match, and your documentation does not describe what you would do if you did, the bank has no confidence that you can handle one. Include your escalation procedure and, ideally, a sample false positive investigation.</li>
+      <li><strong>Undated, unsigned policy documents.</strong> A screening policy without a date, version number, or management signature looks like it was created for the bank application rather than being an operational document. Version-control your policies and have them signed by your MLRO or compliance officer.</li>
+    </ul>
+
+    <hr class="section-divider">
+
+    <h2>Frequently asked questions</h2>
+
+    <h3>What sanctions screening documentation do banks ask for from crypto companies?</h3>
+    <p>
+      There is no universal bank format. A practical evidence package usually includes: (1) a methodology statement covering applicable sanctions regimes, data sources, update frequency, and matching logic; (2) sample screening reports that are timestamped and show the input, result, and list source; (3) a written screening policy with escalation and reporting procedures; (4) historical audit logs showing that screening is operational over time; and (5) vendor attestation or provider documentation where a third-party tool is used.
+    </p>
+
+    <h3>Why do bank reviews stall even when a crypto company screens for sanctions?</h3>
+    <p>
+      Reviews often stall because the applicant can state that screening happens but cannot show how it happens, when it happened, which data was checked, and how alerts are handled. A pass/fail result without a timestamp, list source, retained log, or escalation record gives the bank limited evidence for its own due diligence file.
+    </p>
+
+    <h3>Can I use free sanctions screening tools for bank compliance evidence?</h3>
+    <p>
+      Public or free screening tools can be useful for point checks, but bank evidence depends on the current provider documentation and on your own logging. If a tool returns only a pass/fail result, or does not retain timestamped reports and audit logs, supplement it with your own records or use a workflow that can generate exportable, retained evidence.
+    </p>
+
+    <h3>How far back do banks want to see sanctions screening history?</h3>
+    <p>
+      There is no fixed regulatory lookback period for a bank evidence pack. A bank may ask for recent history, a longer lookback, or the period since launch depending on its risk assessment and the relationship. The important point is <strong>continuity</strong>: explain the period covered, any gaps, and whether full underlying logs are available on request.
+    </p>
+
+    <h3>What is a sanctions screening methodology statement?</h3>
+    <p>
+      A methodology statement explains how your company performs sanctions screening: applicable sanctions regimes, data sources, blockchain networks, matching logic, update frequency, screening triggers, alert investigation, and record retention. For EU CASPs and PSPs, EBA/GL/2024/15 under Regulation (EU) 2023/1113 focuses on Union and national restrictive measures for transfers; OFAC, UK, UN, or other regimes should be included where they apply to your business, bank, counterparties, or legal footprint.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>Bottom line</h2>
+
+    <p>
+      Sanctions screening evidence is the gap between "we checked" and "here is a retained record of what was checked, when, against which source, and how alerts were handled."
+    </p>
+
+    <p>
+      A useful evidence package -- methodology, sample reports, policy, audit log, vendor attestation -- takes effort to assemble the first time. After that, it is maintenance: keeping logs running, updating policies when your process or legal obligations change, and generating fresh reports when a bank requests them.
+    </p>
+
+    <p>
+      Start building the evidence trail before the bank asks for it. Every screening event you log now is one more data point in the audit history that a future reviewer can inspect.
+    </p>
+
+    <div class="cta-banner">
+      <h3>Audit-ready screening evidence for bank compliance</h3>
+      <p>Your evidence package should include methodology, sample reports, historical logs, vendor attestations, and a clear explanation of match handling.</p>
+      <a href="/operations/" class="btn-primary">
+        Read operations guides &rarr;
+      </a>
+    </div>
+
+    <div class="sources">
+      <h3>Sources</h3>
+      <ul>
+        <li><a href="https://www.fatf-gafi.org/content/dam/fatf/documents/recommendations/Updated-Guidance-VA-VASP.pdf" target="_blank" rel="noopener">Updated Guidance for a Risk-Based Approach to Virtual Assets and Virtual Asset Service Providers -- FATF (October 2021)</a></li>
+        <li><a href="https://www.eba.europa.eu/activities/single-rulebook/regulatory-activities/anti-money-laundering-and-countering-financing-terrorism/guidelines-internal-policies-procedures-and-controls-ensure-implementation-union-and-national" target="_blank" rel="noopener">Guidelines on internal policies, procedures and controls to ensure the implementation of Union and national restrictive measures -- EBA/GL/2024/14 and EBA/GL/2024/15</a></li>
+        <li><a href="https://eur-lex.europa.eu/eli/reg/2023/1113/oj/eng" target="_blank" rel="noopener">Regulation (EU) 2023/1113 on information accompanying transfers of funds and certain crypto-assets -- EUR-Lex</a></li>
+        <li><a href="https://eur-lex.europa.eu/eli/reg/2023/1114/oj/eng" target="_blank" rel="noopener">Regulation (EU) 2023/1114 on markets in crypto-assets (MiCA) -- EUR-Lex</a></li>
+        <li><a href="https://www.cysec.gov.cy/CMSPages/GetFile.aspx?guid=e26d5753-bab0-427b-84aa-f0223ce26935" target="_blank" rel="noopener">Circular C790: ML/TF risks following the end of the MiCA Transitional Period -- CySEC (7 July 2026)</a></li>
+        <li><a href="https://www.eba.europa.eu/publications-and-media/press-releases/eba-issues-guidance-crypto-asset-service-providers" target="_blank" rel="noopener">EBA guidance to crypto-asset service providers on ML/TF risk factors -- EBA (16 January 2024)</a></li>
+        <li><a href="https://ofac.treasury.gov/media/16331/download?inline" target="_blank" rel="noopener">A Framework for OFAC Compliance Commitments -- U.S. Treasury OFAC</a></li>
+        <li><a href="https://www.fatf-gafi.org/content/dam/fatf-gafi/recommendations/FATF%20Recommendations%202012.pdf.coredownload.inline.pdf" target="_blank" rel="noopener">FATF Recommendations (Recommendation 11: Record Keeping) -- FATF</a></li>
+      </ul>
+    </div>
+
+    <div class="related-articles">
+      <h3>Related articles</h3>
+      <div class="related-grid">
+        <a href="/operations/sanctions-screening-implementation-guide" class="related-card">
+          <span class="related-card__tag">Operations</span>
+          <span class="related-card__title">Sanctions Screening API Setup in 30 Days</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+        <a href="/operations/cysec-sanctions-checklist" class="related-card">
+          <span class="related-card__tag">Operations</span>
+          <span class="related-card__title">CySEC Sanctions Screening Checklist</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+        <a href="/tools/chainalysis-oracle-limitations" class="related-card">
+          <span class="related-card__tag">Tools</span>
+          <span class="related-card__title">Chainalysis Oracle Limitations for EU Compliance</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+<div style="margin: 40px 0; padding: 24px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; text-align: center;">
+  <p style="font-size: 15px; color: #475569; margin-bottom: 12px;">Need bank-ready sanctions screening evidence for your crypto operation?</p>
+  <a href="mailto:info@chainscreen.io" style="display: inline-block; padding: 12px 24px; background: #0c2340; color: #fff; border-radius: 8px; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600;">Contact ChainScreen</a>
+</div>
+
+
+<footer>
+  <div class="container">
+    &copy; 2026 DailyMind LTD &middot; HE 439959 &middot; Limassol, Cyprus
+    &nbsp;&middot;&nbsp;
+    <span>Information only; not legal advice</span>
+    &nbsp;&middot;&nbsp;
+    <a href="/privacy">Privacy</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://dailymind.eu">dailymind.eu</a>
+  </div>
+</footer>
+<script data-goatcounter="https://gc-chainscreen.vigilcom.dev/count"
+        async src="//gc.vigilcom.dev/count.js"></script>
+<script src="/nav.js" defer></script>
+</body>
+</html>

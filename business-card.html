@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChainScreen Business Card — Print Layout</title>
+<link rel="canonical" href="https://chainscreen.io/business-card">
+<meta name="robots" content="noindex, nofollow">
+<script defer src="https://u.vigilcom.dev/script.js" data-website-id="df019ee1-bf37-42db-be6c-93671ff213ec"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: #d1d5db;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+    padding: 60px 24px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .label {
+    font-size: 12px;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .spec {
+    font-size: 11px;
+    color: #9ca3af;
+    text-align: center;
+    margin-top: 8px;
+    letter-spacing: 0.02em;
+  }
+
+  
+  .card {
+    width: 585px;
+    height: 351px;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.1);
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  
+  .front {
+    background: #0f1117;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 32px 36px 28px;
+  }
+
+  
+  .front::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #6366f1 0%, #818cf8 100%);
+  }
+
+  .front__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .front__identity {}
+
+  .front__name {
+    font-size: 26px;
+    font-weight: 700;
+    color: #f0f4ff;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+  }
+
+  .front__role {
+    font-size: 13px;
+    font-weight: 400;
+    color: #a8b4d0;
+    margin-top: 4px;
+    letter-spacing: 0.01em;
+  }
+
+  .front__company {
+    font-size: 12px;
+    font-weight: 500;
+    color: #5c6a8a;
+    margin-top: 2px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  
+  .front__logo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+    flex-shrink: 0;
+    margin-left: 20px;
+  }
+
+  .front__shield {
+    width: 38px;
+    height: 38px;
+    background: linear-gradient(135deg, #6366f1 0%, #818cf8 100%);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .front__logo-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: #f0f4ff;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+
+  .front__logo-text span {
+    color: #818cf8;
+  }
+
+  
+  .front__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .front__contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .front__contact-line {
+    font-size: 13px;
+    color: #a8b4d0;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    line-height: 1.4;
+  }
+
+  .front__contact-line--accent {
+    color: #818cf8;
+  }
+
+  .front__location {
+    font-size: 12px;
+    color: #3a4460;
+    text-align: right;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  
+  .back {
+    background: #080b12;
+    display: flex;
+    align-items: center;
+    padding: 32px 36px;
+    gap: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  
+  .back::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(99,102,241,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(99,102,241,0.04) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  
+  .back::after {
+    content: '';
+    position: absolute;
+    right: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 140px;
+    height: 140px;
+    background: radial-gradient(circle, rgba(99,102,241,0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .back__left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .back__logo-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .back__shield {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #6366f1 0%, #818cf8 100%);
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .back__logo-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    font-weight: 700;
+    color: #f0f4ff;
+    letter-spacing: -0.03em;
+  }
+
+  .back__logo-text span {
+    color: #818cf8;
+  }
+
+  .back__tagline {
+    font-size: 12px;
+    color: #4a5578;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.5;
+    max-width: 220px;
+  }
+
+  .back__url-row {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-top: 4px;
+  }
+
+  .back__url {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    color: #818cf8;
+    letter-spacing: 0.01em;
+  }
+
+  .back__url-hint {
+    font-size: 11px;
+    color: #3a4460;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  .back__qr {
+    width: 130px;
+    height: 130px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 8px;
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .back__qr-inner {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    border-radius: 2px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .back__qr-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .back__corner {
+    position: absolute;
+    top: 0; right: 0;
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    z-index: 2;
+  }
+
+  .back__corner::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 0; height: 0;
+    border-style: solid;
+    border-width: 0 60px 60px 0;
+    border-color: transparent rgba(99,102,241,0.15) transparent transparent;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="label">Front</div>
+<div class="card front">
+  <div class="front__top">
+    <div class="front__identity">
+      <div class="front__name">Katerina Bletsch</div>
+      <div class="front__role">Founder &amp; CEO</div>
+      <div class="front__company">DailyMind LTD</div>
+    </div>
+    <div class="front__logo">
+      <div class="front__shield">
+        <svg width="20" height="23" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 0.833L18.333 4.167V10.5C18.333 15.417 14.667 20 10 21.667C5.333 20 1.667 15.417 1.667 10.5V4.167L10 0.833Z" fill="white" fill-opacity="0.9"/>
+        </svg>
+      </div>
+      <div class="front__logo-text">Chain<span>Screen</span></div>
+    </div>
+  </div>
+
+  <div class="front__bottom">
+    <div class="front__contacts">
+      <span class="front__contact-line front__contact-line--accent">kat@chainscreen.io</span>
+      <span class="front__contact-line">linkedin.com/in/katerina-bletsch</span>
+      <span class="front__contact-line">chainscreen.io</span>
+    </div>
+    <div class="front__location">Limassol<br>Cyprus</div>
+  </div>
+</div>
+
+<div class="label">Back</div>
+<div class="card back">
+  <div class="back__corner"></div>
+
+  <div class="back__left">
+    <div class="back__logo-row">
+      <div class="back__shield">
+        <svg width="17" height="20" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 0.833L18.333 4.167V10.5C18.333 15.417 14.667 20 10 21.667C5.333 20 1.667 15.417 1.667 10.5V4.167L10 0.833Z" fill="white" fill-opacity="0.9"/>
+        </svg>
+      </div>
+      <div class="back__logo-text">Chain<span>Screen</span></div>
+    </div>
+
+    <div class="back__tagline">EU Sanctions Screening<br>for CASPs</div>
+
+    <div class="back__url-row">
+      <div class="back__url">info@chainscreen.io</div>
+      <div class="back__url-hint">Scan to connect</div>
+    </div>
+  </div>
+
+  <div class="back__qr">
+    <div class="back__qr-inner">
+      <img class="back__qr-image" src="/qr-info.svg" alt="QR code for info@chainscreen.io">
+    </div>
+  </div>
+</div>
+
+<script data-goatcounter="https://gc-chainscreen.vigilcom.dev/count"
+        async src="//gc.vigilcom.dev/count.js"></script>
+</body>
+</html>

@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chainalysis Oracle Limitations | ChainScreen</title>
+<meta name="description" content="Chainalysis sanctions oracle gives a boolean address check, but regulated CASPs still need evidence, rescreening, alert handling, and current sanctions-list coverage.">
+<link rel="canonical" href="https://chainscreen.io/tools/chainalysis-oracle-limitations">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chainalysis Free Sanctions Oracle: What It Covers and What It Doesn't">
+<meta property="og:description" content="Technical analysis of Chainalysis free sanctions screening tools: what the oracle covers, what the API announcement says, and what EU/Cyprus CASPs still need to evidence.">
+<meta property="og:url" content="https://chainscreen.io/tools/chainalysis-oracle-limitations">
+<meta property="og:site_name" content="ChainScreen">
+<meta property="og:image" content="https://chainscreen.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Chainalysis Free Sanctions Oracle: What It Covers and What It Doesn't","description":"Technical analysis of the Chainalysis free sanctions oracle and API announcement, updated for EU and Cyprus sanctions-screening expectations.","datePublished":"2026-03-09","dateModified":"2026-08-17","wordCount":2000,"author":{"@type":"Person","name":"Katerina Bletsch","url":"https://chainscreen.io","jobTitle":"Founder","sameAs":["https://www.linkedin.com/in/katerina-bletsch/"]},"publisher":{"@type":"Organization","name":"ChainScreen","url":"https://chainscreen.io","logo":{"@type":"ImageObject","url":"https://chainscreen.io/og-image.png"}}}
+</script>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chainscreen.io/og-image.png">
+<script defer src="https://u.vigilcom.dev/script.js" data-website-id="df019ee1-bf37-42db-be6c-93671ff213ec"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://chainscreen.io"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://chainscreen.io/tools/"},{"@type":"ListItem","position":3,"name":"Chainalysis Free Sanctions Oracle: What It Covers and What It Doesn't"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does the Chainalysis free oracle cover EU sanctions?","acceptedAnswer":{"@type":"Answer","text":"Chainalysis oracle documentation says its sanctions data includes economic and trade embargo lists imposed by the US, EU, or UN. Treat that as documented US/EU/UN coverage, not as proof that every list relevant to your business, including the current UK Sanctions List, is covered."}},{"@type":"Question","name":"Is the Chainalysis free API enough for EU CASP sanctions compliance?","acceptedAnswer":{"@type":"Answer","text":"Not on its own. EBA GL/2024/15 expects PSPs and CASPs to have documented policies, list management, adequate screening-system controls, pre-transfer screening where applicable, and documented alert decisions. A free API or oracle result can be an input to that process, but it is not the whole process."}},{"@type":"Question","name":"What is the difference between the Chainalysis REST API and the on-chain oracle?","acceptedAnswer":{"@type":"Answer","text":"Chainalysis announced an API for web, mobile, and server integrations and an on-chain oracle for smart contracts. The oracle exposes isSanctioned(address), which returns true or false. Chainalysis documents the oracle on Ethereum, Polygon, BNB Smart Chain, Avalanche, Optimism, Arbitrum, Fantom, Celo, Blast, and Base, with Base using a different contract address from the other listed networks."}},{"@type":"Question","name":"Does the Chainalysis free oracle provide an audit trail?","acceptedAnswer":{"@type":"Answer","text":"No built-in audit trail is documented for the oracle. The oracle returns a boolean. If you use the API or oracle in a regulated workflow, you need to log the address, time, result, source, list/update context, match handling, and final decision in your own system."}},{"@type":"Question","name":"Can I use the Chainalysis free oracle alongside a paid screening tool?","acceptedAnswer":{"@type":"Answer","text":"Yes. It can be used as a secondary or on-chain control, but regulated CASPs still need documented list management, rescreening, alert handling, quality assurance, and evidence that can be produced to the competent authority."}}]}
+</script>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-alt: #f8fafc;
+    --surface: #ffffff;
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --text: #0c1d36;
+    --text-body: #475569;
+    --text-muted: #94a3b8;
+    --accent: #0c2340;
+    --accent-hover: #143a65;
+    --accent-light: #edf2f9;
+    --teal: #0f766e;
+    --teal-light: #f0fdf4;
+    --code-bg: #091a30;
+    --code-surface: #0c2340;
+    --red: #dc2626;
+    --red-light: #fef2f2;
+    --font-serif: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-code: 'JetBrains Mono', 'SF Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  
+  header {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: var(--font-code);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--accent-hover); }
+
+  .nav-link {
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover { color: var(--text); }
+
+  
+  .article-header {
+    padding: 80px 0 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .article-header__eyebrow {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--teal);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .article-header h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+
+  .article-header__sub {
+    font-size: 17px;
+    color: var(--text-body);
+    max-width: 640px;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .article-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: var(--font-code);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.01em;
+  }
+
+  .article-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .article-meta__dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--teal);
+    flex-shrink: 0;
+  }
+
+  
+  .article-body {
+    padding: 48px 0 72px;
+  }
+
+  .article-body h2 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-top: 48px;
+    margin-bottom: 16px;
+    line-height: 1.3;
+    color: var(--text);
+  }
+
+  .article-body h3 {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 32px;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+
+  .article-body p {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .article-body ul, .article-body ol {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+    padding-left: 24px;
+  }
+
+  .article-body li {
+    margin-bottom: 6px;
+  }
+
+  .article-body a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+  }
+
+  .article-body a:hover {
+    color: var(--accent-hover);
+  }
+
+  .article-body strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .article-body code {
+    font-family: var(--font-code);
+    font-size: 13px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--accent);
+  }
+
+  
+  .code-block {
+    margin: 24px 0;
+    background: var(--code-bg);
+    border: 1px solid #0c2340;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .code-block__header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 16px;
+    border-bottom: 1px solid #0c2340;
+    background: #071528;
+  }
+
+  .code-block__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #0c2340;
+  }
+
+  .code-block__title {
+    font-family: var(--font-code);
+    font-size: 12px;
+    color: #64748b;
+    margin-left: 8px;
+  }
+
+  .code-block pre {
+    padding: 20px;
+    overflow-x: auto;
+    font-family: var(--font-code);
+    font-size: 13px;
+    line-height: 1.8;
+    color: #94a3b8;
+  }
+
+  .code-block .keyword { color: #93c5fd; }
+  .code-block .string { color: #a5b4fc; }
+  .code-block .comment { color: #475569; }
+  .code-block .prop { color: #7dd3fc; }
+  .code-block .val { color: #fbbf24; }
+
+  
+  .callout {
+    margin: 28px 0;
+    padding: 24px 28px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .callout p {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .callout p:last-child {
+    margin-bottom: 0;
+  }
+
+  .callout--warning {
+    background: var(--red-light);
+    border: 1px solid #fecaca;
+  }
+
+  .callout--warning .callout__label {
+    color: var(--red);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--info {
+    background: var(--accent-light);
+    border: 1px solid #c7d5e8;
+  }
+
+  .callout--info .callout__label {
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--teal {
+    background: var(--teal-light);
+    border: 1px solid #bbf7d0;
+  }
+
+  .callout--teal .callout__label {
+    color: var(--teal);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  
+  .comparison-wrapper {
+    margin: 28px 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .comparison th, .comparison td {
+    padding: 13px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .comparison tr:last-child td { border-bottom: none; }
+
+  .comparison th {
+    color: var(--text-muted);
+    font-family: var(--font-code);
+    font-weight: 500;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--bg-alt);
+  }
+
+  .comparison td:first-child {
+    color: var(--text);
+    font-weight: 500;
+    font-size: 13px;
+  }
+
+  .comparison th:last-child {
+    color: var(--accent);
+  }
+
+  .comparison td:last-child {
+    background: var(--accent-light);
+  }
+
+  .check { color: var(--teal); font-weight: 600; }
+  .cross { color: var(--red); font-weight: 600; }
+  .na { color: var(--text-muted); }
+
+  
+  blockquote {
+    margin: 24px 0;
+    padding: 20px 24px;
+    border-left: 3px solid var(--border-strong);
+    background: var(--bg-alt);
+    border-radius: 0 8px 8px 0;
+  }
+
+  blockquote p {
+    font-size: 14px;
+    color: var(--text-body);
+    font-style: italic;
+    margin-bottom: 0;
+  }
+
+  blockquote cite {
+    display: block;
+    margin-top: 8px;
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-style: normal;
+    color: var(--text-muted);
+  }
+
+  
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  
+  .cta-banner {
+    margin: 48px 0;
+    padding: 40px 36px;
+    background: var(--code-bg);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .cta-banner h3 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: #f1f5f9;
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .cta-banner p {
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 24px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 28px;
+    background: #fff;
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary:hover {
+    background: #f1f5f9;
+    color: var(--accent);
+  }
+
+  
+  .sources {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .sources h3 {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .sources ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sources li {
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 4px 0;
+    line-height: 1.6;
+  }
+
+  .sources li a {
+    color: var(--text-body);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .sources li a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--text); }
+
+  
+  @media (max-width: 640px) {
+    .article-header { padding: 48px 0 32px; }
+    .article-header h1 { font-size: 1.8rem; }
+    .article-body h2 { font-size: 20px; }
+    .article-meta { gap: 12px; }
+    .comparison { font-size: 11px; }
+    .comparison th, .comparison td { padding: 8px 10px; }
+    .callout { padding: 20px; }
+    .cta-banner { padding: 32px 24px; }
+  }
+
+  
+  .breadcrumb { padding: 12px 0; border-bottom: 1px solid var(--border); background: var(--bg-alt); }
+  .breadcrumb a, .breadcrumb span { font-family: var(--font-code); font-size: 11px; letter-spacing: 0.01em; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb__sep { color: #cbd5e1; margin: 0 6px; }
+  .breadcrumb__current { color: var(--text-body); }
+
+  
+  .nav-links { display: flex; align-items: center; gap: 20px; }
+  .nav-link.active { color: var(--text); }
+  @media (max-width: 640px) { .nav-links { gap: 12px; } .nav-link { font-size: 11px; } }
+
+  
+  .related-articles { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+  .related-articles h3 { font-family: var(--font-code); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 16px; margin-top: 0; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .related-card { display: flex; flex-direction: column; gap: 8px; padding: 20px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; transition: border-color 0.2s; }
+  .related-card:hover { border-color: var(--accent); }
+  .related-card__tag { font-family: var(--font-code); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--teal); }
+  .related-card__title { font-family: var(--font-serif); font-size: 15px; color: var(--text); line-height: 1.35; }
+  .related-card__arrow { font-family: var(--font-code); font-size: 12px; color: var(--text-muted); margin-top: auto; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="/" class="logo">chain<span>screen</span></a>
+    <nav class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/regulations/" class="nav-link">Regulations</a>
+      <a href="/operations/" class="nav-link">Operations</a>
+      <a href="/tools/" class="nav-link active">Tools</a>
+      <a href="/technical/" class="nav-link">Technical</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <div class="container">
+    <a href="/">Home</a><span class="breadcrumb__sep">/</span>
+    <a href="/tools/">Tools</a><span class="breadcrumb__sep">/</span>
+    <span class="breadcrumb__current">Oracle Limitations</span>
+  </div>
+</nav>
+
+<section class="article-header">
+  <div class="container">
+    <div class="article-header__eyebrow">Compliance tooling</div>
+    <h1>Chainalysis Free Sanctions Oracle: What It Covers and What It Doesn't</h1>
+    <p class="article-header__sub">
+      Chainalysis has documented two free sanctions screening tools -- an API and an on-chain oracle. The oracle documentation says its sanctions data includes US, EU, and UN lists. But the oracle returns only <code>true</code> or <code>false</code>; it does not give you screening evidence, list-management records, risk scoring, or UK Sanctions List coverage.
+    </p>
+    <div class="article-meta">
+      <span><div class="article-meta__dot"></div> Updated July 10, 2026</span>
+      <span><div class="article-meta__dot"></div> 6 min read</span>
+      <span><div class="article-meta__dot"></div> Sources: Chainalysis docs, OFAC SLS/FAQ 594, EBA GL/2024/15, CySEC C685</span>
+    </div>
+  </div>
+</section>
+
+<article class="article-body">
+  <div class="container">
+
+    <p><strong>Bottom line: the Chainalysis oracle is useful for a fast address check, but it is not a complete sanctions-screening control for a regulated CASP.</strong> Chainalysis says the oracle is updated for sanctions designations from lists including the US, EU, and UN. EBA GL/2024/15 and CySEC C685 focus on policies, list management, screening-system reliability, ongoing screening, documented alert decisions, and evidence you can produce to a regulator. A boolean oracle call does not provide that by itself.</p>
+
+    <h2>What are the two free tools and how do their interfaces differ?</h2>
+
+    <p>
+      Chainalysis announced two free sanctions screening options in March 2022: an API for web, mobile, and server integrations, and an on-chain oracle for smart contracts. The important difference is what you get back and what you must build around it.
+    </p>
+
+    <h3>1. REST API</h3>
+
+    <p>
+      Chainalysis's 2022 announcement described an API where users receive an API key and check whether an address is on a sanctions list. As of this refresh, the old public free-tools landing page redirects to Chainalysis Address Screening, so verify current endpoint, response schema, rate limits, and access terms in Chainalysis's current documentation or your Chainalysis account before relying on implementation details.
+    </p>
+
+    <div class="code-block">
+      <div class="code-block__header">
+        <div class="code-block__dot"></div>
+        <div class="code-block__dot"></div>
+        <div class="code-block__dot"></div>
+        <span class="code-block__title">Logging minimum</span>
+      </div>
+<pre><span class="comment"># Implementation details must be checked in current Chainalysis docs.</span>
+<span class="comment"># At minimum, your own system should log:</span>
+{
+  <span class="prop">"address"</span>: <span class="string">"0x..."</span>,
+  <span class="prop">"screened_at"</span>: <span class="string">"2026-07-10T09:30:00Z"</span>,
+  <span class="prop">"source"</span>: <span class="string">"Chainalysis sanctions API"</span>,
+  <span class="prop">"result"</span>: <span class="string">"match | no_match | error"</span>,
+  <span class="prop">"decision"</span>: <span class="string">"blocked | escalated | cleared"</span>
+}</pre>
+    </div>
+
+    <p>
+      Do not assume that an API response is an audit trail. If you use the API in a regulated workflow, your system should retain the request, response, timestamp, list/update context, escalation result, and final decision.
+    </p>
+
+    <h3>2. On-chain oracle (smart contract)</h3>
+
+    <p>
+      Chainalysis documents the oracle on 10 EVM-compatible networks. Ethereum, Polygon, BNB Smart Chain, Avalanche, Optimism, Arbitrum, Fantom, Celo, and Blast use <code>0x40C57923924B5c5c5455c48D93317139ADDaC8fb</code>. Base uses <code>0x3A91A31cB3dC49b4db9Ce721F50a9D076c8D739B</code>.
+    </p>
+
+    <p>
+      It exposes <code>isSanctioned(address)</code>, which returns a boolean. <code>true</code> means the oracle currently marks the address as sanctioned; <code>false</code> means the oracle does not currently mark it as sanctioned. The public oracle call does not return the matching regime, designation name, source list, or update timestamp.
+    </p>
+
+    <div class="code-block">
+      <div class="code-block__header">
+        <div class="code-block__dot"></div>
+        <div class="code-block__dot"></div>
+        <div class="code-block__dot"></div>
+        <span class="code-block__title">Solidity integration</span>
+      </div>
+<pre><span class="keyword">interface</span> <span class="val">ISanctionsList</span> {
+    <span class="keyword">function</span> <span class="prop">isSanctioned</span>(<span class="keyword">address</span> addr) <span class="keyword">external</span> <span class="keyword">view</span> <span class="keyword">returns</span> (<span class="val">bool</span>);
+}
+
+<span class="comment">// Check before processing a transaction</span>
+<span class="val">ISanctionsList</span> oracle = <span class="val">ISanctionsList</span>(
+    <span class="string">0x40C57923924B5c5c5455c48D93317139ADDaC8fb</span>
+);
+
+<span class="keyword">require</span>(!oracle.<span class="prop">isSanctioned</span>(msg.sender), <span class="string">"Sanctioned address"</span>);</pre>
+    </div>
+
+    <p>
+      The oracle is useful for smart contracts that need an on-chain pre-check. It should not be treated as proof that a counterparty is clear under every sanctions regime relevant to your business.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>What sanctions lists do they actually cover?</h2>
+
+    <p>
+      Chainalysis oracle documentation defines sanctioned entities as entities listed on economic or trade embargo lists, including but not limited to sanctions lists imposed by the <strong>US, EU, or UN</strong>. That is broader than OFAC-only coverage, but it is not the same as an exhaustive guarantee that every list relevant to your business is covered.
+    </p>
+
+    <p>
+      For direct official sources, OFAC publishes the SDN List and other US sanctions data through its Sanctions List Service; the European Commission manages the EU consolidated financial sanctions list; the UN Security Council maintains the UN Consolidated List. For the UK, the current source is the <strong>UK Sanctions List</strong>: the old OFSI Consolidated List closed on January 28, 2026 and is no longer updated.
+    </p>
+
+    <p>
+      OFAC's own digital-currency address search is exact-match via the <code>ID #</code> field; it is not a blockchain analytics or evidence workflow.
+    </p>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">Critical limitation: it's a binary check</div>
+      <p>The oracle can answer a narrow address question, but it does not provide the surrounding controls a regulated firm needs:</p>
+      <ul style="margin-top: 8px; margin-bottom: 0; padding-left: 20px;">
+        <li><strong>No built-in audit log</strong> -- you must record screening activity yourself</li>
+        <li><strong>No source-list evidence in the oracle response</strong> -- the boolean does not identify the regime or designation</li>
+        <li><strong>No alert workflow</strong> -- investigation, escalation, and final decision records are your responsibility</li>
+        <li><strong>No risk scoring or exposure analysis</strong> -- the oracle is a direct boolean check</li>
+        <li><strong>No customer-database rescreening workflow</strong> -- you must trigger and document rescreening on list updates</li>
+        <li><strong>No current UK Sanctions List coverage documented</strong> -- do not assume UK coverage from the public oracle docs</li>
+      </ul>
+    </div>
+
+    <p>
+      The practical gap is not just list coverage. A regulator can ask how your screening system is configured, which lists it uses, when lists were updated, how customer records were rescreened, which alerts were generated, and what decision was taken. The oracle does not generate those records for you.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>Why is the lack of built-in evidence a problem?</h2>
+
+    <p>
+      The API result, if you use it, has to be logged by your own system. You need to preserve enough context to reconstruct what was screened, when, against which source or vendor dataset, what result was returned, and what action was taken.
+    </p>
+
+    <p>
+      The oracle is even simpler: it returns <code>true</code> or <code>false</code>. If you need to prove that address X was checked at time Y and then cleared, escalated, or blocked, you need your own logging, case handling, and retention process.
+    </p>
+
+    <p>
+      EBA GL/2024/15 expects PSPs and CASPs to understand and document the screening system's capabilities and limitations, manage list updates, define the data to be screened, and document decisions taken on alerts. CySEC C685 similarly expects ongoing screening, up-to-date sanctions lists, regular testing, and evidence when a screening system misses a sanctions record or accepts a documented risk.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>What does Chainalysis's own disclaimer say?</h2>
+
+    <blockquote>
+      <p>"Chainalysis cannot guarantee the accuracy, timeliness, suitability, or validity of the data."</p>
+      <cite>-- Chainalysis oracle documentation</cite>
+    </blockquote>
+
+    <p>
+      That disclaimer does not make the oracle useless. It means the oracle should be treated as a data input and control, not as a complete compliance conclusion. You still need policies, validation, monitoring, and records around the tool.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>Why does this matter for EU-licensed CASPs?</h2>
+
+    <p>
+      The regulatory landscape for crypto sanctions screening in the EU is specific about what's required. Two documents define the standard:
+    </p>
+
+    <h3>EBA Guidelines on Restrictive Measures (GL/2024/15)</h3>
+
+    <p>
+      These guidelines apply from December 30, 2025. They say PSPs and CASPs should put in place policies, procedures, and controls to comply with restrictive measures, including an effective screening system. Relevant expectations include:
+    </p>
+
+    <ul>
+      <li>Screening crypto-asset transfers before making crypto-assets available to the beneficiary, subject to the guideline's technical framing</li>
+      <li>Screening all parties to transfers against applicable restrictive measures</li>
+      <li>Updating internal datasets immediately when restrictive measures enter into force, change, or are lifted</li>
+      <li>Understanding and documenting the screening system's capabilities and limitations</li>
+      <li>Documenting decisions taken in respect of alerts</li>
+    </ul>
+
+    <h3>CySEC Circular C685</h3>
+
+    <p>
+      For CySEC-regulated entities, Circular C685 and the related February 27, 2025 guidance are more practical. CySEC's thematic inspections focused on UN and EU sanctions lists and relevant screening practices for US and UK sanctions lists. The guidance expects onboarding and ongoing screening, whole-database screening on every relevant list update, up-to-date list feeds, testing of screening tools, and documented remediation where weaknesses are found.
+    </p>
+
+    <div class="callout callout--info">
+      <div class="callout__label">The compliance gap</div>
+      <p>
+        If you're an EU-licensed CASP using only the Chainalysis oracle, you may have a useful US/EU/UN address check, but you still need documented list management, rescreening triggers, alert handling, quality assurance, and evidence of screening decisions. For Cyprus firms, do not forget the current UK Sanctions List if your policies or exposure assessment require UK screening.
+      </p>
+    </div>
+
+    <p>
+      A regulator will not only ask whether a boolean check was performed. They can ask how the system was selected, how it was tested, which list sources were enabled, when rescreening happened, and how possible matches were resolved.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>What is the free oracle actually good for?</h2>
+
+    <p>
+      None of this means you should avoid the oracle. It is useful when the use case matches the interface:
+    </p>
+
+    <ul>
+      <li><strong>On-chain gating.</strong> Smart contracts can call <code>isSanctioned(address)</code> before allowing an action.</li>
+      <li><strong>Secondary checks.</strong> It can be one control in a broader sanctions-screening workflow.</li>
+      <li><strong>Public availability.</strong> Chainalysis says the oracle is available without a customer relationship.</li>
+      <li><strong>Fast direct-address checks.</strong> The oracle answers a narrow question without off-chain case management.</li>
+    </ul>
+
+    <p>
+      The limitation is what the oracle gives you back. A boolean result is not a compliance program. Use it as a screening layer, but build or buy the evidence, monitoring, list-management, and alert-handling infrastructure around it.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>What about other free tiers?</h2>
+
+    <p>
+      Other vendors have also announced free or low-friction sanctions-screening options over time. Treat all of them the same way: verify current access, covered chains, covered lists, response fields, rate limits, and terms directly with the vendor before relying on them.
+    </p>
+
+    <p>
+      The same fundamental limitation usually applies: a result is not the same as documented controls. For EU/Cyprus regulatory use, the decisive question is whether you can evidence policies, list management, rescreening, alert handling, testing, and final decisions.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>How does the free oracle compare to EBA requirements?</h2>
+
+    <p>
+      Here's a practical view of what the Chainalysis oracle provides against expectations in EBA GL/2024/15 and CySEC C685.
+    </p>
+
+    <div class="comparison-wrapper">
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th>Requirement</th>
+            <th>Chainalysis Oracle</th>
+            <th>Regulatory context</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>OFAC SDN screening</td>
+            <td class="check">&#10003; US lists included in docs</td>
+            <td class="na">US obligation for US persons; common additional control</td>
+          </tr>
+          <tr>
+            <td>EU Consolidated List screening</td>
+            <td class="check">&#10003; EU lists included in docs</td>
+            <td><strong style="color: var(--text);">EU sanctions are binding in EU jurisdiction</strong></td>
+          </tr>
+          <tr>
+            <td>UN Consolidated List screening</td>
+            <td class="check">&#10003; UN lists included in docs</td>
+            <td><strong style="color: var(--text);">CySEC C685 inspections focused on UN and EU lists</strong></td>
+          </tr>
+          <tr>
+            <td>Current UK Sanctions List</td>
+            <td class="cross">&#10007; Not documented in oracle docs</td>
+            <td><strong style="color: var(--text);">CySEC C685 considers UK screening practices</strong></td>
+          </tr>
+          <tr>
+            <td>Built-in audit log</td>
+            <td class="cross">&#10007; Build your own</td>
+            <td><strong style="color: var(--text);">Needed to evidence screening and decisions</strong></td>
+          </tr>
+          <tr>
+            <td>List-update and rescreening workflow</td>
+            <td class="cross">&#10007; Build your own</td>
+            <td><strong style="color: var(--text);">EBA and CySEC expect list management/rescreening</strong></td>
+          </tr>
+          <tr>
+            <td>Risk scoring / indirect exposure</td>
+            <td class="cross">&#10007; Not the oracle interface</td>
+            <td>Useful for broader risk assessment; not replaced by a boolean</td>
+          </tr>
+          <tr>
+            <td>Alert investigation workflow</td>
+            <td class="cross">&#10007; Build your own</td>
+            <td><strong style="color: var(--text);">EBA expects documented alert decisions</strong></td>
+          </tr>
+          <tr>
+            <td>Match metadata (name, category)</td>
+            <td class="cross">&#10007; Not returned by oracle</td>
+            <td>Needed for investigation and escalation</td>
+          </tr>
+          <tr>
+            <td>Pre-transfer screening</td>
+            <td class="check">&#10003; Possible</td>
+            <td><strong style="color: var(--text);">EBA expects screening before crypto-assets are made available</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      The oracle can contribute to pre-transfer screening if it is integrated at the right point in the workflow. The missing pieces -- evidence, rescreening, list management, alert handling, testing, and broader risk context -- require your own controls or a separate compliance platform.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>Bottom line</h2>
+
+    <p>
+      Chainalysis's oracle is a useful sanctions-address control. It is public, on-chain, and documented for major EVM networks. Chainalysis says its sanctions data includes US, EU, and UN lists.
+    </p>
+
+    <p>
+      But list coverage alone is not compliance. If you're an EU-licensed CASP, you need documented policies, list management, rescreening, alert handling, testing, and records of decisions. CySEC-regulated firms also need to align with C685's expectations on ongoing screening and relevant UK screening practices, using the current UK Sanctions List rather than the closed OFSI consolidated list.
+    </p>
+
+    <p>
+      Use the free oracle where a boolean on-chain check helps. Do not mistake it for a complete screening program. The oracle gives you one check; your compliance process still has to produce the records.
+    </p>
+
+    <div class="cta-banner">
+      <h3>Not sure if your screening meets EBA requirements?</h3>
+      <p>Take our 2-minute compliance self-check. Ten questions based on EBA GL/2024/15 -- see where you stand before your next inspection.</p>
+      <a href="/regulations/" class="btn-primary">
+        Read the regulatory guides &rarr;
+      </a>
+    </div>
+
+    <div class="sources">
+      <h3>Sources</h3>
+      <ul>
+        <li><a href="https://www.chainalysis.com/blog/sanctions-screening-tools/" target="_blank" rel="noopener">Chainalysis -- Free sanctions screening tools announcement</a></li>
+        <li><a href="https://go.chainalysis.com/chainalysis-oracle-docs.html" target="_blank" rel="noopener">Chainalysis Oracle Smart Contract Documentation</a></li>
+        <li><a href="https://www.chainalysis.com/product/address-screening/" target="_blank" rel="noopener">Chainalysis -- Address Screening product page</a></li>
+        <li><a href="https://www.eba.europa.eu/sites/default/files/2024-11/eaeae49d-81a5-4154-8af9-5014f6ee8881/Final%20Report%20Guidelines%20restrictive%20measures%20.pdf" target="_blank" rel="noopener">EBA Final Report -- Guidelines on Restrictive Measures (GL/2024/15)</a></li>
+        <li><a href="https://www.cysec.gov.cy/CMSPages/GetFile.aspx?guid=72f9c65f-79c3-480b-8801-58d506f05f3e" target="_blank" rel="noopener">CySEC Circular C685 -- Guidance on Sanctions Screening Systems</a></li>
+        <li><a href="https://www.cysec.gov.cy/en-GB/Files/AML/98989.aspx/" target="_blank" rel="noopener">CySEC -- Guidance for maintaining effective and efficient Sanctions Screening Systems</a></li>
+        <li><a href="https://ofac.treasury.gov/sanctions-list-service" target="_blank" rel="noopener">OFAC -- Sanctions List Service</a></li>
+        <li><a href="https://ofac.treasury.gov/faqs/594" target="_blank" rel="noopener">OFAC FAQ 594 -- digital currency address search uses exact ID # matches</a></li>
+        <li><a href="https://finance.ec.europa.eu/eu-and-world/sanctions-restrictive-measures/overview-sanctions-and-related-resources_en" target="_blank" rel="noopener">European Commission -- EU sanctions and consolidated financial sanctions list</a></li>
+        <li><a href="https://www.gov.uk/government/publications/the-uk-sanctions-list" target="_blank" rel="noopener">GOV.UK -- The UK Sanctions List</a></li>
+        <li><a href="https://main.un.org/securitycouncil/en/content/un-sc-consolidated-list" target="_blank" rel="noopener">UN Security Council -- Consolidated List</a></li>
+      </ul>
+    </div>
+
+  
+
+    <div class="related-articles">
+      <h3>Related articles</h3>
+      <div class="related-grid">
+        <a href="/operations/chainalysis-alternative-eu-casp" class="related-card">
+          <span class="related-card__tag">Tools</span>
+          <span class="related-card__title">Affordable Chainalysis Alternatives for EU CASPs in 2026</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+        <a href="/tools/screening-vs-risk-scoring" class="related-card">
+          <span class="related-card__tag">Tools</span>
+          <span class="related-card__title">Sanctions Screening vs. Transaction Monitoring</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+        <a href="/regulations/which-sanctions-lists-mica-requires" class="related-card">
+          <span class="related-card__tag">Regulations</span>
+          <span class="related-card__title">Which Sanctions Lists Does MiCA Require? OFAC vs EU Consolidated</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+<div style="margin: 40px 0; padding: 24px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; text-align: center;">
+  <p style="font-size: 15px; color: #475569; margin-bottom: 12px;">Need screening records and evidence, not just a binary check?</p>
+  <a href="mailto:info@chainscreen.io" style="display: inline-block; padding: 12px 24px; background: #0c2340; color: #fff; border-radius: 8px; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600;">Contact ChainScreen</a>
+</div>
+
+
+<footer>
+  <div class="container">
+    &copy; 2026 DailyMind LTD &middot; HE 439959 &middot; Limassol, Cyprus
+    &nbsp;&middot;&nbsp;
+    <span>Information only; not legal advice</span>
+    &nbsp;&middot;&nbsp;
+    <a href="/privacy">Privacy</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://dailymind.eu">dailymind.eu</a>
+  </div>
+</footer>
+<script data-goatcounter="https://gc-chainscreen.vigilcom.dev/count"
+        async src="//gc.vigilcom.dev/count.js"></script>
+<script src="/nav.js" defer></script>
+</body>
+</html>

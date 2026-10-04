@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why Banks Reject Crypto Companies | ChainScreen</title>
+<meta name="description" content="7 practical reasons banks reject or pause crypto company applications. Documentation checklist and compliance evidence package.">
+<link rel="canonical" href="https://chainscreen.io/operations/why-banks-reject-crypto-companies">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Why Banks Reject Crypto Companies (and How to Fix It)">
+<meta property="og:description" content="7 practical reasons banks reject or pause crypto company applications. What banks commonly ask for, what MiCA changed, and how to build a compliance evidence package.">
+<meta property="og:url" content="https://chainscreen.io/operations/why-banks-reject-crypto-companies">
+<meta property="og:image" content="https://chainscreen.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="ChainScreen">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Why Banks Reject Crypto Companies (and How to Fix It)","description":"7 practical reasons banks reject or pause crypto company applications. Documentation checklist, positioning strategy, and the compliance evidence package approach.","datePublished":"2026-04-10","dateModified":"2026-08-17","author":{"@type":"Person","name":"Katerina Bletsch","url":"https://chainscreen.io","jobTitle":"Founder","sameAs":["https://www.linkedin.com/in/katerina-bletsch/"]},"publisher":{"@type":"Organization","name":"ChainScreen","url":"https://chainscreen.io","logo":{"@type":"ImageObject","url":"https://chainscreen.io/og-image.png"}},"wordCount":2050}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why do banks reject crypto company applications?","acceptedAnswer":{"@type":"Answer","text":"Banks usually reject or pause crypto company applications when they cannot complete risk-based due diligence. Common gaps include opaque ownership, no current MiCA CASP authorisation for EU activity after the 1 July 2026 transition, weak AML/KYC procedures, unclear source of funds, high-risk jurisdiction exposure, weak sanctions controls, and a pitch that does not explain the regulated activity and control framework."}},{"@type":"Question","name":"What documents do crypto companies need to open a bank account?","acceptedAnswer":{"@type":"Answer","text":"Banks commonly request a practical compliance evidence package: certificate of incorporation and registry extract, ownership and control chart, UBO documents, current CASP authorisation or a clear pre-operational/pending-application status, AML/CFT policy, KYC and risk-scoring procedures, sanctions-screening evidence for applicable EU, UN, and national restrictive-measures lists, risk assessment, MLRO or compliance-owner appointment, source-of-funds evidence, transaction-monitoring methodology, and recent financial statements where available."}},{"@type":"Question","name":"How should crypto companies position themselves when applying for a bank account?","acceptedAnswer":{"@type":"Answer","text":"Lead with regulatory status, services, customer types, jurisdictions, and controls. Do not hide that the business involves crypto-assets, but describe it as a MiCA-authorised or otherwise regulated digital-asset service provider and attach evidence of AML/CFT, sanctions, travel-rule, and transaction-monitoring controls."}},{"@type":"Question","name":"Which banks accept crypto companies in the EU?","acceptedAnswer":{"@type":"Answer","text":"There is no official EU list of banks that accept crypto companies. Bank appetite changes by institution, country, licence status, customer profile, payment flows, and correspondent-banking constraints. A MiCA CASP authorisation helps the bank complete due diligence, but it does not guarantee account approval."}},{"@type":"Question","name":"What is a compliance evidence package for bank applications?","acceptedAnswer":{"@type":"Answer","text":"A compliance evidence package is a structured set of documents showing how the company manages AML, KYC, travel-rule, transaction-monitoring, and sanctions risk. It is a practical onboarding tool, not a legal guarantee. The purpose is to give the bank's compliance team enough evidence to assess the account request without basic follow-up gaps."}}]}
+</script>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chainscreen.io/og-image.png">
+<script defer src="https://u.vigilcom.dev/script.js" data-website-id="df019ee1-bf37-42db-be6c-93671ff213ec"></script>
+<meta name="twitter:title" content="Why Banks Reject Crypto Companies (and How to Fix It)">
+<meta name="twitter:description" content="7 practical reasons banks reject or pause crypto company applications. Documentation checklist, MiCA status, and compliance evidence package.">
+<meta name="article:published_time" content="2026-04-10">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://chainscreen.io"},{"@type":"ListItem","position":2,"name":"Operations","item":"https://chainscreen.io/operations/"},{"@type":"ListItem","position":3,"name":"Why Banks Reject Crypto Companies"}]}
+</script>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-alt: #f8fafc;
+    --surface: #ffffff;
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --text: #0c1d36;
+    --text-body: #475569;
+    --text-muted: #94a3b8;
+    --accent: #0c2340;
+    --accent-hover: #143a65;
+    --accent-light: #edf2f9;
+    --teal: #0f766e;
+    --teal-light: #f0fdf4;
+    --code-bg: #091a30;
+    --code-surface: #0c2340;
+    --red: #dc2626;
+    --red-light: #fef2f2;
+    --font-serif: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-code: 'JetBrains Mono', 'SF Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  
+  header {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: var(--font-code);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--accent-hover); }
+
+  .nav-link {
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover { color: var(--text); }
+
+  
+  .article-header {
+    padding: 80px 0 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .article-header__eyebrow {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--teal);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .article-header h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+
+  .article-header__sub {
+    font-size: 17px;
+    color: var(--text-body);
+    max-width: 640px;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .article-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: var(--font-code);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.01em;
+  }
+
+  .article-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .article-meta__dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--teal);
+    flex-shrink: 0;
+  }
+
+  
+  .article-body {
+    padding: 48px 0 72px;
+  }
+
+  .article-body h2 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-top: 48px;
+    margin-bottom: 16px;
+    line-height: 1.3;
+    color: var(--text);
+  }
+
+  .article-body h3 {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 32px;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+
+  .article-body p {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .article-body ul, .article-body ol {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+    padding-left: 24px;
+  }
+
+  .article-body li {
+    margin-bottom: 6px;
+  }
+
+  .article-body a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+  }
+
+  .article-body a:hover {
+    color: var(--accent-hover);
+  }
+
+  .article-body strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .article-body code {
+    font-family: var(--font-code);
+    font-size: 13px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--accent);
+  }
+
+  
+  .callout {
+    margin: 28px 0;
+    padding: 24px 28px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .callout p {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .callout p:last-child {
+    margin-bottom: 0;
+  }
+
+  .callout--warning {
+    background: var(--red-light);
+    border: 1px solid #fecaca;
+  }
+
+  .callout--warning .callout__label {
+    color: var(--red);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--info {
+    background: var(--accent-light);
+    border: 1px solid #c7d5e8;
+  }
+
+  .callout--info .callout__label {
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--teal {
+    background: var(--teal-light);
+    border: 1px solid #bbf7d0;
+  }
+
+  .callout--teal .callout__label {
+    color: var(--teal);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  
+  .comparison-wrapper {
+    margin: 28px 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .comparison th, .comparison td {
+    padding: 13px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .comparison tr:last-child td { border-bottom: none; }
+
+  .comparison th {
+    color: var(--text-muted);
+    font-family: var(--font-code);
+    font-weight: 500;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--bg-alt);
+  }
+
+  .comparison td:first-child {
+    color: var(--text);
+    font-weight: 500;
+    font-size: 13px;
+  }
+
+  .check { color: var(--teal); font-weight: 600; }
+  .cross { color: var(--red); font-weight: 600; }
+  .na { color: var(--text-muted); }
+
+  
+  blockquote {
+    margin: 24px 0;
+    padding: 20px 24px;
+    border-left: 3px solid var(--border-strong);
+    background: var(--bg-alt);
+    border-radius: 0 8px 8px 0;
+  }
+
+  blockquote p {
+    font-size: 14px;
+    color: var(--text-body);
+    font-style: italic;
+    margin-bottom: 0;
+  }
+
+  blockquote cite {
+    display: block;
+    margin-top: 8px;
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-style: normal;
+    color: var(--text-muted);
+  }
+
+  
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  
+  .cta-banner {
+    margin: 48px 0;
+    padding: 40px 36px;
+    background: var(--code-bg);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .cta-banner h3 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: #f1f5f9;
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .cta-banner p {
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 24px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 28px;
+    background: #fff;
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary:hover {
+    background: #f1f5f9;
+    color: var(--accent);
+  }
+
+  
+  .sources {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .sources h3 {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .sources ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sources li {
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 4px 0;
+    line-height: 1.6;
+  }
+
+  .sources li a {
+    color: var(--text-body);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .sources li a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--text); }
+
+  
+  .checklist {
+    counter-reset: checklist-counter;
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .checklist > li {
+    counter-increment: checklist-counter;
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: 28px;
+  }
+
+  .checklist > li::before {
+    content: counter(checklist-counter);
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 28px;
+    height: 28px;
+    background: var(--accent-light);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-code);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .checklist > li strong {
+    display: block;
+    color: var(--text);
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+
+  .checklist > li p {
+    margin-bottom: 8px;
+  }
+
+  
+  @media (max-width: 640px) {
+    .article-header { padding: 48px 0 32px; }
+    .article-header h1 { font-size: 1.8rem; }
+    .article-body h2 { font-size: 20px; }
+    .article-meta { gap: 12px; }
+    .comparison { font-size: 11px; }
+    .comparison th, .comparison td { padding: 8px 10px; }
+    .callout { padding: 20px; }
+    .cta-banner { padding: 32px 24px; }
+  }
+
+  
+  .breadcrumb { padding: 12px 0; border-bottom: 1px solid var(--border); background: var(--bg-alt); }
+  .breadcrumb a, .breadcrumb span { font-family: var(--font-code); font-size: 11px; letter-spacing: 0.01em; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb__sep { color: #cbd5e1; margin: 0 6px; }
+  .breadcrumb__current { color: var(--text-body); }
+
+  
+  .nav-links { display: flex; align-items: center; gap: 20px; }
+  .nav-link.active { color: var(--text); }
+  @media (max-width: 640px) { .nav-links { gap: 12px; } .nav-link { font-size: 11px; } }
+
+  
+  .related-articles { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+  .related-articles h3 { font-family: var(--font-code); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 16px; margin-top: 0; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .related-card { display: flex; flex-direction: column; gap: 8px; padding: 20px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; transition: border-color 0.2s; }
+  .related-card:hover { border-color: var(--accent); }
+  .related-card__tag { font-family: var(--font-code); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--teal); }
+  .related-card__title { font-family: var(--font-serif); font-size: 15px; color: var(--text); line-height: 1.35; }
+  .related-card__arrow { font-family: var(--font-code); font-size: 12px; color: var(--text-muted); margin-top: auto; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="/" class="logo">chain<span>screen</span></a>
+    <nav class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/regulations/" class="nav-link">Regulations</a>
+      <a href="/operations/" class="nav-link active">Operations</a>
+      <a href="/tools/" class="nav-link">Tools</a>
+      <a href="/technical/" class="nav-link">Technical</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <div class="container">
+    <a href="/">Home</a><span class="breadcrumb__sep">/</span>
+    <a href="/operations/">Operations</a><span class="breadcrumb__sep">/</span>
+    <span class="breadcrumb__current">Why Banks Reject Crypto Companies</span>
+  </div>
+</nav>
+
+<section class="article-header">
+  <div class="container">
+    <div class="article-header__eyebrow">Bank account kit</div>
+    <h1>Why Banks Reject Crypto Companies (and How to Fix It)</h1>
+    <p class="article-header__sub">
+      Your bank application was rejected, paused, or buried in follow-up questions. Here are the 7 due diligence gaps that commonly create problems, what banks usually need to assess, and how to build a compliance evidence package that supports a serious review.
+    </p>
+    <div class="article-meta">
+      <span><div class="article-meta__dot"></div> Updated July 2026</span>
+      <span><div class="article-meta__dot"></div> 8 min read</span>
+      <span><div class="article-meta__dot"></div> Sources: MiCA/TFR, EBA, FATF, CySEC</span>
+    </div>
+  </div>
+</section>
+
+<article class="article-body">
+  <div class="container">
+
+    <p>
+      <strong>Crypto companies are still treated as higher-risk bank customers.</strong> There is no reliable public EU-wide bank rejection rate for crypto company account applications. What is documented is the underlying risk concern: FATF notes that many virtual asset service providers are perceived as "risky business" and denied access to bank accounts, while the EBA warns that de-risking whole customer categories without looking at the individual risk profile can be unwarranted.
+    </p>
+
+    <p>
+      The pattern is familiar across jurisdictions. You register your company, build your product, apply for a bank account -- and get a polite rejection, a long list of follow-up questions, or no clear explanation.
+    </p>
+
+    <p>
+      But here is the thing: many rejections are not only about the business model. They are about whether the bank can evidence that it understood and controlled the risk. A complete AML, sanctions, KYC, travel-rule, and transaction-monitoring file does not guarantee approval, but it gives the bank's compliance team something concrete to assess.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>What are the 7 reasons banks reject crypto companies?</h2>
+
+    <p>
+      For EU and Cyprus CASPs, the same due diligence gaps repeatedly create delays or rejections. Here is each one, and how to fix it.
+    </p>
+
+    <ol class="checklist">
+
+      <li>
+        <strong>Opaque ownership structure</strong>
+        <p>
+          Banks must identify your Ultimate Beneficial Owners (UBOs) and anyone else who ultimately controls the company. The practical threshold often starts with direct or indirect ownership around 25%, but control can matter even below that level. If your corporate structure involves multiple holding companies, nominee directors, or jurisdictions with limited ownership transparency, the bank's compliance team may not be able to complete due diligence.
+        </p>
+        <p>
+          <strong>Fix:</strong> Prepare a clear ownership chart showing every entity from you to the top. Include passport copies, proof of address, and source of wealth documentation for each UBO. If your structure is genuinely complex, write a one-page narrative explaining why -- and make sure it is not just tax optimization.
+        </p>
+      </li>
+
+      <li>
+        <strong>Missing or pending MiCA authorisation</strong>
+        <p>
+          Under <a href="/regulations/mica-casp-license-requirements-2026">MiCA</a>, firms providing crypto-asset services in the EU need CASP authorisation unless a specific exemption applies. The EU transitional period for firms that were already operating under national law ended on 1 July 2026. ESMA has called on unauthorised CASPs to wind down EU activity, and CySEC stated that Cyprus national-regime CASPs could continue only until authorisation was granted or refused, or until 1 July 2026, whichever came first.
+        </p>
+        <p>
+          <strong>Fix:</strong> If you have a MiCA authorisation, lead with it. Put the licence status, regulator, register link, and permitted services on page one. If your application is still pending after 1 July 2026, be explicit whether you are pre-operational, outside EU scope, or winding down. A pending application can support context, but it is not a substitute for authorisation to keep serving EU clients after the transition.
+        </p>
+      </li>
+
+      <li>
+        <strong>No documented AML/KYC framework</strong>
+        <p>
+          "We do KYC" is not an AML framework. Banks commonly ask for a board-approved AML/CFT policy, written KYC procedures with risk scoring methodology, customer onboarding workflows, and ongoing monitoring processes. If you cannot produce these documents, the bank cannot assess the control environment.
+        </p>
+        <p>
+          <strong>Fix:</strong> Write your AML/CFT policy before you apply. It does not need to be long, but it needs to cover your risk appetite, customer due diligence procedures, enhanced due diligence triggers, suspicious transaction reporting process, record-keeping standards, and Travel Rule controls under TFR. Board-approve it. Date it. Reference the current rules you operate under, including MiCA, Regulation (EU) 2023/1113, your national AML law, and your plan for the AMLR/AMLD6 framework whose main application and transposition date is 10 July 2027.
+        </p>
+      </li>
+
+      <li>
+        <strong>Unclear source of funds and liquidity</strong>
+        <p>
+          Where does the money come from? For crypto companies, this question has layers: where does the company's operating capital come from (investment, revenue, personal funds), and where do your customers' funds originate? If you cannot clearly answer both, the bank cannot assess your money laundering risk.
+        </p>
+        <p>
+          <strong>Fix:</strong> Document your funding history -- investment rounds with term sheets, revenue with invoices, personal capital with bank statements showing the transfer. For customer funds, describe your source-of-funds verification process: what documentation do you require, at what thresholds do you escalate, how do you handle crypto-to-fiat conversions.
+        </p>
+      </li>
+
+      <li>
+        <strong>High-risk jurisdiction connections</strong>
+        <p>
+          If your company, its UBOs, or significant portions of your customer base are connected to jurisdictions on the <a href="https://www.fatf-gafi.org/en/countries/black-and-grey-lists.html" target="_blank" rel="noopener">FATF high-risk or increased-monitoring lists</a>, or to jurisdictions, persons, sectors, or activity covered by applicable EU, UN, or national restrictive measures, expect enhanced questioning. This can apply even when the connection is indirect -- a subsidiary, a concentrated customer base, or repeated flows involving higher-risk jurisdictions.
+        </p>
+        <p>
+          <strong>Fix:</strong> You cannot change your geography, but you can demonstrate that you manage the risk. Show your jurisdiction risk assessment. Document your enhanced due diligence procedures for high-risk connections. If you have exited or restricted services to certain jurisdictions, document that decision and when it was made. Proactive risk management is what banks want to see.
+        </p>
+      </li>
+
+      <li>
+        <strong>No evidence of sanctions screening</strong>
+        <p>
+          This is one of the gaps that can stop an application without much explanation. EU financial institutions and CASPs must be able to comply with applicable Union and national restrictive measures, and EBA guidelines set expectations for PSPs and CASPs on KYC, screening, and due diligence when performing transfers. For an EU-only CASP, the legal anchor is EU and national restrictive measures, with UN sanctions implemented through EU or national law. OFAC or other third-country lists may be a practical bank or correspondent requirement where there is a relevant nexus, USD flows, group policy, or specific bank policy; they are not a universal MiCA mandate.
+        </p>
+        <p>
+          <strong>Fix:</strong> Implement sanctions screening and document it against the lists that apply to your business and payment rails. Show the bank recent screening reports -- not just "we use tool X," but actual evidence: screening logs, list sources, match handling procedures, false positive resolution records, and escalation records. The bank's compliance team needs to see that screening is active, ongoing, and auditable.
+        </p>
+      </li>
+
+      <li>
+        <strong>Describing yourself as a "crypto company"</strong>
+        <p>
+          This one is not about hiding the business model -- it is about framing the regulated activity accurately. If the application starts and ends with "crypto," the relationship manager may not see the authorisation status, customer profile, services, jurisdictions, and controls needed to route the file to compliance.
+        </p>
+        <p>
+          <strong>Fix:</strong> Lead with your regulatory status, services, and controls, not the technology label alone. You are a "MiCA-authorised crypto-asset service provider" or a "regulated digital-asset service provider" if that is true. Open with your licence status, AML framework, sanctions controls, Travel Rule process, and transaction monitoring. This is not deception -- it is accurate positioning.
+        </p>
+      </li>
+
+    </ol>
+
+    <div class="callout callout--info">
+      <div class="callout__label">The positioning insight</div>
+      <p>
+        The difference between "we are a crypto exchange" and "we are a MiCA-authorised CASP supervised by CySEC with documented AML/CFT, sanctions, Travel Rule, and transaction-monitoring controls" is not semantic. Banks assess risk based on evidence. Give them the evidence first.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>What do banks actually want to see?</h2>
+
+    <p>
+      Here is a practical bank-onboarding checklist for crypto companies. This is not a statement that every item is legally required for every CASP; it is the evidence banks commonly need to complete a risk-based review.
+    </p>
+
+    <div class="comparison-wrapper">
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th>Document</th>
+            <th>Purpose</th>
+            <th>Practical status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Certificate of incorporation + registry extract</td>
+            <td>Legal existence verification</td>
+            <td><span class="check">Core evidence</span></td>
+          </tr>
+          <tr>
+            <td>UBO register (passport + proof of address for owners/controllers)</td>
+            <td>Beneficial ownership identification</td>
+            <td><span class="check">Core evidence</span></td>
+          </tr>
+          <tr>
+            <td>MiCA CASP authorisation (or clear pre-operational/pending status)</td>
+            <td>Regulatory authorization</td>
+            <td><span class="check">Core evidence</span></td>
+          </tr>
+          <tr>
+            <td>Board-approved AML/CFT policy</td>
+            <td>Compliance program evidence</td>
+            <td><span class="check">Core evidence</span></td>
+          </tr>
+          <tr>
+            <td>KYC procedures with risk scoring methodology</td>
+            <td>Customer due diligence process</td>
+            <td><span class="check">Core evidence</span></td>
+          </tr>
+          <tr>
+            <td>Sanctions screening evidence (logs, list sources, reports)</td>
+            <td>Sanctions compliance verification</td>
+            <td><span class="check">Core evidence</span></td>
+          </tr>
+          <tr>
+            <td>Risk assessment (products, customers, jurisdictions)</td>
+            <td>Risk awareness and management</td>
+            <td><span class="check">Core evidence</span></td>
+          </tr>
+          <tr>
+            <td>MLRO appointment letter</td>
+            <td>Designated compliance responsibility</td>
+            <td><span class="check">Core evidence</span></td>
+          </tr>
+          <tr>
+            <td>Professional indemnity insurance</td>
+            <td>Financial protection</td>
+            <td>Often requested</td>
+          </tr>
+          <tr>
+            <td>Recent financial statements (audited or management-prepared)</td>
+            <td>Financial viability</td>
+            <td>Often requested</td>
+          </tr>
+          <tr>
+            <td>Source of funds documentation (investment rounds, revenue)</td>
+            <td>Legitimate capital verification</td>
+            <td><span class="check">Core evidence</span></td>
+          </tr>
+          <tr>
+            <td>Transaction monitoring methodology</td>
+            <td>Ongoing surveillance evidence</td>
+            <td>Often requested</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>What is the compliance evidence package approach?</h2>
+
+    <p>
+      There is a gap in the market for crypto founders applying for bank accounts. On one side: screenshots and informal explanations that produce no reliable documentation trail. On the other: a full regulatory advisory project that may be more than a narrow bank onboarding file needs.
+    </p>
+
+    <p>
+      The compliance evidence package approach sits in between. The idea is simple: <strong>assemble a structured collection of documents that shows your company actively manages AML, KYC, and sanctions risk</strong> -- and present it as a single package with your bank application.
+    </p>
+
+    <p>
+      A strong compliance evidence package includes:
+    </p>
+
+    <ul>
+      <li><strong>AML/CFT policy</strong> -- board-approved, dated, referencing applicable regulations</li>
+      <li><strong>KYC procedures</strong> -- customer onboarding flow, risk categorization, EDD triggers</li>
+      <li><strong>Sanctions screening reports</strong> -- recent checks against applicable EU, UN, national, and bank-required lists, with timestamps and results</li>
+      <li><strong>Transaction monitoring methodology</strong> -- how you detect suspicious patterns, escalation thresholds, reporting procedures</li>
+      <li><strong>Risk assessment</strong> -- your products, customer segments, jurisdictions, and how you mitigate identified risks</li>
+      <li><strong>Post-transition migration evidence</strong> -- if customers migrated from an unauthorised VASP after 1 July 2026, include individual customer risk assessments, CDD refresh evidence, transaction-monitoring capacity checks, and the rationale for any EDD or exits</li>
+      <li><strong>MLRO appointment</strong> -- formal designation with reporting lines and authority</li>
+      <li><strong>Training records</strong> -- evidence that staff are trained on AML obligations</li>
+    </ul>
+
+    <p>
+      The goal is to give the bank's compliance team enough evidence to assess the application without basic follow-up gaps. When a compliance officer opens your application and finds a complete, well-organized evidence package, the first review can focus on real residual risk rather than missing documents.
+    </p>
+
+    <div class="callout callout--teal">
+      <div class="callout__label">Why this works</div>
+      <p>
+        Bank compliance teams need a defensible risk assessment. Your compliance evidence package is the material they can test: who owns the company, what services you provide, where funds come from, which sanctions lists apply, how alerts are resolved, and who is accountable.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>Which banks are more likely to accept crypto companies?</h2>
+
+    <p>
+      Not all banks treat crypto the same way. There is no official EU list of banks that accept crypto companies, and institution policies change. In practice, the landscape broadly breaks into three types:
+    </p>
+
+    <div class="comparison-wrapper">
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th>Bank type</th>
+            <th>What to verify</th>
+            <th>Practical note</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Crypto-specialist or digital-asset banks</td>
+            <td>Jurisdiction, licence scope, currencies, custody model, deposit protection</td>
+            <td>More familiar with blockchain evidence, still full due diligence</td>
+          </tr>
+          <tr>
+            <td>Fintech, EMI, or banking-as-a-service providers</td>
+            <td>Safeguarding model, payment rails, correspondent restrictions, crypto policy</td>
+            <td>May handle operating accounts; appetite varies by flows and customers</td>
+          </tr>
+          <tr>
+            <td>Traditional banks</td>
+            <td>Risk appetite for CASPs, permitted services, evidence pack</td>
+            <td>May consider authorised CASPs case by case; no guarantee</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      MiCA gives banks a clearer authorisation status to review, but it does not force any bank to open an account. The EBA's de-risking guidance says rejecting whole customer categories without considering individual risk profiles can be unwarranted, while still allowing banks to refuse or exit relationships where the risk cannot be managed. A MiCA CASP authorisation helps the diligence file; it does not create an acceptance rate or an entitlement to banking.
+    </p>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">Important note</div>
+      <p>
+        Bank policies change frequently. The information above reflects practical market patterns as of 10 July 2026, not guaranteed acceptance by any specific institution. Confirm current policy directly with the bank before preparing a full application.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>Frequently asked questions</h2>
+
+    <h3>Why do banks reject crypto company applications?</h3>
+    <p>
+      Banks usually reject or pause crypto company applications when they cannot complete risk-based due diligence. Common gaps include opaque ownership structures, no current CASP authorisation for EU activity after the 1 July 2026 MiCA transition, no documented AML/KYC framework, unclear source of funds and liquidity, high-risk jurisdiction exposure, weak sanctions controls, and positioning the business as "crypto" without explaining the regulated service and control framework.
+    </p>
+
+    <h3>What documents do crypto companies need to open a bank account?</h3>
+    <p>
+      Banks commonly ask for a compliance evidence package including: certificate of incorporation and corporate registry extract, ownership and control chart, UBO documents, current CASP authorisation or clear pre-operational/pending-application status, board-approved AML/CFT policy, documented KYC procedures with risk scoring methodology, sanctions screening evidence for applicable EU, UN, and national restrictive-measures lists, a risk assessment covering products and customer base, MLRO or compliance-owner appointment, source-of-funds evidence, transaction-monitoring methodology, and recent financial statements where available.
+    </p>
+
+    <h3>How should crypto companies position themselves when applying for a bank account?</h3>
+    <p>
+      Lead with regulatory status, services, customer types, jurisdictions, and controls. Do not hide that the business involves crypto-assets, but describe it as a MiCA-authorised or otherwise regulated digital-asset service provider if that is true. Open with your licence status, AML framework, sanctions controls, Travel Rule process, and transaction-monitoring evidence.
+    </p>
+
+    <h3>Which banks accept crypto companies in the EU?</h3>
+    <p>
+      There is no official EU list of banks that accept crypto companies. Bank appetite varies by institution, country, licence status, customer profile, payment flows, and correspondent-banking constraints. A MiCA CASP authorisation helps the bank complete due diligence, but it does not guarantee account approval.
+    </p>
+
+    <h3>What is a compliance evidence package for bank applications?</h3>
+    <p>
+      A compliance evidence package is a structured collection of documents that shows how your company manages AML, KYC, travel-rule, transaction-monitoring, and sanctions risk. It includes your AML/CFT policy, KYC procedures, sanctions screening reports showing recent checks, transaction monitoring methodology, risk assessment, MLRO or compliance-owner appointment, and training records. It is a practical onboarding tool, not a legal guarantee.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>Bottom line</h2>
+
+    <p>
+      Banks do not need a perfect story. They need a file they can assess. Crypto company applications fail when the bank cannot verify ownership, authorisation, source of funds, customer risk, sanctions controls, travel-rule controls, and transaction monitoring.
+    </p>
+
+    <p>
+      The fix is practical: document your compliance framework, produce sanctions screening evidence, lead with your regulatory status, and present a complete application that lets the bank complete its risk review. Most of the 7 rejection reasons above are solved by preparation, not by changing your business.
+    </p>
+
+    <p>
+      The companies with the strongest banking conversations are the ones that look like regulated financial institutions because their evidence is organised, current, and specific.
+    </p>
+
+    <div class="cta-banner">
+      <h3>Sanctions screening evidence for bank applications</h3>
+      <p>Bank onboarding teams need to see evidence that your screening process produces retained records, list-version proof, and documented match handling.</p>
+      <a href="/operations/" class="btn-primary">
+        Read operations guides &rarr;
+      </a>
+    </div>
+
+    <div class="sources">
+      <h3>Sources</h3>
+      <ul>
+        <li><a href="https://eur-lex.europa.eu/eli/reg/2023/1114/oj" target="_blank" rel="noopener">Regulation (EU) 2023/1114 (MiCA) -- EUR-Lex</a></li>
+        <li><a href="https://www.esma.europa.eu/sites/default/files/2026-06/ESMA75-113276571-1710_Public_Statement_MiCA_transitional_period_ends.pdf" target="_blank" rel="noopener">Public statement on the end of MiCA transitional period -- ESMA</a></li>
+        <li><a href="https://www.cysec.gov.cy/CMSPages/GetFile.aspx?guid=3c2571bc-1e2f-4537-b139-bc6bdc375719" target="_blank" rel="noopener">MiCA licence applications due by 27 February 2026 -- CySEC</a></li>
+        <li><a href="https://eur-lex.europa.eu/eli/reg/2023/1113/oj" target="_blank" rel="noopener">Regulation (EU) 2023/1113 (Transfer of Funds Regulation) -- EUR-Lex</a></li>
+        <li><a href="https://eur-lex.europa.eu/eli/reg/2024/1624/oj" target="_blank" rel="noopener">Regulation (EU) 2024/1624 (AMLR) -- EUR-Lex</a></li>
+        <li><a href="https://eur-lex.europa.eu/eli/dir/2024/1640/oj" target="_blank" rel="noopener">Directive (EU) 2024/1640 (AMLD6) -- EUR-Lex</a></li>
+        <li><a href="https://www.eba.europa.eu/publications-and-media/press-releases/eba-issues-guidance-crypto-asset-service-providers" target="_blank" rel="noopener">EBA ML/TF risk factors guidance for CASPs -- European Banking Authority</a></li>
+        <li><a href="https://www.eba.europa.eu/activities/single-rulebook/regulatory-activities/anti-money-laundering-and-countering-financing-terrorism/guidelines-information-requirements-relation-transfers-funds-and-certain-crypto-assets-transfers" target="_blank" rel="noopener">EBA Travel Rule Guidelines under Regulation (EU) 2023/1113 -- European Banking Authority</a></li>
+        <li><a href="https://www.eba.europa.eu/activities/single-rulebook/regulatory-activities/anti-money-laundering-and-countering-financing-terrorism/guidelines-internal-policies-procedures-and-controls-ensure-implementation-union-and-national" target="_blank" rel="noopener">EBA restrictive-measures controls guidelines -- European Banking Authority</a></li>
+        <li><a href="https://www.eba.europa.eu/publications-and-media/press-releases/eba-issues-guidelines-challenge-unwarranted-de-risking-and" target="_blank" rel="noopener">EBA de-risking and access to financial services guidance -- European Banking Authority</a></li>
+        <li><a href="https://www.fatf-gafi.org/en/topics/virtual-assets.html" target="_blank" rel="noopener">Virtual assets and VASPs -- Financial Action Task Force</a></li>
+        <li><a href="https://www.fatf-gafi.org/en/countries/black-and-grey-lists.html" target="_blank" rel="noopener">FATF high-risk and increased-monitoring jurisdictions -- Financial Action Task Force</a></li>
+        <li><a href="https://finance.ec.europa.eu/eu-and-world/sanctions-restrictive-measures/overview-sanctions-and-related-resources_en" target="_blank" rel="noopener">EU sanctions resources and consolidated financial sanctions list -- European Commission</a></li>
+        <li><a href="https://main.un.org/securitycouncil/en/content/un-sc-consolidated-list" target="_blank" rel="noopener">UN Security Council Consolidated List -- United Nations</a></li>
+        <li><a href="https://ofac.treasury.gov/specially-designated-nationals-and-blocked-persons-list-sdn-human-readable-lists" target="_blank" rel="noopener">OFAC SDN List -- U.S. Treasury</a></li>
+      </ul>
+    </div>
+
+    <div class="related-articles">
+      <h3>Related articles</h3>
+      <div class="related-grid">
+        <a href="/operations/sanctions-screening-implementation-guide" class="related-card">
+          <span class="related-card__tag">Operations</span>
+          <span class="related-card__title">Sanctions Screening Implementation Guide: From Excel to API in 30 Days</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+        <a href="/operations/cysec-inspection-documents" class="related-card">
+          <span class="related-card__tag">Operations</span>
+          <span class="related-card__title">CySEC Crypto Audit: 8 Documents You Need</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+        <a href="/regulations/mica-casp-license-requirements-2026" class="related-card">
+          <span class="related-card__tag">Regulations</span>
+          <span class="related-card__title">MiCA CASP License Requirements in 2026</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+<div style="margin: 40px 0; padding: 24px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; text-align: center;">
+  <p style="font-size: 15px; color: #475569; margin-bottom: 12px;">Screen wallet sanctions exposure against relevant lists -- free, no signup.</p>
+  <a href="mailto:info@chainscreen.io" style="display: inline-block; padding: 12px 24px; background: #0c2340; color: #fff; border-radius: 8px; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600;">Contact ChainScreen</a>
+</div>
+
+
+<footer>
+  <div class="container">
+    &copy; 2026 DailyMind LTD &middot; HE 439959 &middot; Limassol, Cyprus
+    &nbsp;&middot;&nbsp;
+    <span>Information only; not legal advice</span>
+    &nbsp;&middot;&nbsp;
+    <a href="/privacy">Privacy</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://dailymind.eu">dailymind.eu</a>
+  </div>
+</footer>
+<script data-goatcounter="https://gc-chainscreen.vigilcom.dev/count"
+        async src="//gc.vigilcom.dev/count.js"></script>
+<script src="/nav.js" defer></script>
+</body>
+</html>

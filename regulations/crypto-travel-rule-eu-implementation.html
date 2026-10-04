@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travel Rule Crypto EU: What CASPs Must Do | ChainScreen</title>
+<meta name="description" content="EU crypto Travel Rule has no minimum threshold. Every transfer needs originator and beneficiary data. IVMS 101 fields, vendor comparison, wallet rules.">
+<link rel="canonical" href="https://chainscreen.io/regulations/crypto-travel-rule-eu-implementation">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EU Crypto Travel Rule: Implementation Guide for CASPs">
+<meta property="og:description" content="No de minimis threshold. All crypto transfers need originator + beneficiary info. Here's what to implement, which vendors to use, and what the regulation actually says.">
+<meta property="og:url" content="https://chainscreen.io/regulations/crypto-travel-rule-eu-implementation">
+<meta property="og:image" content="https://chainscreen.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="ChainScreen">
+<meta name="article:published_time" content="2026-08-17">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"EU Crypto Travel Rule: Implementation Guide for CASPs","description":"Complete implementation guide for the EU crypto Travel Rule under TFR 2023/1113. IVMS 101 data fields, vendor comparison, self-hosted wallet rules, and compliance timeline for CASPs.","datePublished":"2026-03-13","dateModified":"2026-08-17","wordCount":2880,"author":{"@type":"Person","name":"Katerina Bletsch","url":"https://chainscreen.io","jobTitle":"Founder","sameAs":["https://www.linkedin.com/in/katerina-bletsch/"]},"publisher":{"@type":"Organization","name":"ChainScreen","url":"https://chainscreen.io","logo":{"@type":"ImageObject","url":"https://chainscreen.io/og-image.png"}}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does the EU Travel Rule have a minimum threshold for crypto transfers?","acceptedAnswer":{"@type":"Answer","text":"No. Unlike the US ($3,000) or FATF recommendation ($1,000/EUR 1,000), the EU's Transfer of Funds Regulation (TFR 2023/1113) applies to ALL crypto-asset transfers between CASPs regardless of amount. There is no de minimis threshold. For self-hosted wallet transfers, a EUR 1,000 threshold triggers additional verification requirements."}},{"@type":"Question","name":"What is IVMS 101 and why does it matter for Travel Rule compliance?","acceptedAnswer":{"@type":"Answer","text":"IVMS 101 (InterVASP Messaging Standard) is the data format standard used to structure originator and beneficiary information exchanged between VASPs during crypto transfers. It defines four objects — Originator, Beneficiary, OriginatingVASP, and BeneficiaryVASP — each with specific fields like name, geographic address, national identification, and account numbers. All major Travel Rule vendors use IVMS 101 as their underlying data format."}},{"@type":"Question","name":"What is the Travel Rule sunrise problem?","acceptedAnswer":{"@type":"Answer","text":"The sunrise problem occurs when your CASP needs to send Travel Rule data to a counterparty VASP that hasn't implemented Travel Rule compliance yet — either because their jurisdiction hasn't mandated it, or they haven't deployed a compatible solution. In practice, some CASPs proceed with the transfer after a timeout, others block it entirely. EBA guidelines expect CASPs to have documented procedures for handling non-responsive counterparties, including risk-based decisions on whether to proceed."}},{"@type":"Question","name":"When did the EU Travel Rule take effect?","acceptedAnswer":{"@type":"Answer","text":"Regulation (EU) 2023/1113 (the recast Transfer of Funds Regulation) applies from 30 December 2024. The EBA published accompanying Travel Rule Guidelines (EBA/GL/2024/11) on 4 July 2024, also applicable from 30 December 2024. A transitional period for CASPs ran until 31 July 2025 to allow systems adjustment, but full compliance is now required."}},{"@type":"Question","name":"Does ChainScreen offer Travel Rule compliance?","acceptedAnswer":{"@type":"Answer","text":"No. ChainScreen now publishes content only. This guide is published to help CASPs understand their obligations and evaluate vendors. Travel Rule compliance remains a separate operational requirement from sanctions screening."}}]}
+</script>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chainscreen.io/og-image.png">
+<script defer src="https://u.vigilcom.dev/script.js" data-website-id="df019ee1-bf37-42db-be6c-93671ff213ec"></script>
+<meta name="twitter:title" content="EU Crypto Travel Rule: Implementation Guide for CASPs">
+<meta name="twitter:description" content="No de minimis threshold. All crypto transfers need originator + beneficiary info. Here's what to implement, which vendors to use, and what TFR 2023/1113 actually says.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://chainscreen.io"},{"@type":"ListItem","position":2,"name":"Regulations","item":"https://chainscreen.io/regulations/"},{"@type":"ListItem","position":3,"name":"EU Crypto Travel Rule: Implementation Guide for CASPs"}]}
+</script>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-alt: #f8fafc;
+    --surface: #ffffff;
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --text: #0c1d36;
+    --text-body: #475569;
+    --text-muted: #94a3b8;
+    --accent: #0c2340;
+    --accent-hover: #143a65;
+    --accent-light: #edf2f9;
+    --teal: #0f766e;
+    --teal-light: #f0fdf4;
+    --code-bg: #091a30;
+    --code-surface: #0c2340;
+    --red: #dc2626;
+    --red-light: #fef2f2;
+    --font-serif: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-code: 'JetBrains Mono', 'SF Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  
+  header {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: var(--font-code);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--accent-hover); }
+
+  .nav-link {
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover { color: var(--text); }
+
+  
+  .article-header {
+    padding: 80px 0 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .article-header__eyebrow {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--teal);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .article-header h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+
+  .article-header__sub {
+    font-size: 17px;
+    color: var(--text-body);
+    max-width: 640px;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .article-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: var(--font-code);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.01em;
+  }
+
+  .article-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .article-meta__dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--teal);
+    flex-shrink: 0;
+  }
+
+  
+  .article-body {
+    padding: 48px 0 72px;
+  }
+
+  .article-body h2 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-top: 48px;
+    margin-bottom: 16px;
+    line-height: 1.3;
+    color: var(--text);
+  }
+
+  .article-body h3 {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 32px;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+
+  .article-body p {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .article-body ul, .article-body ol {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+    padding-left: 24px;
+  }
+
+  .article-body li {
+    margin-bottom: 6px;
+  }
+
+  .article-body a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+  }
+
+  .article-body a:hover {
+    color: var(--accent-hover);
+  }
+
+  .article-body strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .article-body code {
+    font-family: var(--font-code);
+    font-size: 13px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--accent);
+  }
+
+  
+  .code-block {
+    margin: 24px 0;
+    background: var(--code-bg);
+    border: 1px solid #0c2340;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .code-block__header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 16px;
+    border-bottom: 1px solid #0c2340;
+    background: #071528;
+  }
+
+  .code-block__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #0c2340;
+  }
+
+  .code-block__title {
+    font-family: var(--font-code);
+    font-size: 12px;
+    color: #64748b;
+    margin-left: 8px;
+  }
+
+  .code-block pre {
+    padding: 20px;
+    overflow-x: auto;
+    font-family: var(--font-code);
+    font-size: 13px;
+    line-height: 1.8;
+    color: #94a3b8;
+  }
+
+  .code-block .keyword { color: #93c5fd; }
+  .code-block .string { color: #a5b4fc; }
+  .code-block .comment { color: #475569; }
+  .code-block .prop { color: #7dd3fc; }
+  .code-block .val { color: #fbbf24; }
+
+  
+  .callout {
+    margin: 28px 0;
+    padding: 24px 28px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .callout p {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .callout p:last-child {
+    margin-bottom: 0;
+  }
+
+  .callout--warning {
+    background: var(--red-light);
+    border: 1px solid #fecaca;
+  }
+
+  .callout--warning .callout__label {
+    color: var(--red);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--info {
+    background: var(--accent-light);
+    border: 1px solid #c7d5e8;
+  }
+
+  .callout--info .callout__label {
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--teal {
+    background: var(--teal-light);
+    border: 1px solid #bbf7d0;
+  }
+
+  .callout--teal .callout__label {
+    color: var(--teal);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  
+  .comparison-wrapper {
+    margin: 28px 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow-x: auto;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .comparison th, .comparison td {
+    padding: 13px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .comparison tr:last-child td { border-bottom: none; }
+
+  .comparison th {
+    color: var(--text-muted);
+    font-family: var(--font-code);
+    font-weight: 500;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--bg-alt);
+    white-space: nowrap;
+  }
+
+  .comparison td:first-child {
+    color: var(--text);
+    font-weight: 500;
+    font-size: 13px;
+  }
+
+  .check { color: var(--teal); font-weight: 600; }
+  .cross { color: var(--red); font-weight: 600; }
+  .na { color: var(--text-muted); }
+
+  
+  blockquote {
+    margin: 24px 0;
+    padding: 20px 24px;
+    border-left: 3px solid var(--border-strong);
+    background: var(--bg-alt);
+    border-radius: 0 8px 8px 0;
+  }
+
+  blockquote p {
+    font-size: 14px;
+    color: var(--text-body);
+    font-style: italic;
+    margin-bottom: 0;
+  }
+
+  blockquote cite {
+    display: block;
+    margin-top: 8px;
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-style: normal;
+    color: var(--text-muted);
+  }
+
+  
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  
+  .cta-banner {
+    margin: 48px 0;
+    padding: 40px 36px;
+    background: var(--code-bg);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .cta-banner h3 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: #f1f5f9;
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .cta-banner p {
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 24px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 28px;
+    background: #fff;
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary:hover {
+    background: #f1f5f9;
+    color: var(--accent);
+  }
+
+  
+  .sources {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .sources h3 {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .sources ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sources li {
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 4px 0;
+    line-height: 1.6;
+  }
+
+  .sources li a {
+    color: var(--text-body);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .sources li a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--text); }
+
+  
+  @media (max-width: 640px) {
+    .article-header { padding: 48px 0 32px; }
+    .article-header h1 { font-size: 1.8rem; }
+    .article-body h2 { font-size: 20px; }
+    .article-meta { gap: 12px; }
+    .comparison { font-size: 11px; }
+    .comparison th, .comparison td { padding: 8px 10px; }
+    .callout { padding: 20px; }
+    .cta-banner { padding: 32px 24px; }
+  }
+
+  
+  .breadcrumb { padding: 12px 0; border-bottom: 1px solid var(--border); background: var(--bg-alt); }
+  .breadcrumb a, .breadcrumb span { font-family: var(--font-code); font-size: 11px; letter-spacing: 0.01em; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb__sep { color: #cbd5e1; margin: 0 6px; }
+  .breadcrumb__current { color: var(--text-body); }
+
+  
+  .nav-links { display: flex; align-items: center; gap: 20px; }
+  .nav-link.active { color: var(--text); }
+  @media (max-width: 640px) { .nav-links { gap: 12px; } .nav-link { font-size: 11px; } }
+
+  
+  .related-articles { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+  .related-articles h3 { font-family: var(--font-code); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 16px; margin-top: 0; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .related-card { display: flex; flex-direction: column; gap: 8px; padding: 20px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; transition: border-color 0.2s; }
+  .related-card:hover { border-color: var(--accent); }
+  .related-card__tag { font-family: var(--font-code); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--teal); }
+  .related-card__title { font-family: var(--font-serif); font-size: 15px; color: var(--text); line-height: 1.35; }
+  .related-card__arrow { font-family: var(--font-code); font-size: 12px; color: var(--text-muted); margin-top: auto; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="/" class="logo">chain<span>screen</span></a>
+    <nav class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/regulations/" class="nav-link active">Regulations</a>
+      <a href="/operations/" class="nav-link">Operations</a>
+      <a href="/tools/" class="nav-link">Tools</a>
+      <a href="/technical/" class="nav-link">Technical</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <div class="container">
+    <a href="/">Home</a><span class="breadcrumb__sep">/</span>
+    <a href="/regulations/">Regulations</a><span class="breadcrumb__sep">/</span>
+    <span class="breadcrumb__current">Travel Rule Guide</span>
+  </div>
+</nav>
+
+<section class="article-header">
+  <div class="container">
+    <div class="article-header__eyebrow">Travel Rule compliance</div>
+    <h1>EU Crypto Travel Rule: Implementation Guide for CASPs</h1>
+    <p class="article-header__sub">
+      The EU Travel Rule applies to ALL crypto transfers with no minimum threshold. Here's what CASPs must implement, which vendors to use, and what the regulation actually says.
+    </p>
+    <div class="article-meta">
+      <span><div class="article-meta__dot"></div> March 2026</span>
+      <span><div class="article-meta__dot"></div> 11 min read</span>
+      <span><div class="article-meta__dot"></div> Sources: EUR-Lex TFR 2023/1113, EBA GL/2024/11, FATF R.16</span>
+    </div>
+  </div>
+</section>
+
+<article class="article-body">
+  <div class="container">
+
+    <h2>What is the Travel Rule?</h2>
+
+    <p>
+      The "Travel Rule" is the requirement that crypto-asset service providers (CASPs) must collect and transmit originator and beneficiary information alongside every crypto transfer. The concept originates from <strong>FATF Recommendation 16</strong>, which has applied to traditional wire transfers for decades. The EU extended it to crypto through <strong>Regulation (EU) 2023/1113</strong> -- the recast Transfer of Funds Regulation (TFR).
+    </p>
+
+    <p>
+      The regulation entered into force on <strong>9 June 2023</strong> and applies from <strong>30 December 2024</strong>. The European Banking Authority published accompanying guidelines (<a href="https://www.eba.europa.eu/sites/default/files/2024-07/6de6e9b9-0ed9-49cd-985d-c0834b5b4356/Travel%20Rule%20Guidelines.pdf" target="_blank" rel="noopener">EBA/GL/2024/11</a>) on 4 July 2024, also applicable from the same date. A transitional period for CASPs ran until 31 July 2025 to allow systems adjustment. That window is closed. Full compliance is now required.
+    </p>
+
+    <p>
+      Verified <strong>17 August 2026</strong>: Regulation (EU) 2023/1113 and EBA/GL/2024/11 remain the operative EU Travel Rule sources; no EU de minimis threshold applies to CASP-to-CASP crypto transfers.
+    </p>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">No de minimis threshold in the EU</div>
+      <p>
+        Unlike the US (which applies the Travel Rule only above $3,000) or the general FATF recommendation ($1,000/EUR 1,000), the EU's TFR applies to <strong>all crypto-asset transfers</strong> between CASPs regardless of amount. A EUR 5 transfer between two exchanges requires the same originator/beneficiary data as a EUR 500,000 transfer. This is one of the strictest implementations globally.
+      </p>
+    </div>
+
+    <h3>Self-hosted wallet transfers: the EUR 1,000 threshold</h3>
+
+    <p>
+      There is one area where a threshold applies. When a CASP processes a transfer to or from a <strong>self-hosted address</strong> (i.e., a non-custodial wallet not controlled by any CASP):
+    </p>
+
+    <ul>
+      <li><strong>All amounts</strong>: The CASP must collect and retain originator or beneficiary information from their own customer.</li>
+      <li><strong>Above EUR 1,000</strong>: The CASP must additionally <strong>verify</strong> that the self-hosted address is owned or controlled by the customer, using at least one reliable and independent method (e.g., Satoshi test, signed message, on-chain proof).</li>
+    </ul>
+
+    <p>
+      This means self-hosted wallet transfers are not exempt -- they trigger a different set of obligations. For CASP-to-CASP transfers, there is no threshold at all.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>What information must be exchanged under the Travel Rule?</h2>
+
+    <p>
+      The TFR specifies the data fields that must accompany each transfer. In practice, the industry has standardized on <strong>IVMS 101</strong> (InterVASP Messaging Standard) as the data format for structuring this information. IVMS 101 was developed by the Joint Working Group on interVASP Messaging Standards and is used by all major Travel Rule solution providers.
+    </p>
+
+    <h3>Required data fields</h3>
+
+    <p>
+      For <strong>CASP-to-CASP transfers</strong>, the originator's CASP must include:
+    </p>
+
+    <ul>
+      <li><strong>Originator</strong>: full name, account number (wallet address or internal identifier), and one of: address, date and place of birth, or national identity number</li>
+      <li><strong>Beneficiary</strong>: full name, account number</li>
+    </ul>
+
+    <p>
+      The beneficiary's CASP must verify that beneficiary information is present before making the funds available. If information is missing, the beneficiary CASP must implement risk-based procedures to decide whether to execute, reject, return, or suspend the transfer.
+    </p>
+
+    <h3>IVMS 101 message structure</h3>
+
+    <p>
+      An IVMS 101 message contains four top-level objects. Here's a simplified example of what a Travel Rule message looks like in practice:
+    </p>
+
+    <div class="code-block">
+      <div class="code-block__header">
+        <div class="code-block__dot"></div>
+        <div class="code-block__dot"></div>
+        <div class="code-block__dot"></div>
+        <span class="code-block__title">IVMS 101 message (simplified)</span>
+      </div>
+<pre>{
+  <span class="prop">"originator"</span>: {
+    <span class="prop">"originatorPersons"</span>: [{
+      <span class="prop">"naturalPerson"</span>: {
+        <span class="prop">"name"</span>: {
+          <span class="prop">"nameIdentifier"</span>: [{
+            <span class="prop">"primaryIdentifier"</span>: <span class="string">"SCHMIDT"</span>,
+            <span class="prop">"secondaryIdentifier"</span>: <span class="string">"MAX"</span>,
+            <span class="prop">"nameIdentifierType"</span>: <span class="string">"LEGL"</span>
+          }]
+        },
+        <span class="prop">"geographicAddress"</span>: [{
+          <span class="prop">"addressLine"</span>: [<span class="string">"Friedrichstrasse 123"</span>],
+          <span class="prop">"townName"</span>: <span class="string">"Berlin"</span>,
+          <span class="prop">"country"</span>: <span class="string">"DE"</span>,
+          <span class="prop">"addressType"</span>: <span class="string">"HOME"</span>
+        }],
+        <span class="prop">"nationalIdentification"</span>: {
+          <span class="prop">"nationalIdentifier"</span>: <span class="string">"DE-1234567890"</span>,
+          <span class="prop">"nationalIdentifierType"</span>: <span class="string">"NATIONAL_IDENTITY_NUMBER"</span>,
+          <span class="prop">"countryOfIssue"</span>: <span class="string">"DE"</span>
+        }
+      }
+    }],
+    <span class="prop">"accountId"</span>: [<span class="string">"user-12345"</span>]
+  },
+  <span class="prop">"beneficiary"</span>: {
+    <span class="prop">"beneficiaryPersons"</span>: [{
+      <span class="prop">"naturalPerson"</span>: {
+        <span class="prop">"name"</span>: {
+          <span class="prop">"nameIdentifier"</span>: [{
+            <span class="prop">"primaryIdentifier"</span>: <span class="string">"PAPADOPOULOS"</span>,
+            <span class="prop">"secondaryIdentifier"</span>: <span class="string">"ANDREAS"</span>,
+            <span class="prop">"nameIdentifierType"</span>: <span class="string">"LEGL"</span>
+          }]
+        }
+      }
+    }],
+    <span class="prop">"accountId"</span>: [<span class="string">"user-67890"</span>]
+  },
+  <span class="prop">"originatingVASP"</span>: {
+    <span class="prop">"originatingVASP"</span>: {
+      <span class="prop">"legalPerson"</span>: {
+        <span class="prop">"name"</span>: {
+          <span class="prop">"nameIdentifier"</span>: [{
+            <span class="prop">"legalPersonName"</span>: <span class="string">"CryptoExchange DE GmbH"</span>,
+            <span class="prop">"legalPersonNameIdentifierType"</span>: <span class="string">"LEGL"</span>
+          }]
+        }
+      }
+    }
+  },
+  <span class="prop">"beneficiaryVASP"</span>: {
+    <span class="prop">"beneficiaryVASP"</span>: {
+      <span class="prop">"legalPerson"</span>: {
+        <span class="prop">"name"</span>: {
+          <span class="prop">"nameIdentifier"</span>: [{
+            <span class="prop">"legalPersonName"</span>: <span class="string">"CyprusCrypto Ltd"</span>,
+            <span class="prop">"legalPersonNameIdentifierType"</span>: <span class="string">"LEGL"</span>
+          }]
+        }
+      }
+    }
+  }
+}</pre>
+    </div>
+
+    <p>
+      The full IVMS 101 specification includes additional fields for legal persons (registered businesses), date and place of birth, customer identification numbers, and more. What's shown above are the minimum fields for a natural person transfer between two CASPs. Your Travel Rule vendor will handle the IVMS 101 serialization -- you typically pass in structured customer data and the vendor formats it.
+    </p>
+
+    <div class="callout callout--info">
+      <div class="callout__label">Data retention</div>
+      <p>
+        Under the TFR, both the originator's and beneficiary's CASP must retain Travel Rule records for <strong>five years</strong>. This includes the IVMS 101 data transmitted and received, timestamps, and the outcome of any verification procedures.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>How does the Travel Rule work technically?</h2>
+
+    <p>
+      The Travel Rule sounds simple in theory: send customer data along with the transfer. In practice, three technical problems make it hard.
+    </p>
+
+    <h3>1. Counterparty VASP discovery</h3>
+
+    <p>
+      When your user sends crypto to an address, you need to figure out <strong>which CASP controls the receiving address</strong> -- and whether they support Travel Rule at all. This is the discovery problem.
+    </p>
+
+    <p>
+      Solutions use different approaches: centralized directories (Notabene maintains a directory of 7,000+ VASPs), decentralized registries (TRISA's Global Directory Service uses a certificate authority model), and blockchain analysis (mapping addresses to known CASP clusters). Most vendors combine multiple methods.
+    </p>
+
+    <h3>2. Secure messaging</h3>
+
+    <p>
+      Once you've identified the counterparty, you need to exchange IVMS 101 data securely. The data contains PII (names, addresses, national IDs), so it must be encrypted in transit and never stored by intermediaries without authorization. Several protocols handle this:
+    </p>
+
+    <ul>
+      <li><strong>TRP (Travel Rule Protocol)</strong> -- open-source, peer-to-peer, built on HTTPS and mTLS. Developed by the OpenVASP Association. No central server. Interoperable with TRISA since 2024.</li>
+      <li><strong>TRISA</strong> -- open-source, uses a certificate authority model with a Global Directory Service. P2P encrypted messaging between verified VASPs.</li>
+      <li><strong>Sygna Bridge</strong> -- proprietary API-based protocol by CoolBitX. Strong in Asia-Pacific markets.</li>
+      <li><strong>Notabene's network</strong> -- connects to multiple protocols (TRP, TRISA, Sygna, and others) through a single API integration.</li>
+    </ul>
+
+    <p>
+      The protocol landscape is fragmented. Your counterparty may use a different protocol than you. This is why vendors that support <strong>multiple protocols</strong> through a single integration point have an advantage -- you connect once, and the vendor handles protocol translation.
+    </p>
+
+    <h3>3. The sunrise problem</h3>
+
+    <p>
+      The "sunrise problem" is what happens when your CASP sends Travel Rule data to a counterparty that hasn't implemented it yet -- either because their jurisdiction doesn't mandate it, or they simply haven't deployed a solution.
+    </p>
+
+    <p>
+      According to Notabene's 2025 State of Crypto Travel Rule report, the industry is still split on how to handle this:
+    </p>
+
+    <ul>
+      <li><strong>12%</strong> of VASPs block the transfer entirely if no Travel Rule response is received</li>
+      <li><strong>14%</strong> proceed after a timeout period</li>
+      <li><strong>22%</strong> proceed without waiting for a response</li>
+      <li><strong>52%</strong> don't connect Travel Rule to transaction flows at all</li>
+    </ul>
+
+    <p>
+      The EBA guidelines expect CASPs to have <strong>documented, risk-based procedures</strong> for handling non-responsive counterparties. "We just send the transfer anyway" without a documented risk assessment is unlikely to satisfy an inspector.
+    </p>
+
+    <div class="callout callout--teal">
+      <div class="callout__label">Practical approach</div>
+      <p>
+        Some vendors offer sunrise-specific features. 21 Analytics has "21 Sunrise" -- a mechanism where you send the counterparty a secure link for data exchange, even if they don't run Travel Rule software. This bridges the gap for counterparties that are willing to comply but haven't deployed a full solution yet.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>How do Travel Rule vendors compare?</h2>
+
+    <p>
+      The vendor landscape has matured significantly since the TFR took effect. Here's a comparison of the major solutions available to EU CASPs as of early 2026.
+    </p>
+
+    <div class="comparison-wrapper">
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th>Vendor</th>
+            <th>Protocols</th>
+            <th>VASP network</th>
+            <th>Pricing model</th>
+            <th>Strengths</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Notabene</td>
+            <td>TRP, TRISA, Sygna, + others</td>
+            <td>7,000+ VASPs</td>
+            <td>Contact sales</td>
+            <td>Largest network. Multi-protocol. Single API.</td>
+          </tr>
+          <tr>
+            <td>21 Analytics</td>
+            <td>TRP, TRISA</td>
+            <td>2,800+ assets</td>
+            <td>Flat rate, unlimited txns</td>
+            <td>Swiss. Transparent pricing. Sunrise solution. Privacy-first (P2P, no data stored centrally).</td>
+          </tr>
+          <tr>
+            <td>Sygna (CoolBitX)</td>
+            <td>Sygna Bridge, TRISA interop</td>
+            <td>Strong in APAC</td>
+            <td>Contact sales</td>
+            <td>Chainalysis + Elliptic integrated. Combined AML + Travel Rule in Sygna Hub.</td>
+          </tr>
+          <tr>
+            <td>Sumsub</td>
+            <td>5 protocols + email fallback</td>
+            <td>1,800+ VASPs</td>
+            <td>Contact sales</td>
+            <td>Integrated with KYC/KYB. Fireblocks partnership. Unhosted wallet verification built in.</td>
+          </tr>
+          <tr>
+            <td>TRISA</td>
+            <td>TRISA (native), TRP interop</td>
+            <td>Open directory (GDS)</td>
+            <td>Open source (free)</td>
+            <td>No vendor lock-in. Certificate-based trust. Self-hosted option ("Envoy").</td>
+          </tr>
+          <tr>
+            <td>Shyft / Veriscope</td>
+            <td>Veriscope protocol</td>
+            <td>40+ major exchanges</td>
+            <td>Open source</td>
+            <td>Decentralized on-chain registry. Tether integration. Discovery layer for VASP lookup.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>How to choose</h3>
+
+    <p>
+      For most small-to-mid-size EU CASPs, the decision comes down to three factors:
+    </p>
+
+    <ol>
+      <li><strong>Network size.</strong> The vendor's value is proportional to how many counterparty VASPs they can reach. If 80% of your transfers go to 5 major exchanges, check which vendor those exchanges use.</li>
+      <li><strong>Protocol coverage.</strong> Your counterparties may use different protocols. A vendor that bridges multiple protocols (Notabene, Sumsub) reduces your integration burden.</li>
+      <li><strong>Pricing predictability.</strong> 21 Analytics offers flat-rate unlimited transactions -- useful if your volume is growing. "Contact sales" vendors may price per transaction or per tier, which scales differently.</li>
+    </ol>
+
+    <p>
+      If you want to avoid vendor dependency entirely, TRISA's open-source "Envoy" software lets you run your own Travel Rule node. This requires more engineering effort but gives you full control over your data and no ongoing vendor fees.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>What is the implementation timeline for small CASPs?</h2>
+
+    <p>
+      If you haven't implemented Travel Rule yet, you're past the deadline. The transitional period ended 31 July 2025. That said, here's a realistic timeline for getting compliant:
+    </p>
+
+    <h3>Weeks 1-2: Assessment and vendor selection</h3>
+
+    <ul>
+      <li>Map your transaction flows: what percentage is CASP-to-CASP vs. self-hosted wallet?</li>
+      <li>Identify your top 10 counterparty VASPs by volume</li>
+      <li>Check which Travel Rule vendors those counterparties use</li>
+      <li>Request demos from 2-3 vendors. Test their APIs in sandbox</li>
+      <li>Review your existing KYC data: do you already collect the IVMS 101 required fields from customers?</li>
+    </ul>
+
+    <h3>Weeks 3-4: Integration</h3>
+
+    <ul>
+      <li>Integrate the vendor API with your transaction processing pipeline</li>
+      <li>Implement pre-transfer screening: Travel Rule data exchange must happen <strong>before</strong> the transfer is released to the beneficiary</li>
+      <li>Build the self-hosted wallet verification flow for transfers above EUR 1,000</li>
+      <li>Set up data retention: 5-year storage for all Travel Rule messages sent and received</li>
+      <li>Most vendors advertise deployment in "less than a day" -- for the API integration, maybe. For end-to-end process integration with your existing systems, plan for 1-2 weeks of engineering.</li>
+    </ul>
+
+    <h3>Weeks 5-6: Policies and testing</h3>
+
+    <ul>
+      <li>Document your sunrise procedures: what happens when a counterparty doesn't respond?</li>
+      <li>Document your missing-information procedures: when do you reject vs. proceed with a transfer?</li>
+      <li>Run end-to-end tests with at least 3 counterparty VASPs</li>
+      <li>Train operations and compliance staff on the new workflows</li>
+      <li>Update your AML/CFT policies and procedures manual</li>
+    </ul>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">Regulatory exposure</div>
+      <p>
+        The TFR is not a future obligation -- it's current law. CASPs operating in the EU without Travel Rule compliance since 31 July 2025 are in breach. National competent authorities (CySEC, BaFin, AMF, etc.) can inspect at any time. The fact that "many CASPs haven't implemented it yet" is not a defense. Get compliant, then focus on optimizing.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>How does the Travel Rule relate to sanctions screening?</h2>
+
+    <p>
+      Travel Rule and sanctions screening are <strong>separate but complementary</strong> obligations. They're governed by different regulations, serve different purposes, and require different technical implementations.
+    </p>
+
+    <ul>
+      <li><strong>Travel Rule</strong> (TFR 2023/1113): ensures identity information accompanies every transfer for AML/CFT traceability</li>
+      <li><strong>Sanctions screening</strong> (<a href="/regulations/eba-guidelines-casps">EBA GL/2024/15</a>): ensures you don't process transfers involving sanctioned persons, entities, or addresses</li>
+    </ul>
+
+    <p>
+      In practice, Travel Rule data feeds into sanctions screening. Once you receive the originator's name and national ID via IVMS 101, you should screen that data against the sanctions and restrictive-measures sources applicable to your firm, starting with EU and national measures for EU CASPs, before releasing funds. The two systems work together -- Travel Rule gives you the data, sanctions screening tells you what to do with it.
+    </p>
+
+    <p>
+      For a deeper breakdown of how sanctions screening differs from transaction monitoring and risk scoring, see our guide on <a href="/tools/screening-vs-risk-scoring">screening vs. risk scoring</a>.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>Frequently asked questions</h2>
+
+    <h3>Does the EU Travel Rule have a minimum threshold for crypto transfers?</h3>
+
+    <p>
+      No. Unlike the US ($3,000) or FATF recommendation ($1,000/EUR 1,000), the EU's Transfer of Funds Regulation (TFR 2023/1113) applies to all crypto-asset transfers between CASPs regardless of amount. There is no de minimis threshold. For self-hosted wallet transfers, a EUR 1,000 threshold triggers additional verification requirements, but information collection applies to all amounts.
+    </p>
+
+    <h3>What is IVMS 101 and why does it matter for Travel Rule compliance?</h3>
+
+    <p>
+      IVMS 101 (InterVASP Messaging Standard) is the data format standard used to structure originator and beneficiary information exchanged between VASPs during crypto transfers. It defines four objects -- Originator, Beneficiary, OriginatingVASP, and BeneficiaryVASP -- each with specific fields like name, geographic address, national identification, and account numbers. All major Travel Rule vendors use IVMS 101 as their underlying data format, so you won't need to build the serialization yourself.
+    </p>
+
+    <h3>What is the Travel Rule sunrise problem?</h3>
+
+    <p>
+      The sunrise problem occurs when your CASP needs to send Travel Rule data to a counterparty VASP that hasn't implemented Travel Rule compliance yet -- either because their jurisdiction hasn't mandated it, or they haven't deployed a compatible solution. EBA guidelines expect CASPs to have documented, risk-based procedures for handling non-responsive counterparties, including whether to proceed, delay, or reject the transfer.
+    </p>
+
+    <h3>When did the EU Travel Rule take effect?</h3>
+
+    <p>
+      Regulation (EU) 2023/1113 applies from 30 December 2024. The EBA published accompanying Travel Rule Guidelines (EBA/GL/2024/11) on 4 July 2024, also applicable from 30 December 2024. A transitional period for CASPs ran until 31 July 2025 to allow systems adjustment, but full compliance is now required.
+    </p>
+
+    <h3>Does ChainScreen offer Travel Rule compliance?</h3>
+
+    <p>
+      No. ChainScreen now publishes content only. This guide is published to help CASPs understand their obligations and evaluate vendors. Travel Rule compliance remains a separate operational requirement from sanctions screening under <a href="/regulations/eba-guidelines-casps">EBA GL/2024/15</a>.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>Bottom line</h2>
+
+    <p>
+      The EU Travel Rule is the strictest implementation of FATF Recommendation 16 in any major jurisdiction. No threshold. Mandatory IVMS 101 data exchange. Self-hosted wallet verification above EUR 1,000. Five-year data retention. Documented procedures for every edge case.
+    </p>
+
+    <p>
+      The good news: the vendor ecosystem is mature. You don't need to build Travel Rule infrastructure from scratch. Pick a vendor with good counterparty coverage, integrate their API, document your procedures, and you're compliant. For a 5-person CASP, this is a 4-6 week project, not a 6-month initiative.
+    </p>
+
+    <p>
+      The bad news: if you haven't started, you're already behind. The transitional period ended in July 2025. Every transfer your CASP processes without Travel Rule compliance is a potential regulatory finding. Start now.
+    </p>
+
+    <div class="cta-banner">
+      <h3>Travel Rule is one obligation. Sanctions screening is another.</h3>
+      <p>Take our 2-minute compliance self-check to see if your sanctions screening meets EBA GL/2024/15 requirements -- before your next inspection.</p>
+      <a href="/regulations/" class="btn-primary">
+        Read the regulatory guides &rarr;
+      </a>
+    </div>
+
+    <div class="sources">
+      <h3>Sources</h3>
+      <ul>
+        <li><a href="https://eur-lex.europa.eu/eli/reg/2023/1113/oj/eng" target="_blank" rel="noopener">Regulation (EU) 2023/1113 -- Transfer of Funds Regulation (EUR-Lex)</a></li>
+        <li><a href="https://www.eba.europa.eu/sites/default/files/2024-07/6de6e9b9-0ed9-49cd-985d-c0834b5b4356/Travel%20Rule%20Guidelines.pdf" target="_blank" rel="noopener">EBA/GL/2024/11 -- Guidelines on Travel Rule information requirements (PDF)</a></li>
+        <li><a href="https://www.fatf-gafi.org/content/dam/fatf-gafi/recommendations/Best-Practices-Travel-Rule-Supervision.pdf" target="_blank" rel="noopener">FATF -- Best Practices for Travel Rule Supervision (June 2025)</a></li>
+        <li><a href="https://www.intervasp.org/" target="_blank" rel="noopener">interVASP -- IVMS 101 Messaging Standard</a></li>
+        <li><a href="https://trisa.io/" target="_blank" rel="noopener">TRISA -- Travel Rule Information Sharing Architecture</a></li>
+        <li><a href="https://www.openvasp.org/trp" target="_blank" rel="noopener">OpenVASP -- Travel Rule Protocol (TRP)</a></li>
+        <li><a href="https://notabene.id/state-of-crypto-travel-rule-compliance-report" target="_blank" rel="noopener">Notabene -- State of Crypto Travel Rule Compliance Report 2025</a></li>
+        <li><a href="https://notabene.id/post/a-deep-dive-into-self-hosted-wallet-transaction-requirements-under-the-eu-tfr" target="_blank" rel="noopener">Notabene -- Self-Hosted Wallet Requirements Under EU TFR</a></li>
+        <li><a href="https://www.21analytics.co/travel-rule-regulations/european-union-eu-travel-rule-regulation/" target="_blank" rel="noopener">21 Analytics -- EU Travel Rule Regulation overview</a></li>
+      </ul>
+    </div>
+
+  
+
+    <div class="related-articles">
+      <h3>Related articles</h3>
+      <div class="related-grid">
+        <a href="/regulations/eba-guidelines-casps" class="related-card">
+          <span class="related-card__tag">Regulations</span>
+          <span class="related-card__title">EBA Guidelines on Restrictive Measures: What Every Small CASP Must Do</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+        <a href="/regulations/mica-compliance-checklist-small-casp" class="related-card">
+          <span class="related-card__tag">Regulations</span>
+          <span class="related-card__title">MiCA Compliance Checklist for Small CASPs in 2026</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+<div style="margin: 40px 0; padding: 24px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; text-align: center;">
+  <p style="font-size: 15px; color: #475569; margin-bottom: 12px;">Need screening records and audit-ready evidence, not just a binary check?</p>
+  <a href="mailto:info@chainscreen.io" style="display: inline-block; padding: 12px 24px; background: #0c2340; color: #fff; border-radius: 8px; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600;">Contact ChainScreen</a>
+</div>
+
+
+<footer>
+  <div class="container">
+    &copy; 2026 DailyMind LTD &middot; HE 439959 &middot; Limassol, Cyprus
+    &nbsp;&middot;&nbsp;
+    <span>Information only; not legal advice</span>
+    &nbsp;&middot;&nbsp;
+    <a href="/privacy">Privacy</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://dailymind.eu">dailymind.eu</a>
+  </div>
+</footer>
+<script data-goatcounter="https://gc-chainscreen.vigilcom.dev/count"
+        async src="//gc.vigilcom.dev/count.js"></script>
+<script src="/nav.js" defer></script>
+</body>
+</html>

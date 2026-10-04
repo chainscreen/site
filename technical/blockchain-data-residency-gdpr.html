@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GDPR & Crypto Screening: Data Residency Rules | ChainScreen</title>
+<meta name="description" content="EDPB final Guidelines 02/2025 explain when blockchain identifiers can be personal data under GDPR. What EU data residency means for crypto AML tools.">
+<link rel="canonical" href="https://chainscreen.io/technical/blockchain-data-residency-gdpr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Blockchain Addresses Can Be Personal Data: GDPR Requirements for Crypto Compliance Tools">
+<meta property="og:description" content="EDPB final Guidelines 02/2025 explain when blockchain identifiers can be personal data. Sanctions screening requests may be GDPR-regulated processing operations.">
+<meta property="og:url" content="https://chainscreen.io/technical/blockchain-data-residency-gdpr">
+<meta property="og:site_name" content="ChainScreen">
+<meta property="og:image" content="https://chainscreen.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Blockchain Addresses Can Be Personal Data: GDPR Requirements for Crypto Compliance Tools","description":"EDPB final Guidelines 02/2025 explain when blockchain identifiers can qualify as personal data under GDPR. Analysis of role assessment, vendor selection criteria, and data residency obligations for EU CASPs.","datePublished":"2026-03-13","dateModified":"2026-07-10","wordCount":3097,"author":{"@type":"Person","name":"Katerina Bletsch","url":"https://chainscreen.io","jobTitle":"Founder","sameAs":["https://www.linkedin.com/in/katerina-bletsch/"]},"publisher":{"@type":"Organization","name":"ChainScreen","url":"https://chainscreen.io","logo":{"@type":"ImageObject","url":"https://chainscreen.io/og-image.png"}}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are blockchain addresses personal data under GDPR?","acceptedAnswer":{"@type":"Answer","text":"Yes, when the identifier relates to an identified or identifiable natural person. EDPB Guidelines 02/2025, final version adopted on 7 July 2026, state that public keys and other on-chain identifiers can qualify as personal data when individuals can be identified by means reasonably likely to be used, such as off-chain KYC data, exchange records, blockchain analytics, or breach correlation. Pseudonymous does not mean anonymous under GDPR."}},{"@type":"Question","name":"Do I need a Data Processing Agreement with my sanctions screening vendor?","acceptedAnswer":{"@type":"Answer","text":"Usually, if the screening vendor processes the data only on your documented instructions. GDPR roles require a factual assessment: the CASP is normally the controller for compliance screening, and the vendor is normally a processor for screening performed on the CASP's behalf. If the vendor determines its own purposes or essential means, a DPA alone is not enough and the controller/controller or joint-controller arrangement must be documented."}},{"@type":"Question","name":"Can I use a US-hosted compliance tool and still comply with GDPR?","acceptedAnswer":{"@type":"Answer","text":"It depends. Under GDPR Chapter V and the Schrems II ruling, a transfer to a US-hosted service needs an adequacy basis or appropriate safeguards. The EU-US Data Privacy Framework can cover self-certified organisations; otherwise SCCs and a transfer assessment plus supplementary measures may be needed. EU/EEA hosting can reduce transfer work, but only if support access, logs, backups, sub-processors, and onward transfers also stay within the EEA or are covered by a valid transfer mechanism."}},{"@type":"Question","name":"What records must CASPs keep under MiCA and for how long?","acceptedAnswer":{"@type":"Answer","text":"MiCA Article 68 requires CASPs to keep records of all crypto-asset services, activities, orders, and transactions for a minimum of five years (up to seven if requested by a national competent authority). Records must be detailed enough for regulators to reconstruct every transaction. This includes timestamps, quantities, counterparties, and screening results — all of which may contain personal data subject to GDPR."}},{"@type":"Question","name":"What happens if my compliance vendor has a data breach involving screening logs?","acceptedAnswer":{"@type":"Answer","text":"Under GDPR Article 33, the data controller (you, the CASP) must notify the relevant supervisory authority within 72 hours of becoming aware of a breach. Your DPA should require the processor to notify you 'without undue delay' after detecting a breach. If your vendor has no breach notification clause in their terms, you have no contractual mechanism to meet the 72-hour deadline — which makes both the breach and the notification failure your regulatory problem."}}]}
+</script>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chainscreen.io/og-image.png">
+<script defer src="https://u.vigilcom.dev/script.js" data-website-id="df019ee1-bf37-42db-be6c-93671ff213ec"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://chainscreen.io"},{"@type":"ListItem","position":2,"name":"Technical","item":"https://chainscreen.io/technical/"},{"@type":"ListItem","position":3,"name":"Blockchain Addresses Can Be Personal Data: GDPR Requirements for Crypto Compliance Tools"}]}
+</script>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-alt: #f8fafc;
+    --surface: #ffffff;
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --text: #0c1d36;
+    --text-body: #475569;
+    --text-muted: #94a3b8;
+    --accent: #0c2340;
+    --accent-hover: #143a65;
+    --accent-light: #edf2f9;
+    --teal: #0f766e;
+    --teal-light: #f0fdf4;
+    --code-bg: #091a30;
+    --code-surface: #0c2340;
+    --red: #dc2626;
+    --red-light: #fef2f2;
+    --font-serif: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-code: 'JetBrains Mono', 'SF Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  
+  header {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: var(--font-code);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--accent-hover); }
+
+  .nav-link {
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover { color: var(--text); }
+
+  
+  .article-header {
+    padding: 80px 0 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .article-header__eyebrow {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--teal);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .article-header h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+
+  .article-header__sub {
+    font-size: 17px;
+    color: var(--text-body);
+    max-width: 640px;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .article-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: var(--font-code);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.01em;
+  }
+
+  .article-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .article-meta__dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--teal);
+    flex-shrink: 0;
+  }
+
+  
+  .article-body {
+    padding: 48px 0 72px;
+  }
+
+  .article-body h2 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-top: 48px;
+    margin-bottom: 16px;
+    line-height: 1.3;
+    color: var(--text);
+  }
+
+  .article-body h3 {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 32px;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+
+  .article-body p {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .article-body ul, .article-body ol {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+    padding-left: 24px;
+  }
+
+  .article-body li {
+    margin-bottom: 6px;
+  }
+
+  .article-body a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+  }
+
+  .article-body a:hover {
+    color: var(--accent-hover);
+  }
+
+  .article-body strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .article-body code {
+    font-family: var(--font-code);
+    font-size: 13px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--accent);
+  }
+
+  
+  .callout {
+    margin: 28px 0;
+    padding: 24px 28px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .callout p {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .callout p:last-child {
+    margin-bottom: 0;
+  }
+
+  .callout--warning {
+    background: var(--red-light);
+    border: 1px solid #fecaca;
+  }
+
+  .callout--warning .callout__label {
+    color: var(--red);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--info {
+    background: var(--accent-light);
+    border: 1px solid #c7d5e8;
+  }
+
+  .callout--info .callout__label {
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--teal {
+    background: var(--teal-light);
+    border: 1px solid #bbf7d0;
+  }
+
+  .callout--teal .callout__label {
+    color: var(--teal);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  
+  .comparison-wrapper {
+    margin: 28px 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .comparison th, .comparison td {
+    padding: 13px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .comparison tr:last-child td { border-bottom: none; }
+
+  .comparison th {
+    color: var(--text-muted);
+    font-family: var(--font-code);
+    font-weight: 500;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--bg-alt);
+  }
+
+  .comparison td:first-child {
+    color: var(--text);
+    font-weight: 500;
+    font-size: 13px;
+  }
+
+  .check { color: var(--teal); font-weight: 600; }
+  .cross { color: var(--red); font-weight: 600; }
+  .na { color: var(--text-muted); }
+
+  
+  .checklist {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 24px;
+    counter-reset: checklist;
+  }
+
+  .checklist li {
+    counter-increment: checklist;
+    padding: 12px 16px 12px 52px;
+    position: relative;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-body);
+  }
+
+  .checklist li::before {
+    content: counter(checklist);
+    position: absolute;
+    left: 16px;
+    top: 12px;
+    width: 24px;
+    height: 24px;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .checklist li strong {
+    color: var(--text);
+  }
+
+  
+  blockquote {
+    margin: 24px 0;
+    padding: 20px 24px;
+    border-left: 3px solid var(--border-strong);
+    background: var(--bg-alt);
+    border-radius: 0 8px 8px 0;
+  }
+
+  blockquote p {
+    font-size: 14px;
+    color: var(--text-body);
+    font-style: italic;
+    margin-bottom: 0;
+  }
+
+  blockquote cite {
+    display: block;
+    margin-top: 8px;
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-style: normal;
+    color: var(--text-muted);
+  }
+
+  
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  
+  .cta-banner {
+    margin: 48px 0;
+    padding: 40px 36px;
+    background: var(--code-bg);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .cta-banner h3 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: #f1f5f9;
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .cta-banner p {
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 24px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 28px;
+    background: #fff;
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary:hover {
+    background: #f1f5f9;
+    color: var(--accent);
+  }
+
+  
+  .sources {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .sources h3 {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .sources ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sources li {
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 4px 0;
+    line-height: 1.6;
+  }
+
+  .sources li a {
+    color: var(--text-body);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .sources li a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  
+  .faq-section {
+    margin-top: 48px;
+  }
+
+  .faq-item {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+
+  .faq-item summary {
+    padding: 16px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .faq-item summary::-webkit-details-marker { display: none; }
+
+  .faq-item summary::after {
+    content: "+";
+    font-family: var(--font-code);
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+
+  .faq-item[open] summary::after {
+    content: "-";
+  }
+
+  .faq-item .faq-answer {
+    padding: 0 20px 16px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-body);
+  }
+
+  
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--text); }
+
+  
+  @media (max-width: 640px) {
+    .article-header { padding: 48px 0 32px; }
+    .article-header h1 { font-size: 1.8rem; }
+    .article-body h2 { font-size: 20px; }
+    .article-meta { gap: 12px; }
+    .comparison { font-size: 11px; }
+    .comparison th, .comparison td { padding: 8px 10px; }
+    .callout { padding: 20px; }
+    .cta-banner { padding: 32px 24px; }
+    .checklist li { padding-left: 44px; font-size: 13px; }
+    .checklist li::before { left: 12px; }
+  }
+
+  
+  .breadcrumb { padding: 12px 0; border-bottom: 1px solid var(--border); background: var(--bg-alt); }
+  .breadcrumb a, .breadcrumb span { font-family: var(--font-code); font-size: 11px; letter-spacing: 0.01em; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb__sep { color: #cbd5e1; margin: 0 6px; }
+  .breadcrumb__current { color: var(--text-body); }
+
+  
+  .nav-links { display: flex; align-items: center; gap: 20px; }
+  .nav-link.active { color: var(--text); }
+  @media (max-width: 640px) { .nav-links { gap: 12px; } .nav-link { font-size: 11px; } }
+
+  
+  .related-articles { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+  .related-articles h3 { font-family: var(--font-code); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 16px; margin-top: 0; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .related-card { display: flex; flex-direction: column; gap: 8px; padding: 20px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; transition: border-color 0.2s; }
+  .related-card:hover { border-color: var(--accent); }
+  .related-card__tag { font-family: var(--font-code); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--teal); }
+  .related-card__title { font-family: var(--font-serif); font-size: 15px; color: var(--text); line-height: 1.35; }
+  .related-card__arrow { font-family: var(--font-code); font-size: 12px; color: var(--text-muted); margin-top: auto; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="/" class="logo">chain<span>screen</span></a>
+    <nav class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/regulations/" class="nav-link">Regulations</a>
+      <a href="/operations/" class="nav-link">Operations</a>
+      <a href="/tools/" class="nav-link">Tools</a>
+      <a href="/technical/" class="nav-link active">Technical</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <div class="container">
+    <a href="/">Home</a><span class="breadcrumb__sep">/</span>
+    <a href="/technical/">Technical</a><span class="breadcrumb__sep">/</span>
+    <span class="breadcrumb__current">GDPR Data Residency</span>
+  </div>
+</nav>
+
+<section class="article-header">
+  <div class="container">
+    <div class="article-header__eyebrow">Data protection &amp; compliance</div>
+    <h1>Blockchain Addresses Can Be Personal Data: GDPR Requirements for Crypto Compliance Tools</h1>
+    <p class="article-header__sub">
+      EDPB confirmed: public keys, accounts, wallet addresses, and transaction metadata can qualify as personal data under GDPR. Here's what that means for crypto AML vendor selection.
+    </p>
+    <div class="article-meta">
+      <span><div class="article-meta__dot"></div> Updated July 2026</span>
+      <span><div class="article-meta__dot"></div> 9 min read</span>
+      <span><div class="article-meta__dot"></div> Sources: EDPB Guidelines 02/2025 v2.0, GDPR, MiCA, Schrems II</span>
+    </div>
+  </div>
+</section>
+
+<article class="article-body">
+  <div class="container">
+
+    <p>
+      Most compliance teams at crypto asset service providers (CASPs) focus on which sanctions lists their screening tool covers. That's the right starting point -- we've written about <a href="/tools/chainalysis-oracle-limitations">what the Chainalysis free oracle does and doesn't cover</a> and published a <a href="/tools/sanctions-screening-tools-comparison">full comparison of screening tools</a>. But there's a second compliance layer that almost no one talks about: <strong>data protection</strong>.
+    </p>
+
+    <p>
+      Every time you send a customer or counterparty blockchain address to a third-party screening API, you may be transmitting personal data to an external vendor. That transaction needs a GDPR role assessment. If your vendor processes the data on your instructions, you need a Data Processing Agreement; if their servers or support flows are outside the EU without adequate safeguards, or if they can't tell you how long they retain your screening logs -- you have a GDPR problem on top of your sanctions compliance problem.
+    </p>
+
+    <p>
+      On 7 July 2026, the European Data Protection Board adopted the final v2.0 of Guidelines 02/2025 on processing personal data through blockchain technologies. This article breaks down what those guidelines mean for your compliance tooling stack.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>1. Are blockchain addresses personal data under EDPB guidance?</h2>
+
+    <p>
+      The argument that blockchain addresses are "just random strings" and therefore not personal data has never held up legally. EDPB Guidelines 02/2025, final v2.0 adopted on 7 July 2026, settle the practical point for blockchain identifiers.
+    </p>
+
+    <h3>Pseudonymous does not mean anonymous</h3>
+
+    <p>
+      The guidelines explicitly address the classification of on-chain identifiers. Public keys, blockchain addresses, accounts, wallet identifiers, and transaction metadata often operate as <strong>pseudonymous data</strong> -- not anonymous data. Under GDPR Recital 26, data is personal data if a natural person can be identified "directly or indirectly" by means "reasonably likely to be used."
+    </p>
+
+    <p>
+      The EDPB confirms that public keys and other on-chain identifiers qualify as personal data whenever they can be linked to a natural person through means reasonably likely to be used. Those means include:
+    </p>
+
+    <ul>
+      <li><strong>Off-chain KYC data</strong> -- your own customer records linking addresses to identities</li>
+      <li><strong>Exchange deposit/withdrawal records</strong> -- centralized exchanges know which user controls which address</li>
+      <li><strong>Blockchain analytics</strong> -- clustering algorithms, transaction graph analysis, and address attribution databases</li>
+      <li><strong>Data breach correlation</strong> -- leaked datasets that map addresses to real-world identities</li>
+    </ul>
+
+    <p>
+      The point is not only whether <em>you</em> can identify the person behind the address. It's whether the person can be identified with reasonably available means. In a CASP context, addresses connected to customer files, exchange records, transaction monitoring, or analytics databases should be treated as personal data unless you have documented a stronger reason not to.
+    </p>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">Regulatory position</div>
+      <p>
+        The EDPB states that "technical impossibility cannot be invoked to justify non-compliance with GDPR requirements." The immutability of blockchain does not exempt on-chain data from GDPR obligations. If personal data is processed, GDPR applies -- regardless of the technical architecture.
+      </p>
+    </div>
+
+    <h3>What this covers in practice</h3>
+
+    <p>
+      For a CASP running sanctions screening, the following data elements should be treated as personal data when they relate to customers, counterparties, or other identifiable natural persons:
+    </p>
+
+    <ul>
+      <li><strong>Screening request logs</strong> -- the blockchain addresses you submit to a screening API, with timestamps</li>
+      <li><strong>Screening results</strong> -- whether an address was flagged, which list triggered the match, the risk score</li>
+      <li><strong>Audit trails</strong> -- historical records of who was screened, when, and what action was taken</li>
+      <li><strong>Transaction monitoring data</strong> -- origin/destination addresses, amounts, chain identifiers</li>
+    </ul>
+
+    <p>
+      All of these are routinely transmitted to or generated by third-party compliance tools. When they relate to identifiable people, each collection, lookup, storage, export, or deletion step is a GDPR processing operation.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>2. How should you classify your sanctions screening vendor?</h2>
+
+    <p>
+      When you integrate a third-party sanctions screening API, the GDPR roles are usually practical but not automatic. The EDPB stresses that roles and responsibilities require a factual assessment for each processing activity.
+    </p>
+
+    <ul>
+      <li><strong>You (the CASP)</strong> are normally the data controller for compliance screening. You determine why blockchain addresses are screened -- sanctions and AML compliance.</li>
+      <li><strong>Your screening vendor</strong> is normally the data processor when it processes addresses only on your behalf, according to your documented instructions.</li>
+      <li><strong>Different roles are possible</strong> if the vendor determines its own purposes or essential means, reuses data for independent analytics, or combines your screening data with other products. In that case, a processor DPA alone is not the right answer.</li>
+    </ul>
+
+    <p>
+      If the vendor is your processor, GDPR Article 28 is explicit: a controller may only use processors that provide "sufficient guarantees to implement appropriate technical and organisational measures" to protect personal data. And the relationship <strong>must</strong> be governed by a contract -- the Data Processing Agreement.
+    </p>
+
+    <h3>What the DPA must contain</h3>
+
+    <p>
+      Article 28(3) lists eight mandatory provisions for any DPA. For a sanctions screening vendor, these translate to:
+    </p>
+
+    <ul>
+      <li><strong>Subject matter and duration</strong> -- sanctions screening of blockchain addresses, for the term of the service agreement</li>
+      <li><strong>Nature and purpose</strong> -- checking addresses against sanctions lists to fulfill regulatory obligations</li>
+      <li><strong>Categories of data</strong> -- blockchain addresses, transaction identifiers, screening results, timestamps</li>
+      <li><strong>Categories of data subjects</strong> -- your customers and counterparties whose addresses are screened</li>
+      <li><strong>Processing only on documented instructions</strong> -- the vendor cannot use your screening data for their own purposes (training ML models, compiling analytics, marketing)</li>
+      <li><strong>Confidentiality obligations</strong> -- everyone with access to the data is bound by confidentiality</li>
+      <li><strong>Sub-processor disclosure</strong> -- if the vendor uses AWS, GCP, or any other sub-processor, they must disclose it and you must approve it</li>
+      <li><strong>Deletion or return on termination</strong> -- when you stop using the vendor, they must delete your data or return it, at your choice</li>
+    </ul>
+
+    <div class="callout callout--info">
+      <div class="callout__label">Sub-processor chain</div>
+      <p>
+        This is where it gets practical. If your screening vendor hosts on AWS US-East, Amazon is a sub-processor. If they use a third-party sanctions list provider that receives your query data, that provider is a sub-processor. Under Article 28(4), the same data protection obligations in your DPA must flow down to every sub-processor. Ask your vendor: who are your sub-processors, and where are they located?
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>3. Where does your screening data live — and why does it matter?</h2>
+
+    <p>
+      GDPR Chapter V governs international transfers of personal data. The rules are straightforward in principle: personal data can only leave the EU/EEA if the destination country provides an adequate level of protection, or if specific safeguards are in place. The EDPB also flags cloud computing and non-EU nodes as practical transfer risks in blockchain-related processing.
+    </p>
+
+    <h3>The Schrems II legacy</h3>
+
+    <p>
+      The 2020 Schrems II ruling (Case C-311/18) invalidated the EU-US Privacy Shield and raised the bar for all data transfers to the United States. While the EU-US Data Privacy Framework (adopted July 2023) restored an adequacy basis for certified US companies, it only applies to organizations that have self-certified under the framework.
+    </p>
+
+    <p>
+      If your screening vendor is a US company that hasn't self-certified under the Data Privacy Framework, transferring blockchain addresses to their servers usually requires Standard Contractual Clauses (SCCs) plus a documented transfer assessment and any needed supplementary measures. The assessment must evaluate whether third-country law and practice could compromise the protection of the transferred data.
+    </p>
+
+    <p>
+      For most CASPs, this is compliance overhead you may be able to reduce. EU/EEA-hosted screening can simplify the transfer analysis, but it does not end the question by itself. Check where application servers, databases, backups, support access, telemetry, error logs, and sub-processors are located, and whether any onward transfer is covered by a valid mechanism.
+    </p>
+
+    <h3>MiCA record-keeping adds another layer</h3>
+
+    <p>
+      MiCA Article 68 requires CASPs to retain records of all crypto-asset services, activities, orders, and transactions for a minimum of five years -- up to seven if requested by a national competent authority. These records must be detailed enough for regulators to reconstruct every transaction.
+    </p>
+
+    <p>
+      Sanctions screening results are part of these records. If your screening vendor deletes logs after 12 months or doesn't provide data export, you can't meet MiCA's retention requirements. If those logs are stored outside the EU, you have both a GDPR transfer issue and a MiCA record-keeping issue simultaneously.
+    </p>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">Double obligation</div>
+      <p>
+        MiCA says: keep records for at least 5 years. GDPR says: don't keep data longer than necessary. These two obligations must be reconciled in your retention policy. The screening vendor's DPA should specify retention periods that satisfy MiCA minimums while defining a clear deletion schedule for when the retention period expires.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>4. What should your vendor selection checklist include for GDPR?</h2>
+
+    <p>
+      When evaluating a sanctions screening tool, sanctions list coverage is only half the assessment. Here's what a GDPR-aware vendor selection process looks like:
+    </p>
+
+    <ol class="checklist">
+      <li><strong>EU-hosted infrastructure and access.</strong> Verify that the screening API processes and stores data within the EU/EEA. Ask specifically: where are the application servers, databases, backups, logs, support teams, and sub-processors located? "Cloud-hosted" is not an answer -- you need regions and access paths.</li>
+      <li><strong>Data Processing Agreement available.</strong> The vendor should provide a DPA that meets Article 28(3) requirements -- not buried in general terms, but as a standalone, signable document. If they don't have one, they haven't thought about GDPR.</li>
+      <li><strong>Data retention and deletion policy.</strong> How long does the vendor retain your screening queries and results? Can you request deletion? Is deletion verifiable? The policy must be documented and specific -- not "we follow industry best practices."</li>
+      <li><strong>Sub-processor transparency.</strong> The vendor must disclose all sub-processors (cloud providers, list providers, analytics services) and their locations. You must have the right to object to new sub-processors. This should be in the DPA.</li>
+      <li><strong>Breach notification process.</strong> Under GDPR Article 33, controllers must notify supervisory authorities within 72 hours of a breach. Your DPA must require the vendor to notify you "without undue delay" -- which means faster than 72 hours, because you still need time to assess and report.</li>
+      <li><strong>Data subject rights support.</strong> If a customer exercises their GDPR rights (access, rectification, erasure), the vendor must be able to locate and handle data related to that individual's blockchain addresses. Ask: can you search your systems by a specific address and return or delete all associated records?</li>
+      <li><strong>Security certifications.</strong> SOC 2 Type II or ISO 27001 certification demonstrates that the vendor has been independently audited for security controls. These aren't strictly required by GDPR, but they're strong evidence of "appropriate technical and organisational measures" under Article 32. For smaller CASPs, asking for at least a SOC 2 Type I report is reasonable.</li>
+      <li><strong>No data reuse clause.</strong> The DPA should explicitly prohibit the vendor from using your screening data for their own purposes -- product improvement, aggregate analytics, benchmarking, or resale. If the vendor's business model depends on aggregating customer screening data, that's a GDPR red flag.</li>
+    </ol>
+
+    <hr class="section-divider">
+
+    <h2>5. What are the common GDPR pitfalls with compliance tools?</h2>
+
+    <p>
+      We've reviewed the data protection posture of several common screening setups. These are the patterns that create the most risk:
+    </p>
+
+    <h3>Free tools with no DPA</h3>
+
+    <p>
+      Free screening APIs -- including free tiers from major providers -- typically come with terms of service, not a Data Processing Agreement. A ToS is not a DPA. It doesn't contain the mandatory Article 28(3) provisions, doesn't address sub-processors, and doesn't give you the contractual basis you need. If you're processing personal data through a service governed only by a ToS, you're operating without the required legal framework. This applies even if the tool is from a reputable vendor.
+    </p>
+
+    <h3>US-hosted audit logs</h3>
+
+    <p>
+      Some vendors offer EU-hosted APIs but route audit logs, analytics, or error reporting through US-based services. Screening metadata -- which addresses were checked, when, and what the result was -- can be personal data. If that metadata ends up on a US server without Data Privacy Framework coverage, SCCs, or another valid transfer mechanism, the transfer risk remains even though the primary screening happened in the EU.
+    </p>
+
+    <h3>No data deletion mechanism</h3>
+
+    <p>
+      If your vendor can't delete your historical screening data when you offboard, they're retaining personal data without a legal basis after the processing relationship ends. Ask before you sign: what happens to my data when I cancel? "We'll archive it" is not the same as "we'll delete it within 30 days and provide a certificate of deletion."
+    </p>
+
+    <h3>Mixing compliance data with marketing</h3>
+
+    <p>
+      Some compliance platforms are part of larger companies that also offer marketing, analytics, or research products. If the same entity processes your sanctions screening data and your newsletter sign-ups, the purposes need to be strictly segregated. Cross-contamination of compliance data into marketing systems is a purpose limitation violation under GDPR Article 5(1)(b) -- and it would be extremely difficult to explain to a regulator.
+    </p>
+
+    <h3>Vendor lock-in through data inaccessibility</h3>
+
+    <p>
+      If you can't export your screening history in a structured format, you can't migrate to another vendor without losing your audit trail. MiCA requires you to keep those records for five years. A vendor that holds your compliance records hostage is a regulatory liability.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>How do common screening setups compare for GDPR compliance?</h2>
+
+    <p>
+      Here's how typical screening configurations stack up against GDPR requirements:
+    </p>
+
+    <div class="comparison-wrapper">
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th>GDPR Requirement</th>
+            <th>Free API (no DPA)</th>
+            <th>US-hosted vendor</th>
+            <th>EU-hosted vendor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Data Processing Agreement</td>
+            <td class="cross">&#10007; Not available</td>
+            <td class="check">&#10003; Usually available</td>
+            <td class="check">&#10003; Available</td>
+          </tr>
+          <tr>
+            <td>EU data residency</td>
+            <td class="na">Unknown</td>
+            <td class="cross">&#10007; Needs DPF or SCCs + transfer assessment</td>
+            <td class="check">&#10003; Lower transfer risk if verified</td>
+          </tr>
+          <tr>
+            <td>Sub-processor transparency</td>
+            <td class="cross">&#10007; Not disclosed</td>
+            <td class="check">&#10003; Varies</td>
+            <td class="check">&#10003; Disclosed</td>
+          </tr>
+          <tr>
+            <td>Breach notification clause</td>
+            <td class="cross">&#10007; Not in ToS</td>
+            <td class="check">&#10003; In DPA</td>
+            <td class="check">&#10003; In DPA</td>
+          </tr>
+          <tr>
+            <td>Data deletion on offboarding</td>
+            <td class="cross">&#10007; No mechanism</td>
+            <td class="na">Varies by vendor</td>
+            <td class="check">&#10003; Contractual</td>
+          </tr>
+          <tr>
+            <td>No data reuse guarantee</td>
+            <td class="cross">&#10007; ToS may allow</td>
+            <td class="check">&#10003; In DPA</td>
+            <td class="check">&#10003; In DPA</td>
+          </tr>
+          <tr>
+            <td>Transfer Impact Assessment</td>
+            <td class="na">Unknown</td>
+            <td class="cross">&#10007; Your responsibility unless covered by adequacy</td>
+            <td class="na">Usually not needed if no onward transfer</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      The difference is not about which setup is "more secure." All three can implement strong encryption and access controls. The difference is regulatory overhead: US-hosted vendors may require additional legal instruments, transfer assessments, and ongoing monitoring, while EU-hosted vendors can reduce that work if all processing, logs, support access, backups, and sub-processors stay in the EEA. Free tools without DPAs lack the legal foundation entirely.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>What does this mean for vendor selection?</h2>
+
+    <p>
+      Data protection is becoming a competitive differentiator in the compliance tooling market. CASPs that have been through a regulatory inspection know that auditors don't just ask about sanctions lists -- they ask about data flows, vendor contracts, and retention policies.
+    </p>
+
+    <p>
+      The practical takeaway: when evaluating screening tools, your assessment should have two tracks running in parallel. Track one: does this tool screen against the sanctions lists I need (EU, UN, OFAC, UK)? Track two: have I classified the vendor's GDPR role correctly, and if it is a processor, does it meet my Article 28 obligations?
+    </p>
+
+    <p>
+      Failing on track one means you might miss a sanctioned address. Failing on track two can turn your screening archive into a data protection finding. Both carry regulatory risk. But the data protection risk scales with volume -- every screening request tied to an identifiable person is a separate processing operation.
+    </p>
+
+    <div class="callout callout--teal">
+      <div class="callout__label">EU-first architecture</div>
+      <p>
+        ChainScreen is designed with EU data residency from the ground up. All screening data is processed and stored within the EU. DPA, sub-processor list, retention policy, and deletion procedures are available on request. We think this should be the baseline, not a premium feature.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>Frequently asked questions</h2>
+
+    <div class="faq-section">
+
+      <details class="faq-item">
+        <summary>Are blockchain addresses personal data under GDPR?</summary>
+        <div class="faq-answer">
+          <p>Yes, when the identifier relates to an identified or identifiable natural person. EDPB Guidelines 02/2025, final version adopted on 7 July 2026, confirm that public keys and other on-chain identifiers can qualify as personal data whenever they can be linked to a natural person by means "reasonably likely to be used" -- such as through off-chain KYC data, exchange records, blockchain analytics, or breach correlation. Pseudonymous does not mean anonymous under GDPR.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Do I need a Data Processing Agreement with my sanctions screening vendor?</summary>
+        <div class="faq-answer">
+          <p>Usually, if the screening vendor processes the data only on your documented instructions. GDPR roles require a factual assessment: the CASP is normally the controller for compliance screening, and the vendor is normally a processor for screening performed on the CASP's behalf. If the vendor determines its own purposes or essential means, a DPA alone is not enough and the controller/controller or joint-controller arrangement must be documented.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Can I use a US-hosted compliance tool and still comply with GDPR?</summary>
+        <div class="faq-answer">
+          <p>It depends. Under GDPR Chapter V and the Schrems II ruling, a transfer to a US-hosted service needs an adequacy basis or appropriate safeguards. Since July 2023, the EU-US Data Privacy Framework can cover self-certified organisations; otherwise SCCs and a transfer assessment plus supplementary measures may be needed. EU/EEA hosting can reduce transfer work, but only if support access, logs, backups, sub-processors, and onward transfers also stay within the EEA or are covered by a valid transfer mechanism.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>What records must CASPs keep under MiCA, and for how long?</summary>
+        <div class="faq-answer">
+          <p>MiCA Article 68 requires CASPs to keep records of all crypto-asset services, activities, orders, and transactions for a minimum of five years (up to seven if requested by a national competent authority). Records must be detailed enough for regulators to reconstruct every transaction. This includes timestamps, quantities, counterparties, and screening results -- all of which may contain personal data subject to GDPR.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>What happens if my compliance vendor has a data breach involving screening logs?</summary>
+        <div class="faq-answer">
+          <p>Under GDPR Article 33, the data controller (you, the CASP) must notify the relevant supervisory authority within 72 hours of becoming aware of a breach. Your DPA should require the processor to notify you "without undue delay" after detecting a breach. If your vendor has no breach notification clause in their terms, you have no contractual mechanism to meet the 72-hour deadline -- which makes both the breach and the notification failure your regulatory problem.</p>
+        </div>
+      </details>
+
+    </div>
+
+    <div class="cta-banner">
+      <h3>Is your screening vendor GDPR-ready?</h3>
+      <p>Take our 2-minute compliance self-check. Ten questions covering sanctions lists, data protection, and audit readiness -- see where you stand before your next inspection.</p>
+      <a href="/regulations/" class="btn-primary">
+        Read the regulatory guides &rarr;
+      </a>
+    </div>
+
+    <div class="sources">
+      <h3>Sources</h3>
+      <ul>
+        <li><a href="https://www.edpb.europa.eu/documents/guideline/guidelines-on-processing-of-personal-data-through-blockchain-technologies_en" target="_blank" rel="noopener">EDPB -- Guidelines 02/2025 on processing of personal data through blockchain technologies, final v2.0</a></li>
+        <li><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679" target="_blank" rel="noopener">GDPR -- Regulation (EU) 2016/679, Articles 4, 5, 28, 32, 33, and Chapter V</a></li>
+        <li><a href="https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/standard-contractual-clauses-scc_en" target="_blank" rel="noopener">European Commission -- Standard Contractual Clauses (SCCs)</a></li>
+        <li><a href="https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/adequacy-decisions_en" target="_blank" rel="noopener">European Commission -- Adequacy decisions and EU-US Data Privacy Framework</a></li>
+        <li><a href="https://curia.europa.eu/juris/liste.jsf?num=C-311/18" target="_blank" rel="noopener">CJEU Case C-311/18 (Schrems II)</a></li>
+        <li><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32023R1114" target="_blank" rel="noopener">Regulation (EU) 2023/1114 -- Markets in Crypto-Assets (MiCA)</a></li>
+        <li><a href="https://www.esma.europa.eu/sites/default/files/2024-12/ESMA75-453128700-1278_Final_Report_STOR_MiCA_Article_92_2_.pdf" target="_blank" rel="noopener">ESMA Final Report -- MiCA Article 92 regulatory technical standards</a></li>
+        <li><a href="https://www.eba.europa.eu/publications-and-media/press-releases/eba-publishes-final-guidelines-internal-policies-procedures-and-controls-ensure-implementation" target="_blank" rel="noopener">EBA Final Guidelines on Restrictive Measures (GL/2024/15)</a></li>
+      </ul>
+    </div>
+
+  
+
+    <div class="related-articles">
+      <h3>Related articles</h3>
+      <div class="related-grid">
+        <a href="/technical/blockchain-analytics-address-clustering" class="related-card">
+          <span class="related-card__tag">Technical</span>
+          <span class="related-card__title">Address Clustering, Mixing Detection, and Source of Funds</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+        <a href="/operations/chainalysis-alternative-eu-casp" class="related-card">
+          <span class="related-card__tag">Tools</span>
+          <span class="related-card__title">Affordable Chainalysis Alternatives for EU CASPs in 2026</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+<div style="margin: 40px 0; padding: 24px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; text-align: center;">
+  <p style="font-size: 15px; color: #475569; margin-bottom: 12px;">Need screening records and audit-ready evidence, not just a binary check?</p>
+  <a href="mailto:info@chainscreen.io" style="display: inline-block; padding: 12px 24px; background: #0c2340; color: #fff; border-radius: 8px; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600;">Contact ChainScreen</a>
+</div>
+
+
+<footer>
+  <div class="container">
+    &copy; 2026 DailyMind LTD &middot; HE 439959 &middot; Limassol, Cyprus
+    &nbsp;&middot;&nbsp;
+    <span>Information only; not legal advice</span>
+    &nbsp;&middot;&nbsp;
+    <a href="/privacy">Privacy</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://dailymind.eu">dailymind.eu</a>
+  </div>
+</footer>
+<script data-goatcounter="https://gc-chainscreen.vigilcom.dev/count"
+        async src="//gc.vigilcom.dev/count.js"></script>
+<script src="/nav.js" defer></script>
+</body>
+</html>

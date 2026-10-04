@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crypto Wallet Risk Score: How Clustering Works | ChainScreen</title>
+<meta name="description" content="How address clustering, mixing detection, and source of funds tracing produce crypto wallet risk scores. Which analytics level your CASP actually needs.">
+<link rel="canonical" href="https://chainscreen.io/technical/blockchain-analytics-address-clustering">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Address Clustering, Mixing Detection, and Source of Funds: What CASPs Actually Need to Know">
+<meta property="og:description" content="Sanctions screening checks if an address is on a list. Risk scoring asks: where did the money come from? Here's how blockchain analytics works — and how much of it you actually need.">
+<meta property="og:url" content="https://chainscreen.io/technical/blockchain-analytics-address-clustering">
+<meta property="og:image" content="https://chainscreen.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="ChainScreen">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chainscreen.io/og-image.png">
+<script defer src="https://u.vigilcom.dev/script.js" data-website-id="df019ee1-bf37-42db-be6c-93671ff213ec"></script>
+<meta name="twitter:title" content="Address Clustering, Mixing Detection, and Source of Funds: What CASPs Actually Need to Know">
+<meta name="twitter:description" content="Sanctions screening checks if an address is on a list. Risk scoring asks: where did the money come from? Here's how much blockchain analytics your CASP actually needs.">
+<meta name="article:published_time" content="2026-03-13">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Address Clustering, Mixing Detection, and Source of Funds: What CASPs Actually Need to Know","description":"How blockchain analytics works — from list-based screening to full behavioral analysis. Address clustering, mixing detection, source of funds tracing, and which analytics level your CASP actually needs.","datePublished":"2026-03-13","dateModified":"2026-07-10","wordCount":3496,"author":{"@type":"Person","name":"Katerina Bletsch","url":"https://chainscreen.io","jobTitle":"Founder","sameAs":["https://www.linkedin.com/in/katerina-bletsch/"]},"publisher":{"@type":"Organization","name":"ChainScreen","url":"https://chainscreen.io","logo":{"@type":"ImageObject","url":"https://chainscreen.io/og-image.png"}}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is address clustering in blockchain analytics?","acceptedAnswer":{"@type":"Answer","text":"Address clustering is a technique that groups blockchain addresses likely controlled by the same wallet, service, or entity. The most common Bitcoin method is the common-input-ownership heuristic: if two addresses appear as inputs in the same transaction, they are usually controlled by the same spender. This is a compliance signal, not proof of beneficial ownership; CoinJoin, PayJoin, custodial wallets, and labeling errors can create false positives."}},{"@type":"Question","name":"Do CASPs need mixing detection to comply with EU restrictive-measures expectations?","acceptedAnswer":{"@type":"Answer","text":"EBA GL/2024/15 requires PSPs and CASPs performing transfers to maintain adequate screening systems and controls for Union and national restrictive measures. FATF guidance identifies anonymity-enhanced cryptocurrencies, mixers, and tumblers as reduced-transparency ML/TF risks. The rules do not mandate a specific mixing-detection technology. Depth should be proportionate: known-address and direct-interaction flags may be enough for lower-risk models, while high-volume exchanges usually need deeper monitoring."}},{"@type":"Question","name":"What is the difference between hop-counting and value-flow analysis in source of funds tracing?","acceptedAnswer":{"@type":"Answer","text":"Hop-counting measures how many transactions separate an address from a known risky source — for example, '3 hops from a sanctioned wallet.' Value-flow analysis tracks the amount of funds that flowed through each path, calculating what percentage of an address's balance originated from risky sources. Value-flow analysis is more specific but more computationally expensive. Hop-counting is simpler but produces more false positives because, at higher hop depths, graph paths quickly reach high-degree services and noisy indirect exposure."}},{"@type":"Question","name":"Which analytics level does a small CASP need — Level 2 or Level 3?","acceptedAnswer":{"@type":"Answer","text":"It depends on your service type. Payment processors and staking services can typically operate at Level 2 (one-hop tracing with known-address flagging). Custodians and OTC desks handling larger amounts should target Level 3 (multi-hop clustering with exposure scoring). Full exchanges need Level 3-4. The key factor is your risk exposure: if customers can deposit arbitrary funds from unknown sources, you need deeper analytics than if you only process outbound payments to verified recipients."}},{"@type":"Question","name":"Can blockchain analytics trace privacy coins like Monero?","acceptedAnswer":{"@type":"Answer","text":"Not in the same way it can trace transparent ledgers. Monero uses ring signatures, stealth addresses, and RingCT to hide the apparent spender, recipient link, and transaction amount. Public on-chain analysis cannot provide deterministic source-of-funds tracing for Monero; any vendor output should be treated as probabilistic and boundary-focused unless backed by off-chain evidence."}}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://chainscreen.io"},{"@type":"ListItem","position":2,"name":"Technical","item":"https://chainscreen.io/technical/"},{"@type":"ListItem","position":3,"name":"Address Clustering, Mixing Detection, and Source of Funds: What CASPs Actually Need to Know"}]}
+</script>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-alt: #f8fafc;
+    --surface: #ffffff;
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --text: #0c1d36;
+    --text-body: #475569;
+    --text-muted: #94a3b8;
+    --accent: #0c2340;
+    --accent-hover: #143a65;
+    --accent-light: #edf2f9;
+    --teal: #0f766e;
+    --teal-light: #f0fdf4;
+    --code-bg: #091a30;
+    --code-surface: #0c2340;
+    --red: #dc2626;
+    --red-light: #fef2f2;
+    --font-serif: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-code: 'JetBrains Mono', 'SF Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  
+  header {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: var(--font-code);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--accent-hover); }
+
+  .nav-link {
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover { color: var(--text); }
+
+  
+  .article-header {
+    padding: 80px 0 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .article-header__eyebrow {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--teal);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .article-header h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+
+  .article-header__sub {
+    font-size: 17px;
+    color: var(--text-body);
+    max-width: 640px;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .article-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: var(--font-code);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.01em;
+  }
+
+  .article-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .article-meta__dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--teal);
+    flex-shrink: 0;
+  }
+
+  
+  .article-body {
+    padding: 48px 0 72px;
+  }
+
+  .article-body h2 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-top: 48px;
+    margin-bottom: 16px;
+    line-height: 1.3;
+    color: var(--text);
+  }
+
+  .article-body h3 {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 32px;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+
+  .article-body p {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .article-body ul, .article-body ol {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+    padding-left: 24px;
+  }
+
+  .article-body li {
+    margin-bottom: 6px;
+  }
+
+  .article-body a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+  }
+
+  .article-body a:hover {
+    color: var(--accent-hover);
+  }
+
+  .article-body strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .article-body code {
+    font-family: var(--font-code);
+    font-size: 13px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--accent);
+  }
+
+  
+  .code-block {
+    margin: 24px 0;
+    background: var(--code-bg);
+    border: 1px solid #0c2340;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .code-block__header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 16px;
+    border-bottom: 1px solid #0c2340;
+    background: #071528;
+  }
+
+  .code-block__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #0c2340;
+  }
+
+  .code-block__title {
+    font-family: var(--font-code);
+    font-size: 12px;
+    color: #64748b;
+    margin-left: 8px;
+  }
+
+  .code-block pre {
+    padding: 20px;
+    overflow-x: auto;
+    font-family: var(--font-code);
+    font-size: 13px;
+    line-height: 1.8;
+    color: #94a3b8;
+  }
+
+  .code-block .keyword { color: #93c5fd; }
+  .code-block .string { color: #a5b4fc; }
+  .code-block .comment { color: #475569; }
+  .code-block .prop { color: #7dd3fc; }
+  .code-block .val { color: #fbbf24; }
+
+  
+  .callout {
+    margin: 28px 0;
+    padding: 24px 28px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .callout p {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .callout p:last-child {
+    margin-bottom: 0;
+  }
+
+  .callout--warning {
+    background: var(--red-light);
+    border: 1px solid #fecaca;
+  }
+
+  .callout--warning .callout__label {
+    color: var(--red);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--info {
+    background: var(--accent-light);
+    border: 1px solid #c7d5e8;
+  }
+
+  .callout--info .callout__label {
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--teal {
+    background: var(--teal-light);
+    border: 1px solid #bbf7d0;
+  }
+
+  .callout--teal .callout__label {
+    color: var(--teal);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  
+  .comparison-wrapper {
+    margin: 28px 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .comparison th, .comparison td {
+    padding: 13px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .comparison tr:last-child td { border-bottom: none; }
+
+  .comparison th {
+    color: var(--text-muted);
+    font-family: var(--font-code);
+    font-weight: 500;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--bg-alt);
+  }
+
+  .comparison td:first-child {
+    color: var(--text);
+    font-weight: 500;
+    font-size: 13px;
+  }
+
+  .check { color: var(--teal); font-weight: 600; }
+  .cross { color: var(--red); font-weight: 600; }
+  .na { color: var(--text-muted); }
+
+  
+  blockquote {
+    margin: 24px 0;
+    padding: 20px 24px;
+    border-left: 3px solid var(--border-strong);
+    background: var(--bg-alt);
+    border-radius: 0 8px 8px 0;
+  }
+
+  blockquote p {
+    font-size: 14px;
+    color: var(--text-body);
+    font-style: italic;
+    margin-bottom: 0;
+  }
+
+  blockquote cite {
+    display: block;
+    margin-top: 8px;
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-style: normal;
+    color: var(--text-muted);
+  }
+
+  
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  
+  .cta-banner {
+    margin: 48px 0;
+    padding: 40px 36px;
+    background: var(--code-bg);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .cta-banner h3 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: #f1f5f9;
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .cta-banner p {
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 24px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 28px;
+    background: #fff;
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary:hover {
+    background: #f1f5f9;
+    color: var(--accent);
+  }
+
+  
+  .sources {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .sources h3 {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .sources ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sources li {
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 4px 0;
+    line-height: 1.6;
+  }
+
+  .sources li a {
+    color: var(--text-body);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .sources li a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  
+  .faq {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .faq h2 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 24px;
+    margin-top: 0;
+  }
+
+  .faq-item {
+    margin-bottom: 24px;
+  }
+
+  .faq-item h3 {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 8px;
+    margin-top: 0;
+  }
+
+  .faq-item p {
+    font-size: 14px;
+    color: var(--text-body);
+    line-height: 1.7;
+    margin-bottom: 0;
+  }
+
+  
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--text); }
+
+  
+  @media (max-width: 640px) {
+    .article-header { padding: 48px 0 32px; }
+    .article-header h1 { font-size: 1.8rem; }
+    .article-body h2 { font-size: 20px; }
+    .article-meta { gap: 12px; }
+    .comparison { font-size: 11px; }
+    .comparison th, .comparison td { padding: 8px 10px; }
+    .callout { padding: 20px; }
+    .cta-banner { padding: 32px 24px; }
+  }
+
+  
+  .breadcrumb { padding: 12px 0; border-bottom: 1px solid var(--border); background: var(--bg-alt); }
+  .breadcrumb a, .breadcrumb span { font-family: var(--font-code); font-size: 11px; letter-spacing: 0.01em; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb__sep { color: #cbd5e1; margin: 0 6px; }
+  .breadcrumb__current { color: var(--text-body); }
+
+  
+  .nav-links { display: flex; align-items: center; gap: 20px; }
+  .nav-link.active { color: var(--text); }
+  @media (max-width: 640px) { .nav-links { gap: 12px; } .nav-link { font-size: 11px; } }
+
+  
+  .related-articles { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+  .related-articles h3 { font-family: var(--font-code); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 16px; margin-top: 0; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .related-card { display: flex; flex-direction: column; gap: 8px; padding: 20px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; transition: border-color 0.2s; }
+  .related-card:hover { border-color: var(--accent); }
+  .related-card__tag { font-family: var(--font-code); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--teal); }
+  .related-card__title { font-family: var(--font-serif); font-size: 15px; color: var(--text); line-height: 1.35; }
+  .related-card__arrow { font-family: var(--font-code); font-size: 12px; color: var(--text-muted); margin-top: auto; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="/" class="logo">chain<span>screen</span></a>
+    <nav class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/regulations/" class="nav-link">Regulations</a>
+      <a href="/operations/" class="nav-link">Operations</a>
+      <a href="/tools/" class="nav-link">Tools</a>
+      <a href="/technical/" class="nav-link active">Technical</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <div class="container">
+    <a href="/">Home</a><span class="breadcrumb__sep">/</span>
+    <a href="/technical/">Technical</a><span class="breadcrumb__sep">/</span>
+    <span class="breadcrumb__current">Address Clustering</span>
+  </div>
+</nav>
+
+<section class="article-header">
+  <div class="container">
+    <div class="article-header__eyebrow">Blockchain analytics</div>
+    <h1>Address Clustering, Mixing Detection, and Source of Funds: What CASPs Actually Need to Know</h1>
+    <p class="article-header__sub">
+      Sanctions screening checks if an address is on a list. Risk scoring asks: where did the money come from? Here's how blockchain analytics works -- and how much of it you actually need.
+    </p>
+    <div class="article-meta">
+      <span><div class="article-meta__dot"></div> March 2026</span>
+      <span><div class="article-meta__dot"></div> 11 min read</span>
+      <span><div class="article-meta__dot"></div> Updated July 10, 2026</span>
+    </div>
+  </div>
+</section>
+
+<article class="article-body">
+  <div class="container">
+
+    <p>
+      Every compliance officer at a CASP eventually hits the same question: "We screen against sanctions lists -- is that enough?" The honest answer is: it depends on what your business does, how much risk you're absorbing, and what your regulator expects to see during an inspection.
+    </p>
+
+    <p>
+      Blockchain analytics isn't one thing. It's a spectrum -- from simple list lookups to deep behavioral analysis that can identify mixing patterns and trace funds across dozens of hops. Most CASPs don't need the most expensive end of that spectrum. But most CASPs also need more than a simple address lookup.
+    </p>
+
+    <p>
+      This article explains each level, how the underlying techniques work, and provides a decision framework for choosing the right depth for your operation. If you've already read our <a href="/tools/screening-vs-risk-scoring">breakdown of screening vs. risk scoring</a>, this picks up where that left off.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>What are the four levels of blockchain analytics depth?</h2>
+
+    <p>
+      Think of blockchain analytics as four distinct levels. Each builds on the previous one, adds capability, and adds cost.
+    </p>
+
+    <h3>Level 1: List-based screening</h3>
+
+    <p>
+      The simplest form. You take a blockchain address and check it against the sanctions and restrictive-measures lists that apply to your business -- for example EU and applicable national lists for EU CASPs, plus OFAC, UN, UK OFSI, or other lists where your legal footprint, banking partners, or policy require them. The answer is binary: the address is on the list set you screened, or it isn't.
+    </p>
+
+    <p>
+      This is what the <a href="/tools/chainalysis-oracle-limitations">Chainalysis free oracle</a> does (covering US, EU, and UN sanctions lists). It's what <a href="/tools/sanctions-screening-tools-comparison">most free-tier tools</a> provide -- a binary yes/no against designated addresses. It catches the obvious cases -- sanctioned wallets that have been publicly designated. It misses everything else.
+    </p>
+
+    <p>
+      <strong>What it catches:</strong> Addresses directly designated by sanctions authorities in the list set you screen.<br>
+      <strong>What it misses:</strong> Addresses one transaction away from a sanctioned wallet. Addresses used by the same entity but not yet designated. Funds that flowed through mixers or tumblers.
+    </p>
+
+    <h3>Level 2: One-hop tracing</h3>
+
+    <p>
+      Level 2 looks one step beyond the address itself. Did this address send funds to or receive funds from a sanctioned address? Has it interacted directly with a known darknet market deposit address? Is it a first-degree counterparty of a flagged entity?
+    </p>
+
+    <p>
+      This is where most risk scoring APIs start. You submit an address and get back a risk score that reflects its immediate transaction partners -- not just whether the address itself is on a list.
+    </p>
+
+    <p>
+      <strong>What it catches:</strong> Direct counterparties of sanctioned/flagged addresses. First-hop recipients of stolen funds. Addresses that deposited directly to known illicit services.<br>
+      <strong>What it misses:</strong> Funds laundered through two or more intermediary wallets. Entity-level connections (multiple addresses likely controlled by the same wallet, service, or customer). Mixing and tumbling activity.
+    </p>
+
+    <h3>Level 3: Multi-hop clustering (entity identification)</h3>
+
+    <p>
+      Level 3 is where blockchain analytics gets genuinely sophisticated. Instead of looking at individual addresses, the system groups addresses into entities -- clusters of addresses that are likely controlled by the same wallet or organization. Then it traces the flow of funds across multiple transaction hops, through these entities.
+    </p>
+
+    <p>
+      This is the technology behind statements like "this address received 12% of its funds from wallets associated with a sanctioned entity, routed through 4 intermediary hops." It requires large-scale graph analysis and proprietary labeling databases.
+    </p>
+
+    <p>
+      <strong>What it catches:</strong> Funds laundered through intermediary wallets. Entity-level risk (the whole cluster, not just one address). Multi-step exposure to illicit sources.<br>
+      <strong>What it misses:</strong> Sophisticated mixing protocols. Privacy coin transactions. Novel obfuscation techniques not yet in the vendor's detection models.
+    </p>
+
+    <h3>Level 4: Full behavioral analytics</h3>
+
+    <p>
+      The deepest level. On top of clustering and multi-hop tracing, Level 4 adds pattern detection: identifying CoinJoin transactions, detecting Tornado Cash deposits/withdrawals, flagging peel chains (a laundering technique where funds are sent in a sequence of decreasing-value transactions), and analyzing timing patterns that suggest automated laundering.
+    </p>
+
+    <p>
+      This is the enterprise tier used by large exchanges and institutional custodians. It requires real-time transaction monitoring, machine learning models, and massive labeled datasets.
+    </p>
+
+    <p>
+      <strong>What it catches:</strong> CoinJoin and mixing protocol usage. Peel chains and structuring patterns. Tornado-style protocol interactions. Unusual behavioral patterns suggesting automated laundering.<br>
+      <strong>What it misses:</strong> Privacy coins (Monero, Zcash shielded pools). Zero-knowledge protocols where deposit-withdrawal linkage is deliberately hidden. Cross-chain bridges without a reliable public mapping.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>How does address clustering work?</h2>
+
+    <p>
+      Address clustering is the foundation of Level 3+ analytics. It answers the question: "Which addresses are likely controlled by the same wallet, service, or entity?" The technique varies by blockchain architecture.
+    </p>
+
+    <h3>Bitcoin: The common-input-ownership heuristic</h3>
+
+    <p>
+      Bitcoin's UTXO model means that a single transaction can spend outputs from multiple addresses. The key insight, formalized by Meiklejohn et al. in 2013 and already noted as a privacy issue in the Bitcoin whitepaper, is this: <strong>if two addresses appear as inputs in the same standard transaction, they are usually controlled by the same spender</strong>, because every input has to be authorized. That is a strong heuristic, not proof of legal or beneficial ownership.
+    </p>
+
+    <blockquote>
+      <p>"all inputs to a transaction are controlled by the same user"</p>
+      <cite>-- Meiklejohn et al., "A Fistful of Bitcoins: Characterizing Payments Among Men with No Names," 2013</cite>
+    </blockquote>
+
+    <p>
+      This heuristic is powerful, but it has known limitations and false-positive modes:
+    </p>
+
+    <ul>
+      <li><strong>CoinJoin breaks it.</strong> CoinJoin transactions deliberately combine inputs from multiple unrelated users into a single transaction, making the common-input heuristic produce false clusters unless the CoinJoin is detected and excluded.</li>
+      <li><strong>PayJoin (P2EP) weakens it.</strong> The sender and recipient both contribute inputs, making the common-input heuristic unreliable for that payment.</li>
+      <li><strong>Custodial services complicate interpretation.</strong> An exchange's hot wallet may combine UTXOs attributable to many customers. The cluster may identify the custody platform, not the underlying beneficial owners.</li>
+    </ul>
+
+    <p>
+      Analytics vendors supplement the basic heuristic with additional signals: change address detection, timing analysis, address reuse patterns, public attribution, customer-reported addresses, deposit-address behavior, and proprietary research.
+    </p>
+
+    <h3>Ethereum: Account model differences</h3>
+
+    <p>
+      Ethereum doesn't have UTXOs. Each address is an account with state and a balance; externally owned accounts initiate transactions, and smart contracts can then update many token balances or emit many internal transfers. This means the common-input-ownership heuristic doesn't apply.
+    </p>
+
+    <p>
+      Instead, Ethereum clustering relies on:
+    </p>
+
+    <ul>
+      <li><strong>Deposit address patterns.</strong> Exchanges generate unique deposit addresses that funnel to a hot wallet. The deposit-to-hot-wallet flow identifies the exchange entity.</li>
+      <li><strong>Contract interaction patterns.</strong> Addresses that interact with the same smart contracts in similar patterns may be linked, but this is behavioral evidence rather than ownership proof.</li>
+      <li><strong>Gas payment analysis.</strong> If address A pays gas fees for address B's transactions (via a relayer or direct ETH transfer), they may be linked.</li>
+      <li><strong>ENS and on-chain identity.</strong> Ethereum Name Service registrations sometimes link multiple addresses to a single identity.</li>
+    </ul>
+
+    <p>
+      Ethereum clustering does not have the same native multi-input signal as Bitcoin clustering. The account model gives less structural ownership evidence to work with, so Ethereum-focused analytics depends more heavily on labels, contract-specific parsers, and behavioral patterns.
+    </p>
+
+    <h3>TRON and Solana</h3>
+
+    <p>
+      <strong>TRON</strong> uses an account model similar to Ethereum but with very different usage patterns. The network carries a large share of USDT transfer activity, and its resource model uses Bandwidth and Energy rather than Ethereum-style gas. TRON clustering focuses heavily on stablecoin flow patterns and resource-delegation relationships, but delegation is a linkage signal rather than proof of common ownership.
+    </p>
+
+    <p>
+      <strong>Solana</strong> has a unique architecture where a single transaction can include instructions interacting with many accounts. This creates richer graph data for analytics, but also more noise. Account co-appearance in one transaction is not ownership proof; useful attribution depends on program-specific parsers and labeled entities.
+    </p>
+
+    <div class="callout callout--info">
+      <div class="callout__label">Why clustering matters for compliance</div>
+      <p>
+        If one address in a cluster is designated or tied to illicit activity, the cluster should trigger entity-level review. A customer might present a "clean" address that has never directly interacted with an illicit service -- but if that address has a strong cluster link to a designated wallet, it may carry the same entity-level risk. The record should still say what the evidence is: heuristic cluster, vendor label, direct list match, or confirmed ownership.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>What's detectable in mixing detection — and what isn't?</h2>
+
+    <p>
+      Mixing services are designed to break the link between the source and destination of funds. For compliance teams, detecting mixing is important because FATF identifies anonymity-enhanced cryptocurrencies, mixers, and tumblers as reduced-transparency ML/TF risks, and EBA GL/2024/15 requires CASPs performing transfers to maintain adequate systems and controls for Union and national restrictive measures.
+    </p>
+
+    <h3>CoinJoin detection</h3>
+
+    <p>
+      CoinJoin transactions have a distinct on-chain signature: many inputs from different addresses, many outputs of equal (or near-equal) value. Tools like Wasabi Wallet and JoinMarket automate this process.
+    </p>
+
+    <p>
+      Detection is well-established for some standard implementations. Published studies have detected Wasabi and Samourai-era CoinJoin transactions with very high accuracy in defined block ranges. That does not make detection universal: implementations, wallet behavior, and vendor heuristics vary.
+    </p>
+
+    <p>
+      However, next-generation CoinJoin implementations (like WabiSabi in Wasabi Wallet 2.0) use variable-amount outputs, making detection harder. The arms race between mixing and detection is ongoing.
+    </p>
+
+    <h3>Tornado Cash and tornado-style protocols</h3>
+
+    <p>
+      Tornado Cash uses zero-knowledge proofs to break the on-chain link between depositor and withdrawer. Classic ETH pools used fixed denominations such as 0.1, 1, 10, or 100 ETH. Later, the user presents a zero-knowledge proof that they made a deposit -- without revealing which deposit was theirs -- and withdraws to a fresh address.
+    </p>
+
+    <p>
+      <strong>What's detectable:</strong> Deposits into and withdrawals from Tornado Cash contracts are visible on-chain, so analytics tools can flag interaction with those contracts. OFAC designated Tornado Cash in August 2022, but removed the economic sanctions against Tornado Cash on March 21, 2025. As of July 10, 2026, the old 2022 designation should not be treated as a current SDN match; list-screening logic still has to check current OFAC, EU, UN, UK, and applicable national lists.
+    </p>
+
+    <p>
+      <strong>What's not detectable:</strong> The link between a specific deposit and a specific withdrawal. That's the entire point of the protocol. If someone deposits 10 ETH, and later a different address withdraws 10 ETH, you know both addresses used Tornado Cash -- but you can't prove they belong to the same person.
+    </p>
+
+    <h3>Privacy coins: The screening wall</h3>
+
+    <p>
+      Monero uses ring signatures, stealth addresses, and RingCT to hide the apparent spender, recipient link, and transaction amount. Public on-chain analysis cannot produce deterministic source-of-funds tracing comparable to Bitcoin or Ethereum. Academic deanonymization attacks, including M&ouml;ser et al., focused on weaknesses in earlier Monero protocol periods and do not amount to reliable current transaction tracing.
+    </p>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">Regulatory reality</div>
+      <p>
+        FATF's virtual-asset guidance identifies anonymity-enhanced cryptocurrencies, mixers, and tumblers as products that reduce transparency and increase obfuscation of financial flows. If your CASP supports privacy coins, your risk assessment should state plainly that deterministic on-chain source-of-funds tracing is unavailable for those assets, and document the compensating controls you use instead.
+      </p>
+    </div>
+
+    <h3>What regulators expect vs. what's technically possible</h3>
+
+    <p>
+      There's a gap between regulatory expectations and technical reality. Regulators may ask how you assess source of funds for higher-risk crypto activity. But for certain transaction patterns -- funds routed through zero-knowledge mixers, cross-chain bridges without public mapping, or privacy coins -- the specific source-to-destination link may not be observable on-chain.
+    </p>
+
+    <p>
+      The pragmatic approach: detect what you can, flag what you can't, and document your methodology. A risk assessment that says "we detect CoinJoin and Tornado-style interactions at the first-hop level, and flag them for enhanced due diligence" is defensible. A risk assessment that says "we trace all funds to their origin" is not.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>How does source of funds tracing and exposure scoring work?</h2>
+
+    <p>
+      Source of funds (SoF) analysis answers the question: "What percentage of this address's funds came from risky sources?" The answer is expressed as an exposure breakdown -- a percentage-based risk profile.
+    </p>
+
+    <div class="code-block">
+      <div class="code-block__header">
+        <div class="code-block__dot"></div>
+        <div class="code-block__dot"></div>
+        <div class="code-block__dot"></div>
+        <span class="code-block__title">Example exposure breakdown (JSON)</span>
+      </div>
+<pre>{
+  <span class="prop">"address"</span>: <span class="string">"bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh"</span>,
+  <span class="prop">"risk_score"</span>: <span class="val">72</span>,
+  <span class="prop">"exposure"</span>: {
+    <span class="prop">"sanctioned_entity"</span>:     <span class="val">0.3</span>,   <span class="comment">// 0.3% from OFAC-listed addresses</span>
+    <span class="prop">"darknet_market"</span>:        <span class="val">4.2</span>,   <span class="comment">// 4.2% from known DNM wallets</span>
+    <span class="prop">"mixing_service"</span>:        <span class="val">12.8</span>,  <span class="comment">// 12.8% passed through a mixer</span>
+    <span class="prop">"gambling"</span>:              <span class="val">8.1</span>,   <span class="comment">// 8.1% from gambling platforms</span>
+    <span class="prop">"exchange_verified"</span>:     <span class="val">61.4</span>,  <span class="comment">// 61.4% from KYC'd exchanges</span>
+    <span class="prop">"mining"</span>:                <span class="val">5.7</span>,   <span class="comment">// 5.7% from mining pools</span>
+    <span class="prop">"unknown"</span>:               <span class="val">7.5</span>    <span class="comment">// 7.5% unattributable</span>
+  },
+  <span class="prop">"max_hops_analyzed"</span>: <span class="val">10</span>,
+  <span class="prop">"analysis_timestamp"</span>: <span class="string">"2026-03-13T14:22:00Z"</span>
+}</pre>
+    </div>
+
+    <p>
+      This is the kind of output you get from Level 3-4 analytics tools. The risk score (72 in this example) is a composite -- but the breakdown shows why. It's the difference between "this address is risky" and "this address is risky because 12.8% of its funds passed through a mixer and 4.2% trace to darknet markets."
+    </p>
+
+    <h3>Hop-counting vs. value-flow analysis</h3>
+
+    <p>
+      Two approaches to tracing, with very different results:
+    </p>
+
+    <p>
+      <strong>Hop-counting</strong> measures the number of transactions between your address and a known risky source. "This address is 3 hops from a sanctioned wallet." Simple to compute, easy to explain. But it generates false positives at scale: at higher hop depths, graph paths quickly reach high-degree services, exchanges, bridges, and old risk labels. Hop-counting alone can make indirect exposure look more meaningful than it is.
+    </p>
+
+    <p>
+      <strong>Value-flow analysis</strong> tracks the actual amount of funds that moved along each path. Instead of "3 hops from a sanctioned wallet," it says "0.003 BTC (0.3% of this address's balance) traces through 3 hops to a sanctioned wallet." This is more computationally expensive but produces far fewer false positives because it weights by actual value, not just graph distance.
+    </p>
+
+    <div class="callout callout--teal">
+      <div class="callout__label">The false positive challenge</div>
+      <p>
+        Much Bitcoin activity eventually intersects large exchanges and other high-degree services, and those services may have processed illicit funds at some point. A naive graph analysis can score too many addresses as "risky" because distant paths become noisy. The art of good analytics is calibrating how many hops matter, how to weight value flows, and when indirect exposure is genuinely meaningful vs. statistical noise. This is why vendor-specific risk models matter -- and why different tools produce different scores for the same address.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>What level do YOU need? Decision matrix by service type</h2>
+
+    <p>
+      The right analytics depth depends on your business model. A payment processor that only sends outbound transfers to verified recipients has very different risk exposure than an exchange that accepts anonymous crypto deposits.
+    </p>
+
+    <div class="comparison-wrapper">
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th>Service type</th>
+            <th>Recommended level</th>
+            <th>Why</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Staking / validator services</td>
+            <td><strong style="color: var(--text);">Level 1-2</strong></td>
+            <td>Low risk. Funds flow is predictable (stake in, rewards out). Screen stakers against sanctions lists. One-hop check on large delegations.</td>
+          </tr>
+          <tr>
+            <td>Payment processors</td>
+            <td><strong style="color: var(--text);">Level 2</strong></td>
+            <td>Primarily outbound. You control where funds go. Screen recipient addresses and flag if they've interacted with sanctioned entities.</td>
+          </tr>
+          <tr>
+            <td>Custodians / wallets</td>
+            <td><strong style="color: var(--text);">Level 2-3</strong></td>
+            <td>Customers deposit arbitrary funds. You need to know where deposits came from -- at least one-hop, ideally entity-level clustering for large deposits.</td>
+          </tr>
+          <tr>
+            <td>OTC desks</td>
+            <td><strong style="color: var(--text);">Level 3</strong></td>
+            <td>Large-value, low-frequency trades. High regulatory and bank-partner scrutiny. Entity-level clustering and multi-hop exposure scoring are common EDD controls.</td>
+          </tr>
+          <tr>
+            <td>Exchanges (centralized)</td>
+            <td><strong style="color: var(--text);">Level 3-4</strong></td>
+            <td>High volume, arbitrary deposits, broad user base. You need clustering, exposure scoring, mixer detection, and real-time monitoring. This is the tier regulators scrutinize hardest.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      A key factor: <strong>can your customers deposit arbitrary crypto from unknown sources?</strong> If yes, you need at least Level 2 with exposure scoring. If your service only handles outbound payments to KYC'd recipients, Level 1-2 may be sufficient -- combined with the <a href="/tools/screening-vs-risk-scoring">restrictive-measures screening controls</a> that apply to your legal footprint and risk profile.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>Which tools match each analytics level?</h2>
+
+    <p>
+      Here's how the market maps to the four levels. Note that vendor capabilities overlap -- a Level 3 tool may have some Level 4 features, and vice versa. This is a general positioning based on primary use case and pricing tier.
+    </p>
+
+    <div class="comparison-wrapper">
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th>Level</th>
+            <th>Capability</th>
+            <th>Tools</th>
+            <th>Typical cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Level 1</td>
+            <td>List-based sanctions screening</td>
+            <td>Chainalysis free oracle, OpenSanctions, direct list screening</td>
+            <td>Free -- low hundreds/mo</td>
+          </tr>
+          <tr>
+            <td>Level 2</td>
+            <td>One-hop tracing + risk scoring</td>
+            <td>AMLBot, sanctions.io, focused screening vendors</td>
+            <td>$200 -- $1,000/mo</td>
+          </tr>
+          <tr>
+            <td>Level 3</td>
+            <td>Multi-hop clustering + exposure</td>
+            <td>Crystal Intelligence, Scorechain, Merkle Science</td>
+            <td>$1,000 -- $5,000/mo</td>
+          </tr>
+          <tr>
+            <td>Level 4</td>
+            <td>Full behavioral analytics</td>
+            <td>Chainalysis Reactor, TRM Labs, Elliptic</td>
+            <td>$5,000 -- $50,000+/mo</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Public pricing is limited and contract-specific. Treat these ranges as rough procurement bands, not quotes. Actual pricing depends on transaction volume, number of chains, and contract terms. See our <a href="/tools/sanctions-screening-tools-comparison">full tool comparison</a> for detailed pricing on each vendor.
+    </p>
+
+    <div class="callout callout--info">
+      <div class="callout__label">The build vs. buy spectrum</div>
+      <p>
+        Level 1 is buildable in-house: download sanctions lists, hash addresses, check incoming addresses against the hashes. Level 2 is feasible with public blockchain data and a basic graph database. Level 3+ requires years of labeled data, entity databases, and ongoing maintenance that makes in-house development impractical for all but the largest companies. This is the core value proposition of analytics vendors -- not the algorithms, but the data.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>How do you put together a practical compliance architecture?</h2>
+
+    <p>
+      For most small-to-mid-size CASPs, the practical approach is layered:
+    </p>
+
+    <ol>
+      <li><strong>Layer 1 -- Restrictive-measures screening (baseline control):</strong> For EU CASPs performing crypto-asset transfers, screen against EU and applicable national restrictive measures. Add OFAC, UK, UN, and other lists where your legal footprint, bank partners, or written policy require them. Build or buy -- but do it with an audit trail.</li>
+      <li><strong>Layer 2 -- Risk scoring on deposits (recommended for custodians and above):</strong> Check inbound deposits for one-hop exposure to flagged addresses. Flag deposits from addresses that recently interacted with known illicit services. Trigger enhanced due diligence (EDD) above a risk threshold.</li>
+      <li><strong>Layer 3 -- Entity-level analysis (recommended for OTC and exchanges):</strong> Cluster analysis on large or suspicious deposits. Exposure scoring with multi-hop tracing. Periodic re-screening of existing customer wallets when new designations are published.</li>
+    </ol>
+
+    <p>
+      Each layer catches what the previous layer misses. And each layer creates records that demonstrate to regulators that your analytics are proportionate to your risk profile -- which is the core of the risk-based approach under FATF and EBA guidance.
+    </p>
+
+    <hr class="section-divider">
+
+    <div class="faq">
+      <h2>Frequently asked questions</h2>
+
+      <div class="faq-item">
+        <h3>What is address clustering in blockchain analytics?</h3>
+        <p>Address clustering groups blockchain addresses likely controlled by the same wallet, service, or entity. The most common Bitcoin method is the common-input-ownership heuristic: if two addresses appear as inputs in the same transaction, they are usually controlled by the same spender. This matters because a strong cluster link to a designated or illicit address should trigger entity-level review -- but it is not proof of beneficial ownership.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Do CASPs need mixing detection to comply with EU restrictive-measures expectations?</h3>
+        <p>EBA GL/2024/15 requires CASPs performing transfers to maintain adequate systems and controls for Union and national restrictive measures, and FATF identifies mixers, tumblers, and anonymity-enhanced cryptocurrencies as reduced-transparency risks. The rules don't mandate a specific technology. For lower-risk CASPs, flagging known mixer addresses and direct interactions may be proportionate. Full protocol-level detection is typically a higher-risk exchange control.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>What is the difference between hop-counting and value-flow analysis?</h3>
+        <p>Hop-counting measures how many transactions separate an address from a risky source (e.g., "3 hops from a sanctioned wallet"). Value-flow analysis tracks the actual amount of funds through each path, calculating what percentage originated from risky sources. Value-flow is more specific but computationally expensive. Hop-counting is simpler but produces more false positives because high hop depths quickly reach noisy paths through exchanges, bridges, and other high-degree services.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Which analytics level does a small CASP need -- Level 2 or Level 3?</h3>
+        <p>It depends on your service type. Payment processors and staking services can typically operate at Level 2 (one-hop tracing). Custodians and OTC desks should target Level 3 (multi-hop clustering with exposure scoring). The key factor: if customers can deposit arbitrary funds from unknown sources, you need deeper analytics than if you only process outbound payments to verified recipients.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Can blockchain analytics trace privacy coins like Monero?</h3>
+        <p>Not in the same way as transparent ledgers. Monero uses ring signatures, stealth addresses, and RingCT to hide the apparent spender, recipient link, and transaction amount. Public on-chain analysis cannot provide deterministic source-of-funds tracing for Monero; any vendor output should be treated as probabilistic and boundary-focused unless backed by off-chain evidence.</p>
+      </div>
+    </div>
+
+    <div class="cta-banner">
+      <h3>Start with the baseline screening layer</h3>
+      <p>Start with Level 1: restrictive-measures screening with an audit trail. Check where your current process stands on the full spectrum before buying broader analytics.</p>
+      <a href="/regulations/" class="btn-primary">
+        Read the regulatory guides &rarr;
+      </a>
+    </div>
+
+    <div class="sources">
+      <h3>Sources</h3>
+      <ul>
+        <li><a href="https://bitcoin.org/bitcoin.pdf" target="_blank" rel="noopener">Nakamoto -- "Bitcoin: A Peer-to-Peer Electronic Cash System" (2008)</a></li>
+        <li><a href="https://cseweb.ucsd.edu/~smeikle/files/imc13.pdf" target="_blank" rel="noopener">Meiklejohn et al. -- "A Fistful of Bitcoins: Characterizing Payments Among Men with No Names" (IMC 2013)</a></li>
+        <li><a href="https://bips.dev/78/" target="_blank" rel="noopener">BIP 78 -- A Simple Payjoin Proposal</a></li>
+        <li><a href="https://cryptoeconomicsystems.pubpub.org/pub/ficsor-wabisabi-coordinated" target="_blank" rel="noopener">Fics&oacute;r et al. -- "WabiSabi: Centrally Coordinated CoinJoins with Variable Amounts" (2021)</a></li>
+        <li><a href="https://arxiv.org/abs/2109.10229" target="_blank" rel="noopener">St&uuml;tz et al. -- "Adoption and Actual Privacy of Decentralized CoinJoin Implementations in Bitcoin" (2021)</a></li>
+        <li><a href="https://www.fatf-gafi.org/en/publications/Fatfrecommendations/Updated-Guidance-VA-VASP.html" target="_blank" rel="noopener">FATF -- Updated Guidance for a Risk-Based Approach to Virtual Assets and VASPs (2021)</a></li>
+        <li><a href="https://www.eba.europa.eu/publications-and-media/press-releases/eba-publishes-final-guidelines-internal-policies-procedures-and-controls-ensure-implementation" target="_blank" rel="noopener">EBA -- Final Guidelines on Restrictive Measures (GL/2024/15)</a></li>
+        <li><a href="https://home.treasury.gov/news/press-releases/sb0057" target="_blank" rel="noopener">U.S. Treasury -- Tornado Cash Delisting (March 21, 2025)</a></li>
+        <li><a href="https://home.treasury.gov/policy-issues/financial-sanctions/specially-designated-nationals-and-blocked-persons-list-sdn-human-readable-lists" target="_blank" rel="noopener">OFAC -- Specially Designated Nationals and Blocked Persons List (SDN)</a></li>
+        <li><a href="https://go.chainalysis.com/chainalysis-oracle-docs.html" target="_blank" rel="noopener">Chainalysis -- Oracle for Sanctions Screening Documentation</a></li>
+        <li><a href="https://www.chainalysis.com/blog/intro-to-chainalysis-reactor/" target="_blank" rel="noopener">Chainalysis -- Introduction to Chainalysis Reactor</a></li>
+        <li><a href="https://arxiv.org/abs/1704.04299" target="_blank" rel="noopener">M&ouml;ser et al. -- "An Empirical Analysis of Traceability in the Monero Blockchain" (2018)</a></li>
+        <li><a href="https://www.getmonero.org/resources/moneropedia/ringsignatures.html" target="_blank" rel="noopener">Monero -- Ring Signatures</a>; <a href="https://www.getmonero.org/resources/moneropedia/stealthaddress.html" target="_blank" rel="noopener">Stealth Addresses</a>; <a href="https://www.getmonero.org/resources/moneropedia/ringCT.html" target="_blank" rel="noopener">RingCT</a></li>
+        <li><a href="https://zcash.readthedocs.io/en/latest/rtd_pages/addresses.html" target="_blank" rel="noopener">Zcash Documentation -- Addresses and Value Pools</a></li>
+        <li><a href="https://ethereum.org/developers/docs/accounts/" target="_blank" rel="noopener">Ethereum.org -- Accounts</a>; <a href="https://ethereum.org/developers/docs/transactions/" target="_blank" rel="noopener">Transactions</a></li>
+        <li><a href="https://developers.tron.network/docs/resource-model" target="_blank" rel="noopener">TRON Developer Docs -- Resource Model</a></li>
+        <li><a href="https://solana.com/docs/core/transactions" target="_blank" rel="noopener">Solana Docs -- Transactions</a>; <a href="https://solana.com/docs/core/instructions" target="_blank" rel="noopener">Instructions</a></li>
+      </ul>
+    </div>
+
+  
+
+    <div class="related-articles">
+      <h3>Related articles</h3>
+      <div class="related-grid">
+        <a href="/technical/blockchain-data-residency-gdpr" class="related-card">
+          <span class="related-card__tag">Technical</span>
+          <span class="related-card__title">Blockchain Addresses Are Personal Data: GDPR for Compliance Tools</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+        <a href="/tools/screening-vs-risk-scoring" class="related-card">
+          <span class="related-card__tag">Tools</span>
+          <span class="related-card__title">Sanctions Screening vs. Transaction Monitoring</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+<div style="margin: 40px 0; padding: 24px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; text-align: center;">
+  <p style="font-size: 15px; color: #475569; margin-bottom: 12px;">Need screening records and audit-ready evidence, not just a binary check?</p>
+  <a href="mailto:info@chainscreen.io" style="display: inline-block; padding: 12px 24px; background: #0c2340; color: #fff; border-radius: 8px; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600;">Contact ChainScreen</a>
+</div>
+
+
+<footer>
+  <div class="container">
+    &copy; 2026 DailyMind LTD &middot; HE 439959 &middot; Limassol, Cyprus
+    &nbsp;&middot;&nbsp;
+    <span>Information only; not legal advice</span>
+    &nbsp;&middot;&nbsp;
+    <a href="/privacy">Privacy</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://dailymind.eu">dailymind.eu</a>
+  </div>
+</footer>
+<script data-goatcounter="https://gc-chainscreen.vigilcom.dev/count"
+        async src="//gc.vigilcom.dev/count.js"></script>
+<script src="/nav.js" defer></script>
+</body>
+</html>

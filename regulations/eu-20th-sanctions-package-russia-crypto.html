@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EU Russia Crypto Sanctions for CASPs | ChainScreen</title>
+<meta name="description" content="EU Russia crypto sanctions: 20th and 21st package controls for CASPs, RUBx/digital rouble, third-country platforms, and circumvention risk.">
+<link rel="canonical" href="https://chainscreen.io/regulations/eu-20th-sanctions-package-russia-crypto">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EU's 20th Sanctions Package: Russia Crypto Restrictions — What CASPs Must Do Now">
+<meta property="og:description" content="EU Russia crypto sanctions now include the 20th and 21st packages: Russia-established CASPs, RUBx/digital rouble, third-country crypto platforms, and crypto-service circumvention controls.">
+<meta property="og:url" content="https://chainscreen.io/regulations/eu-20th-sanctions-package-russia-crypto">
+<meta property="og:image" content="https://chainscreen.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="ChainScreen">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chainscreen.io/og-image.png">
+<script defer src="https://u.vigilcom.dev/script.js" data-website-id="df019ee1-bf37-42db-be6c-93671ff213ec"></script>
+<meta name="twitter:title" content="EU's 20th Sanctions Package: Russia Crypto Restrictions">
+<meta name="twitter:description" content="Council Regulation 2026/506 targets Russian CASPs and crypto platforms, RUBx and the digital rouble. Compliance breakdown for CASPs.">
+<meta name="article:published_time" content="2026-03-15">
+<meta name="article:modified_time" content="2026-08-17">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"EU's 20th Sanctions Package: Russia Crypto Restrictions — What CASPs Must Do Now","description":"EU Russia crypto sanctions now include the 20th and 21st packages: Russia-established CASPs, RUBx/digital rouble, third-country crypto platforms, and crypto-service circumvention controls.","datePublished":"2026-03-15","dateModified":"2026-08-17","wordCount":1480,"author":{"@type":"Person","name":"Katerina Bletsch","url":"https://chainscreen.io","jobTitle":"Founder","sameAs":["https://www.linkedin.com/in/katerina-bletsch/"]},"publisher":{"@type":"Organization","name":"ChainScreen","url":"https://chainscreen.io","logo":{"@type":"ImageObject","url":"https://chainscreen.io/og-image.png"}}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does the EU 20th sanctions package say about crypto?","acceptedAnswer":{"@type":"Answer","text":"The Council adopted the 20th Russia sanctions package on 23 April 2026. Council Regulation (EU) 2026/506 and Council Decision (CFSP) 2026/508 introduce sectoral restrictions on Russia-established crypto-asset service providers and platforms that facilitate transfer or exchange of crypto-assets, including decentralised platforms. The package also prohibits transactions involving RUBx and the digital rouble, and support for development of the digital rouble."}},{"@type":"Question","name":"When did the EU Russia crypto restrictions take effect?","acceptedAnswer":{"@type":"Answer","text":"The 20th sanctions package was adopted by the Council on 23 April 2026. The RUBx and digital rouble entries in Annex LIII apply from 24 May 2026, so as of 10 July 2026 the relevant wind-down period has expired."}},{"@type":"Question","name":"How are the Russia crypto restrictions different from normal sanctions screening?","acceptedAnswer":{"@type":"Answer","text":"Standard sanctions screening checks counterparties against named-individual lists such as the EU Consolidated List, OFAC SDN, UN and UK OFSI. The 20th package adds a sectoral restriction: Russia-established crypto-asset service providers and crypto transfer or exchange platforms can be prohibited even if they are not individually listed. A clean name-screening result is not sufficient; CASPs need counterparty establishment and platform-risk controls."}},{"@type":"Question","name":"What are the penalties for violating EU Russia sanctions?","acceptedAnswer":{"@type":"Answer","text":"EU Russia sanctions are enforced by member-state competent authorities under national penalty regimes, alongside the EU framework for criminalising sanctions violations. CASPs should treat breaches as inspection, enforcement and potential criminal-liability events, not as routine screening exceptions."}},{"@type":"Question","name":"What must a CASP do to comply with the Russia crypto restrictions?","acceptedAnswer":{"@type":"Answer","text":"CASPs need four controls: (1) counterparty establishment screening for Russia-based CASPs and platforms; (2) platform-risk checks for decentralised platforms enabling crypto trading; (3) transaction monitoring and policy coverage for RUBx and digital rouble exposure; and (4) re-screening and documented exits for existing Russia-nexus business relationships. Standard sanctions APIs that only check named lists will not be sufficient."}}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://chainscreen.io"},{"@type":"ListItem","position":2,"name":"Regulations","item":"https://chainscreen.io/regulations/"},{"@type":"ListItem","position":3,"name":"EU's 20th Sanctions Package: Russia Crypto Restrictions — What CASPs Must Do Now"}]}
+</script>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-alt: #f8fafc;
+    --surface: #ffffff;
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --text: #0c1d36;
+    --text-body: #475569;
+    --text-muted: #94a3b8;
+    --accent: #0c2340;
+    --accent-hover: #143a65;
+    --accent-light: #edf2f9;
+    --teal: #0f766e;
+    --teal-light: #f0fdf4;
+    --code-bg: #091a30;
+    --code-surface: #0c2340;
+    --red: #dc2626;
+    --red-light: #fef2f2;
+    --font-serif: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-code: 'JetBrains Mono', 'SF Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  
+  header {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: var(--font-code);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--accent-hover); }
+
+  .nav-link {
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover { color: var(--text); }
+
+  
+  .article-header {
+    padding: 80px 0 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .article-header__eyebrow {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--teal);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .article-header h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+
+  .article-header__sub {
+    font-size: 17px;
+    color: var(--text-body);
+    max-width: 640px;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .article-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: var(--font-code);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.01em;
+  }
+
+  .article-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .article-meta__dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--teal);
+    flex-shrink: 0;
+  }
+
+  
+  .article-body {
+    padding: 48px 0 72px;
+  }
+
+  .article-body h2 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-top: 48px;
+    margin-bottom: 16px;
+    line-height: 1.3;
+    color: var(--text);
+  }
+
+  .article-body h3 {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 32px;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+
+  .article-body p {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .article-body ul, .article-body ol {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+    padding-left: 24px;
+  }
+
+  .article-body li {
+    margin-bottom: 6px;
+  }
+
+  .article-body a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+  }
+
+  .article-body a:hover {
+    color: var(--accent-hover);
+  }
+
+  .article-body strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .article-body code {
+    font-family: var(--font-code);
+    font-size: 13px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--accent);
+  }
+
+  
+  .callout {
+    margin: 28px 0;
+    padding: 24px 28px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .callout p {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .callout p:last-child {
+    margin-bottom: 0;
+  }
+
+  .callout--warning {
+    background: var(--red-light);
+    border: 1px solid #fecaca;
+  }
+
+  .callout--warning .callout__label {
+    color: var(--red);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--info {
+    background: var(--accent-light);
+    border: 1px solid #c7d5e8;
+  }
+
+  .callout--info .callout__label {
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--teal {
+    background: var(--teal-light);
+    border: 1px solid #bbf7d0;
+  }
+
+  .callout--teal .callout__label {
+    color: var(--teal);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  
+  .comparison-wrapper {
+    margin: 28px 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .comparison th, .comparison td {
+    padding: 13px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .comparison tr:last-child td { border-bottom: none; }
+
+  .comparison th {
+    color: var(--text-muted);
+    font-family: var(--font-code);
+    font-weight: 500;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--bg-alt);
+  }
+
+  .comparison td:first-child {
+    color: var(--text);
+    font-weight: 500;
+    font-size: 13px;
+  }
+
+  .check { color: var(--teal); font-weight: 600; }
+  .cross { color: var(--red); font-weight: 600; }
+  .na { color: var(--text-muted); }
+
+  
+  .timeline {
+    margin: 28px 0;
+    padding: 0;
+    list-style: none;
+    border-left: 2px solid var(--border);
+    padding-left: 24px;
+  }
+
+  .timeline li {
+    position: relative;
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-body);
+  }
+
+  .timeline li::before {
+    content: '';
+    position: absolute;
+    left: -29px;
+    top: 8px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+  }
+
+  .timeline li strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .timeline .timeline__date {
+    display: block;
+    font-family: var(--font-code);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+    margin-bottom: 2px;
+  }
+
+  
+  blockquote {
+    margin: 24px 0;
+    padding: 20px 24px;
+    border-left: 3px solid var(--border-strong);
+    background: var(--bg-alt);
+    border-radius: 0 8px 8px 0;
+  }
+
+  blockquote p {
+    font-size: 14px;
+    color: var(--text-body);
+    font-style: italic;
+    margin-bottom: 0;
+  }
+
+  blockquote cite {
+    display: block;
+    margin-top: 8px;
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-style: normal;
+    color: var(--text-muted);
+  }
+
+  
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  
+  .cta-banner {
+    margin: 48px 0;
+    padding: 40px 36px;
+    background: var(--code-bg);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .cta-banner h3 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: #f1f5f9;
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .cta-banner p {
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 24px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 28px;
+    background: #fff;
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary:hover {
+    background: #f1f5f9;
+    color: var(--accent);
+  }
+
+  
+  .sources {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .sources h3 {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .sources ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sources li {
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 4px 0;
+    line-height: 1.6;
+  }
+
+  .sources li a {
+    color: var(--text-body);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .sources li a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  
+  .faq-section {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .faq-section h2 {
+    margin-top: 0;
+  }
+
+  .faq-item {
+    margin-bottom: 24px;
+    padding: 20px 24px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+
+  .faq-item h3 {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 0;
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+
+  .faq-item p {
+    font-size: 14px;
+    color: var(--text-body);
+    line-height: 1.7;
+    margin-bottom: 0;
+  }
+
+  
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--text); }
+
+  
+  @media (max-width: 640px) {
+    .article-header { padding: 48px 0 32px; }
+    .article-header h1 { font-size: 1.8rem; }
+    .article-body h2 { font-size: 20px; }
+    .article-meta { gap: 12px; }
+    .comparison { font-size: 11px; }
+    .comparison th, .comparison td { padding: 8px 10px; }
+    .callout { padding: 20px; }
+    .cta-banner { padding: 32px 24px; }
+    .timeline { padding-left: 18px; }
+  }
+
+  
+  .breadcrumb { padding: 12px 0; border-bottom: 1px solid var(--border); background: var(--bg-alt); }
+  .breadcrumb a, .breadcrumb span { font-family: var(--font-code); font-size: 11px; letter-spacing: 0.01em; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb__sep { color: #cbd5e1; margin: 0 6px; }
+  .breadcrumb__current { color: var(--text-body); }
+
+  
+  .nav-links { display: flex; align-items: center; gap: 20px; }
+  .nav-link.active { color: var(--text); }
+  @media (max-width: 640px) { .nav-links { gap: 12px; } .nav-link { font-size: 11px; } }
+
+  
+  .related-articles { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+  .related-articles h3 { font-family: var(--font-code); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 16px; margin-top: 0; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .related-card { display: flex; flex-direction: column; gap: 8px; padding: 20px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; transition: border-color 0.2s; }
+  .related-card:hover { border-color: var(--accent); }
+  .related-card__tag { font-family: var(--font-code); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--teal); }
+  .related-card__title { font-family: var(--font-serif); font-size: 15px; color: var(--text); line-height: 1.35; }
+  .related-card__arrow { font-family: var(--font-code); font-size: 12px; color: var(--text-muted); margin-top: auto; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="/" class="logo">chain<span>screen</span></a>
+    <nav class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/regulations/" class="nav-link active">Regulations</a>
+      <a href="/operations/" class="nav-link">Operations</a>
+      <a href="/tools/" class="nav-link">Tools</a>
+      <a href="/technical/" class="nav-link">Technical</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <div class="container">
+    <a href="/">Home</a><span class="breadcrumb__sep">/</span>
+    <a href="/regulations/">Regulations</a><span class="breadcrumb__sep">/</span>
+    <span class="breadcrumb__current">EU 20th Sanctions Package: Russia Crypto Restrictions</span>
+  </div>
+</nav>
+
+<section class="article-header">
+  <div class="container">
+    <div class="article-header__eyebrow">Sanctions &amp; Regulations</div>
+    <h1>EU's 20th Sanctions Package: Russia Crypto Restrictions — What CASPs Must Do Now</h1>
+    <p class="article-header__sub">
+      On April 23, 2026, the Council adopted the EU's 20th Russia sanctions package. On July 23, 2026, the EU adopted a 21st package with additional crypto measures for third-country platforms and circumvention controls. CASPs now need both named-list screening and sectoral crypto controls.
+    </p>
+    <div class="article-meta">
+      <span><div class="article-meta__dot"></div> Updated August 2026</span>
+      <span><div class="article-meta__dot"></div> 6 min read</span>
+      <span><div class="article-meta__dot"></div> By Katerina Bletsch</span>
+      <span><div class="article-meta__dot"></div> Sources: Council of the EU, EUR-Lex</span>
+    </div>
+  </div>
+</section>
+
+<article class="article-body">
+  <div class="container">
+
+    <div class="callout callout--info">
+      <div class="callout__label">Update: 21st package</div>
+      <p>
+        On <strong>23 July 2026</strong>, the EU adopted the 21st Russia sanctions package. The Council says it extends transaction bans to <strong>14 crypto-related service platforms</strong> based outside Russia and creates a new tool for third-country crypto-asset services used by Russia to evade EU sanctions.
+      </p>
+    </div>
+
+    <h2>What does the 20th sanctions package actually do?</h2>
+
+    <p>
+      The Council adopted the 20th package of Russia sanctions on April 23, 2026. For crypto compliance teams, the important legal acts are <strong>Council Regulation (EU) 2026/506</strong>, amending Regulation (EU) No 833/2014, and <strong>Council Decision (CFSP) 2026/508</strong>, amending Decision 2014/512/CFSP.
+    </p>
+
+    <p>
+      The measure is narrower than a general ban on every Russia-linked crypto transaction, but broader than ordinary name-list screening. It targets crypto-asset service providers and platforms established in Russia that facilitate the transfer or exchange of crypto-assets, including decentralized platforms. It also prohibits transactions involving RUBx and the digital rouble, and bars EU support for the development of the digital rouble.
+    </p>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">Current legal status</div>
+      <p>
+        <strong>Adopted:</strong> April 23, 2026 (Council of the EU)<br>
+        <strong>Legal acts:</strong> Council Regulation (EU) 2026/506 and Council Decision (CFSP) 2026/508<br>
+        <strong>Scope:</strong> Russia-established CASPs and platforms enabling crypto transfer or exchange, including decentralized platforms<br>
+        <strong>RUBx and digital rouble:</strong> Listed in Annex LIII from May 24, 2026<br>
+        <strong>Status:</strong> In force as of August 17, 2026; now supplemented by 21st-package third-country crypto-platform measures
+      </p>
+    </div>
+
+    <p>
+      The practical point for CASPs is simple: a counterparty can be prohibited because of where it is established and what platform function it performs, even when it is not individually designated on the EU Consolidated List.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>What changed between February and July 2026?</h2>
+
+    <p>
+      The March version of this article treated the package as a pending measure. That is now stale. The Council adopted the package on April 23, 2026, and the relevant legal acts were published in the Official Journal. The RUBx and digital rouble entries in Annex LIII took effect on May 24, 2026, after the wind-down period.
+    </p>
+
+    <p>
+      As of July 10, 2026, this is not a "wait and see" issue. It is an active sanctions-control issue. The compliance question is whether your onboarding, counterparty due diligence and transaction monitoring can identify the new crypto categories now.
+    </p>
+
+    <ul class="timeline">
+      <li>
+        <span class="timeline__date">Feb 6, 2026</span>
+        <strong>Commission stage.</strong> Crypto measures entered negotiations as part of the 20th Russia sanctions package.
+      </li>
+      <li>
+        <span class="timeline__date">Apr 23, 2026</span>
+        <strong>Council adoption.</strong> Council Regulation (EU) 2026/506 and Council Decision (CFSP) 2026/508 form the legal basis for the sectoral crypto measures.
+      </li>
+      <li>
+        <span class="timeline__date">May 24, 2026</span>
+        <strong>Wind-down period expires.</strong> RUBx and the digital rouble apply as Annex LIII entries.
+      </li>
+      <li>
+        <span class="timeline__date">Jul 10, 2026</span>
+        <strong>Current status.</strong> CASPs should treat the relevant crypto restrictions as in force.
+      </li>
+    </ul>
+
+    <p>
+      The practical implication: remove pending-package language from policies, training and controls. The package has been adopted.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>Why is standard SDN screening not enough?</h2>
+
+    <p>
+      Most CASPs operating today have built their sanctions compliance around named-individual screening: check the customer's name and wallet address against the EU Consolidated List, OFAC SDN, UN, and UK OFSI. Flag matches, escalate, freeze. This is the correct baseline — EBA GL/2024/15 and CySEC C685 both require it.
+    </p>
+
+    <p>
+      The 20th package introduces a different obligation entirely. The prohibition is not "do not transact with Person X who happens to be in Russia." It is "do not engage with Russia-established crypto-asset service providers or crypto transfer and exchange platforms" as a category. An exchange or platform established in Russia can be off-limits even if it is not individually designated.
+    </p>
+
+    <div class="callout callout--info">
+      <div class="callout__label">The core distinction</div>
+      <p>
+        <strong>SDN screening asks:</strong> Is this specific entity on a named list?<br>
+        <strong>Sectoral restriction asks:</strong> Is this a Russia-established CASP or crypto transfer/exchange platform, including a decentralized platform?
+      </p>
+      <p>
+        A passing SDN result does not clear a Russia-established exchange or platform under the adopted sectoral restriction.
+      </p>
+    </div>
+
+    <p>
+      The digital rouble prohibition adds a second layer of complexity. The digital rouble is not a crypto-asset in the MiCA sense — it is a CBDC issued by the Bank of Russia. Transaction monitoring systems built around blockchain analytics may not flag digital rouble flows by default. CASPs need to verify their transaction monitoring coverage explicitly includes Russian CBDC exposure and RUBx exposure.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>What does the gap look like in practice?</h2>
+
+    <p>
+      Consider a typical small CASP scenario: an EU-licensed exchange with a B2B flow that includes a Russia-established OTC desk acting as a liquidity provider. The OTC desk is not on any sanctions list. It passes SDN screening cleanly. Before the 20th package, this relationship may have looked compliant.
+    </p>
+
+    <p>
+      Under the adopted 20th package, the same relationship can be prohibited. The OTC desk is a Russia-established crypto-asset service provider or transfer/exchange platform. The restriction applies regardless of whether it is individually listed, whether it has Russian government connections, or whether individual transactions appear low-risk.
+    </p>
+
+    <p>
+      The practical gap for CASPs is: current compliance infrastructure answers the wrong question. Sanctions screening APIs that check names and wallets against lists will return clean results for unlisted Russian counterparties. The 20th package requires a different data point entirely — counterparty place of establishment and platform function — which many screening workflows do not capture.
+    </p>
+
+    <div class="comparison-wrapper">
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th>Compliance layer</th>
+            <th>Covers existing Russia sanctions</th>
+            <th>Covers 20th package crypto restrictions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>SDN / EU Consolidated List screening</td>
+            <td class="check">Yes</td>
+            <td class="cross">No — only catches listed entities</td>
+          </tr>
+          <tr>
+            <td>Counterparty jurisdiction verification</td>
+            <td class="na">Partial</td>
+            <td class="check">Yes — catches Russia-established providers</td>
+          </tr>
+          <tr>
+            <td>Beneficial ownership / control check</td>
+            <td class="na">Partial</td>
+            <td class="na">Supportive — helps identify escalation and sanctions-control facts</td>
+          </tr>
+          <tr>
+            <td>Platform-function review</td>
+            <td class="na">Partial</td>
+            <td class="check">Yes — catches transfer/exchange platforms, including decentralized platforms</td>
+          </tr>
+          <tr>
+            <td>RUBx and digital rouble monitoring</td>
+            <td class="na">N/A</td>
+            <td class="check">Required — Annex LIII assets are explicitly restricted</td>
+          </tr>
+          <tr>
+            <td>Re-screening of existing B2B relationships</td>
+            <td class="na">Partial</td>
+            <td class="check">Required — existing Russia-nexus relationships must be re-evaluated</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>What four things must CASPs do now?</h2>
+
+    <h3>1. Map all Russia-nexus counterparty relationships</h3>
+
+    <p>
+      Audit your B2B relationships: liquidity providers, OTC desks, payment processors, sub-custodians, API partners. For each, identify: where is the entity established? Does it provide crypto-asset services or operate a platform that facilitates crypto transfer or exchange? Is there Russian state or sanctioned-party ownership or control that creates a separate sanctions issue?
+    </p>
+
+    <p>
+      This audit cannot be delegated to your sanctions screening API. It requires direct counterparty due diligence — requesting corporate documents, beneficial ownership declarations, and jurisdiction of establishment. The Council vote has happened; stale "pending package" risk ratings should be updated.
+    </p>
+
+    <h3>2. Verify RUBx and digital rouble coverage in transaction monitoring</h3>
+
+    <p>
+      Contact your transaction monitoring provider and ask specifically: does your system flag RUBx and digital rouble exposure? If the answer is unclear or negative, you have a gap. The digital rouble uses a two-tier architecture via Russian commercial banks, which means exposure may not appear as direct blockchain transactions. Understand the exposure vector for your specific business model.
+    </p>
+
+    <h3>3. Update your sanctions policy documentation</h3>
+
+    <p>
+      Your AML/sanctions policy needs to explicitly describe the Russia sectoral crypto restriction as a distinct compliance obligation separate from named-list screening. Document the specific procedures for: (a) verifying counterparty establishment at onboarding; (b) identifying transfer and exchange platforms, including decentralized platforms; (c) handling RUBx and digital rouble detection. Regulators will want to see that your policy reflects the adopted law.
+    </p>
+
+    <h3>4. Prepare a counterparty termination workflow</h3>
+
+    <p>
+      If you still have Russia-established crypto service providers or transfer/exchange platforms in your B2B stack, you need a documented exit or legal assessment. Build the workflow: notice requirements, contract termination clauses, transition to alternative providers, documentation of the termination decision and its basis. Handling this as a routine vendor-management issue will understate the sanctions risk.
+    </p>
+
+    <div class="callout callout--teal">
+      <div class="callout__label">The cost of waiting</div>
+      <p>
+        The 20th package is now adopted. The question is not whether this becomes law. The question is whether your compliance program can prove that it recognized the legal change and applied it to counterparties, platforms, RUBx and the digital rouble.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>What will regulators look for during inspection?</h2>
+
+    <p>
+      When MiCA-era inspections examine Russia sanctions compliance after adoption, they will not only ask "did you screen against the list?" They will ask:
+    </p>
+
+    <ul>
+      <li>Did your policy explicitly address the sectoral restriction on Russia-established CASPs and crypto platforms?</li>
+      <li>How did you identify and terminate Russia-nexus B2B relationships?</li>
+      <li>What documentation shows the termination decision was made promptly and for the right reasons?</li>
+      <li>Does your transaction monitoring cover RUBx and digital rouble exposure?</li>
+      <li>Were your existing customer and counterparty records re-screened when the adopted restriction entered into force?</li>
+    </ul>
+
+    <p>
+      These are not trick questions. They are the natural extension of EBA GL/2024/15's requirement that CASPs maintain policies calibrated to specific risk typologies — and a sectoral Russia crypto restriction is exactly the kind of categorical risk that policies must address explicitly.
+    </p>
+
+    <blockquote>
+      <p>The obligation is not merely to check names. CASPs need to understand where the counterparty or platform is established, what crypto function it performs, and whether RUBx or the digital rouble appears in the transaction chain.</p>
+      <cite>— ChainScreen reading of Council Regulation (EU) 2026/506 and Council Decision (CFSP) 2026/508</cite>
+    </blockquote>
+
+    <hr class="section-divider">
+
+    <div class="cta-banner">
+      <h3>Does your process cover categorical restrictions, not just named lists?</h3>
+      <p>Categorical restrictions require policies, counterparty controls, and jurisdiction-risk checks in addition to named-list screening.</p>
+      <a href="/regulations/" class="btn-primary">
+        Read regulatory guides &rarr;
+      </a>
+    </div>
+
+    <div class="faq-section">
+      <h2>Frequently asked questions</h2>
+
+      <div class="faq-item">
+        <h3>What does the EU 20th sanctions package say about crypto?</h3>
+        <p>
+          The Council adopted the 20th Russia sanctions package on April 23, 2026. Council Regulation (EU) 2026/506 and Council Decision (CFSP) 2026/508 restrict Russia-established crypto-asset service providers and platforms that facilitate crypto transfer or exchange, including decentralized platforms. They also prohibit transactions involving RUBx and the digital rouble, and support for development of the digital rouble.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>When did the EU Russia crypto restrictions take effect?</h3>
+        <p>
+          The package was adopted on April 23, 2026. The RUBx and digital rouble Annex LIII entries apply from May 24, 2026. As of July 10, 2026, CASPs should treat the relevant crypto measures as in force.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>How are the Russia crypto restrictions different from normal sanctions screening?</h3>
+        <p>
+          Standard sanctions screening checks counterparties against named-individual lists (EU Consolidated List, OFAC SDN, UN). The 20th package adds a sectoral restriction on Russia-established crypto-asset service providers and platforms that facilitate transfer or exchange of crypto-assets. A clean SDN check is not sufficient compliance. CASPs need to verify place of establishment and platform function.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>What are the penalties for violating EU Russia sanctions?</h3>
+        <p>
+          EU Russia sanctions are enforced by member-state competent authorities under national penalty regimes, alongside the EU framework for criminalising sanctions violations. CASPs should treat breaches as inspection, enforcement and potential criminal-liability events, not as routine screening exceptions.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>What must a CASP do to comply with the Russia crypto restrictions?</h3>
+        <p>
+          CASPs need four controls: (1) counterparty establishment screening for Russia-based CASPs and platforms; (2) platform-risk checks for decentralized platforms enabling crypto trading; (3) transaction monitoring and policy coverage for RUBx and digital rouble exposure; (4) re-screening and documented exits for existing Russia-nexus business relationships. Standard sanctions APIs that only check named lists will not be sufficient.
+        </p>
+      </div>
+    </div>
+
+    <div class="sources">
+      <h3>Sources</h3>
+      <ul>
+        <li><a href="https://www.consilium.europa.eu/en/press/press-releases/2026/07/23/21st-package-of-sanctions-eu-hits-russian-energy-financial-services-and-crypto-hard/" target="_blank" rel="noopener">Council of the EU — 21st package of Russia sanctions, including crypto (23 Jul 2026)</a></li>
+        <li><a href="https://finance.ec.europa.eu/news/eu-adopts-21th-package-sanctions-against-russia-2026-07-23_en" target="_blank" rel="noopener">European Commission — EU adopts 21st package of sanctions against Russia (23 Jul 2026)</a></li>
+        <li><a href="https://www.consilium.europa.eu/en/press/press-releases/2026/04/23/russia-s-war-of-aggression-against-ukraine-20th-round-of-stern-eu-sanctions-hits-energy-military-industrial-complex-trade-and-financial-services-including-crypto/" target="_blank" rel="noopener">Council of the EU — 20th round of Russia sanctions, including crypto (23 Apr 2026)</a></li>
+        <li><a href="https://eur-lex.europa.eu/eli/reg/2026/506/oj/eng" target="_blank" rel="noopener">EUR-Lex — Council Regulation (EU) 2026/506 amending Regulation (EU) No 833/2014</a></li>
+        <li><a href="https://eur-lex.europa.eu/eli/dec/2026/508/oj/eng" target="_blank" rel="noopener">EUR-Lex — Council Decision (CFSP) 2026/508 amending Decision 2014/512/CFSP</a></li>
+        <li><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32014R0833" target="_blank" rel="noopener">EUR-Lex — Council Regulation (EU) No 833/2014 (Russia sanctions framework, as amended)</a></li>
+        <li><a href="https://www.eba.europa.eu/publications-and-media/press-releases/eba-publishes-final-guidelines-internal-policies-procedures-and-controls-ensure-implementation" target="_blank" rel="noopener">EBA — Final Guidelines on Restrictive Measures (GL/2024/15)</a></li>
+        <li><a href="https://eur-lex.europa.eu/eli/reg/2023/1114/oj/eng" target="_blank" rel="noopener">EUR-Lex — MiCA Regulation 2023/1114</a></li>
+        <li><a href="https://www.cysec.gov.cy/en-GB/legislation/crypto-asset/" target="_blank" rel="noopener">CySEC — Crypto Asset Regulation, Circular C685</a></li>
+      </ul>
+    </div>
+
+    <div class="related-articles">
+      <h3>Related articles</h3>
+      <div class="related-grid">
+        <a href="/operations/crypto-aml-enforcement-cases-eu" class="related-card">
+          <span class="related-card__tag">Operations</span>
+          <span class="related-card__title">EU Crypto Enforcement Cases: Lessons from Real Penalties</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+        <a href="/regulations/eba-guidelines-casps" class="related-card">
+          <span class="related-card__tag">Regulations</span>
+          <span class="related-card__title">EBA Guidelines on Restrictive Measures: What Every Small CASP Must Do</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+        <a href="/regulations/which-sanctions-lists-mica-requires" class="related-card">
+          <span class="related-card__tag">Regulations</span>
+          <span class="related-card__title">Which Sanctions Lists Does MiCA Require? OFAC vs EU Consolidated</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+<div style="margin: 40px 0; padding: 24px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; text-align: center;">
+  <p style="font-size: 15px; color: #475569; margin-bottom: 12px;">Need screening records and audit-ready evidence, not just a binary check?</p>
+  <a href="mailto:info@chainscreen.io" style="display: inline-block; padding: 12px 24px; background: #0c2340; color: #fff; border-radius: 8px; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600;">Contact ChainScreen</a>
+</div>
+
+
+<footer>
+  <div class="container">
+    &copy; 2026 DailyMind LTD &middot; HE 439959 &middot; Limassol, Cyprus
+    &nbsp;&middot;&nbsp;
+    <span>Information only; not legal advice</span>
+    &nbsp;&middot;&nbsp;
+    <a href="/privacy">Privacy</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://dailymind.eu">dailymind.eu</a>
+  </div>
+</footer>
+<script data-goatcounter="https://gc-chainscreen.vigilcom.dev/count"
+        async src="//gc.vigilcom.dev/count.js"></script>
+<script src="/nav.js" defer></script>
+</body>
+</html>

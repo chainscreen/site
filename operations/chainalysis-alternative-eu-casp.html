@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chainalysis Alternative for EU CASPs | ChainScreen</title>
+<meta name="description" content="Compare Chainalysis alternatives for EU CASPs using official product pages, sanctions-screening coverage, audit evidence, and regulatory fit as of 10 July 2026.">
+<link rel="canonical" href="https://chainscreen.io/operations/chainalysis-alternative-eu-casp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Affordable Chainalysis Alternatives for EU CASPs in 2026">
+<meta property="og:description" content="6 Chainalysis competitors compared on vendor-published capabilities, sanctions-screening fit, and audit evidence for EU CASPs.">
+<meta property="og:url" content="https://chainscreen.io/operations/chainalysis-alternative-eu-casp">
+<meta property="og:site_name" content="ChainScreen">
+<meta property="og:image" content="https://chainscreen.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Affordable Chainalysis Alternatives for EU CASPs in 2026","description":"6 Chainalysis competitors compared on vendor-published capabilities, sanctions-screening fit, and audit evidence for EU CASPs.","datePublished":"2026-03-13","dateModified":"2026-07-10","wordCount":2679,"author":{"@type":"Person","name":"Katerina Bletsch","url":"https://chainscreen.io","jobTitle":"Founder","sameAs":["https://www.linkedin.com/in/katerina-bletsch/"]},"publisher":{"@type":"Organization","name":"ChainScreen","url":"https://chainscreen.io","logo":{"@type":"ImageObject","url":"https://chainscreen.io/og-image.png"}}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why is Chainalysis so expensive?","acceptedAnswer":{"@type":"Answer","text":"Chainalysis does not publish standard paid pricing on its official product pages. Its paid stack includes KYT, Address Screening, Reactor, VASP Risking, APIs, monitoring, and investigation workflows, so small CASPs should request a scoped quote instead of assuming they need the full platform."}},{"@type":"Question","name":"Is the Chainalysis free sanctions oracle enough for EU compliance?","acceptedAnswer":{"@type":"Answer","text":"Not on its own for a regulated CASP. Chainalysis says its free oracle checks whether an address is included in sanctions designations from organizations including the US, EU, or UN, and it returns a boolean result. EBA GL/2024/15 expects policies, alert analysis, documented decisions, screening-system testing, and freezing/reporting procedures for applicable restrictive measures."}},{"@type":"Question","name":"Can a small CASP pass a CySEC inspection without Chainalysis?","acceptedAnswer":{"@type":"Answer","text":"Yes, if its controls are effective. EBA GL/2024/15 and CySEC C685 do not name a required vendor. CySEC emphasizes configuration, list updates, testing, alert handling, ongoing screening, and documented procedures, so the evidence matters more than the vendor label."}},{"@type":"Question","name":"What sanctions lists must an EU CASP screen against?","acceptedAnswer":{"@type":"Answer","text":"EBA GL/2024/15 requires controls for Union restrictive measures and relevant national restrictive measures; it does not make OFAC or UK OFSI screening mandatory for every EU CASP. CySEC C685 says its inspections focused on UN and EU sanctions lists and also reviewed relevant U.S. and UK screening practices. CASPs should document which lists apply to their footprint and why."}},{"@type":"Question","name":"How do I switch from Chainalysis to a cheaper alternative without compliance gaps?","acceptedAnswer":{"@type":"Answer","text":"Run both tools in parallel for a defined transition period. Screen the same addresses and transfers through both systems, compare alerts, verify coverage for applicable EU and national restrictive measures, test list-update handling, export alert-resolution records, and have the compliance owner approve the change before decommissioning the old tool."}}]}
+</script>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chainscreen.io/og-image.png">
+<script defer src="https://u.vigilcom.dev/script.js" data-website-id="df019ee1-bf37-42db-be6c-93671ff213ec"></script>
+<meta name="twitter:title" content="Affordable Chainalysis Alternatives for EU CASPs in 2026">
+<meta name="twitter:description" content="6 Chainalysis competitors compared on vendor-published capabilities, sanctions-screening fit, and audit evidence for EU CASPs.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://chainscreen.io"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://chainscreen.io/tools/"},{"@type":"ListItem","position":3,"name":"Affordable Chainalysis Alternatives for EU CASPs in 2026"}]}
+</script>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-alt: #f8fafc;
+    --surface: #ffffff;
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --text: #0c1d36;
+    --text-body: #475569;
+    --text-muted: #94a3b8;
+    --accent: #0c2340;
+    --accent-hover: #143a65;
+    --accent-light: #edf2f9;
+    --teal: #0f766e;
+    --teal-light: #f0fdf4;
+    --code-bg: #091a30;
+    --code-surface: #0c2340;
+    --red: #dc2626;
+    --red-light: #fef2f2;
+    --font-serif: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-code: 'JetBrains Mono', 'SF Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  
+  header {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: var(--font-code);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--accent-hover); }
+
+  .nav-link {
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover { color: var(--text); }
+
+  
+  .article-header {
+    padding: 80px 0 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .article-header__eyebrow {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--teal);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .article-header h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+
+  .article-header__sub {
+    font-size: 17px;
+    color: var(--text-body);
+    max-width: 640px;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .article-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: var(--font-code);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.01em;
+  }
+
+  .article-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .article-meta__dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--teal);
+    flex-shrink: 0;
+  }
+
+  
+  .article-body {
+    padding: 48px 0 72px;
+  }
+
+  .article-body h2 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-top: 48px;
+    margin-bottom: 16px;
+    line-height: 1.3;
+    color: var(--text);
+  }
+
+  .article-body h3 {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 32px;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+
+  .article-body p {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .article-body ul, .article-body ol {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+    padding-left: 24px;
+  }
+
+  .article-body li {
+    margin-bottom: 6px;
+  }
+
+  .article-body a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+  }
+
+  .article-body a:hover {
+    color: var(--accent-hover);
+  }
+
+  .article-body strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .article-body code {
+    font-family: var(--font-code);
+    font-size: 13px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--accent);
+  }
+
+  
+  .callout {
+    margin: 28px 0;
+    padding: 24px 28px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .callout p {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .callout p:last-child {
+    margin-bottom: 0;
+  }
+
+  .callout--warning {
+    background: var(--red-light);
+    border: 1px solid #fecaca;
+  }
+
+  .callout--warning .callout__label {
+    color: var(--red);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--info {
+    background: var(--accent-light);
+    border: 1px solid #c7d5e8;
+  }
+
+  .callout--info .callout__label {
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--teal {
+    background: var(--teal-light);
+    border: 1px solid #bbf7d0;
+  }
+
+  .callout--teal .callout__label {
+    color: var(--teal);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  
+  .comparison-wrapper {
+    margin: 28px 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow-x: auto;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .comparison th, .comparison td {
+    padding: 13px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .comparison tr:last-child td { border-bottom: none; }
+
+  .comparison th {
+    color: var(--text-muted);
+    font-family: var(--font-code);
+    font-weight: 500;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--bg-alt);
+    white-space: nowrap;
+  }
+
+  .comparison td:first-child {
+    color: var(--text);
+    font-weight: 500;
+    font-size: 13px;
+  }
+
+  .check { color: var(--teal); font-weight: 600; }
+  .cross { color: var(--red); font-weight: 600; }
+  .na { color: var(--text-muted); }
+
+  
+  blockquote {
+    margin: 24px 0;
+    padding: 20px 24px;
+    border-left: 3px solid var(--border-strong);
+    background: var(--bg-alt);
+    border-radius: 0 8px 8px 0;
+  }
+
+  blockquote p {
+    font-size: 14px;
+    color: var(--text-body);
+    font-style: italic;
+    margin-bottom: 0;
+  }
+
+  blockquote cite {
+    display: block;
+    margin-top: 8px;
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-style: normal;
+    color: var(--text-muted);
+  }
+
+  
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  
+  .decision-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-bottom: 12px;
+  }
+
+  .decision-card__header {
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .decision-card__body {
+    font-size: 14px;
+    color: var(--text-body);
+    line-height: 1.65;
+  }
+
+  .decision-card__body ul {
+    padding-left: 18px;
+    margin-top: 8px;
+    margin-bottom: 0;
+    font-size: 14px;
+  }
+
+  .decision-card__body li {
+    margin-bottom: 4px;
+    font-size: 14px;
+  }
+
+  
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+    padding: 24px 0;
+  }
+
+  .faq-item:first-child {
+    border-top: 1px solid var(--border);
+  }
+
+  .faq-item h3 {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 0;
+    margin-bottom: 12px;
+  }
+
+  .faq-item p {
+    font-size: 14px;
+    color: var(--text-body);
+    line-height: 1.7;
+    margin-bottom: 0;
+  }
+
+  
+  .cta-banner {
+    margin: 48px 0;
+    padding: 40px 36px;
+    background: var(--code-bg);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .cta-banner h3 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: #f1f5f9;
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .cta-banner p {
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 24px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 28px;
+    background: #fff;
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary:hover {
+    background: #f1f5f9;
+    color: var(--accent);
+  }
+
+  
+  .sources {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .sources h3 {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .sources ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sources li {
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 4px 0;
+    line-height: 1.6;
+  }
+
+  .sources li a {
+    color: var(--text-body);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .sources li a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--text); }
+
+  
+  @media (max-width: 640px) {
+    .article-header { padding: 48px 0 32px; }
+    .article-header h1 { font-size: 1.8rem; }
+    .article-body h2 { font-size: 20px; }
+    .article-meta { gap: 12px; }
+    .comparison { font-size: 11px; }
+    .comparison th, .comparison td { padding: 8px 10px; }
+    .callout { padding: 20px; }
+    .cta-banner { padding: 32px 24px; }
+    .decision-card { padding: 20px; }
+  }
+
+  
+  .breadcrumb { padding: 12px 0; border-bottom: 1px solid var(--border); background: var(--bg-alt); }
+  .breadcrumb a, .breadcrumb span { font-family: var(--font-code); font-size: 11px; letter-spacing: 0.01em; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb__sep { color: #cbd5e1; margin: 0 6px; }
+  .breadcrumb__current { color: var(--text-body); }
+
+  
+  .nav-links { display: flex; align-items: center; gap: 20px; }
+  .nav-link.active { color: var(--text); }
+  @media (max-width: 640px) { .nav-links { gap: 12px; } .nav-link { font-size: 11px; } }
+
+  
+  .related-articles { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+  .related-articles h3 { font-family: var(--font-code); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 16px; margin-top: 0; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .related-card { display: flex; flex-direction: column; gap: 8px; padding: 20px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; transition: border-color 0.2s; }
+  .related-card:hover { border-color: var(--accent); }
+  .related-card__tag { font-family: var(--font-code); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--teal); }
+  .related-card__title { font-family: var(--font-serif); font-size: 15px; color: var(--text); line-height: 1.35; }
+  .related-card__arrow { font-family: var(--font-code); font-size: 12px; color: var(--text-muted); margin-top: auto; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="/" class="logo">chain<span>screen</span></a>
+    <nav class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/regulations/" class="nav-link">Regulations</a>
+      <a href="/operations/" class="nav-link">Operations</a>
+      <a href="/tools/" class="nav-link active">Tools</a>
+      <a href="/technical/" class="nav-link">Technical</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <div class="container">
+    <a href="/">Home</a><span class="breadcrumb__sep">/</span>
+    <a href="/tools/">Tools</a><span class="breadcrumb__sep">/</span>
+    <span class="breadcrumb__current">Chainalysis Alternatives</span>
+  </div>
+</nav>
+
+<section class="article-header">
+  <div class="container">
+    <div class="article-header__eyebrow">Compliance tooling</div>
+    <h1>Affordable Chainalysis Alternatives for EU CASPs in 2026</h1>
+    <p class="article-header__sub">
+      Here are 6 alternatives for EU CASPs that need sanctions screening, transaction monitoring, or Travel Rule tooling without buying a broader platform than their risk profile requires -- compared on vendor-published capabilities, audit evidence, and regulatory fit.
+    </p>
+    <div class="article-meta">
+      <span><div class="article-meta__dot"></div> Updated 10 July 2026</span>
+      <span><div class="article-meta__dot"></div> 9 min read</span>
+      <span><div class="article-meta__dot"></div> Sources: official vendor pages, EBA GL/2024/15, CySEC C685, ESMA MiCA</span>
+    </div>
+  </div>
+</section>
+
+<article class="article-body">
+  <div class="container">
+
+    <div class="callout callout--info">
+      <div class="callout__label">Disclosure</div>
+      <p>
+        ChainScreen now publishes content only. The former ChainScreen API and product pages were retired on 2026-05-12, so ChainScreen is no longer listed as a vendor alternative. Product claims below are based on official vendor pages reviewed on 2026-07-10. Where a vendor does not publish pricing or list-by-list coverage, this article says so instead of inferring it. If you spot an error, email <a href="mailto:info@chainscreen.io">info@chainscreen.io</a>.
+      </p>
+    </div>
+
+    <h2>Why do CASPs look for Chainalysis alternatives?</h2>
+
+    <p>
+      Chainalysis publishes a broad compliance and investigations stack: KYT for continuous transaction monitoring, Address Screening for wallet and liquidity-pool risk, VASP Risking for counterparty due diligence, and Reactor for investigations. Its Reactor page says the product traces activity across 27+ blockchains and 40M+ assets.
+    </p>
+
+    <p>
+      The practical question is whether a 5-person CASP in Limassol processing 30 transactions per day needs the same tooling footprint as an exchange, bank, or investigations team. For many small EU-licensed crypto companies, the answer is no.
+    </p>
+
+    <p>
+      Here is the pricing reality from official pages reviewed on 2026-07-10:
+    </p>
+
+    <ul>
+      <li><strong>Vendor-published paid pricing:</strong> Chainalysis does not publish a standard paid CASP price on its product pages.</li>
+      <li><strong>Scope:</strong> Paid Chainalysis tools cover monitoring, screening, risk settings, continuous alerts, investigation workflows, and counterparty risk. The quote depends on the modules, volume, users, and deployment model.</li>
+      <li><strong>Practical step:</strong> Request a written quote for the exact modules, users, chains, and transaction volume you need.</li>
+    </ul>
+
+    <p>
+      For a small CASP, the cost question should start with scope: do you need transaction monitoring, investigation tooling, entity attribution, Travel Rule workflows, sanctions screening, or only a documented screening control with alert resolution?
+    </p>
+
+    <div class="callout callout--teal">
+      <div class="callout__label">The core question</div>
+      <p>
+        Do you need a full blockchain analytics suite, or do you need controls that satisfy <a href="/regulations/eba-guidelines-casps">EBA GL/2024/15</a> for applicable Union and national restrictive measures? For many small CASPs, the answer is a narrower screening and evidence workflow.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>What do you actually need vs. what are you paying for?</h2>
+
+    <p>
+      Chainalysis bundles several products into their compliance platform. Understanding what each does -- and which ones your regulator actually inspects -- helps separate must-haves from nice-to-haves.
+    </p>
+
+    <h3>What EBA and CySEC expect you to evidence</h3>
+
+    <p>
+      Based on <a href="/regulations/eba-guidelines-casps">EBA Guidelines GL/2024/15</a> (applicable from 30 December 2025) and CySEC Circular C685, regulators look for evidence that your screening controls work:
+    </p>
+
+    <p>
+      The 1 July 2026 MiCA date is the maximum transitional period for certain providers that were already offering crypto-asset services under national law before 30 December 2024. It is not a MiCA-wide date that makes OFAC, UK OFSI, or UN screening mandatory for every EU CASP.
+    </p>
+
+    <ol>
+      <li><strong>Applicable restrictive measures</strong> -- EBA GL/2024/15 covers Union restrictive measures and relevant national restrictive measures. CySEC C685 says its inspections focused on UN and EU lists and relevant U.S. and UK screening practices.</li>
+      <li><strong>Pre-transfer screening</strong> -- CASPs should screen crypto-asset transfers before making crypto-assets available to the beneficiary.</li>
+      <li><strong>Alert documentation</strong> -- Can you show how alerts were investigated, who decided true/false positives, and what action was taken?</li>
+      <li><strong>Ongoing screening and list updates</strong> -- Do you re-screen customer databases when relevant lists change and test list-management accuracy?</li>
+      <li><strong>Documented procedures</strong> -- Do you have written policies for alert handling, escalation, freezing or blocking, reporting, testing, and vendor oversight?</li>
+    </ol>
+
+    <h3>What Chainalysis bundles that you may not need</h3>
+
+    <ul>
+      <li><strong>KYT (Know Your Transaction):</strong> Continuous transaction monitoring with real-time alerts. Useful where transaction volume and risk justify automated monitoring.</li>
+      <li><strong>Reactor:</strong> Investigation tooling for tracing funds across wallets, assets, swaps, bridges, DEXs, and mixers.</li>
+      <li><strong>Address Screening and VASP Risking:</strong> Wallet, liquidity-pool, and counterparty-risk tools that may be useful if your risk assessment requires them.</li>
+    </ul>
+
+    <p>
+      If your primary control need is sanctions screening with documented alert handling, do not buy broader analytics or investigations modules unless your risk assessment supports them.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>How do 6 Chainalysis alternatives compare?</h2>
+
+    <p>
+      The following comparison focuses on vendor-published claims that matter for EU sanctions compliance: sanctions-screening scope, evidence or audit features, pricing transparency, and public coverage claims. For a deeper dive into each vendor's full capabilities, see our <a href="/tools/sanctions-screening-tools-comparison">comprehensive sanctions screening tools comparison</a>.
+    </p>
+
+    <div class="comparison-wrapper">
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th>Tool</th>
+            <th>Pricing</th>
+            <th>Sanctions / risk claim</th>
+            <th>Evidence claim</th>
+            <th>Public coverage claim</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Chainalysis (paid)</td>
+            <td>Contact vendor</td>
+            <td>Address and liquidity-pool risk screening</td>
+            <td>Historical log and continuous monitoring</td>
+            <td>27+ blockchains / 40M+ assets in Reactor</td>
+          </tr>
+          <tr>
+            <td>TRM Labs</td>
+            <td>Contact vendor</td>
+            <td>Direct, counterparty, and indirect sanctions exposure</td>
+            <td>Real-time alerts and continuous monitoring</td>
+            <td>191+ networks / 720+ bridges</td>
+          </tr>
+          <tr>
+            <td>Elliptic</td>
+            <td>Contact vendor</td>
+            <td>Wallet and transaction screening for AML risk</td>
+            <td>Audit-ready workflows and historical data</td>
+            <td>60+ blockchains on product pages</td>
+          </tr>
+          <tr>
+            <td>Crystal Intelligence</td>
+            <td>Contact vendor</td>
+            <td>Wallet screening against sanctions and blocklists</td>
+            <td>Audit-ready evidence in one platform</td>
+            <td>330+ blockchains / 10,000+ assets</td>
+          </tr>
+          <tr>
+            <td>Scorechain</td>
+            <td>Contact vendor; free API</td>
+            <td>Sanctions exposure and wallet-risk screening</td>
+            <td>Internal reporting and regulatory review support</td>
+            <td>23+ platform chains; 21+ free API chains</td>
+          </tr>
+          <tr>
+            <td>Merkle Science</td>
+            <td>Contact vendor</td>
+            <td>Behavior-based transaction monitoring and sanctions-risk prevention</td>
+            <td>Risk reporting</td>
+            <td>28+ blockchains on public pages</td>
+          </tr>
+          <tr>
+            <td>21 Analytics</td>
+            <td>Public tiers; contact/vendor flow</td>
+            <td>Travel Rule, not standalone sanctions screening</td>
+            <td>Auditable registry, exports, audit log</td>
+            <td>2,800+ currencies via DTIF ISO 24165</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-size: 12px; color: var(--text-muted); margin-top: -12px;">
+      <em>As of 2026-07-10, none of the paid vendor product pages reviewed published a standard annual CASP price. Do not treat third-party procurement benchmarks as vendor-confirmed quotes.</em>
+    </p>
+
+    <h3>1. TRM Labs -- enterprise intelligence</h3>
+
+    <p>
+      TRM Labs publishes wallet screening, transaction monitoring, entity screening, entity due diligence, forensics, and intelligence products. Its sanctions-screening materials say TRM scans across 191+ networks and 720+ bridges and covers direct, counterparty, and indirect exposure.
+    </p>
+
+    <ul>
+      <li><strong>Pricing:</strong> Not published on the official product pages reviewed. Request a quote.</li>
+      <li><strong>Published capability:</strong> Direct, indirect, and counterparty sanctions exposure; real-time screening; wallet behavior monitoring.</li>
+      <li><strong>Best for:</strong> Organizations that need broad cross-chain attribution and investigation capability, not only list matching.</li>
+      <li><strong>Tradeoff:</strong> Public pages do not give a small-CASP price floor, so validate cost before treating TRM as a lower-cost Chainalysis replacement.</li>
+    </ul>
+
+    <h3>2. Elliptic -- wallet and transaction screening</h3>
+
+    <p>
+      Elliptic publishes wallet and transaction screening, investigation, and entity due diligence products. Its screening page emphasizes chain-agnostic wallet and transaction screening, cross-chain and cross-asset risk detection, and audit-ready workflows.
+    </p>
+
+    <ul>
+      <li><strong>Pricing:</strong> Not published on the official product pages reviewed. Request a quote.</li>
+      <li><strong>Chains:</strong> 60+ blockchains on current product pages.</li>
+      <li><strong>Best for:</strong> CASPs that need audit-ready wallet and transaction screening with cross-chain risk context.</li>
+      <li><strong>Tradeoff:</strong> The public pages describe capabilities, not a standard small-CASP package or price.</li>
+    </ul>
+
+    <h3>3. Crystal Intelligence -- chain breadth</h3>
+
+    <p>
+      Crystal Intelligence publishes blockchain analytics for compliance, risk management, and investigations. Its public FAQ says Crystal covers 330+ blockchains and 10,000+ digital assets, screens wallets against sanctions and blocklists, and can help teams build audit-ready evidence.
+    </p>
+
+    <ul>
+      <li><strong>Pricing:</strong> Not published on the official product pages reviewed. Request a quote.</li>
+      <li><strong>Chains:</strong> 330+ blockchains, based on Crystal's public FAQ.</li>
+      <li><strong>Best for:</strong> CASPs operating on unusual blockchains where other tools have gaps.</li>
+      <li><strong>Tradeoff:</strong> The public page does not publish standard CASP pricing or list-by-list sanctions coverage.</li>
+    </ul>
+
+    <h3>4. Scorechain -- screening plus free API</h3>
+
+    <p>
+      Scorechain publishes wallet and transaction screening, blockchain analytics, and a free sanctions API. Its pricing page describes transparent, scalable pricing, but the official pages reviewed do not publish a standard monthly or annual platform amount.
+    </p>
+
+    <ul>
+      <li><strong>Pricing:</strong> Paid platform pricing is not published as a fixed amount. The free sanctions API is published as free, non-commercial, and rate-limited to 100 requests per hour.</li>
+      <li><strong>What's included:</strong> Wallet risk scoring, sanctions and high-risk exposure checks, internal reporting support, and blockchain analytics. The free API checks supported sanctions lists across 21+ blockchains.</li>
+      <li><strong>Best for:</strong> CASPs that want a European compliance platform and also want a lightweight free sanctions API for basic checks or secondary screening.</li>
+      <li><strong>Tradeoff:</strong> The free API is explicitly basic and best-effort; regulated CASPs still need procedures, records, testing, and alert handling around it.</li>
+    </ul>
+
+    <h3>5. Merkle Science -- behavior-based detection</h3>
+
+    <p>
+      Merkle Science publishes Compass for behavior-based transaction monitoring and risk reporting. Its public pages position Compass for AML, KYC, CFT, sanctions-risk prevention, and suspicious-transaction detection beyond blacklists.
+    </p>
+
+    <ul>
+      <li><strong>Pricing:</strong> Not published on the official product pages reviewed. Request a quote.</li>
+      <li><strong>Chains:</strong> Public pages state support for 28+ blockchains and smart-contract, bridge, swap, aggregator, and token transactions.</li>
+      <li><strong>Best for:</strong> CASPs with DeFi or behavior-risk exposure that need transaction monitoring rather than only direct sanctions list checks.</li>
+      <li><strong>Tradeoff:</strong> The public pages do not publish a standard EU CASP package, price, or detailed sanctions-list matrix.</li>
+    </ul>
+
+    <h3>6. 21 Analytics -- Travel Rule operations</h3>
+
+    <p>
+      21 Analytics is primarily a Travel Rule solution, not a standalone sanctions-screening or blockchain-analytics replacement. Its official pages emphasize VASP-to-VASP transfers, self-hosted wallet verification, on-premises deployment, audit records, exports, and native blockchain-analytics integration.
+    </p>
+
+    <ul>
+      <li><strong>Pricing:</strong> Public tiers are Essentials and Enterprise, but the official pricing page does not publish euro or dollar amounts.</li>
+      <li><strong>Differentiator:</strong> Travel Rule automation, self-hosted wallet ownership proofs, peer-to-peer data transfer, and an auditable registry.</li>
+      <li><strong>Best for:</strong> CASPs that need Travel Rule operations and already have, or plan to integrate, separate wallet-risk or sanctions-screening tooling.</li>
+      <li><strong>Tradeoff:</strong> Do not evaluate 21 Analytics as a like-for-like Chainalysis sanctions-screening replacement unless the integrated analytics provider and sanctions workflow are part of your implementation.</li>
+    </ul>
+
+    <h2>Decision framework: which alternative fits your CASP?</h2>
+
+    <p>
+      The right tool depends on what you actually need, not what sounds impressive in a sales demo. Here's a framework based on operational reality:
+    </p>
+
+    <div class="decision-card">
+      <div class="decision-card__header">You need full blockchain analytics + investigations</div>
+      <div class="decision-card__body">
+        <p>Stay with Chainalysis, or evaluate TRM Labs and Elliptic.</p>
+        <ul>
+          <li>If your compliance team runs investigations, traces funds across wallets, and produces intelligence reports, you need the full suite</li>
+          <li>Validate chain coverage, investigation workflows, deployment model, and case evidence against your risk assessment</li>
+          <li>Budget: quote-based; official product pages reviewed do not publish standard annual prices</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="decision-card">
+      <div class="decision-card__header">You need transaction monitoring (KYT) + screening</div>
+      <div class="decision-card__body">
+        <p>Look at Scorechain, Crystal Intelligence, or Merkle Science.</p>
+        <ul>
+          <li>If your volume and risk assessment require continuous monitoring with risk scores, compare the monitoring scope before buying investigation tooling</li>
+          <li>Check whether the vendor publishes audit exports, alert-resolution records, testing support, and list-update evidence</li>
+          <li>Budget: quote-based unless the vendor gives you a written fixed package</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="decision-card">
+      <div class="decision-card__header">You need sanctions screening only + audit trail</div>
+      <div class="decision-card__body">
+        <p>Evaluate focused screening vendors and free APIs, then add the missing evidence workflow.</p>
+        <ul>
+          <li>If your control need is sanctions list checks with proper documentation, verify the tool covers applicable Union and national restrictive measures</li>
+          <li>Confirm exports, alert-resolution records, list-update handling, durable audit records, and testing support before relying on it</li>
+          <li>Use free APIs only as an input to a documented process, not as the entire compliance control</li>
+          <li>Budget: depends on whether you build the records and testing layer yourself or buy it from a vendor</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="decision-card">
+      <div class="decision-card__header">You only need basic screening (no audit trail requirement)</div>
+      <div class="decision-card__body">
+        <p>The Chainalysis free oracle/API or Scorechain free sanctions API may be sufficient.</p>
+        <ul>
+          <li>If you're not regulated and only need a basic sanctions check, Chainalysis says its oracle includes sanctions designations from organizations including the US, EU, or UN; Scorechain says its free API checks supported sanctions lists across 21+ blockchains</li>
+          <li>Build your own records, testing, and alert handling if you later need regulated evidence</li>
+          <li>Budget: $0 + engineering time for audit trail</li>
+        </ul>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>What is the real cost of Chainalysis's "free" oracle?</h2>
+
+    <p>
+      Chainalysis offers a free sanctions screening API and an on-chain oracle. The oracle documentation says it checks whether a wallet address has been included in a sanctions designation and is updated for sanctions designations from organizations including the US, EU, or UN. We've written a <a href="/tools/chainalysis-oracle-limitations">detailed technical analysis of what the free oracle covers and what it doesn't</a>.
+    </p>
+
+    <p>
+      The short version: the oracle returns a boolean result. Here's what that means for an EU CASP:
+    </p>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">Gap analysis: Chainalysis free vs. EU requirements</div>
+      <p><strong>Covered by the oracle docs:</strong> Address checks against sanctions designations from organizations including the US, EU, or UN.</p>
+      <p><strong>Not stated in the oracle docs reviewed:</strong> UK OFSI coverage, case management, alert-resolution workflow, or regulator-ready exports.</p>
+      <p><strong>Not provided by a boolean oracle call:</strong> documented alert analysis, screening-system testing, list-update evidence, freezing/blocking procedures, or reporting procedures.</p>
+      <p><strong>Bottom line:</strong> The free oracle can be a useful screening input. A regulated CASP still needs the control framework around it.</p>
+    </div>
+
+    <p>
+      This doesn't mean you should stop using the free tools. Use them as a screening layer. But you need additional infrastructure for records, alert handling, testing, and regulator-ready documentation -- either build it yourself or use a purpose-built tool.
+    </p>
+
+    <p>
+      Chainalysis's own documentation includes a standard disclaimer: <em>"Chainalysis cannot guarantee the accuracy, timeliness, suitability, or validity of the data."</em> That's reasonable for a free product. But it's a weak foundation for your entire compliance program.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>Frequently asked questions</h2>
+
+    <div class="faq-item">
+      <h3>Why is Chainalysis so expensive?</h3>
+      <p>
+        Chainalysis does not publish standard paid pricing on its official product pages. Its paid stack includes KYT, Address Screening, Reactor, VASP Risking, APIs, monitoring, and investigation workflows, so small CASPs should request a scoped quote instead of assuming they need the full platform.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Is the Chainalysis free sanctions oracle enough for EU compliance?</h3>
+      <p>
+        Not on its own for a regulated CASP. Chainalysis says its free oracle checks whether an address is included in sanctions designations from organizations including the US, EU, or UN, and it returns a boolean result. EBA GL/2024/15 expects policies, alert analysis, documented decisions, screening-system testing, and freezing/reporting procedures for applicable restrictive measures. See our <a href="/tools/chainalysis-oracle-limitations">full analysis of the free oracle's limitations</a>.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Can a small CASP pass a CySEC inspection without Chainalysis?</h3>
+      <p>
+        Yes, if its controls are effective. EBA GL/2024/15 and CySEC C685 do not name a required vendor. CySEC emphasizes configuration, list updates, testing, alert handling, ongoing screening, and documented procedures, so the evidence matters more than the vendor label.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>What sanctions lists must an EU CASP screen against?</h3>
+      <p>
+        <a href="/regulations/eba-guidelines-casps">EBA GL/2024/15</a> requires controls for Union restrictive measures and relevant national restrictive measures; it does not make OFAC or UK OFSI screening mandatory for every EU CASP. CySEC C685 says its inspections focused on UN and EU sanctions lists and also reviewed relevant U.S. and UK screening practices. CASPs should document which lists apply to their footprint and why.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <h3>How do I switch from Chainalysis to a cheaper alternative without compliance gaps?</h3>
+      <p>
+        Run both tools in parallel for a defined transition period. Screen the same addresses and transfers through both systems, compare alerts, verify coverage for applicable EU and national restrictive measures, test list-update handling, export alert-resolution records, and have the compliance owner approve the change before decommissioning the old tool.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>Bottom line</h2>
+
+    <p>
+      Chainalysis publishes a broad product stack for monitoring, screening, risk assessment, and investigations. If your actual control need is sanctions screening with documented alert handling -- not full-suite blockchain analytics -- evaluate narrower tools before buying a broader platform.
+    </p>
+
+    <p>
+      The decision framework is straightforward:
+    </p>
+
+    <ul>
+      <li><strong>Need analytics + investigations?</strong> Stay with Chainalysis, TRM, or Elliptic. You're paying for real capabilities you'll use.</li>
+      <li><strong>Need KYT + screening?</strong> Evaluate Scorechain, Crystal Intelligence, Merkle Science, and similar platforms against your transaction volume, chains, and evidence needs.</li>
+      <li><strong>Need Travel Rule operations?</strong> Evaluate 21 Analytics alongside a sanctions-screening or wallet-risk tool.</li>
+      <li><strong>Need screening only?</strong> Evaluate focused screening vendors and free APIs, but build or buy the audit, testing, and alert-resolution layer.</li>
+    </ul>
+
+    <p>
+      Whatever you choose, make sure it covers applicable Union and national restrictive measures, documents why any UN, U.S., or UK screening is included for your footprint, preserves alert-resolution evidence, and triggers re-screening when relevant lists update. The vendor name on the invoice does not replace the control evidence.
+    </p>
+
+    <div class="cta-banner">
+      <h3>Not sure if your screening meets EBA requirements?</h3>
+      <p>Take our 2-minute compliance self-check. Ten questions based on EBA GL/2024/15 -- see where you stand before your next inspection.</p>
+      <a href="/regulations/" class="btn-primary">
+        Read the regulatory guides &rarr;
+      </a>
+    </div>
+
+    <div class="sources">
+      <h3>Sources</h3>
+      <ul>
+        <li><a href="https://www.eba.europa.eu/sites/default/files/2024-11/eaeae49d-81a5-4154-8af9-5014f6ee8881/Final%20Report%20Guidelines%20restrictive%20measures%20.pdf" target="_blank" rel="noopener">EBA -- Final Report, Guidelines on Restrictive Measures (EBA/GL/2024/15)</a></li>
+        <li><a href="https://www.cysec.gov.cy/en-GB/public-info/circulars/supervised/casp-circulars/99064/" target="_blank" rel="noopener">CySEC -- C685 Guidance on Sanctions Screening Systems</a></li>
+        <li><a href="https://www.cysec.gov.cy/en-GB/Files/AML/98989.aspx/" target="_blank" rel="noopener">CySEC -- Guidance for Maintaining Effective and Efficient Sanctions Screening Systems</a></li>
+        <li><a href="https://www.esma.europa.eu/esmas-activities/digital-finance-and-innovation/markets-crypto-assets-regulation-mica" target="_blank" rel="noopener">ESMA -- MiCA Transitional Measures</a></li>
+        <li><a href="https://www.chainalysis.com/free-cryptocurrency-sanctions-screening-tools/" target="_blank" rel="noopener">Chainalysis -- Free Cryptocurrency Sanctions Screening Tools</a></li>
+        <li><a href="https://go.chainalysis.com/chainalysis-oracle-docs.html" target="_blank" rel="noopener">Chainalysis -- Oracle for Sanctions Screening Documentation</a></li>
+        <li><a href="https://www.chainalysis.com/product/address-screening/" target="_blank" rel="noopener">Chainalysis -- Address Screening</a></li>
+        <li><a href="https://www.chainalysis.com/product/reactor/" target="_blank" rel="noopener">Chainalysis -- Reactor</a></li>
+        <li><a href="https://www.trmlabs.com/glossary/sanctions-screening" target="_blank" rel="noopener">TRM Labs -- Sanctions Screening</a></li>
+        <li><a href="https://www.trmlabs.com/blockchain-intelligence-platform/wallet-screening" target="_blank" rel="noopener">TRM Labs -- Wallet Screening</a></li>
+        <li><a href="https://www.elliptic.co/solutions/screening" target="_blank" rel="noopener">Elliptic -- Wallet and Transaction Screening</a></li>
+        <li><a href="https://www.elliptic.co/digital-asset-platform" target="_blank" rel="noopener">Elliptic -- Digital Asset Platform</a></li>
+        <li><a href="https://crystalintelligence.com/" target="_blank" rel="noopener">Crystal Intelligence -- Blockchain Analytics and Crypto Compliance Platform</a></li>
+        <li><a href="https://www.scorechain.com/products/crypto-wallet-and-transaction-screening" target="_blank" rel="noopener">Scorechain -- Crypto Wallet Transaction Screening and Monitoring</a></li>
+        <li><a href="https://www.scorechain.com/developers/free-sanction-api" target="_blank" rel="noopener">Scorechain -- Free Sanctions API</a></li>
+        <li><a href="https://www.scorechain.com/resources/crypto-glossary/scorechain-pricing" target="_blank" rel="noopener">Scorechain -- Pricing Page</a></li>
+        <li><a href="https://www.merklescience.com/platform/transaction-wallet-monitoring" target="_blank" rel="noopener">Merkle Science -- Compass</a></li>
+        <li><a href="https://www.merklescience.com/competitor-tracker" target="_blank" rel="noopener">Merkle Science -- Public Coverage Page</a></li>
+        <li><a href="https://www.21analytics.ch/21-travel-rule-solution/" target="_blank" rel="noopener">21 Analytics -- 21 Travel Rule</a></li>
+        <li><a href="https://www.21analytics.ch/pricing/" target="_blank" rel="noopener">21 Analytics -- Tiers and Pricing Page</a></li>
+        <li><a href="https://chainscreen.io/tools/chainalysis-oracle-limitations">Chainalysis Oracle Limitations Analysis</a></li>
+        <li><a href="https://chainscreen.io/tools/sanctions-screening-tools-comparison">Full Sanctions Screening Tools Comparison</a></li>
+      </ul>
+    </div>
+
+  
+
+    <div class="related-articles">
+      <h3>Related articles</h3>
+      <div class="related-grid">
+        <a href="/tools/chainalysis-oracle-limitations" class="related-card">
+          <span class="related-card__tag">Tools</span>
+          <span class="related-card__title">Chainalysis Free Sanctions Oracle: What It Covers and What It Doesn't</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+        <a href="/tools/sanctions-screening-tools-comparison" class="related-card">
+          <span class="related-card__tag">Tools</span>
+          <span class="related-card__title">Sanctions Screening Tools: Price and Feature Comparison</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+<div style="margin: 40px 0; padding: 24px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; text-align: center;">
+  <p style="font-size: 15px; color: #475569; margin-bottom: 12px;">Need screening records and audit-ready evidence, not just a binary check?</p>
+  <a href="mailto:info@chainscreen.io" style="display: inline-block; padding: 12px 24px; background: #0c2340; color: #fff; border-radius: 8px; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600;">Contact ChainScreen</a>
+</div>
+
+
+<footer>
+  <div class="container">
+    &copy; 2026 DailyMind LTD &middot; HE 439959 &middot; Limassol, Cyprus
+    &nbsp;&middot;&nbsp;
+    <span>Information only; not legal advice</span>
+    &nbsp;&middot;&nbsp;
+    <a href="/privacy">Privacy</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://dailymind.eu">dailymind.eu</a>
+  </div>
+</footer>
+<script data-goatcounter="https://gc-chainscreen.vigilcom.dev/count"
+        async src="//gc.vigilcom.dev/count.js"></script>
+<script src="/nav.js" defer></script>
+</body>
+</html>

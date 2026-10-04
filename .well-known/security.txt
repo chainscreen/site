@@ -1,0 +1,5 @@
+Contact: mailto:security@chainscreen.io
+Expires: 2027-03-22T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://chainscreen.io/.well-known/security.txt
+Policy: https://chainscreen.io/trust/vulnerability-disclosure

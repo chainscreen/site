@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MiCA Checklist: 15 Items for Small CASPs | ChainScreen</title>
+<meta name="description" content="MiCA compliance checklist for small CASPs after the July 1, 2026 transition: capital, governance, AML, sanctions screening, DORA, and wind-down.">
+<link rel="canonical" href="https://chainscreen.io/regulations/mica-compliance-checklist-small-casp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MiCA Compliance Checklist for Small CASPs in 2026">
+<meta property="og:description" content="Post-deadline MiCA checklist for small CASPs. 15 actionable requirements, ongoing controls, costs, and what unauthorised or pending CASPs should do now.">
+<meta property="og:url" content="https://chainscreen.io/regulations/mica-compliance-checklist-small-casp">
+<meta property="og:image" content="https://chainscreen.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="ChainScreen">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"MiCA Compliance Checklist for Small CASPs in 2026","description":"Post-deadline MiCA compliance checklist for small CASPs (5-50 employees). 15 actionable requirements, ongoing controls, costs, and penalties under Regulation (EU) 2023/1114.","datePublished":"2026-03-13","dateModified":"2026-08-17","author":{"@type":"Person","name":"Katerina Bletsch","url":"https://chainscreen.io","jobTitle":"Founder","sameAs":["https://www.linkedin.com/in/katerina-bletsch/"]},"publisher":{"@type":"Organization","name":"ChainScreen","url":"https://chainscreen.io","logo":{"@type":"ImageObject","url":"https://chainscreen.io/og-image.png"}},"wordCount":3060}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is the MiCA transition period still available for CASPs?","acceptedAnswer":{"@type":"Answer","text":"No. The maximum Article 143 transition period ended on July 1, 2026, and some Member States used shorter periods. ESMA's Q&A says a CASP that has not been authorised by the end of the applicable transition period must cease providing crypto-asset services until authorisation is granted. A pending application alone is not a safe harbour; consult the home NCA before any client activity."}},{"@type":"Question","name":"How much capital does a small CASP need under MiCA?","acceptedAnswer":{"@type":"Answer","text":"MiCA Article 67 and Annex IV set three capital tiers: EUR 50,000 for advisory services only, EUR 125,000 for custody and exchange, and EUR 150,000 for operating a trading platform. CASPs must also hold own funds equal to at least one quarter of the preceding year's fixed overhead expenditures, if that amount is higher."}},{"@type":"Question","name":"What are the penalties for not complying with MiCA?","acceptedAnswer":{"@type":"Answer","text":"For CASPs, national competent authorities can impose fines up to EUR 5 million or 5% of annual turnover (whichever is higher) for legal entities, and up to EUR 700,000 for natural persons. Additional measures include public statements naming the infringer, temporary management bans, authorization withdrawal, and disgorgement of profits."}},{"@type":"Question","name":"Does MiCA require CASPs to comply with DORA?","acceptedAnswer":{"@type":"Answer","text":"Yes. CASPs authorized under MiCA fall within the scope of the Digital Operational Resilience Act (DORA, Regulation EU 2022/2554). This means CASPs must meet DORA's ICT risk management, incident reporting, resilience testing, and third-party risk management requirements in addition to MiCA's own obligations."}},{"@type":"Question","name":"How much does MiCA compliance cost for a small CASP?","acceptedAnswer":{"@type":"Answer","text":"For a small CASP with 5-50 employees, expect EUR 65,000-170,000 in one-time authorization costs (legal, application prep, compliance framework setup), plus EUR 50,000-150,000 in minimum capital. Ongoing annual compliance costs typically run EUR 125,000-260,000 covering a compliance officer, legal counsel, screening tools, audits, and reporting infrastructure."}}]}
+</script>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chainscreen.io/og-image.png">
+<script defer src="https://u.vigilcom.dev/script.js" data-website-id="df019ee1-bf37-42db-be6c-93671ff213ec"></script>
+<meta name="twitter:title" content="MiCA Compliance Checklist for Small CASPs in 2026">
+<meta name="twitter:description" content="Post-deadline MiCA checklist for small CASPs: ongoing controls, costs, penalties, and next steps for unauthorised or pending firms.">
+<meta name="article:published_time" content="2026-03-13">
+<meta property="article:modified_time" content="2026-08-17">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://chainscreen.io"},{"@type":"ListItem","position":2,"name":"Regulations","item":"https://chainscreen.io/regulations/"},{"@type":"ListItem","position":3,"name":"MiCA Compliance Checklist for Small CASPs in 2026"}]}
+</script>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-alt: #f8fafc;
+    --surface: #ffffff;
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --text: #0c1d36;
+    --text-body: #475569;
+    --text-muted: #94a3b8;
+    --accent: #0c2340;
+    --accent-hover: #143a65;
+    --accent-light: #edf2f9;
+    --teal: #0f766e;
+    --teal-light: #f0fdf4;
+    --code-bg: #091a30;
+    --code-surface: #0c2340;
+    --red: #dc2626;
+    --red-light: #fef2f2;
+    --font-serif: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-code: 'JetBrains Mono', 'SF Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  
+  header {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: var(--font-code);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--accent-hover); }
+
+  .nav-link {
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover { color: var(--text); }
+
+  
+  .article-header {
+    padding: 80px 0 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .article-header__eyebrow {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--teal);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .article-header h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+
+  .article-header__sub {
+    font-size: 17px;
+    color: var(--text-body);
+    max-width: 640px;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .article-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: var(--font-code);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.01em;
+  }
+
+  .article-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .article-meta__dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--teal);
+    flex-shrink: 0;
+  }
+
+  
+  .article-body {
+    padding: 48px 0 72px;
+  }
+
+  .article-body h2 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-top: 48px;
+    margin-bottom: 16px;
+    line-height: 1.3;
+    color: var(--text);
+  }
+
+  .article-body h3 {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 32px;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+
+  .article-body p {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .article-body ul, .article-body ol {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+    padding-left: 24px;
+  }
+
+  .article-body li {
+    margin-bottom: 6px;
+  }
+
+  .article-body a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+  }
+
+  .article-body a:hover {
+    color: var(--accent-hover);
+  }
+
+  .article-body strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .article-body code {
+    font-family: var(--font-code);
+    font-size: 13px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--accent);
+  }
+
+  
+  .callout {
+    margin: 28px 0;
+    padding: 24px 28px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .callout p {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .callout p:last-child {
+    margin-bottom: 0;
+  }
+
+  .callout--warning {
+    background: var(--red-light);
+    border: 1px solid #fecaca;
+  }
+
+  .callout--warning .callout__label {
+    color: var(--red);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--info {
+    background: var(--accent-light);
+    border: 1px solid #c7d5e8;
+  }
+
+  .callout--info .callout__label {
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--teal {
+    background: var(--teal-light);
+    border: 1px solid #bbf7d0;
+  }
+
+  .callout--teal .callout__label {
+    color: var(--teal);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  
+  .comparison-wrapper {
+    margin: 28px 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .comparison th, .comparison td {
+    padding: 13px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .comparison tr:last-child td { border-bottom: none; }
+
+  .comparison th {
+    color: var(--text-muted);
+    font-family: var(--font-code);
+    font-weight: 500;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--bg-alt);
+  }
+
+  .comparison td:first-child {
+    color: var(--text);
+    font-weight: 500;
+    font-size: 13px;
+  }
+
+  .comparison th:last-child {
+    color: var(--accent);
+  }
+
+  .comparison td:last-child {
+    background: var(--accent-light);
+  }
+
+  .check { color: var(--teal); font-weight: 600; }
+  .cross { color: var(--red); font-weight: 600; }
+  .na { color: var(--text-muted); }
+
+  
+  blockquote {
+    margin: 24px 0;
+    padding: 20px 24px;
+    border-left: 3px solid var(--border-strong);
+    background: var(--bg-alt);
+    border-radius: 0 8px 8px 0;
+  }
+
+  blockquote p {
+    font-size: 14px;
+    color: var(--text-body);
+    font-style: italic;
+    margin-bottom: 0;
+  }
+
+  blockquote cite {
+    display: block;
+    margin-top: 8px;
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-style: normal;
+    color: var(--text-muted);
+  }
+
+  
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  
+  .cta-banner {
+    margin: 48px 0;
+    padding: 40px 36px;
+    background: var(--code-bg);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .cta-banner h3 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: #f1f5f9;
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .cta-banner p {
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 24px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 28px;
+    background: #fff;
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary:hover {
+    background: #f1f5f9;
+    color: var(--accent);
+  }
+
+  
+  .sources {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .sources h3 {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .sources ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sources li {
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 4px 0;
+    line-height: 1.6;
+  }
+
+  .sources li a {
+    color: var(--text-body);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .sources li a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--text); }
+
+  
+  .checklist {
+    counter-reset: checklist-counter;
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .checklist > li {
+    counter-increment: checklist-counter;
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: 28px;
+  }
+
+  .checklist > li::before {
+    content: counter(checklist-counter);
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 28px;
+    height: 28px;
+    background: var(--accent-light);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-code);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .checklist > li strong {
+    display: block;
+    color: var(--text);
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+
+  .checklist > li p {
+    margin-bottom: 8px;
+  }
+
+  
+  .timeline-item {
+    position: relative;
+    padding-left: 32px;
+    padding-bottom: 28px;
+    border-left: 2px solid var(--border);
+    margin-left: 8px;
+  }
+
+  .timeline-item:last-child {
+    border-left-color: var(--teal);
+    padding-bottom: 0;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 4px;
+    width: 10px;
+    height: 10px;
+    background: var(--bg);
+    border: 2px solid var(--border-strong);
+    border-radius: 50%;
+  }
+
+  .timeline-item:last-child::before {
+    border-color: var(--teal);
+    background: var(--teal-light);
+  }
+
+  .timeline-item h3 {
+    margin-top: 0;
+    font-size: 14px;
+  }
+
+  .timeline-item p {
+    font-size: 14px;
+  }
+
+  
+  @media (max-width: 640px) {
+    .article-header { padding: 48px 0 32px; }
+    .article-header h1 { font-size: 1.8rem; }
+    .article-body h2 { font-size: 20px; }
+    .article-meta { gap: 12px; }
+    .comparison { font-size: 11px; }
+    .comparison th, .comparison td { padding: 8px 10px; }
+    .callout { padding: 20px; }
+    .cta-banner { padding: 32px 24px; }
+  }
+
+  
+  .breadcrumb { padding: 12px 0; border-bottom: 1px solid var(--border); background: var(--bg-alt); }
+  .breadcrumb a, .breadcrumb span { font-family: var(--font-code); font-size: 11px; letter-spacing: 0.01em; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb__sep { color: #cbd5e1; margin: 0 6px; }
+  .breadcrumb__current { color: var(--text-body); }
+
+  
+  .nav-links { display: flex; align-items: center; gap: 20px; }
+  .nav-link.active { color: var(--text); }
+  @media (max-width: 640px) { .nav-links { gap: 12px; } .nav-link { font-size: 11px; } }
+
+  
+  .related-articles { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+  .related-articles h3 { font-family: var(--font-code); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 16px; margin-top: 0; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .related-card { display: flex; flex-direction: column; gap: 8px; padding: 20px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; transition: border-color 0.2s; }
+  .related-card:hover { border-color: var(--accent); }
+  .related-card__tag { font-family: var(--font-code); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--teal); }
+  .related-card__title { font-family: var(--font-serif); font-size: 15px; color: var(--text); line-height: 1.35; }
+  .related-card__arrow { font-family: var(--font-code); font-size: 12px; color: var(--text-muted); margin-top: auto; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="/" class="logo">chain<span>screen</span></a>
+    <nav class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/regulations/" class="nav-link active">Regulations</a>
+      <a href="/operations/" class="nav-link">Operations</a>
+      <a href="/tools/" class="nav-link">Tools</a>
+      <a href="/technical/" class="nav-link">Technical</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <div class="container">
+    <a href="/">Home</a><span class="breadcrumb__sep">/</span>
+    <a href="/regulations/">Regulations</a><span class="breadcrumb__sep">/</span>
+    <span class="breadcrumb__current">MiCA Checklist</span>
+  </div>
+</nav>
+
+<section class="article-header">
+  <div class="container">
+    <div class="article-header__eyebrow">MiCA compliance</div>
+    <h1>MiCA Compliance Checklist for Small CASPs in 2026</h1>
+    <p class="article-header__sub">
+      The maximum MiCA transition period ended on July 1, 2026. Here's every requirement small CASPs with 5-50 employees must maintain -- capital, governance, AML, restrictive measures screening, ICT resilience -- plus what unauthorised or pending firms should do now.
+    </p>
+    <div class="article-meta">
+      <span><div class="article-meta__dot"></div> Updated August 2026</span>
+      <span><div class="article-meta__dot"></div> 11 min read</span>
+      <span><div class="article-meta__dot"></div> Sources: EUR-Lex, EBA, ESMA, CySEC</span>
+    </div>
+  </div>
+</section>
+
+<article class="article-body">
+  <div class="container">
+
+    <p>
+      <strong>The MiCA transition period is over.</strong> The maximum Article 143 transition period for CASPs ended on July 1, 2026, and some Member States used shorter periods. If you hold a MiCA authorisation, the task now is to keep evidence-ready controls working every day. If you are not authorised, or your application is still pending, do not treat the filing as permission to operate: stop onboarding, prepare or execute an orderly wind-down for affected EU services, and consult your national competent authority (NCA) before any client activity.
+    </p>
+
+    <p>
+      This guide covers the 15 specific requirements a small CASP (5-50 employees) must meet, what they cost, and how to run them after authorisation. Every article reference points to the actual MiCA regulation text. Where requirements are set or supervised at national level, we say so.
+    </p>
+
+    <div class="callout callout--info">
+      <div class="callout__label">Who this is for</div>
+      <p>
+        Small crypto-asset service providers operating or planning to operate in the EU: exchanges, custodians, brokers, advisors. If you have 5-50 employees and hold MiCA authorisation, this is your operating checklist. If you're unauthorised, still pending, a large CASP, or a token issuer, some requirements differ -- check ESMA's guidance and your NCA's instructions for your category before operating.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>What does MiCA require from CASPs?</h2>
+
+    <p>
+      MiCA's CASP framework lives in <strong>Title V</strong> of Regulation (EU) 2023/1114. The core obligations break down into three layers:
+    </p>
+
+    <ul>
+      <li><strong>Authorization (Articles 59-64)</strong> -- You cannot provide crypto-asset services in the EU without authorization from your home Member State's NCA. Article 59 sets the requirement; Articles 62-63 specify what your application must contain. After the applicable transition period, a pending application is not enough unless your NCA has given a specific basis for continued activity.</li>
+      <li><strong>Ongoing obligations (Articles 66-83)</strong> -- Once authorized, you must maintain capital, governance, client protection, and operational standards continuously. These aren't one-time setup items.</li>
+      <li><strong>Conduct of business (Articles 66-76)</strong> -- Rules for how you interact with clients: fair dealing, transparent pricing, conflict management, and complaints handling.</li>
+    </ul>
+
+    <p>
+      On top of MiCA itself, CASPs are also subject to the <strong>Digital Operational Resilience Act (DORA, Regulation EU 2022/2554)</strong> for ICT requirements, <strong>EBA Guidelines on Restrictive Measures (GL/2024/15)</strong> for <a href="/regulations/eba-guidelines-casps">screening and controls over Union and national restrictive measures</a>, and national AML/CFT transpositions of Directive (EU) 2015/849 (AMLD5).
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>What is the 15-point MiCA compliance checklist?</h2>
+
+    <p>
+      Every item below maps to a specific MiCA article or related regulation. This isn't a summary of principles -- it's a list of things your NCA will check during authorization review and ongoing supervision.
+    </p>
+
+    <ol class="checklist">
+
+      <li>
+        <strong>Capital requirements by service class (Art. 67, Annex IV)</strong>
+        <p>
+          MiCA sets three minimum own funds thresholds based on which services you provide:
+        </p>
+        <div class="comparison-wrapper">
+          <table class="comparison">
+            <thead>
+              <tr>
+                <th>Service type</th>
+                <th>Minimum capital</th>
+                <th>Typical CASP example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Advisory, portfolio management, execution, placement, transfer</td>
+                <td><strong style="color: var(--text);">EUR 50,000</strong></td>
+                <td>Advisors, brokers</td>
+              </tr>
+              <tr>
+                <td>Custody, exchange (fiat &amp; crypto-crypto)</td>
+                <td><strong style="color: var(--text);">EUR 125,000</strong></td>
+                <td>Custodians, exchanges</td>
+              </tr>
+              <tr>
+                <td>Operation of a trading platform</td>
+                <td><strong style="color: var(--text);">EUR 150,000</strong></td>
+                <td>Trading platforms</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          If you provide multiple service types, the highest threshold applies. Additionally, under Article 67(1)(b), you must hold own funds equal to at least <strong>one quarter of the preceding year's fixed overhead expenditures</strong>, if that figure exceeds the minimum. For a small CASP with EUR 800K in fixed costs, that's EUR 200,000 -- above the EUR 150K minimum.
+        </p>
+      </li>
+
+      <li>
+        <strong>Board and governance structure (Art. 68)</strong>
+        <p>
+          Article 68 requires your management body to be of "sufficiently good repute" and possess "adequate knowledge, skills and experience." In practice, NCAs check for:
+        </p>
+        <ul>
+          <li>No criminal convictions related to money laundering, fraud, or financial crime</li>
+          <li>Relevant professional experience (crypto, fintech, or traditional finance)</li>
+          <li>Documented fit-and-proper assessments for all directors</li>
+          <li>Clear organizational chart with reporting lines</li>
+          <li>Policies on management body composition and succession</li>
+        </ul>
+        <p>
+          For a small CASP, this usually means at minimum a CEO, a compliance officer (can be the same person if justified), and at least one non-executive director or advisory board member with financial services experience. Check with your NCA -- some Member States require a dedicated MLRO (Money Laundering Reporting Officer) as a separate role.
+        </p>
+      </li>
+
+      <li>
+        <strong>AML/CFT policies and procedures (AMLD5 + national transposition)</strong>
+        <p>
+          MiCA doesn't replace AML obligations -- it layers on top of them. Your CASP must have:
+        </p>
+        <ul>
+          <li>Written AML/CFT policy approved by the management body</li>
+          <li>Customer Due Diligence (CDD) procedures -- standard, simplified, and enhanced</li>
+          <li>Suspicious activity reporting (SAR) procedures to your national FIU</li>
+          <li>Risk assessment methodology (firm-wide and per-client)</li>
+          <li>Staff training program with records</li>
+          <li>Appointed MLRO with direct board access</li>
+        </ul>
+        <p>
+          EBA/GL/2024/01 was final on January 16, 2024 and has applied since December 30, 2024. It added CASP-specific ML/TF risk factors and mitigating measures, including expectations around self-hosted addresses, anonymity-enhancing products, high-risk jurisdictions, blockchain analytics, and transaction monitoring. If you're in Cyprus, <a href="/operations/cysec-sanctions-checklist">CySEC Circular C685</a> provides additional specifics for sanctions screening systems.
+        </p>
+      </li>
+
+      <li>
+        <strong>Restrictive measures screening (EBA GL/2024/15)</strong>
+        <p>
+          This is where most small CASPs have gaps. <a href="/regulations/eba-guidelines-casps">EBA Guidelines GL/2024/15</a>, applicable since December 30, 2025, set expectations for PSPs and CASPs to comply with Union and national restrictive measures when performing transfers of funds and crypto-assets, with focus on KYC, screening, and due diligence. In Cyprus, CySEC Circular C685 says its inspections focused on UN Sanctions and EU Restrictive Measures, plus relevant screening practices for U.S. and UK sanctions lists.
+        </p>
+        <p>
+          Requirements include:
+        </p>
+        <ul>
+          <li>Pre-transfer screening of all counterparties</li>
+          <li>Re-screening existing relationships when sanctions lists update</li>
+          <li>Timestamped audit trail of every screening event</li>
+          <li>Documented match-handling procedures (escalation, blocking, SAR filing)</li>
+          <li>Assessment of circumvention risk</li>
+        </ul>
+        <p>
+          Free tools like the Chainalysis sanctions oracle cover several major lists -- but provide only a binary yes/no with <a href="/tools/chainalysis-oracle-limitations">no audit trail, no compliance certificates, and no risk scoring</a>. You need screening with list-version audit trails, match-handling evidence, and regulator-ready documentation.
+        </p>
+      </li>
+
+      <li>
+        <strong>Transaction monitoring (Art. 76, AMLD5)</strong>
+        <p>
+          Beyond sanctions screening (which checks who), transaction monitoring checks what -- looking for suspicious patterns, structuring, layering, and unusual activity. Requirements:
+        </p>
+        <ul>
+          <li>Automated monitoring rules calibrated to your risk assessment</li>
+          <li>Alert investigation and disposition workflow</li>
+          <li>Threshold-based and behavioral detection</li>
+          <li>Regular tuning and effectiveness review (at least annually)</li>
+          <li>Documented rationale for rule calibration</li>
+        </ul>
+        <p>
+          For a small CASP, this might mean a combination of on-chain analytics (for crypto flows) and traditional transaction monitoring (for fiat movements). The key is documented, auditable rules -- not just "we look at things manually."
+        </p>
+      </li>
+
+      <li>
+        <strong>Client asset segregation (Art. 70)</strong>
+        <p>
+          Article 70 requires CASPs to "make adequate arrangements to safeguard the ownership rights of clients, especially in the event of the crypto-asset service provider's insolvency." In practice:
+        </p>
+        <ul>
+          <li>Client crypto-assets must be held separately from the CASP's own assets</li>
+          <li>Client fiat funds must be deposited in a segregated account at a credit institution or central bank</li>
+          <li>Custody policies must be documented and disclosed to clients</li>
+          <li>Regular reconciliation between internal records and on-chain/bank balances</li>
+        </ul>
+
+        <div class="callout callout--warning">
+          <div class="callout__label">Insolvency protection</div>
+          <p>
+            This is not optional or aspirational. If your CASP holds client assets in omnibus wallets without proper segregation records, you are creating personal liability for directors in an insolvency scenario. NCAs will ask for proof of segregation during authorization review.
+          </p>
+        </div>
+      </li>
+
+      <li>
+        <strong>Complaints handling procedure (Art. 71)</strong>
+        <p>
+          Article 71 requires "effective and transparent procedures for the prompt, fair and consistent handling of complaints." You need:
+        </p>
+        <ul>
+          <li>Published complaints policy (on your website, in client-accessible format)</li>
+          <li>Free-of-charge complaint submission for clients</li>
+          <li>Defined response timelines (check your NCA for specifics -- many require acknowledgment within 5 business days)</li>
+          <li>Internal logging and tracking of all complaints</li>
+          <li>Escalation path to your NCA or designated ADR body</li>
+          <li>Regular reporting to management body on complaint volumes and trends</li>
+        </ul>
+      </li>
+
+      <li>
+        <strong>Outsourcing governance (Art. 73)</strong>
+        <p>
+          If you outsource any operational function -- compliance, custody technology, node infrastructure, customer support -- Article 73 applies. Key requirements:
+        </p>
+        <ul>
+          <li>Written outsourcing policy approved by management body</li>
+          <li>Due diligence on all service providers before engagement</li>
+          <li>Written agreements specifying responsibilities, audit rights, and termination</li>
+          <li>No delegation of regulatory responsibility -- your CASP remains liable</li>
+          <li>NCA notification for critical or important outsourcing arrangements</li>
+          <li>Exit strategy for each outsourced function</li>
+        </ul>
+        <p>
+          This catches many small CASPs off guard. Using a third-party custody provider? Outsourcing KYC to an external vendor? Running infrastructure on AWS? All of these require documented outsourcing governance.
+        </p>
+      </li>
+
+      <li>
+        <strong>ICT security and operational resilience (DORA)</strong>
+        <p>
+          CASPs authorized under MiCA fall within the scope of the <strong>Digital Operational Resilience Act (DORA, Regulation EU 2022/2554)</strong>, which has applied since January 17, 2025. DORA requires:
+        </p>
+        <ul>
+          <li>ICT risk management framework with documented policies</li>
+          <li>Incident detection, classification, and reporting procedures</li>
+          <li>Major ICT incident reporting to your NCA within defined timelines</li>
+          <li>Regular resilience testing (at least annually for small CASPs)</li>
+          <li>Third-party ICT risk management (especially for cloud providers)</li>
+          <li>Business continuity and disaster recovery plans</li>
+        </ul>
+        <p>
+          DORA is a separate regulation with its own compliance timeline, but NCAs will assess DORA readiness as part of MiCA authorization review. If your ICT resilience framework doesn't exist, your MiCA application will be delayed or rejected.
+        </p>
+        <p>
+          ESMA's 2026 Common Supervisory Action will review authorised custody CASPs from H2 2026 to H1 2027, focusing on governance, key and storage management, transaction controls, incident response, smart contracts, and third-party dependencies.
+        </p>
+      </li>
+
+      <li>
+        <strong>Record keeping -- 5 years (Art. 68(9))</strong>
+        <p>
+          Article 68(9) requires CASPs to maintain records of all crypto-asset services, orders, and transactions for <strong>at least five years</strong>. Records must be:
+        </p>
+        <ul>
+          <li>Sufficient to enable the NCA to fulfill its supervisory tasks</li>
+          <li>Stored in a format that allows reconstruction of each transaction</li>
+          <li>Available to the NCA on request</li>
+          <li>Including any amendments or cancellations</li>
+        </ul>
+        <p>
+          This covers transaction records, client communications, compliance decisions, screening results, complaint files, and management body minutes. Five years from the end of the business relationship or transaction date.
+        </p>
+      </li>
+
+      <li>
+        <strong>Conflict of interest policy (Art. 72)</strong>
+        <p>
+          Article 72 requires CASPs to maintain and implement a conflict of interest policy. Specific obligations:
+        </p>
+        <ul>
+          <li>Identify all actual and potential conflicts of interest (between the CASP, its staff, its shareholders, and its clients)</li>
+          <li>Written policy with measures to prevent, manage, and disclose conflicts</li>
+          <li>Annual review and update of the policy</li>
+          <li>Public disclosure on your website</li>
+          <li>Specific attention to proprietary trading, if applicable</li>
+        </ul>
+        <p>
+          For small CASPs, common conflicts include: operating a trading platform while also trading as principal, providing advice while earning referral commissions, and listing tokens from related parties.
+        </p>
+      </li>
+
+      <li>
+        <strong>Business continuity plan (Art. 68 + DORA)</strong>
+        <p>
+          Your CASP must have a documented BCP covering:
+        </p>
+        <ul>
+          <li>Business impact analysis identifying critical services and maximum tolerable downtime</li>
+          <li>Recovery procedures for each critical function</li>
+          <li>Communication plan for clients, NCA, and counterparties during disruption</li>
+          <li>Regular testing (at least annually)</li>
+          <li>Wind-down plan -- how client assets are returned if the CASP ceases operations</li>
+        </ul>
+        <p>
+          The wind-down plan is particularly important for authorization. NCAs want to see that if your company fails, client assets are protected and returned in an orderly manner.
+        </p>
+      </li>
+
+      <li>
+        <strong>Marketing compliance (Art. 66 + Art. 94)</strong>
+        <p>
+          All marketing communications must be fair, clear, and not misleading (Article 66). Article 94 adds specific requirements for crypto-asset marketing:
+        </p>
+        <ul>
+          <li>Marketing must be clearly identifiable as such</li>
+          <li>Consistent with any published white paper</li>
+          <li>Include specific risk warnings as defined by ESMA</li>
+          <li>No misleading claims about potential returns</li>
+          <li>Documented approval process for all marketing materials</li>
+          <li>Accessible on the CASP's website for the duration of the offering</li>
+        </ul>
+        <p>
+          NCAs are actively enforcing this. Several CASPs have already received warnings for social media posts that made return guarantees or downplayed risks.
+        </p>
+      </li>
+
+      <li>
+        <strong>White paper (if applicable) (Art. 6, Art. 51)</strong>
+        <p>
+          If your CASP issues or offers crypto-assets to the public, a crypto-asset white paper is required under Article 6. For asset-referenced tokens, Article 51 applies with stricter requirements. The white paper must include:
+        </p>
+        <ul>
+          <li>Description of the issuer and the crypto-asset</li>
+          <li>Rights and obligations attached to the crypto-asset</li>
+          <li>Technology and protocols used</li>
+          <li>Risk factors</li>
+          <li>Environmental impact disclosure (energy consumption)</li>
+        </ul>
+        <p>
+          If you only provide services (exchange, custody, brokerage) without issuing tokens, white paper requirements generally don't apply to you. But if you list tokens from third-party issuers, verify they have compliant white papers filed with the relevant NCA.
+        </p>
+      </li>
+
+      <li>
+        <strong>Regulatory reporting (Art. 68 + NCA-specific)</strong>
+        <p>
+          CASPs must provide regular reporting to their NCA. While MiCA sets the framework, specific reporting templates and frequencies are defined at the national level. Expect:
+        </p>
+        <ul>
+          <li>Quarterly or semi-annual financial reporting (own funds, capital adequacy)</li>
+          <li>Transaction reporting for market surveillance purposes</li>
+          <li>Annual compliance reports</li>
+          <li>Ad-hoc reporting on material changes (management, shareholders, services offered)</li>
+          <li>Incident reports (ICT incidents under DORA, AML under AMLD)</li>
+        </ul>
+        <p>
+          ESMA has published technical standards on reporting formats, including iXBRL for white papers and JSON schemas for transaction data. Check your NCA's portal for submission requirements.
+        </p>
+      </li>
+
+    </ol>
+
+    <hr class="section-divider">
+
+    <h2>What should CASPs do after July 1, 2026?</h2>
+
+    <p>
+      The pre-deadline build phase is over. The right next step depends on your status: authorised CASPs should move into evidence-based supervision mode; unauthorised or pending CASPs should stop new client activity, preserve client assets, and agree the next steps with their NCA.
+    </p>
+
+    <div class="timeline-item">
+      <h3>Immediately: confirm status and perimeter</h3>
+      <p>
+        Confirm whether your legal entity is authorised under MiCA, which services are covered, and which Member States are in scope. Match the authorisation perimeter against actual services, websites, apps, marketing, client contracts, and outsourced functions. If any EU-facing activity sits outside the authorised perimeter, pause it and take NCA-specific advice.
+      </p>
+    </div>
+
+    <div class="timeline-item">
+      <h3>Unauthorised or pending: stop onboarding and wind down</h3>
+      <p>
+        If you have not been authorised by the end of the transition period applicable in the relevant Member State, ESMA says you must cease providing crypto-asset services until authorisation is granted. Stop onboarding and marketing, do not launch new services, communicate with existing clients, preserve records, and implement an orderly wind-down or transfer plan for client assets where required.
+      </p>
+    </div>
+
+    <div class="timeline-item">
+      <h3>Authorised CASPs: maintain evidence-ready controls</h3>
+      <p>
+        Keep capital, governance, complaints, conflicts, outsourcing, DORA, AML/CFT, restrictive measures screening, transaction monitoring, and record keeping live. NCAs will look for evidence that controls work in practice: board minutes, reconciliations, audit trails, match dispositions, incident logs, complaints logs, training records, and management information.
+      </p>
+    </div>
+
+    <div class="timeline-item">
+      <h3>Next 30 days: close high-risk gaps</h3>
+      <p>
+        Prioritise gaps that create immediate supervisory risk: insufficient own funds, missing fit-and-proper files, weak client asset segregation, no screening audit trail, no transaction monitoring workflow, untested incident reporting, incomplete outsourcing register, or no wind-down plan. Document remediation owners and dates.
+      </p>
+    </div>
+
+    <div class="timeline-item">
+      <h3>Quarterly: prove ongoing compliance</h3>
+      <p>
+        Run a quarterly compliance pack for the management body: capital position, complaints, conflicts, outsourcing changes, screening and transaction-monitoring statistics, DORA incidents and tests, AML/CFT training, open remediation items, and NCA correspondence. Keep evidence ready for inspection rather than rebuilding it after a request arrives.
+      </p>
+    </div>
+
+    <div class="timeline-item">
+      <h3>Annually: retest the framework</h3>
+      <p>
+        Review the risk assessment, AML/CFT methodology, restrictive measures exposure assessment, DORA resilience testing, outsourcing arrangements, complaints procedure, business continuity plan, and wind-down plan. Update policies when services, jurisdictions, counterparties, lists, or supervisory expectations change.
+      </p>
+    </div>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">Pending is not authorised</div>
+      <p>
+        ESMA's Q&A is direct: if a CASP has not been authorised by the end of the applicable transition period, it must cease providing crypto-asset services until authorisation is granted. A pending application may explain your remediation posture, but it is not a passport to keep onboarding EU clients.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>How much does MiCA compliance cost for small CASPs?</h2>
+
+    <p>
+      These figures are based on published estimates from legal firms and industry surveys for CASPs with 5-50 employees. Actual costs vary by jurisdiction, service type, and existing infrastructure.
+    </p>
+
+    <div class="comparison-wrapper">
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th>Cost category</th>
+            <th>One-time (EUR)</th>
+            <th>Annual ongoing (EUR)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Minimum capital (custody/exchange)</td>
+            <td><strong style="color: var(--text);">150,000</strong></td>
+            <td class="na">Maintained, not spent</td>
+          </tr>
+          <tr>
+            <td>Legal counsel (application prep)</td>
+            <td>30,000 -- 80,000</td>
+            <td>15,000 -- 30,000</td>
+          </tr>
+          <tr>
+            <td>Compliance officer (salary or outsourced)</td>
+            <td class="na">--</td>
+            <td><strong style="color: var(--text);">60,000 -- 100,000</strong></td>
+          </tr>
+          <tr>
+            <td>Sanctions screening tool</td>
+            <td>5,000 -- 15,000</td>
+            <td>12,000 -- 36,000</td>
+          </tr>
+          <tr>
+            <td>Transaction monitoring</td>
+            <td>10,000 -- 25,000</td>
+            <td>15,000 -- 40,000</td>
+          </tr>
+          <tr>
+            <td>ICT/DORA compliance (audit + tooling)</td>
+            <td>15,000 -- 30,000</td>
+            <td>10,000 -- 20,000</td>
+          </tr>
+          <tr>
+            <td>External audit (annual)</td>
+            <td class="na">--</td>
+            <td>10,000 -- 25,000</td>
+          </tr>
+          <tr>
+            <td>NCA application fee</td>
+            <td>1,000 -- 10,000</td>
+            <td class="na">Varies by NCA</td>
+          </tr>
+          <tr>
+            <td>Staff training (AML, compliance)</td>
+            <td>3,000 -- 8,000</td>
+            <td>3,000 -- 8,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout--teal">
+      <div class="callout__label">Total estimate</div>
+      <p>
+        <strong>One-time setup: EUR 65,000 -- 170,000</strong> (excluding minimum capital, which is retained, not spent).<br>
+        <strong>Annual ongoing: EUR 125,000 -- 260,000</strong> for a small CASP providing custody or exchange services.<br><br>
+        These costs are real, but they're the price of operating a regulated financial service. Now that the maximum transition period has ended, operating without authorization carries fines that dwarf these numbers.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>What happens if you don’t comply with MiCA?</h2>
+
+    <p>
+      MiCA's enforcement framework is in Articles 111-115. For CASPs that breach the regulation, NCAs can impose:
+    </p>
+
+    <ul>
+      <li><strong>Financial penalties for legal entities:</strong> Up to <strong>EUR 5,000,000 or 5% of annual turnover</strong>, whichever is higher</li>
+      <li><strong>Financial penalties for natural persons:</strong> Up to <strong>EUR 700,000</strong> for directors or managers personally responsible</li>
+      <li><strong>Public statement:</strong> NCA publishes your name and the nature of the breach -- reputational damage that's hard to undo</li>
+      <li><strong>Authorization withdrawal or suspension:</strong> You lose the right to operate</li>
+      <li><strong>Temporary management ban:</strong> Directors can be barred from holding management positions at any financial entity</li>
+      <li><strong>Permanent ban:</strong> Up to 10 years for repeat offenders</li>
+      <li><strong>Disgorgement of profits:</strong> NCA can require you to hand over all profits gained from the breach</li>
+    </ul>
+
+    <p>
+      Some Member States may set <strong>higher</strong> penalty caps under national transposition. Check your NCA's published penalty framework.
+    </p>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">Personal liability</div>
+      <p>
+        The EUR 700,000 fine for natural persons applies to directors and senior managers personally -- not to the company. If you're a founder-CEO who decides to "figure out compliance later," you're personally on the hook. This is not theoretical: several EU NCAs have already issued personal sanctions against crypto company directors under existing national frameworks.
+      </p>
+    </div>
+
+    <p>
+      Operating without authorization after the applicable transition period is the clearest violation. But the enforcement articles also cover: insufficient capital, inadequate governance, missing AML procedures, failure to maintain effective restrictive measures controls, and failure to maintain records. Each of these can trigger penalties independently.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>Where does restrictive measures screening fit into MiCA compliance?</h2>
+
+    <p>
+      Of the 15 items on this checklist, <a href="/tools/screening-vs-risk-scoring">restrictive measures screening</a> is the one where we see the most gaps in practice. Many small CASPs have some form of screening, but when audited against EBA GL/2024/15, the coverage falls short:
+    </p>
+
+    <ul>
+      <li>Screening against OFAC only, with no documented coverage for applicable Union and national restrictive measures</li>
+      <li>No re-screening when sanctions lists update</li>
+      <li>No timestamped audit trail showing what was screened, when, against which list version</li>
+      <li>No documented match-handling procedure</li>
+      <li>Manual screening that doesn't scale with transaction volume</li>
+    </ul>
+
+    <p>
+      This is a compliance gap your NCA will find during an inspection -- and it's one of the easiest to close. Purpose-built screening tools that cover EU and UN legal requirements plus relevant U.S. and UK screening practices, with list-version audit trails, exist at price points accessible to small CASPs.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>Frequently asked questions</h2>
+
+    <h3>Is the MiCA transition period still available for CASPs?</h3>
+    <p>
+      No. The maximum Article 143 transition period ended on <strong>July 1, 2026</strong>, and some Member States used shorter periods. ESMA's Q&A says a CASP that has not been authorised by the end of the applicable transition period must cease providing crypto-asset services until authorisation is granted. A pending application alone is not a safe harbour; consult the home NCA before any client activity.
+    </p>
+
+    <h3>How much capital does a small CASP need under MiCA?</h3>
+    <p>
+      MiCA Article 67 and Annex IV set three tiers: <strong>EUR 50,000</strong> for advisory and portfolio management services, <strong>EUR 125,000</strong> for custody and exchange services, and <strong>EUR 150,000</strong> for operating a trading platform. You must also hold own funds equal to at least one quarter of the preceding year's fixed overhead expenditures, if that amount exceeds the minimum threshold.
+    </p>
+
+    <h3>What are the penalties for not complying with MiCA?</h3>
+    <p>
+      For CASPs, NCAs can impose fines up to <strong>EUR 5 million or 5% of annual turnover</strong> (whichever is higher) on legal entities, and up to <strong>EUR 700,000</strong> on natural persons (directors, managers). Additional measures include public statements, temporary or permanent management bans, authorization withdrawal, and disgorgement of profits.
+    </p>
+
+    <h3>Does MiCA require CASPs to comply with DORA?</h3>
+    <p>
+      Yes. CASPs authorized under MiCA fall within the scope of the <strong>Digital Operational Resilience Act (DORA, Regulation EU 2022/2554)</strong>, which has applied since January 17, 2025. This means CASPs must meet DORA's ICT risk management, incident reporting, resilience testing, and third-party risk management requirements on top of MiCA's own obligations. NCAs assess DORA readiness as part of MiCA authorization.
+    </p>
+
+    <h3>How much does MiCA compliance cost for a small CASP?</h3>
+    <p>
+      For a small CASP with 5-50 employees, expect <strong>EUR 65,000-170,000</strong> in one-time authorization costs (legal, application prep, compliance framework setup), plus <strong>EUR 50,000-150,000</strong> in minimum capital (retained, not spent). Ongoing annual compliance costs typically run <strong>EUR 125,000-260,000</strong> covering a compliance officer, legal counsel, screening and monitoring tools, audits, and reporting infrastructure.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>Bottom line</h2>
+
+    <p>
+      MiCA compliance for a small CASP is not a single checkbox -- it's 15 distinct requirements that your NCA will verify at authorization and monitor on an ongoing basis. The good news: every requirement is documented, every article reference is public, and the post-deadline task is concrete: keep the controls working and keep the evidence ready.
+    </p>
+
+    <p>
+      The most common failure mode we see is underestimating how many items there are. A CASP that has capital and governance sorted but no restrictive measures screening policy will get the same supervisory problem as one that has none of the above.
+    </p>
+
+    <p>
+      Start with a status check. If you are authorised, map your current state against the 15 items and close any evidence gaps. If you are unauthorised or pending, stop onboarding, preserve clients and records, prepare an orderly wind-down for affected services, and speak to your NCA before continuing any EU-facing activity.
+    </p>
+
+    <p>
+      July 1, 2026 has passed. Treat MiCA as the operating perimeter, not a project plan.
+    </p>
+
+    <div class="cta-banner">
+      <h3>How ready is your CASP for MiCA?</h3>
+      <p>Take our 2-minute compliance self-check. Ten questions based on EBA GL/2024/15 and MiCA Title V requirements -- see where your gaps are.</p>
+      <a href="/regulations/" class="btn-primary">
+        Read the regulatory guides &rarr;
+      </a>
+    </div>
+
+    <div class="sources">
+      <h3>Sources</h3>
+      <ul>
+        <li><a href="https://eur-lex.europa.eu/eli/reg/2023/1114/oj/eng" target="_blank" rel="noopener">Regulation (EU) 2023/1114 -- Markets in Crypto-Assets (MiCA) -- EUR-Lex full text</a></li>
+        <li><a href="https://www.esma.europa.eu/print/pdf/node/210286" target="_blank" rel="noopener">ESMA Q&A 2220 -- entities not authorised as CASPs by the end of the transition period</a></li>
+        <li><a href="https://www.esma.europa.eu/sites/default/files/2025-12/ESMA75-113276571-1631_Statement_on_end_of_MiCA_transitional_periods.pdf" target="_blank" rel="noopener">ESMA Statement on MiCA transitional measures -- end of transition periods and wind-down expectations</a></li>
+        <li><a href="https://www.eba.europa.eu/sites/default/files/2024-01/a3e89f4f-fbf3-4bd6-9e07-35f3243555b3/Final%20Amending%20%20Guidelines%20on%20MLTF%20Risk%20Factors.pdf" target="_blank" rel="noopener">EBA/GL/2024/01 -- Final amending Guidelines on ML/TF risk factors for CASPs</a></li>
+        <li><a href="https://www.eba.europa.eu/activities/single-rulebook/regulatory-activities/anti-money-laundering-and-countering-financing-terrorism/guidelines-internal-policies-procedures-and-controls-ensure-implementation-union-and-national" target="_blank" rel="noopener">EBA Guidelines on Union and national restrictive measures -- EBA/GL/2024/14 and EBA/GL/2024/15</a></li>
+        <li><a href="https://www.cysec.gov.cy/CMSPages/GetFile.aspx?guid=72f9c65f-79c3-480b-8801-58d506f05f3e" target="_blank" rel="noopener">CySEC Circular C685 -- Guidance on Sanctions Screening Systems</a></li>
+        <li><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32022R2554" target="_blank" rel="noopener">Regulation (EU) 2022/2554 -- Digital Operational Resilience Act (DORA) -- EUR-Lex</a></li>
+        <li><a href="https://www.esma.europa.eu/press-news/esma-news/esma-launches-common-supervisory-action-casps-digital-operational-resilience" target="_blank" rel="noopener">ESMA -- Common Supervisory Action on CASPs' digital operational resilience for custody (8 July 2026)</a></li>
+      </ul>
+    </div>
+
+
+
+    <div class="related-articles">
+      <h3>Related articles</h3>
+      <div class="related-grid">
+        <a href="/regulations/mica-casp-license-requirements-2026" class="related-card">
+          <span class="related-card__tag">Regulations</span>
+          <span class="related-card__title">MiCA CASP License Requirements: Capital, Governance, and Application Process</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+        <a href="/operations/crypto-compliance-cost-small-casp" class="related-card">
+          <span class="related-card__tag">Operations</span>
+          <span class="related-card__title">How Much Does Crypto Compliance Cost for a Small EU CASP?</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+<div style="margin: 40px 0; padding: 24px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; text-align: center;">
+  <p style="font-size: 15px; color: #475569; margin-bottom: 12px;">Need screening records and audit-ready evidence, not just a binary check?</p>
+  <a href="mailto:info@chainscreen.io" style="display: inline-block; padding: 12px 24px; background: #0c2340; color: #fff; border-radius: 8px; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600;">Contact ChainScreen</a>
+</div>
+
+
+<footer>
+  <div class="container">
+    &copy; 2026 DailyMind LTD &middot; HE 439959 &middot; Limassol, Cyprus
+    &nbsp;&middot;&nbsp;
+    <span>Information only; not legal advice</span>
+    &nbsp;&middot;&nbsp;
+    <a href="/privacy">Privacy</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://dailymind.eu">dailymind.eu</a>
+  </div>
+</footer>
+<script data-goatcounter="https://gc-chainscreen.vigilcom.dev/count"
+        async src="//gc.vigilcom.dev/count.js"></script>
+<script src="/nav.js" defer></script>
+</body>
+</html>

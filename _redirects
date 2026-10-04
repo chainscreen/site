@@ -1,0 +1,72 @@
+# P&L financial model (pitch deck link)
+/pnl https://docs.google.com/spreadsheets/d/15NqeYfu_DteWKKxJfF0EI3V3QY4P2UuX/edit?usp=sharing 302
+
+
+# Blog → Category redirects (301 permanent)
+# Regulations
+/blog/mica-compliance-checklist-small-casp /regulations/mica-compliance-checklist-small-casp 301
+/blog/mica-compliance-checklist-small-casp.html /regulations/mica-compliance-checklist-small-casp.html 301
+/blog/mica-casp-license-requirements-2026 /regulations/mica-casp-license-requirements-2026 301
+/blog/mica-casp-license-requirements-2026.html /regulations/mica-casp-license-requirements-2026.html 301
+/blog/crypto-travel-rule-eu-implementation /regulations/crypto-travel-rule-eu-implementation 301
+/blog/crypto-travel-rule-eu-implementation.html /regulations/crypto-travel-rule-eu-implementation.html 301
+/blog/eba-guidelines-casps /regulations/eba-guidelines-casps 301
+/blog/eba-guidelines-casps.html /regulations/eba-guidelines-casps.html 301
+/blog/eu-crypto-regulatory-roadmap-2026-2028 /regulations/eu-crypto-regulatory-roadmap-2026-2028 301
+/blog/eu-crypto-regulatory-roadmap-2026-2028.html /regulations/eu-crypto-regulatory-roadmap-2026-2028.html 301
+/blog/which-sanctions-lists-mica-requires /regulations/which-sanctions-lists-mica-requires 301
+/blog/which-sanctions-lists-mica-requires.html /regulations/which-sanctions-lists-mica-requires.html 301
+/blog/eu-20th-sanctions-package-russia-crypto /regulations/eu-20th-sanctions-package-russia-crypto 301
+/blog/eu-20th-sanctions-package-russia-crypto.html /regulations/eu-20th-sanctions-package-russia-crypto.html 301
+
+# Operations
+/blog/sanctions-screening-implementation-guide /operations/sanctions-screening-implementation-guide 301
+/blog/sanctions-screening-implementation-guide.html /operations/sanctions-screening-implementation-guide.html 301
+/blog/crypto-compliance-cost-small-casp /operations/crypto-compliance-cost-small-casp 301
+/blog/crypto-compliance-cost-small-casp.html /operations/crypto-compliance-cost-small-casp.html 301
+/blog/crypto-aml-enforcement-cases-eu /operations/crypto-aml-enforcement-cases-eu 301
+/blog/crypto-aml-enforcement-cases-eu.html /operations/crypto-aml-enforcement-cases-eu.html 301
+/blog/cysec-sanctions-checklist /operations/cysec-sanctions-checklist 301
+/blog/cysec-sanctions-checklist.html /operations/cysec-sanctions-checklist.html 301
+/blog/chainalysis-alternative-eu-casp /operations/chainalysis-alternative-eu-casp 301
+/blog/chainalysis-alternative-eu-casp.html /operations/chainalysis-alternative-eu-casp.html 301
+/blog/cysec-inspection-documents /operations/cysec-inspection-documents 301
+/blog/cysec-inspection-documents.html /operations/cysec-inspection-documents.html 301
+/blog/crypto-compliance-budget-small-casp /operations/crypto-compliance-budget-small-casp 301
+/blog/crypto-compliance-budget-small-casp.html /operations/crypto-compliance-budget-small-casp.html 301
+
+# Tools
+/blog/sanctions-screening-tools-comparison /tools/sanctions-screening-tools-comparison 301
+/blog/sanctions-screening-tools-comparison.html /tools/sanctions-screening-tools-comparison.html 301
+/blog/screening-vs-risk-scoring /tools/screening-vs-risk-scoring 301
+/blog/screening-vs-risk-scoring.html /tools/screening-vs-risk-scoring.html 301
+/blog/chainalysis-oracle-limitations /tools/chainalysis-oracle-limitations 301
+/blog/chainalysis-oracle-limitations.html /tools/chainalysis-oracle-limitations.html 301
+/blog/crypto-sanctions-false-positives /tools/crypto-sanctions-false-positives 301
+/blog/crypto-sanctions-false-positives.html /tools/crypto-sanctions-false-positives.html 301
+
+# Technical
+/blog/blockchain-analytics-address-clustering /technical/blockchain-analytics-address-clustering 301
+/blog/blockchain-analytics-address-clustering.html /technical/blockchain-analytics-address-clustering.html 301
+/blog/blockchain-data-residency-gdpr /technical/blockchain-data-residency-gdpr 301
+/blog/blockchain-data-residency-gdpr.html /technical/blockchain-data-residency-gdpr.html 301
+
+/check / 301
+/check.html / 301
+/connect / 301
+/connect.html / 301
+/technical/api-reference /technical/ 301
+/technical/api-reference.html /technical/ 301
+/technical/sanctions-screening-api-integration-guide /technical/ 301
+/technical/sanctions-screening-api-integration-guide.html /technical/ 301
+/terms /privacy 301
+/terms.html /privacy 301
+/dpa /privacy 301
+/dpa.html /privacy 301
+/trust / 301
+/trust/ / 301
+/trust/* / 301
+
+# Blog index → home
+/blog/ / 301
+/blog /  301

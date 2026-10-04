@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChainScreen — Sanctions Compliance Research for EU Crypto Firms</title>
+<meta name="description" content="ChainScreen publishes practical sanctions compliance guides for small EU crypto firms: MiCA, EBA restrictive-measures guidance, audit evidence, and vendor selection.">
+<link rel="canonical" href="https://chainscreen.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ChainScreen — Sanctions Compliance Research for EU Crypto Firms">
+<meta property="og:description" content="Practical sanctions compliance guides for small EU crypto firms: MiCA, EBA guidance, audit evidence, and vendor selection.">
+<meta property="og:url" content="https://chainscreen.io/">
+<meta property="og:site_name" content="ChainScreen">
+<meta property="og:image" content="https://chainscreen.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chainscreen.io/og-image.png">
+<script defer src="https://u.vigilcom.dev/script.js" data-website-id="df019ee1-bf37-42db-be6c-93671ff213ec"></script>
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ce0f418986d04274a71d3f3bd767bb49"}'></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "ChainScreen",
+  "url": "https://chainscreen.io",
+  "description": "Sanctions compliance research for small EU crypto firms",
+  "logo": {"@type": "ImageObject", "url": "https://chainscreen.io/og-image.png"},
+  "sameAs": ["https://www.linkedin.com/company/chainscreen", "https://github.com/chainscreen", "https://x.com/ChainScreen", "https://t.me/chainscreen"],
+  "contactPoint": {"@type": "ContactPoint", "email": "info@chainscreen.io", "contactType": "sales"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "What does ChainScreen publish?", "acceptedAnswer": {"@type": "Answer", "text": "ChainScreen publishes practical guides on sanctions screening obligations, MiCA readiness, EBA restrictive-measures guidance, audit evidence, vendor selection, and GDPR/data-residency issues for small EU crypto firms."}},
+    {"@type": "Question", "name": "How current is the research?", "acceptedAnswer": {"@type": "Answer", "text": "Core regulatory articles are reviewed against official sources such as EU regulations, EBA guidance, ESMA publications, CySEC notices, OFAC, and FinCEN materials. Each article should still be checked against the linked official source before relying on it for a live compliance decision."}},
+    {"@type": "Question", "name": "Where is my data?", "acceptedAnswer": {"@type": "Answer", "text": "ChainScreen is now an editorial research site. The former API, hosted checker, account system, lead forms, Terms of Service, and Data Processing Agreement were retired on 2026-05-12."}},
+    {"@type": "Question", "name": "What if I need implementation help?", "acceptedAnswer": {"@type": "Answer", "text": "Start with the editorial guides and evidence checklists. For implementation work, contact us directly with your regulator, service type, screening scope, and evidence requirements."}},
+    {"@type": "Question", "name": "We don't have devs to integrate this.", "acceptedAnswer": {"@type": "Answer", "text": "Start with the editorial guides and evidence checklist. For implementation work, contact us directly."}}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "ChainScreen",
+  "url": "https://chainscreen.io",
+  "description": "Sanctions compliance research for small EU crypto firms",
+  "publisher": {"@type": "Organization", "name": "DailyMind LTD", "url": "https://dailymind.eu"}
+}
+</script>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-alt: #f8fafc;
+    --surface: #ffffff;
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --text: #0c1d36;
+    --text-body: #475569;
+    --text-muted: #94a3b8;
+    --accent: #0c2340;
+    --accent-hover: #143a65;
+    --accent-light: #edf2f9;
+    --teal: #0f766e;
+    --teal-light: #f0fdf4;
+    --code-bg: #091a30;
+    --code-surface: #0c2340;
+    --font-serif: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-code: 'JetBrains Mono', 'SF Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  
+  header {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: var(--font-code);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--accent-hover); }
+
+  .nav-links { display: flex; align-items: center; gap: 20px; }
+  .nav-link {
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+  .nav-link:hover { color: var(--text); }
+  .nav-link.active { color: var(--text); }
+
+  .badge {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 5px 14px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
+    letter-spacing: 0.02em;
+  }
+
+  @media (max-width: 640px) {
+    .nav-links { gap: 10px; }
+    .nav-link { font-size: 11px; }
+    .badge { display: none; }
+  }
+
+  
+  .hero {
+    padding: 100px 0 80px;
+  }
+
+  .hero__eyebrow {
+    font-family: var(--font-code);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--teal);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .hero h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2.4rem, 5.5vw, 3.6rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.12;
+    margin-bottom: 28px;
+    color: var(--text);
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.1s forwards;
+  }
+
+  .hero h1 .highlight {
+    color: var(--accent-hover);
+  }
+
+  .hero__sub {
+    font-size: 17px;
+    color: var(--text-body);
+    max-width: 540px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.2s forwards;
+  }
+
+  .hero__cta-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.3s forwards;
+  }
+
+  
+  .code-block {
+    margin-top: 48px;
+    background: var(--code-bg);
+    border: 1px solid #0c2340;
+    border-radius: 8px;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.5s forwards;
+  }
+
+  .code-block__header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 16px;
+    border-bottom: 1px solid #0c2340;
+    background: #071528;
+  }
+
+  .code-block__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #0c2340;
+  }
+
+  .code-block__title {
+    font-family: var(--font-code);
+    font-size: 12px;
+    color: #64748b;
+    margin-left: 8px;
+  }
+
+  .code-block pre {
+    padding: 20px;
+    overflow-x: auto;
+    font-family: var(--font-code);
+    font-size: 13px;
+    line-height: 1.8;
+    color: #94a3b8;
+  }
+
+  .code-block .keyword { color: #93c5fd; }
+  .code-block .string { color: #a5b4fc; }
+  .code-block .comment { color: #475569; }
+  .code-block .prop { color: #7dd3fc; }
+  .code-block .val { color: #fbbf24; }
+
+  
+  .trust-bar {
+    display: flex;
+    justify-content: center;
+    gap: 36px;
+    padding: 36px 0;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-code);
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.01em;
+  }
+
+  .trust-item__icon {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--teal);
+    flex-shrink: 0;
+  }
+
+  
+  .section {
+    padding: 72px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section--alt {
+    background: var(--bg-alt);
+  }
+
+  .section__eyebrow {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--teal);
+    margin-bottom: 14px;
+  }
+
+  .section h2 {
+    font-family: var(--font-serif);
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-bottom: 20px;
+    line-height: 1.25;
+    color: var(--text);
+  }
+
+  .section p {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  @media (max-width: 640px) { .pain-grid { grid-template-columns: 1fr; } }
+
+  .pain-card {
+    border-left: 3px solid #fbbf24;
+    padding: 20px 24px;
+    background: #fffbeb;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .pain-card p {
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 8px;
+    line-height: 1.6;
+  }
+
+  .pain-card .resolution {
+    font-size: 13px;
+    color: var(--teal);
+    font-weight: 500;
+  }
+
+  .pain-card .resolution::before { content: "\2192  "; }
+
+  
+  .features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  @media (max-width: 640px) {
+    .features { grid-template-columns: 1fr; }
+  }
+
+  .feature {
+    background: var(--bg);
+    padding: 32px 28px;
+  }
+
+  .feature__number {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+    margin-bottom: 16px;
+  }
+
+  .feature__title {
+    font-family: var(--font-serif);
+    font-size: 17px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+
+  .feature__desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  
+  .triggers {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0 0;
+  }
+
+  .triggers li {
+    font-size: 14px;
+    color: var(--text-body);
+    padding: 16px 0 16px 28px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .triggers li:last-child { border-bottom: none; }
+
+  .triggers li::before {
+    content: '>';
+    position: absolute;
+    left: 4px;
+    font-family: var(--font-code);
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 13px;
+  }
+
+  
+  .comparison-wrapper {
+    margin: 28px 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .comparison th, .comparison td {
+    padding: 13px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .comparison tr:last-child td { border-bottom: none; }
+
+  .comparison th {
+    color: var(--text-muted);
+    font-family: var(--font-code);
+    font-weight: 500;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--bg-alt);
+  }
+
+  .comparison td:first-child {
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+
+  .comparison th:last-child {
+    color: var(--accent);
+  }
+
+  .comparison td:last-child {
+    background: var(--accent-light);
+  }
+
+  .check { color: var(--teal); font-weight: 600; }
+  .cross { color: #cbd5e1; }
+
+  
+  .doubts {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0;
+  }
+
+  .doubts li {
+    padding: 22px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .doubts li:last-child { border-bottom: none; }
+
+  .doubt__q {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .doubt__a {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  
+  .cta {
+    background: var(--code-bg);
+    padding: 80px 0;
+    text-align: center;
+    color: #fff;
+  }
+
+  .cta h2 {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    font-weight: 400;
+    margin-bottom: 14px;
+    color: #f1f5f9;
+  }
+
+  .cta p {
+    color: #94a3b8;
+    font-size: 15px;
+    margin-bottom: 32px;
+  }
+
+  .cta-note {
+    margin-top: 16px;
+    font-size: 12px;
+    color: #64748b;
+  }
+
+  
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 28px;
+    background: var(--accent);
+    color: #fff;
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary:hover {
+    background: var(--accent-hover);
+    color: #fff;
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 13px 24px;
+    background: transparent;
+    color: var(--text-body);
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid var(--border-strong);
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--text);
+    color: var(--text);
+  }
+
+  
+  .cta .btn-primary {
+    background: #fff;
+    color: var(--accent);
+  }
+
+  .cta .btn-primary:hover {
+    background: #f1f5f9;
+    color: var(--accent);
+  }
+
+  
+  .kb-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .kb-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 24px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: border-color 0.2s;
+  }
+
+  .kb-card:hover { border-color: var(--accent); }
+
+  .kb-card__count {
+    font-family: var(--font-code);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--teal);
+  }
+
+  .kb-card__title {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    color: var(--text);
+  }
+
+  .kb-card__desc {
+    font-size: 14px;
+    color: var(--text-body);
+    line-height: 1.6;
+  }
+
+  .kb-card__link {
+    font-family: var(--font-code);
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: auto;
+  }
+
+  
+  .aha-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 28px;
+    text-align: left;
+  }
+
+  @media (max-width: 640px) { .aha-grid { grid-template-columns: 1fr; } }
+
+  .aha-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px;
+  }
+
+  .aha-card .step {
+    display: inline-block;
+    background: var(--teal-light);
+    color: var(--teal);
+    font-family: var(--font-code);
+    font-weight: 600;
+    font-size: 11px;
+    padding: 2px 10px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .aha-card h3 {
+    font-family: var(--font-serif);
+    font-size: 17px;
+    font-weight: 400;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+
+  .aha-card p {
+    font-size: 13px;
+    color: var(--text-body);
+    line-height: 1.6;
+  }
+
+  
+  .compare-list {
+    max-width: 680px;
+    margin: 24px auto 0;
+  }
+
+  .compare-item {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .compare-item:last-child { border-bottom: none; }
+
+  .compare-item .alt {
+    font-family: var(--font-serif);
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .compare-item .but {
+    font-size: 14px;
+    color: var(--text-body);
+    line-height: 1.6;
+  }
+
+  
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  @media (max-width: 640px) { .trust-grid { grid-template-columns: 1fr; } }
+
+  .trust-card {
+    background: var(--bg);
+    border-radius: 8px;
+    padding: 24px;
+    border: 1px solid var(--border);
+  }
+
+  .trust-card .fear {
+    font-size: 14px;
+    color: #dc2626;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .trust-card p {
+    font-size: 13px;
+    color: var(--text-body);
+    line-height: 1.6;
+  }
+
+  
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--text); }
+
+  
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 900px) {
+    .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 640px) {
+    .pricing-grid { grid-template-columns: 1fr; }
+  }
+
+  
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  
+  @media (max-width: 640px) {
+    .hero { padding: 60px 0 40px; }
+    .hero h1 { font-size: 2rem; }
+    .trust-bar { gap: 16px; }
+    .section { padding: 48px 0; }
+    .cta { padding: 60px 0; }
+    .comparison { font-size: 11px; }
+    .comparison th, .comparison td { padding: 8px 10px; }
+    .kb-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="/" class="logo">chain<span>screen</span></a>
+    <nav class="nav-links">
+      <a href="/regulations/" class="nav-link">Regulations</a>
+      <a href="/operations/" class="nav-link">Operations</a>
+      <a href="/tools/" class="nav-link">Tools</a>
+      <a href="/technical/" class="nav-link">Technical</a>
+      <a href="/about" class="nav-link">About</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero__eyebrow">Sanctions compliance research</div>
+    <h1>
+      Understand what regulators inspect.<br>
+      <span class="highlight">Build better evidence.</span>
+    </h1>
+    <p class="hero__sub">
+      ChainScreen publishes practical guides for small EU crypto firms on sanctions screening obligations, MiCA readiness, audit evidence, vendor selection, and GDPR/data-residency issues.
+    </p>
+    <div class="hero__cta-row">
+      <a href="/regulations/" class="btn-primary" style="text-decoration:none; display:inline-block;">Read regulatory guides</a>
+      <a href="/operations/" class="btn-ghost" style="text-decoration:none; display:inline-block;">Browse operations content</a>
+    </div>
+
+  </div>
+</section>
+
+<div class="trust-bar">
+  <div class="trust-item">
+    <div class="trust-item__icon"></div>
+    <span>Source-linked guides</span>
+  </div>
+  <div class="trust-item">
+    <div class="trust-item__icon"></div>
+    <span>EU compliance focus</span>
+  </div>
+  <div class="trust-item">
+    <div class="trust-item__icon"></div>
+    <span>MiCA-ready</span>
+  </div>
+  <div class="trust-item">
+    <div class="trust-item__icon"></div>
+    <span>Research + evidence guides</span>
+  </div>
+  <div class="trust-item">
+    <div class="trust-item__icon"></div>
+    <span>Built for operators</span>
+  </div>
+</div>
+
+<section class="section reveal">
+  <div class="container">
+    <div class="section__eyebrow">What to document</div>
+    <h2>Not just a check. A record you can defend.</h2>
+    <p style="max-width:560px;">The screening itself is the easy part. The hard part is proving what was checked, when it was checked, and against which list version. The guides focus on that evidence layer first.</p>
+
+    <div class="aha-grid">
+      <div class="aha-card">
+        <span class="step">Before</span>
+        <h3>Manual checks that collapse at audit time</h3>
+        <p>Search one list at a time, copy screenshots, update spreadsheets, and hope someone can reconstruct the decision later. That works until a regulator, auditor, or bank asks for evidence.</p>
+      </div>
+      <div class="aha-card">
+        <span class="step">After</span>
+        <h3>A repeatable evidence workflow</h3>
+        <p>Run the screening, retain the record, and keep something your team can actually use in review, audit prep, or partner due diligence. The useful outcome is a process your team can explain and defend.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section reveal">
+  <div class="container">
+    <div class="section__eyebrow">Sound familiar?</div>
+    <h2>The problems that made us build this</h2>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <p>"We only need sanctions screening evidence. Why are we shopping an entire analytics platform?"</p>
+        <span class="resolution">Start with the screening record, report, and workflow your small team actually needs</span>
+      </div>
+      <div class="pain-card">
+        <p>"The free tools can check the address, but they don't prove what happened later."</p>
+        <span class="resolution">Traceable records, list-version evidence, and audit-ready outputs built into the workflow</span>
+      </div>
+      <div class="pain-card">
+        <p>"Our compliance officer still patches together manual checks, screenshots, and notes."</p>
+        <span class="resolution">Use a simple documented workflow now and add automation only where it actually reduces effort</span>
+      </div>
+      <div class="pain-card">
+        <p>"When someone asks for last quarter's screening evidence, it becomes a reconstruction exercise."</p>
+        <span class="resolution">Keep timestamps, list versions, screening IDs, and regulator-facing evidence in one place</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container">
+    <div class="features reveal">
+      <div class="feature">
+        <div class="feature__number">01</div>
+        <div class="feature__title">Audit-ready evidence</div>
+        <div class="feature__desc">Create screening records and reports your team can reuse in audit prep, partner due diligence, and internal review.</div>
+      </div>
+      <div class="feature">
+        <div class="feature__number">02</div>
+        <div class="feature__title">Traceability built in</div>
+        <div class="feature__desc">Every screening can be tied back to timestamp, list version, and workflow context instead of reconstructed later.</div>
+      </div>
+      <div class="feature">
+        <div class="feature__number">03</div>
+        <div class="feature__title">Automation when needed</div>
+        <div class="feature__desc">Use the editorial guides and evidence workflow without adding platform complexity. Add implementation work only where it removes real manual work.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section reveal" id="comparison-section">
+  <div class="container">
+    <div class="section__eyebrow">Why this is different</div>
+    <h2>Free tools do the check. Your process has to prove it.</h2>
+
+    <div class="comparison-wrapper">
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Chainalysis Free</th>
+            <th>Enterprise</th>
+            <th>Documented process</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>OFAC SDN</td>
+            <td class="check">&#10003;</td>
+            <td class="check">&#10003;</td>
+            <td class="check">&#10003;</td>
+          </tr>
+          <tr>
+            <td>EU Consolidated</td>
+            <td class="check">&#10003;</td>
+            <td class="check">&#10003;</td>
+            <td class="check">&#10003;</td>
+          </tr>
+          <tr>
+            <td>UN Sanctions</td>
+            <td class="check">&#10003;</td>
+            <td class="check">&#10003;</td>
+            <td class="check">&#10003;</td>
+          </tr>
+          <tr>
+            <td>Audit trail</td>
+            <td class="cross">&#10007;</td>
+            <td class="check">&#10003;</td>
+            <td class="check">&#10003;</td>
+          </tr>
+          <tr>
+            <td>Reusable screening records</td>
+            <td class="cross">&#10007;</td>
+            <td class="check">&#10003;</td>
+            <td class="check">&#10003;</td>
+          </tr>
+          <tr>
+            <td>EU data residency</td>
+            <td class="cross">&#10007;</td>
+            <td>Varies</td>
+            <td class="check">&#10003;</td>
+          </tr>
+          <tr>
+            <td>Best fit</td>
+            <td>Quick ad hoc checks</td>
+            <td>Large compliance teams</td>
+            <td><strong style="color: var(--accent);">Small EU crypto firms that need proof, not platform sprawl</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section reveal">
+  <div class="container">
+    <div class="section__eyebrow">Alternatives</div>
+    <h2>You could also...</h2>
+    <div class="compare-list">
+      <div class="compare-item">
+        <div class="alt">Use the free Chainalysis oracle</div>
+        <div class="but">Covers US, EU, and UN lists -- but returns a binary yes/no with no audit trail, no risk scoring, no compliance certificates, no batch screening. When CySEC asks for timestamped screening records with list versions, you have nothing to show.</div>
+      </div>
+      <div class="compare-item">
+        <div class="alt">Pay for Chainalysis, Elliptic, or TRM Labs</div>
+        <div class="but">$20K-$700K/year for bundled suites that include analytics, risk scoring, and transaction monitoring you may not need. If your obligation is sanctions screening + audit trail, you're paying 10-100x for features you won't use.</div>
+      </div>
+      <div class="compare-item">
+        <div class="alt">Screen manually using government websites</div>
+        <div class="but">10-15 minutes per address across 3 separate websites. No systematic audit trail. No re-screening when lists update. No way to prove to CySEC what list version you checked against. Doesn't scale past 20 transactions/day.</div>
+      </div>
+      <div class="compare-item">
+        <div class="alt">Build your own screening system</div>
+        <div class="but">Months of development. Ongoing list parsing, deduplication, update monitoring. You're not in the sanctions data business — and when OFAC changes their XML schema (they do), your parser breaks at the worst possible time.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt reveal" id="knowledge-base">
+  <div class="container">
+    <div class="section__eyebrow">20 articles &middot; 4 categories</div>
+    <h2>Compliance research</h2>
+    <p style="max-width:600px;margin-bottom:36px;">Fact-based analysis of EU sanctions screening requirements. Every claim sourced to EU regulations, EBA guidelines, or NCA publications.</p>
+    <div class="kb-grid">
+      <a href="/regulations/" class="kb-card">
+        <span class="kb-card__count">7 articles</span>
+        <span class="kb-card__title">Regulations</span>
+        <span class="kb-card__desc">MiCA, Travel Rule, EBA guidelines, regulatory roadmap</span>
+        <span class="kb-card__link">Explore &rarr;</span>
+      </a>
+      <a href="/operations/" class="kb-card">
+        <span class="kb-card__count">7 articles</span>
+        <span class="kb-card__title">Operations</span>
+        <span class="kb-card__desc">Implementation guides, costs, CySEC checklists, enforcement</span>
+        <span class="kb-card__link">Explore &rarr;</span>
+      </a>
+      <a href="/tools/" class="kb-card">
+        <span class="kb-card__count">4 articles</span>
+        <span class="kb-card__title">Tools</span>
+
+        <span class="kb-card__desc">Vendor comparisons, oracle analysis, screening vs. monitoring</span>
+        <span class="kb-card__link">Explore &rarr;</span>
+      </a>
+      <a href="/technical/" class="kb-card">
+        <span class="kb-card__count">3 articles</span>
+        <span class="kb-card__title">Technical</span>
+        <span class="kb-card__desc">Address clustering, GDPR data residency</span>
+        <span class="kb-card__link">Explore &rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt reveal">
+  <div class="container">
+    <div class="section__eyebrow">Built different</div>
+    <h2>Your concerns, answered</h2>
+    <div class="trust-grid">
+      <div class="trust-card">
+        <div class="fear">"Why not just use a bigger vendor?"</div>
+        <p>Because many small firms do not need a full analytics platform. They need screening evidence, traceability, and a workflow they can actually operate.</p>
+      </div>
+      <div class="trust-card">
+        <div class="fear">"Where is my data?"</div>
+        <p>ChainScreen is now an editorial research site. The former API, hosted checker, account system, lead forms, Terms of Service, and Data Processing Agreement were retired on 2026-05-12.</p>
+      </div>
+      <div class="trust-card">
+        <div class="fear">"How current is the research?"</div>
+        <p>Core articles are reviewed against official sources such as EU regulations, EBA guidance, ESMA publications, CySEC notices, OFAC, and FinCEN materials.</p>
+      </div>
+      <div class="trust-card">
+        <div class="fear">"What if I need implementation help?"</div>
+        <p>Start with the editorial guides and evidence checklists. For implementation work, contact us directly with your regulator, service type, and evidence requirements.</p>
+      </div>
+      <div class="trust-card">
+        <div class="fear">"We don't have devs."</div>
+        <p>That is exactly why the primary offer is workflow and reporting first. research support is available when it meaningfully reduces manual work.</p>
+      </div>
+      <div class="trust-card">
+        <div class="fear">"Who is behind this?"</div>
+        <p>DailyMind LTD (HE 439959), a registered Cyprus company. We're compliance engineers building tools for our own regulatory environment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section reveal">
+  <div class="container">
+    <div class="section__eyebrow">Built for</div>
+    <h2>Small EU crypto firms with real compliance pressure</h2>
+    <p>
+      <strong style="color: var(--text);">Compliance Officers</strong> — stop rebuilding screening evidence from screenshots and spreadsheets. Keep a process you can actually defend in review.
+    </p>
+    <p>
+      <strong style="color: var(--text);">Operations Directors</strong> — give your team a repeatable workflow instead of another compliance tool nobody fully adopts.
+    </p>
+    <p>
+      <strong style="color: var(--text);">Founders and Technical Leads</strong> — start with the evidence and process layer first, then add workflow design where it saves time.
+    </p>
+  </div>
+</section>
+
+<section class="cta" id="cta-section">
+  <div class="container">
+    <h2>Need screening evidence you can actually show someone?</h2>
+    <p>Tell us how you screen today, where the process breaks, and what kind of review or audit pressure you are under. We can point you to the right guide or checklist.</p>
+    <a href="mailto:info@chainscreen.io?subject=ChainScreen%20Compliance%20Question&body=Company%3A%20%0ARole%3A%20%0ACurrent%20screening%20process%3A%20%0ABiggest%20question%3A%20" class="btn-primary" data-track="cta_waitlist_click">
+      Start the conversation &rarr;
+    </a>
+    <p class="cta-note">info@chainscreen.io</p>
+    <p class="cta-note" style="margin-top: 12px;">
+      <a href="https://t.me/chainscreen" style="color: #7dd3fc; text-decoration: underline;" data-track="cta_telegram_click">Telegram group</a> &middot; <a href="https://x.com/ChainScreen" style="color: #7dd3fc; text-decoration: underline;" data-track="cta_twitter_click">Follow on X</a> &middot; <a href="https://www.linkedin.com/company/chainscreen/" style="color: #7dd3fc; text-decoration: underline;" data-track="cta_linkedin_click">LinkedIn</a> &mdash; compliance research updates
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    &copy; 2026 DailyMind LTD &middot; HE 439959 &middot; Limassol, Cyprus
+    &nbsp;&middot;&nbsp;
+    <span>Information only; not legal advice</span>
+    &nbsp;&middot;&nbsp;
+    <a href="/privacy">Privacy</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://dailymind.eu">dailymind.eu</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://t.me/chainscreen">Telegram</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://x.com/ChainScreen">X / Twitter</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://www.linkedin.com/company/chainscreen/">LinkedIn</a>
+  </div>
+</footer>
+
+<script>
+  const scrollTargets = {
+    'comparison-section': 'scroll_to_comparison',
+    'pricing': 'scroll_to_pricing',
+    'cta-section': 'scroll_to_cta'
+  };
+  const scrollFired = {};
+  const scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !scrollFired[entry.target.id]) {
+        scrollFired[entry.target.id] = true;      }
+    });
+  }, { threshold: 0.15 });
+  Object.keys(scrollTargets).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) scrollObserver.observe(el);
+  });
+
+  document.querySelectorAll('[data-track]').forEach(el => {
+    el.addEventListener('click', () => {    });
+  });
+
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+<script data-goatcounter="https://gc-chainscreen.vigilcom.dev/count"
+        async src="//gc.vigilcom.dev/count.js"></script>
+<script src="/nav.js" defer></script>
+</body>
+</html>

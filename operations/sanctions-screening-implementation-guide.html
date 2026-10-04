@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanctions Screening API Setup in 30 Days | ChainScreen</title>
+<meta name="description" content="Migrate from spreadsheet sanctions checks to API-based crypto screening in 30 days. Practical roadmap for CASPs with evidence that supports inspection.">
+<link rel="canonical" href="https://chainscreen.io/operations/sanctions-screening-implementation-guide">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sanctions Screening Implementation Guide: From Excel to API in 30 Days">
+<meta property="og:description" content="Step-by-step guide to migrating from manual sanctions checks to automated API screening. 30-day roadmap with audit trail evidence for CASPs.">
+<meta property="og:url" content="https://chainscreen.io/operations/sanctions-screening-implementation-guide">
+<meta property="og:image" content="https://chainscreen.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="ChainScreen">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Sanctions Screening Implementation Guide: From Excel to API in 30 Days","description":"Step-by-step guide to migrating from manual sanctions checks to automated API screening with audit trails. 30-day implementation roadmap for CASPs.","datePublished":"2026-03-13","dateModified":"2026-07-10","author":{"@type":"Person","name":"Katerina Bletsch","url":"https://chainscreen.io","jobTitle":"Founder","sameAs":["https://www.linkedin.com/in/katerina-bletsch/"]},"publisher":{"@type":"Organization","name":"ChainScreen","url":"https://chainscreen.io","logo":{"@type":"ImageObject","url":"https://chainscreen.io/og-image.png"}},"wordCount":2850}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What sanctions lists does an EU-licensed CASP need to screen against?","acceptedAnswer":{"@type":"Answer","text":"A CASP should screen against applicable Union and national restrictive measures. For an EU CASP this means EU restrictive measures and any applicable national measures; UN, OFAC SDN and the UK Sanctions List may also be included where required by local law, business exposure, customer geography or internal risk policy. There is no universal MiCA rule that every EU CASP must screen EU, UN, OFAC and UK lists in every case."}},{"@type":"Question","name":"Can I use Excel spreadsheets for sanctions screening?","acceptedAnswer":{"@type":"Answer","text":"A spreadsheet is not automatically banned, but it is hard to evidence control quality. EBA GL/2024/15 expects effective screening, documented policies and procedures, list-update handling, alert investigation records and regular system review. Manual spreadsheets usually need substantial supplementary controls to meet that standard."}},{"@type":"Question","name":"How often must I re-screen existing customers against sanctions lists?","acceptedAnswer":{"@type":"Answer","text":"EBA GL/2024/15 expects regular customer database screening with frequency set by the restrictive-measures exposure assessment, and trigger-event screening when a designation or restrictive measure changes, at onboarding, after significant CDD changes, or where circumvention is suspected. Event-driven re-screening is a best-practice implementation pattern, not a separate universal daily mandate."}},{"@type":"Question","name":"What does a sanctions screening audit trail need to contain?","acceptedAnswer":{"@type":"Answer","text":"A defensible screening record should include the timestamp, data screened, screening trigger, lists or datasets checked, list version or publication date, result, reference ID, and the operator or system that performed the check. Match files should document investigation steps, decision, approver, action taken and any required reporting reference."}},{"@type":"Question","name":"How long does it take to implement automated sanctions screening?","acceptedAnswer":{"@type":"Answer","text":"A realistic implementation timeline for a small CASP is about 30 days. Week 1: document policy and procedures. Week 2: select a tool and integrate the API. Week 3: test covered lists, edge cases and batch re-screening. Week 4: go live, train staff and verify audit trail completeness."}}]}
+</script>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chainscreen.io/og-image.png">
+<script defer src="https://u.vigilcom.dev/script.js" data-website-id="df019ee1-bf37-42db-be6c-93671ff213ec"></script>
+<meta name="twitter:title" content="Sanctions Screening Implementation Guide: From Excel to API in 30 Days">
+<meta name="twitter:description" content="Step-by-step guide to migrating from manual sanctions checks to automated API screening in 30 days.">
+<meta name="article:published_time" content="2026-03-13">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://chainscreen.io"},{"@type":"ListItem","position":2,"name":"Operations","item":"https://chainscreen.io/operations/"},{"@type":"ListItem","position":3,"name":"Sanctions Screening Implementation Guide: From Excel to API in 30 Days"}]}
+</script>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-alt: #f8fafc;
+    --surface: #ffffff;
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --text: #0c1d36;
+    --text-body: #475569;
+    --text-muted: #94a3b8;
+    --accent: #0c2340;
+    --accent-hover: #143a65;
+    --accent-light: #edf2f9;
+    --teal: #0f766e;
+    --teal-light: #f0fdf4;
+    --code-bg: #091a30;
+    --code-surface: #0c2340;
+    --red: #dc2626;
+    --red-light: #fef2f2;
+    --font-serif: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-code: 'JetBrains Mono', 'SF Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  
+  header {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: var(--font-code);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--accent-hover); }
+
+  .nav-link {
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover { color: var(--text); }
+
+  
+  .article-header {
+    padding: 80px 0 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .article-header__eyebrow {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--teal);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .article-header h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+
+  .article-header__sub {
+    font-size: 17px;
+    color: var(--text-body);
+    max-width: 640px;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .article-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: var(--font-code);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.01em;
+  }
+
+  .article-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .article-meta__dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--teal);
+    flex-shrink: 0;
+  }
+
+  
+  .article-body {
+    padding: 48px 0 72px;
+  }
+
+  .article-body h2 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-top: 48px;
+    margin-bottom: 16px;
+    line-height: 1.3;
+    color: var(--text);
+  }
+
+  .article-body h3 {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 32px;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+
+  .article-body p {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .article-body ul, .article-body ol {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+    padding-left: 24px;
+  }
+
+  .article-body li {
+    margin-bottom: 6px;
+  }
+
+  .article-body a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+  }
+
+  .article-body a:hover {
+    color: var(--accent-hover);
+  }
+
+  .article-body strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .article-body code {
+    font-family: var(--font-code);
+    font-size: 13px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--accent);
+  }
+
+  
+  .code-block {
+    margin: 24px 0;
+    background: var(--code-bg);
+    border: 1px solid #0c2340;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .code-block__header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 16px;
+    border-bottom: 1px solid #0c2340;
+    background: #071528;
+  }
+
+  .code-block__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #0c2340;
+  }
+
+  .code-block__title {
+    font-family: var(--font-code);
+    font-size: 12px;
+    color: #64748b;
+    margin-left: 8px;
+  }
+
+  .code-block pre {
+    padding: 20px;
+    overflow-x: auto;
+    font-family: var(--font-code);
+    font-size: 13px;
+    line-height: 1.8;
+    color: #94a3b8;
+  }
+
+  .code-block .keyword { color: #93c5fd; }
+  .code-block .string { color: #a5b4fc; }
+  .code-block .comment { color: #475569; }
+  .code-block .prop { color: #7dd3fc; }
+  .code-block .val { color: #fbbf24; }
+
+  
+  .callout {
+    margin: 28px 0;
+    padding: 24px 28px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .callout p {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .callout p:last-child {
+    margin-bottom: 0;
+  }
+
+  .callout--warning {
+    background: var(--red-light);
+    border: 1px solid #fecaca;
+  }
+
+  .callout--warning .callout__label {
+    color: var(--red);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--info {
+    background: var(--accent-light);
+    border: 1px solid #c7d5e8;
+  }
+
+  .callout--info .callout__label {
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--teal {
+    background: var(--teal-light);
+    border: 1px solid #bbf7d0;
+  }
+
+  .callout--teal .callout__label {
+    color: var(--teal);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  
+  .comparison-wrapper {
+    margin: 28px 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .comparison th, .comparison td {
+    padding: 13px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .comparison tr:last-child td { border-bottom: none; }
+
+  .comparison th {
+    color: var(--text-muted);
+    font-family: var(--font-code);
+    font-weight: 500;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--bg-alt);
+  }
+
+  .comparison td:first-child {
+    color: var(--text);
+    font-weight: 500;
+    font-size: 13px;
+  }
+
+  .comparison th:last-child {
+    color: var(--accent);
+  }
+
+  .comparison td:last-child {
+    background: var(--accent-light);
+  }
+
+  .check { color: var(--teal); font-weight: 600; }
+  .cross { color: var(--red); font-weight: 600; }
+  .partial { color: #d97706; font-weight: 600; }
+  .na { color: var(--text-muted); }
+
+  
+  blockquote {
+    margin: 24px 0;
+    padding: 20px 24px;
+    border-left: 3px solid var(--border-strong);
+    background: var(--bg-alt);
+    border-radius: 0 8px 8px 0;
+  }
+
+  blockquote p {
+    font-size: 14px;
+    color: var(--text-body);
+    font-style: italic;
+    margin-bottom: 0;
+  }
+
+  blockquote cite {
+    display: block;
+    margin-top: 8px;
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-style: normal;
+    color: var(--text-muted);
+  }
+
+  
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  
+  .cta-banner {
+    margin: 48px 0;
+    padding: 40px 36px;
+    background: var(--code-bg);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .cta-banner h3 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: #f1f5f9;
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .cta-banner p {
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 24px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 28px;
+    background: #fff;
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary:hover {
+    background: #f1f5f9;
+    color: var(--accent);
+  }
+
+  
+  .sources {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .sources h3 {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .sources ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sources li {
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 4px 0;
+    line-height: 1.6;
+  }
+
+  .sources li a {
+    color: var(--text-body);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .sources li a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--text); }
+
+  
+  @media (max-width: 640px) {
+    .article-header { padding: 48px 0 32px; }
+    .article-header h1 { font-size: 1.8rem; }
+    .article-body h2 { font-size: 20px; }
+    .article-meta { gap: 12px; }
+    .comparison { font-size: 11px; }
+    .comparison th, .comparison td { padding: 8px 10px; }
+    .callout { padding: 20px; }
+    .cta-banner { padding: 32px 24px; }
+  }
+
+  
+  .breadcrumb { padding: 12px 0; border-bottom: 1px solid var(--border); background: var(--bg-alt); }
+  .breadcrumb a, .breadcrumb span { font-family: var(--font-code); font-size: 11px; letter-spacing: 0.01em; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb__sep { color: #cbd5e1; margin: 0 6px; }
+  .breadcrumb__current { color: var(--text-body); }
+
+  
+  .nav-links { display: flex; align-items: center; gap: 20px; }
+  .nav-link.active { color: var(--text); }
+  @media (max-width: 640px) { .nav-links { gap: 12px; } .nav-link { font-size: 11px; } }
+
+  
+  .related-articles { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+  .related-articles h3 { font-family: var(--font-code); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 16px; margin-top: 0; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .related-card { display: flex; flex-direction: column; gap: 8px; padding: 20px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; transition: border-color 0.2s; }
+  .related-card:hover { border-color: var(--accent); }
+  .related-card__tag { font-family: var(--font-code); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--teal); }
+  .related-card__title { font-family: var(--font-serif); font-size: 15px; color: var(--text); line-height: 1.35; }
+  .related-card__arrow { font-family: var(--font-code); font-size: 12px; color: var(--text-muted); margin-top: auto; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="/" class="logo">chain<span>screen</span></a>
+    <nav class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/regulations/" class="nav-link">Regulations</a>
+      <a href="/operations/" class="nav-link active">Operations</a>
+      <a href="/tools/" class="nav-link">Tools</a>
+      <a href="/technical/" class="nav-link">Technical</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <div class="container">
+    <a href="/">Home</a><span class="breadcrumb__sep">/</span>
+    <a href="/operations/">Operations</a><span class="breadcrumb__sep">/</span>
+    <span class="breadcrumb__current">Implementation Guide</span>
+  </div>
+</nav>
+
+<section class="article-header">
+  <div class="container">
+    <div class="article-header__eyebrow">Implementation guide</div>
+    <h1>Sanctions Screening Implementation Guide: From Excel to API in 30 Days</h1>
+    <p class="article-header__sub">
+      Many small CASPs start with manual list checks in Excel. Here's how to migrate to automated API screening in 30 days -- with evidence that supports CySEC inspection.
+    </p>
+    <div class="article-meta">
+      <span><div class="article-meta__dot"></div> Updated July 2026</span>
+      <span><div class="article-meta__dot"></div> 11 min read</span>
+      <span><div class="article-meta__dot"></div> Sources: EBA GL/2024/15, TFR, CySEC C685, official lists</span>
+    </div>
+  </div>
+</section>
+
+<article class="article-body">
+  <div class="container">
+
+    <p>
+      If you're running a small crypto-asset service provider, there's a good chance your sanctions screening process started as a spreadsheet. Someone downloads the OFAC SDN list, pastes wallet addresses into Excel, and runs a VLOOKUP. It works -- until it doesn't. Until a list update gets missed. Until an analyst skips a row. Until a CySEC inspector asks for your audit trail and you hand them a .xlsx file with no timestamps.
+    </p>
+
+    <p>
+      This guide walks you through the migration from manual spreadsheet screening to automated API-based sanctions checks. Not in theory -- in practice. A 30-day roadmap with specific deliverables for each week, an evidence-friendly database schema, and the controls expected under <a href="/regulations/eba-guidelines-casps">EBA GL/2024/15</a>, the EU Transfer of Funds Regulation, and applicable Union or national restrictive measures.
+    </p>
+
+    <p>
+      As of this 10 July 2026 refresh, EBA GL/2024/15 is already in application; its application date was 30 December 2025. The article therefore treats those guidelines as current supervisory expectations, not a future deadline.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>What are the four maturity levels of sanctions screening?</h2>
+
+    <p>
+      Before you plan the migration, understand where you are today. Sanctions screening maturity falls into four levels. Many small CASPs start at Level 1. EBA GL/2024/15 points toward Level 3-style controls: effective screening, documented list management, trigger-based customer screening, transfer screening, and evidence of alert handling.
+    </p>
+
+    <div class="comparison-wrapper">
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th>Level</th>
+            <th>Method</th>
+            <th>Lists covered</th>
+            <th>Audit trail</th>
+            <th>Regulatory status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Level 0</td>
+            <td>No screening</td>
+            <td class="cross">None</td>
+            <td class="cross">None</td>
+            <td><strong style="color: var(--red);">Legal breach risk</strong></td>
+          </tr>
+          <tr>
+            <td>Level 1</td>
+            <td>Manual Excel checks</td>
+            <td class="partial">Usually OFAC only</td>
+            <td class="cross">Spreadsheet logs</td>
+            <td><strong style="color: #d97706;">High control risk</strong></td>
+          </tr>
+          <tr>
+            <td>Level 2</td>
+            <td>API with single list</td>
+            <td class="partial">OFAC SDN</td>
+            <td class="partial">Partial (API logs)</td>
+            <td><strong style="color: #d97706;">Depends on scope</strong></td>
+          </tr>
+          <tr>
+            <td>Level 3</td>
+            <td>Automated applicable-list screening + audit trail</td>
+            <td class="check">EU/national + risk-based extras</td>
+            <td class="check">Full audit trail</td>
+            <td><strong style="color: var(--teal);">Target state</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      <strong>Level 0: No screening.</strong> Under applicable restrictive measures, a CASP must not make funds or crypto-assets available to designated persons or carry out prohibited transfers. EBA GL/2024/15 says PSPs and CASPs should have an effective screening system to identify targets of restrictive measures. No screening is a direct legal and licensing risk.
+    </p>
+
+    <p>
+      <strong>Level 1: Manual Excel checks.</strong> The most common starting point. An analyst downloads a sanctions list, pastes customer wallet addresses into a spreadsheet, and checks for matches. Problems: the list can be stale, individual checks may lack reliable timestamps, and a single typo in a wallet address can mean a missed match. If the process is OFAC-only, it also fails to address EU restrictive measures that apply to EU CASPs.
+    </p>
+
+    <p>
+      <strong>Level 2: Single-list API integration.</strong> A step up. You integrate a sanctions screening API -- often the <a href="/tools/chainalysis-oracle-limitations">Chainalysis free sanctions API</a> -- into your transaction workflow. Addresses are checked automatically before transfers. The limitation is coverage and evidence: a single-list or binary response may not show which restrictive measures were checked, which list version was used, or how alerts were investigated. If you're an EU-licensed CASP, you need documented, timestamped screening records -- not just a binary check.
+    </p>
+
+    <p>
+      <strong>Level 3: Automated applicable-list screening with audit trail.</strong> The target state. Customer and transfer data is screened against applicable Union and national restrictive measures, with additional lists such as UN, OFAC SDN, or the UK Sanctions List where your legal nexus or risk policy requires them. Every check is logged with a timestamp, the list version used, and the result. Matches trigger a documented investigation workflow. This aligns with <a href="/regulations/eba-guidelines-casps">EBA GL/2024/15</a> and CySEC's supervisory focus on effective, tested screening systems.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>What do you need before you start?</h2>
+
+    <p>
+      Before writing a single line of code or evaluating tools, get three things clear: which lists, which screening points, and what happens when you get a match.
+    </p>
+
+    <h3>Which sanctions lists -- legal minimum vs risk coverage</h3>
+
+    <p>
+      Do not treat "EU + UN + OFAC + UK" as a universal MiCA checklist. For an EU-licensed CASP, the legal baseline is the restrictive measures that apply to you: Union restrictive measures and any applicable national restrictive measures. Your risk assessment may then add other official lists because of customers, counterparties, jurisdictions, banking partners, or ownership.
+    </p>
+
+    <ol>
+      <li><strong>EU Consolidated Financial Sanctions List</strong> -- maintained by the European Commission and used to facilitate EU asset-freeze screening. The binding legal source remains the relevant EU legal act in the Official Journal, so keep list versioning and legal-act references where your tool provides them.</li>
+      <li><strong>National restrictive measures</strong> -- Member State measures that apply to your entity. In Cyprus, CySEC Circular C685 says its thematic inspections focused on UN and EU lists and also reviewed relevant U.S. and UK screening practices.</li>
+      <li><strong>UN Consolidated List</strong> -- maintained by the UN Security Council. UN designations are implemented by Member States through legal measures, but direct UN screening is a common control because it helps identify timing or implementation gaps.</li>
+      <li><strong>OFAC SDN List and other OFAC lists</strong> -- maintained by the U.S. Treasury. Mandatory for U.S. persons and U.S.-nexus activity; for an EU-only CASP it is a risk-based addition, not a MiCA mandate.</li>
+      <li><strong>UK Sanctions List</strong> -- the current UK official source for designations. As of 28 January 2026, the OFSI Consolidated List of Asset Freeze Targets is closed and no longer updated.</li>
+    </ol>
+
+    <p>
+      <a href="/operations/cysec-sanctions-checklist">CySEC Circular C685</a> is relevant because it sets supervisory expectations and best-practice benchmarks for regulated entities, including CASPs. It should not be read as a blanket rule that every Cyprus CASP must screen OFAC and UK lists in every case; document the legal and risk basis for each list in your policy.
+    </p>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">Common mistake: OFAC-only screening</div>
+      <p>
+        Screening only the OFAC SDN list is a common control gap for EU CASPs. OFAC is a U.S. list; it does not replace screening against applicable EU and national restrictive measures. An address, name, entity, or vessel can be relevant under one regime but not another. Your policy should explain which official sources you screen and why.
+      </p>
+    </div>
+
+    <h3>Screening points: when to screen</h3>
+
+    <p>
+      EBA GL/2024/15 sets out trigger points and transfer-screening controls:
+    </p>
+
+    <ol>
+      <li><strong>Onboarding.</strong> Screen customer information before the business relationship is established. For CASPs, include wallet addresses where they are available and relevant to the restrictive measures being screened.</li>
+      <li><strong>Pre-transfer.</strong> Screen transfers of crypto-assets before making the crypto-assets available to the beneficiary. Screen all parties and relevant transfer data, including wallet addresses to the extent that official restrictive-measures lists include wallet addresses.</li>
+      <li><strong>Ongoing and trigger-event screening.</strong> Screen the customer database regularly, with frequency based on your restrictive-measures exposure assessment. Trigger screening when a designation or restrictive measure changes, when CDD data changes materially, or when circumvention is suspected.</li>
+    </ol>
+
+    <h3>Match handling: what happens when you hit a positive</h3>
+
+    <p>
+      Before you automate screening, you need a documented procedure for handling matches. Regulators ask about this specifically. Your procedure should distinguish between:
+    </p>
+
+    <ul>
+      <li><strong>True positive:</strong> The party, address, or asset is genuinely subject to an applicable restrictive measure. Action: suspend or block the transfer, freeze or hold assets as required, notify your MLRO, and report to the relevant national authority, supervisory authority, or FIU where applicable law requires it.</li>
+      <li><strong>False positive:</strong> The screening flagged an address that is not actually sanctioned (e.g., partial string match, address reuse on a different chain). Action: document the investigation, record the reasoning for the false-positive determination, have a senior compliance officer or MLRO approve the override, and release the transaction.</li>
+    </ul>
+
+    <p>
+      Both outcomes should be logged. A regulator wants to see not just that you screened, but that you had a rational, documented process for acting on the results.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>What does the 30-day implementation roadmap look like?</h2>
+
+    <p>
+      This roadmap assumes a small CASP with 1-2 developers and a compliance officer. If you have a larger team, you can compress the timeline. If you're a solo founder wearing all hats, add a buffer week.
+    </p>
+
+    <h3>Week 1: Policy and procedures</h3>
+
+    <p>
+      Do not start with code. Start with documentation. Your sanctions screening policy is the document a regulator may ask for before they look at any technology.
+    </p>
+
+    <ol>
+      <li><strong>Draft your Sanctions Screening Policy.</strong> This is a standalone document (3-5 pages) that covers: which lists you screen against and why, when screening occurs, who is responsible for screening (role, not name), how matches are handled, escalation procedures, and record retention periods aligned to AML/CFT and local sanctions requirements.</li>
+      <li><strong>Define your match handling SOP.</strong> A step-by-step procedure: analyst identifies match, escalates to MLRO within [timeframe], MLRO investigates and determines true/false positive, true positives are reported to the relevant authority or FIU where required, and all steps are documented in the screening log.</li>
+      <li><strong>Get board or management sign-off.</strong> The policy needs to be approved at the appropriate level. For a small CASP, this is usually the director or the board. Date-stamp the approval -- regulators check this.</li>
+      <li><strong>Assess your current state.</strong> Document exactly what you're doing today (even if it's Excel). This becomes your baseline for demonstrating improvement.</li>
+    </ol>
+
+    <div class="callout callout--teal">
+      <div class="callout__label">Deliverables -- end of week 1</div>
+      <p>Signed sanctions screening policy. Match handling SOP. Current-state assessment document. These three documents make the technical implementation much easier to evidence.</p>
+    </div>
+
+    <h3>Week 2: Tool selection and API integration</h3>
+
+    <p>
+      Now you build the technical layer. Your tool selection criteria should prioritize:
+    </p>
+
+    <ul>
+      <li><strong>Applicable-list coverage.</strong> The tool should support the Union and national restrictive measures you have to apply. Add UN, OFAC, UK, or other lists where your legal nexus, banking partners, or risk assessment requires them.</li>
+      <li><strong>List update handling.</strong> The tool should identify new, updated, or lifted restrictive measures and update the internal screening dataset immediately after the change enters into force.</li>
+      <li><strong>Audit trail built in.</strong> Every screening should be logged automatically: timestamp, data screened, lists checked, list version, trigger, result. If you have to build the audit trail yourself, you're adding engineering and control work.</li>
+      <li><strong>API-first design.</strong> You need a REST API you can call from your transaction processing pipeline. A web dashboard you log into manually is Level 1 with extra steps.</li>
+      <li><strong>Re-screening support.</strong> The tool should support trigger-event and batch re-screening, with frequency and triggers documented in your policy.</li>
+    </ul>
+
+    <p>
+      For a detailed comparison of available tools, see our <a href="/tools/sanctions-screening-tools-comparison">sanctions screening tools comparison</a>. For understanding the limitations of free options, read our <a href="/tools/chainalysis-oracle-limitations">analysis of the Chainalysis free oracle</a>.
+    </p>
+
+    <p>
+      Integration itself is straightforward. A typical sanctions screening API call looks like this:
+    </p>
+
+    <div class="code-block">
+      <div class="code-block__header">
+        <div class="code-block__dot"></div>
+        <div class="code-block__dot"></div>
+        <div class="code-block__dot"></div>
+        <span class="code-block__title">Sanctions screening API request</span>
+      </div>
+<pre><span class="comment"># Screen a wallet address against the lists in your policy</span>
+<span class="keyword">curl</span> -X POST \
+  <span class="string">"https://api.example.com/v1/screen"</span> \
+  -H <span class="string">"Authorization: Bearer YOUR_API_KEY"</span> \
+  -H <span class="string">"Content-Type: application/json"</span> \
+  -d <span class="string">'{
+    "address": "0x1234...abcd",
+    "chain": "ethereum",
+    "lists": ["ofac_sdn", "eu_consolidated", "un_consolidated"],
+    "reference_id": "txn_2026031301"
+  }'</span>
+
+<span class="comment"># Response (clean address)</span>
+{
+  <span class="prop">"address"</span>: <span class="string">"0x1234...abcd"</span>,
+  <span class="prop">"screened_at"</span>: <span class="string">"2026-03-13T14:30:00Z"</span>,
+  <span class="prop">"lists_checked"</span>: [
+    { <span class="prop">"name"</span>: <span class="string">"ofac_sdn"</span>, <span class="prop">"version"</span>: <span class="string">"2026-03-12"</span> },
+    { <span class="prop">"name"</span>: <span class="string">"eu_consolidated"</span>, <span class="prop">"version"</span>: <span class="string">"2026-03-10"</span> },
+    { <span class="prop">"name"</span>: <span class="string">"un_consolidated"</span>, <span class="prop">"version"</span>: <span class="string">"2026-03-01"</span> }
+  ],
+  <span class="prop">"matches"</span>: [],
+  <span class="prop">"result"</span>: <span class="string">"clear"</span>
+}
+
+<span class="comment"># Response (sanctioned address)</span>
+{
+  <span class="prop">"address"</span>: <span class="string">"0xdead...beef"</span>,
+  <span class="prop">"screened_at"</span>: <span class="string">"2026-03-13T14:31:00Z"</span>,
+  <span class="prop">"lists_checked"</span>: [ <span class="comment">...</span> ],
+  <span class="prop">"matches"</span>: [
+    {
+      <span class="prop">"list"</span>: <span class="string">"ofac_sdn"</span>,
+      <span class="prop">"designation"</span>: <span class="string">"Lazarus Group"</span>,
+      <span class="prop">"category"</span>: <span class="string">"sanctions"</span>,
+      <span class="prop">"source_url"</span>: <span class="string">"https://sanctionssearch.ofac.treas.gov/..."</span>
+    }
+  ],
+  <span class="prop">"result"</span>: <span class="string">"match"</span>
+}</pre>
+    </div>
+
+    <p>
+      The integration point in your code is simple: before processing any outbound transfer, call the screening API. If the result is <code>"match"</code>, block the transfer and trigger your match handling SOP. If <code>"clear"</code>, proceed. Store the full response either way.
+    </p>
+
+    <div class="callout callout--teal">
+      <div class="callout__label">Deliverables -- end of week 2</div>
+      <p>API integration complete in staging/test environment. Pre-transfer screening gate wired into transaction flow. Onboarding screening wired into registration flow. All API responses being logged to your audit database.</p>
+    </div>
+
+    <h3>Week 3: Testing</h3>
+
+    <p>
+      This is where many implementations fall short. Teams integrate the API, verify it returns results, and call it done. Testing should be more rigorous than that.
+    </p>
+
+    <ol>
+      <li><strong>Test with known sanctioned records.</strong> Use records from the official lists covered by your policy. If OFAC is in scope, OFAC-published digital currency addresses are useful test cases. If EU, UN, or UK lists are in scope, use records from those sources as name/entity tests.</li>
+      <li><strong>Test list divergence.</strong> Screen records that appear in one official source but not another. This catches tools that claim multi-list coverage while only checking one dataset.</li>
+      <li><strong>Test edge cases.</strong> Screen addresses in different formats (checksummed vs. non-checksummed for Ethereum). Screen addresses on chains your customers actually use. Screen an address, then re-screen after a simulated list update to verify re-screening works.</li>
+      <li><strong>Batch screening test.</strong> Export all customer addresses from your database and run a full batch screen. This simulates ongoing re-screening. Measure how long it takes -- if re-screening 500 addresses takes 4 hours, your re-screening process has a timing problem.</li>
+      <li><strong>Match handling walkthrough.</strong> Simulate a true positive hit. Walk through your entire SOP: analyst receives alert, escalates to MLRO, MLRO investigates, tests any required reporting step, and documents the decision. Time it. Identify bottlenecks.</li>
+      <li><strong>Audit trail verification.</strong> Pull up your screening logs. Verify that every test screen produced a complete audit record (timestamp, data screened, lists, versions, trigger, result). Have your compliance officer review the logs and confirm they contain the evidence your policy requires.</li>
+    </ol>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">Common mistake: no re-screening on list updates</div>
+      <p>
+        Many CASPs screen at onboarding and pre-transfer but never re-screen when lists are updated. An address or customer that was clean last month can be designated today. EBA GL/2024/15 expects regular customer-base screening with frequency based on the exposure assessment, plus trigger-event screening when designations or restrictive measures change.
+      </p>
+    </div>
+
+    <div class="callout callout--teal">
+      <div class="callout__label">Deliverables -- end of week 3</div>
+      <p>Test report documenting all test scenarios and results. Batch screening benchmarks. Match handling SOP tested end-to-end with timing data. Audit trail verified by compliance officer.</p>
+    </div>
+
+    <h3>Week 4: Go-live, training, and verification</h3>
+
+    <ol>
+      <li><strong>Deploy to production.</strong> Switch the screening gate from test mode to live. Ensure that blocked transfers produce clear error messages for operations staff (not just a raw API error).</li>
+      <li><strong>Train your team.</strong> Every person who touches transactions needs to understand: what triggers a screening alert, what they do when they see one, who they escalate to, and where they document their actions. Keep training records so you can demonstrate coverage.</li>
+      <li><strong>Verify audit trail in production.</strong> After 24-48 hours of live operation, pull the production audit logs. Verify completeness. Every in-scope transfer should have a corresponding screening record. Every screening record should have a timestamp, the lists checked, the trigger, and a result.</li>
+      <li><strong>Set up re-screening automation.</strong> Configure your tool to re-screen when applicable restrictive measures are added, updated, or lifted. If your tool does not support event-driven re-screening, set a documented batch frequency based on your exposure assessment.</li>
+      <li><strong>Document everything.</strong> Update your sanctions screening policy to reflect the new system. Record the go-live date, the tool selected, the API version, the lists covered. This is your "before and after" evidence for regulators.</li>
+    </ol>
+
+    <div class="callout callout--teal">
+      <div class="callout__label">Deliverables -- end of week 4</div>
+      <p>Live production deployment. Staff training records. Verified production audit trail. Updated sanctions screening policy. Re-screening automation configured and tested.</p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>How do you build a defensible audit trail?</h2>
+
+    <p>
+      The audit trail is not an afterthought -- it's the primary evidence that your screening process works. When CySEC (or any EU NCA) inspects your sanctions compliance, historical records are likely to be reviewed. If the records are incomplete, it is hard to evidence that the control operated as designed.
+    </p>
+
+    <h3>What each screening record should contain</h3>
+
+    <ul>
+      <li><strong>Timestamp</strong> -- when the screening was performed (UTC, ISO 8601 format)</li>
+      <li><strong>Data screened</strong> -- the exact wallet address, name, entity name, identifier, or transfer field</li>
+      <li><strong>Chain</strong> -- which blockchain (Ethereum, Bitcoin, Tron, etc.)</li>
+      <li><strong>Lists checked</strong> -- which sanctions lists were queried</li>
+      <li><strong>List version</strong> -- the publication date or version hash of each list at the time of screening</li>
+      <li><strong>Result</strong> -- match or no-match</li>
+      <li><strong>Screening trigger</strong> -- what initiated the screen (onboarding, pre-transfer, re-screening, manual)</li>
+      <li><strong>Reference ID</strong> -- link to the associated transaction or customer record</li>
+    </ul>
+
+    <h3>What each match investigation should contain</h3>
+
+    <ul>
+      <li><strong>Match details</strong> -- which list, which designation, what category</li>
+      <li><strong>Investigation notes</strong> -- what the analyst checked, what evidence was reviewed</li>
+      <li><strong>Decision</strong> -- true positive or false positive, with reasoning</li>
+      <li><strong>Decision maker</strong> -- who approved the determination (name, role, date)</li>
+      <li><strong>Escalation</strong> -- if true positive: when was the FIU notified, STR reference number</li>
+      <li><strong>Action taken</strong> -- transaction blocked, account frozen, funds returned, etc.</li>
+    </ul>
+
+    <h3>Database schema example</h3>
+
+    <p>
+      Here's a minimal audit-ready schema for your screening audit trail:
+    </p>
+
+    <div class="code-block">
+      <div class="code-block__header">
+        <div class="code-block__dot"></div>
+        <div class="code-block__dot"></div>
+        <div class="code-block__dot"></div>
+        <span class="code-block__title">PostgreSQL -- sanctions screening audit trail</span>
+      </div>
+<pre><span class="keyword">CREATE TABLE</span> <span class="val">screening_log</span> (
+  <span class="prop">id</span>              <span class="keyword">UUID</span> <span class="keyword">PRIMARY KEY DEFAULT</span> gen_random_uuid(),
+  <span class="prop">screened_at</span>     <span class="keyword">TIMESTAMPTZ</span> <span class="keyword">NOT NULL DEFAULT</span> now(),
+  <span class="prop">address</span>         <span class="keyword">TEXT</span> <span class="keyword">NOT NULL</span>,
+  <span class="prop">chain</span>           <span class="keyword">TEXT</span> <span class="keyword">NOT NULL</span>,
+  <span class="prop">trigger_type</span>    <span class="keyword">TEXT</span> <span class="keyword">NOT NULL</span>,  <span class="comment">-- 'onboarding' | 'pre_transfer' | 'rescreen' | 'manual'</span>
+  <span class="prop">reference_id</span>    <span class="keyword">TEXT</span>,            <span class="comment">-- transaction or customer ID</span>
+  <span class="prop">lists_checked</span>   <span class="keyword">JSONB</span> <span class="keyword">NOT NULL</span>, <span class="comment">-- [{"name":"ofac_sdn","version":"2026-03-12"}, ...]</span>
+  <span class="prop">result</span>          <span class="keyword">TEXT</span> <span class="keyword">NOT NULL</span>,  <span class="comment">-- 'clear' | 'match'</span>
+  <span class="prop">matches</span>         <span class="keyword">JSONB</span>,           <span class="comment">-- match details if any</span>
+  <span class="prop">api_response_id</span> <span class="keyword">TEXT</span>,            <span class="comment">-- provider's response ID for traceability</span>
+  <span class="prop">screened_by</span>     <span class="keyword">TEXT</span> <span class="keyword">NOT NULL</span>   <span class="comment">-- 'system' | operator email for manual screens</span>
+);
+
+<span class="keyword">CREATE TABLE</span> <span class="val">match_investigation</span> (
+  <span class="prop">id</span>              <span class="keyword">UUID</span> <span class="keyword">PRIMARY KEY DEFAULT</span> gen_random_uuid(),
+  <span class="prop">screening_id</span>    <span class="keyword">UUID</span> <span class="keyword">REFERENCES</span> screening_log(id),
+  <span class="prop">opened_at</span>       <span class="keyword">TIMESTAMPTZ</span> <span class="keyword">NOT NULL DEFAULT</span> now(),
+  <span class="prop">closed_at</span>       <span class="keyword">TIMESTAMPTZ</span>,
+  <span class="prop">investigator</span>    <span class="keyword">TEXT</span> <span class="keyword">NOT NULL</span>,  <span class="comment">-- analyst name/email</span>
+  <span class="prop">notes</span>           <span class="keyword">TEXT</span> <span class="keyword">NOT NULL</span>,  <span class="comment">-- investigation narrative</span>
+  <span class="prop">determination</span>   <span class="keyword">TEXT</span> <span class="keyword">NOT NULL</span>,  <span class="comment">-- 'true_positive' | 'false_positive'</span>
+  <span class="prop">approved_by</span>     <span class="keyword">TEXT</span> <span class="keyword">NOT NULL</span>,  <span class="comment">-- MLRO or senior compliance officer</span>
+  <span class="prop">approved_at</span>     <span class="keyword">TIMESTAMPTZ</span>,
+  <span class="prop">action_taken</span>    <span class="keyword">TEXT</span> <span class="keyword">NOT NULL</span>,  <span class="comment">-- 'blocked' | 'frozen' | 'released' | 'reported'</span>
+  <span class="prop">str_reference</span>   <span class="keyword">TEXT</span>             <span class="comment">-- STR filing reference if reported to FIU</span>
+);
+
+<span class="comment">-- Index for re-screening: quickly find all addresses to re-check</span>
+<span class="keyword">CREATE INDEX</span> idx_screening_address <span class="keyword">ON</span> screening_log(address);
+<span class="keyword">CREATE INDEX</span> idx_screening_result <span class="keyword">ON</span> screening_log(result);
+<span class="keyword">CREATE INDEX</span> idx_screening_date <span class="keyword">ON</span> screening_log(screened_at);</pre>
+    </div>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">Common mistake: storing audit logs in spreadsheets</div>
+      <p>
+        If your audit trail lives only in a Google Sheet or Excel file, it may be editable, weak on access controls, and lack transactional integrity. A regulator can reasonably question whether records were modified after the fact. Use a database with immutable audit logging, or at minimum, append-only storage with access controls and checksums.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>What are the five common mistakes that fail audits?</h2>
+
+    <p>
+      These are the patterns we see repeatedly in small CASPs preparing for their first regulatory inspection. Each one can become an audit finding if the policy, control, or evidence is missing.
+    </p>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">Mistake 1: Screening OFAC only</div>
+      <p>
+        OFAC is a U.S. list. If you're licensed in the EU, OFAC does not replace EU and applicable national restrictive measures. Your regulator is likely to look for the lists that apply to your business, plus a documented rationale for any additional sources you use.
+      </p>
+    </div>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">Mistake 2: No re-screening on list updates</div>
+      <p>
+        A customer address that was clean when they onboarded can be designated later. If you only screen at onboarding, you could process transactions after a new designation. EBA GL/2024/15 expects regular customer-base screening and trigger-event screening when a designation or restrictive measure changes.
+      </p>
+    </div>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">Mistake 3: No match handling procedure</div>
+      <p>
+        Your screening tool flags a match. Now what? If the answer is "it depends on who's working that day," you have a compliance problem. EBA GL/2024/15 expects policies and procedures to investigate alerts, document decisions, and define review levels for higher-exposure situations.
+      </p>
+    </div>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">Mistake 4: No list version tracking</div>
+      <p>
+        When a regulator asks "was this address screened against the EU list version in force on that date?" you need to answer with evidence. If your audit log says "screened: yes" but doesn't record which version of each list was current, you can't prove completeness. Log the list publication date, version identifier, or provider dataset hash alongside every screening result.
+      </p>
+    </div>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">Mistake 5: Screening addresses but not names</div>
+      <p>
+        Blockchain sanctions screening focuses on wallet addresses, but your KYC data also contains customer names and legal entity names. EBA GL/2024/15 treats customer-base screening as broader than wallet addresses; wallet addresses should be screened where available in official restrictive-measures lists. Name screening with calibrated fuzzy matching is a separate control from address screening.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>How do you maintain compliance after go-live?</h2>
+
+    <p>
+      Implementation is not a one-time project. Sanctions screening is an ongoing operational process. After your 30-day implementation:
+    </p>
+
+    <ul>
+      <li><strong>Monitor list update ingestion.</strong> Verify that your tool is actually pulling updates for every list in your policy. Set alerts for failed ingestion, stale datasets, or provider errors.</li>
+      <li><strong>Review audit logs on a documented schedule.</strong> Pull a sample of screening records and verify completeness. Monthly review is a practical starting point for many small CASPs, but set the frequency based on exposure.</li>
+      <li><strong>Review the screening system at least annually.</strong> EBA GL/2024/15 expects at least annual review and immediate review if there are grounds for concern. Test settings and scenarios at a frequency based on your exposure assessment.</li>
+      <li><strong>Update your policy.</strong> When sanctions lists are added, regulatory guidance changes, or your screening tool is upgraded, update the policy document. Version-control it.</li>
+      <li><strong>Retain records under your AML/CFT and sanctions policy.</strong> EU AMLD record retention is generally five years for CDD and transaction records after the business relationship or occasional transaction ends. Treat screening logs as part of your evidence set and check local retention rules before deleting them.</li>
+    </ul>
+
+    <blockquote>
+      <p>EBA GL/2024/15 expects PSPs and CASPs to identify new, updated, or lifted restrictive measures and update their internal screening dataset immediately after the change enters into force.</p>
+      <cite>-- EBA Guidelines on Internal Policies, Procedures and Controls (GL/2024/15), Section 4.1.2</cite>
+    </blockquote>
+
+    <hr class="section-divider">
+
+    <h2>Frequently asked questions</h2>
+
+    <h3>What sanctions lists does an EU-licensed CASP need to screen against?</h3>
+    <p>
+      Screen against applicable Union and national restrictive measures. For an EU CASP, that means EU restrictive measures and any applicable national measures. UN, OFAC SDN, and the UK Sanctions List may also be in scope because of local law, business exposure, customer geography, or internal risk policy. There is no universal MiCA mandate that every EU CASP must screen EU, UN, OFAC, and UK lists in every case.
+    </p>
+
+    <h3>Can I use Excel spreadsheets for sanctions screening?</h3>
+    <p>
+      Technically yes, but it creates significant compliance risk. Excel-based screening often lacks reliable timestamps, automatic re-screening triggers, access controls, and list-version evidence. EBA GL/2024/15 expects effective screening, documented policies, alert investigation records, and regular system review. A spreadsheet process needs substantial supplementary controls to evidence that standard.
+    </p>
+
+    <h3>How often must I re-screen existing customers against sanctions lists?</h3>
+    <p>
+      EBA GL/2024/15 expects regular customer database screening with frequency set by your restrictive-measures exposure assessment. It also expects trigger-event screening when a designation or restrictive measure changes, at onboarding, after significant CDD changes, or when circumvention is suspected. Event-driven re-screening is the cleanest implementation pattern; a batch-only approach should have a documented frequency and rationale.
+    </p>
+
+    <h3>What does a sanctions screening audit trail need to contain?</h3>
+    <p>
+      A defensible record should include: timestamp (UTC), the address, name, entity, or transfer data screened, which lists or datasets were checked, the list version or publication date, the screening result, and the trigger (onboarding, pre-transfer, re-screen, manual). For matches, keep investigation notes, the decision, who approved it, the action taken, and any required reporting reference.
+    </p>
+
+    <h3>How long does it take to implement automated sanctions screening?</h3>
+    <p>
+      A realistic timeline for a small CASP is 30 days. Week 1: document your sanctions screening policy and procedures. Week 2: select a tool and integrate the API. Week 3: test with known sanctioned addresses, edge cases, and batch screening. Week 4: go live, train staff, and verify audit trail completeness. The API integration itself can be done in a day -- the policy work and testing take the remaining time.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>Bottom line</h2>
+
+    <p>
+      Migrating from Excel to automated sanctions screening is not primarily a technical project -- it's an operational one. The API integration is the easy part. The hard part is the policy documentation, the match handling procedures, the testing discipline, and the audit trail architecture. But all of it is achievable in 30 days for a small CASP with focused effort.
+    </p>
+
+    <p>
+      The regulatory direction is clear: the TFR gives the EBA a restrictive-measures mandate for CASP transfers, and EBA GL/2024/15 expects controls to be operational, not just written into a policy. CASPs still running manual spreadsheet checks need strong supplementary controls to evidence list coverage, trigger-event screening, alert handling, and audit trails. The 30-day plan in this guide gets you to an automated, documented process that is much easier to defend under inspection.
+    </p>
+
+    <p>
+      Start with the policy. The code follows.
+    </p>
+
+    <div class="cta-banner">
+      <h3>Ready to automate your sanctions screening?</h3>
+      <p>Take our 2-minute compliance self-check. Ten questions based on EBA GL/2024/15 -- see where you stand before your next inspection.</p>
+      <a href="/regulations/" class="btn-primary">
+        Read the regulatory guides &rarr;
+      </a>
+    </div>
+
+    <div class="sources">
+      <h3>Sources</h3>
+      <ul>
+        <li><a href="https://www.eba.europa.eu/activities/single-rulebook/regulatory-activities/anti-money-laundering-and-countering-financing-terrorism/guidelines-internal-policies-procedures-and-controls-ensure-implementation-union-and-national" target="_blank" rel="noopener">EBA Guidelines on Restrictive Measures (EBA/GL/2024/14 and EBA/GL/2024/15)</a></li>
+        <li><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32023R1113" target="_blank" rel="noopener">Regulation (EU) 2023/1113 -- Transfer of Funds Regulation, Article 23</a></li>
+        <li><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32023R1114" target="_blank" rel="noopener">Regulation (EU) 2023/1114 -- Markets in Crypto-Assets Regulation (MiCA)</a></li>
+        <li><a href="https://www.cysec.gov.cy/CMSPages/GetFile.aspx?guid=72f9c65f-79c3-480b-8801-58d506f05f3e" target="_blank" rel="noopener">CySEC Circular C685 -- Guidance on Sanctions Screening Systems</a></li>
+        <li><a href="https://finance.ec.europa.eu/eu-and-world/sanctions-restrictive-measures/overview-sanctions-and-related-resources_en" target="_blank" rel="noopener">European Commission -- EU Sanctions and Consolidated Financial Sanctions List</a></li>
+        <li><a href="https://ofac.treasury.gov/sanctions-list-service" target="_blank" rel="noopener">OFAC Sanctions List Service -- U.S. Department of the Treasury</a></li>
+        <li><a href="https://www.un.org/securitycouncil/content/un-sc-consolidated-list" target="_blank" rel="noopener">UN Security Council Consolidated List</a></li>
+        <li><a href="https://www.gov.uk/government/publications/the-uk-sanctions-list" target="_blank" rel="noopener">UK Sanctions List -- GOV.UK</a></li>
+        <li><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex%3A32015L0849" target="_blank" rel="noopener">EU Anti-Money Laundering Directive (Directive 2015/849) -- Record Retention Requirements</a></li>
+      </ul>
+    </div>
+
+  
+
+    <div class="related-articles">
+      <h3>Related articles</h3>
+      <div class="related-grid">
+        <a href="/operations/crypto-compliance-cost-small-casp" class="related-card">
+          <span class="related-card__tag">Operations</span>
+          <span class="related-card__title">How Much Does Crypto Compliance Cost for a Small EU CASP?</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+        <a href="/operations/cysec-sanctions-checklist" class="related-card">
+          <span class="related-card__tag">Operations</span>
+          <span class="related-card__title">CySEC CASP Compliance Checklist: Sanctions Screening in 2026</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+<div style="margin: 40px 0; padding: 24px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; text-align: center;">
+  <p style="font-size: 15px; color: #475569; margin-bottom: 12px;">Need screening records and audit-ready evidence, not just a binary check?</p>
+  <a href="mailto:info@chainscreen.io" style="display: inline-block; padding: 12px 24px; background: #0c2340; color: #fff; border-radius: 8px; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600;">Contact ChainScreen</a>
+</div>
+
+
+<footer>
+  <div class="container">
+    &copy; 2026 DailyMind LTD &middot; HE 439959 &middot; Limassol, Cyprus
+    &nbsp;&middot;&nbsp;
+    <span>Information only; not legal advice</span>
+    &nbsp;&middot;&nbsp;
+    <a href="/privacy">Privacy</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://dailymind.eu">dailymind.eu</a>
+  </div>
+</footer>
+<script data-goatcounter="https://gc-chainscreen.vigilcom.dev/count"
+        async src="//gc.vigilcom.dev/count.js"></script>
+<script src="/nav.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+# ChainScreen
+
+ChainScreen is a compliance research hub for EU crypto asset service providers (CASPs), focused on sanctions screening, MiCA, EBA restrictive-measures guidance, Travel Rule operations, AML/CFT evidence, vendor selection, and GDPR/data-residency issues.
+
+ChainScreen publishes content only. The public API, wallet checker, lead forms, and developer API documentation were retired on 2026-05-12.
+
+## Company
+
+- DailyMind LTD, HE 439959, Limassol, Cyprus
+- Founded by Katerina Bletsch, Limassol, Cyprus
+- Website: https://chainscreen.io
+- About: https://chainscreen.io/about
+- Contact: info@chainscreen.io
+
+## Main Research Areas
+
+- MiCA authorization, CASP licensing, transitional regimes, and ESMA register checks
+- EBA restrictive-measures guidance and sanctions-screening governance
+- EU Travel Rule implementation and counterparty CASP evidence
+- Crypto AML/CFT inspection files, banking evidence, and enforcement lessons
+- Sanctions-screening tools, Chainalysis alternatives, false positives, and oracle limitations
+- Blockchain analytics depth, source-of-funds tracing, and GDPR/data-residency risk
+- Stablecoin compliance developments in the United States where they affect crypto compliance teams
+
+## Content Sections
+
+- Regulations: https://chainscreen.io/regulations/
+- Operations: https://chainscreen.io/operations/
+- Tools: https://chainscreen.io/tools/
+- Technical: https://chainscreen.io/technical/
+
+## Important Context
+
+- Articles are educational research, not legal advice.
+- Public pages cite official or primary sources where possible.
+- CASPs should verify live obligations with their national competent authority and legal counsel before operational decisions.

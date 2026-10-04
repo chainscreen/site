@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crypto Compliance Budget for Small CASPs | ChainScreen</title>
+<meta name="description" content="Small-CASP crypto compliance budget refresh for July 2026: public AML vendor prices, MiCA/CySEC fees, EBA sanctions-screening duties, and clearly labelled assumptions.">
+<link rel="canonical" href="https://chainscreen.io/operations/crypto-compliance-budget-small-casp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Crypto Compliance on a Startup Budget: What Small CASPs Actually Need vs What Enterprise Vendors Sell">
+<meta property="og:description" content="What small CASPs can budget from official vendor pricing, what needs a quote, and what MiCA/EBA/CySEC actually require. Updated July 10, 2026.">
+<meta property="og:url" content="https://chainscreen.io/operations/crypto-compliance-budget-small-casp">
+<meta property="og:site_name" content="ChainScreen">
+<meta property="og:image" content="https://chainscreen.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Crypto Compliance on a Startup Budget: What Small CASPs Actually Need vs What Enterprise Vendors Sell","description":"A July 2026 refresh of small-CASP AML tooling budgets: what official rules require, which public vendor prices can be used, which enterprise price claims should be treated as unsourced, and where assumptions must be labelled.","datePublished":"2026-03-15","dateModified":"2026-07-10","wordCount":2539,"author":{"@type":"Person","name":"Katerina Bletsch","url":"https://chainscreen.io","jobTitle":"Founder","sameAs":["https://www.linkedin.com/in/katerina-bletsch/"]},"publisher":{"@type":"Organization","name":"ChainScreen","url":"https://chainscreen.io","logo":{"@type":"ImageObject","url":"https://chainscreen.io/og-image.png"}}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What public AML software prices can a small CASP use for budget planning?","acceptedAnswer":{"@type":"Answer","text":"As of July 10, 2026, ComplyAdvantage publishes a Starter price from $99/month for customer screening, and Sumsub publishes Basic user verification at $1.35 per verification with a $149 monthly minimum and Compliance verification at $1.85 per verification with a $299 monthly minimum. These figures do not include crypto wallet or on-chain transaction monitoring unless that scope is included in your signed vendor order."}},{"@type":"Question","name":"Should a small CASP buy Chainalysis Reactor for baseline compliance?","acceptedAnswer":{"@type":"Answer","text":"Not solely for baseline sanctions screening. Chainalysis describes Reactor as an investigations product that works with KYT to escalate risk-based alerts into full investigations. If your requirement is list screening, documented audit trails, and pre-transfer controls, buy or build those capabilities first and treat investigation workbenches as a separate need."}},{"@type":"Question","name":"What sanctions lists do EU CASPs need to screen?","acceptedAnswer":{"@type":"Answer","text":"EBA GL/2024/15 requires CASPs to screen against applicable Union and national restrictive measures. For an EU CASP, the baseline is the EU Consolidated Financial Sanctions List and any national measures that apply in the home Member State. UN, OFAC, and UK lists are not universal EU-law mandates for every CASP, but they may be necessary where the CASP has the relevant legal nexus, counterparty exposure, correspondent relationship, currency exposure, or national-supervisor expectation."}},{"@type":"Question","name":"What AML tools do small CASPs actually need under MiCA and EBA GL/2024/15?","acceptedAnswer":{"@type":"Answer","text":"A small CASP needs customer due diligence and identity verification, customer and beneficial-owner screening, pre-transfer screening of crypto-asset transfers against applicable restrictive measures, documented alert handling, record retention, and evidence that the screening system is adequate for its size, nature, complexity, and restrictive-measures exposure. MiCA and EBA guidelines specify outcomes and controls, not a required software brand."}},{"@type":"Question","name":"Can regulators require a CASP to use specific AML software vendors?","acceptedAnswer":{"@type":"Answer","text":"Regulators do not mandate a specific commercial vendor. They can, however, reject a weak system if it does not cover the applicable restrictive measures, cannot screen the required data fields, lacks testing and calibration evidence, or cannot produce usable records during supervision. Vendor choice is flexible; control evidence is not."}}]}
+</script>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chainscreen.io/og-image.png">
+<script defer src="https://u.vigilcom.dev/script.js" data-website-id="df019ee1-bf37-42db-be6c-93671ff213ec"></script>
+<meta name="twitter:title" content="Crypto Compliance on a Startup Budget: What Small CASPs Actually Need vs What Enterprise Vendors Sell">
+<meta name="twitter:description" content="Official vendor prices, MiCA/CySEC fee inputs, and EBA sanctions-screening duties for small CASP budget planning. Updated July 2026.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://chainscreen.io"},{"@type":"ListItem","position":2,"name":"Operations","item":"https://chainscreen.io/operations/"},{"@type":"ListItem","position":3,"name":"Crypto Compliance on a Startup Budget: What Small CASPs Actually Need vs What Enterprise Vendors Sell"}]}
+</script>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-alt: #f8fafc;
+    --surface: #ffffff;
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --text: #0c1d36;
+    --text-body: #475569;
+    --text-muted: #94a3b8;
+    --accent: #0c2340;
+    --accent-hover: #143a65;
+    --accent-light: #edf2f9;
+    --teal: #0f766e;
+    --teal-light: #f0fdf4;
+    --code-bg: #091a30;
+    --code-surface: #0c2340;
+    --red: #dc2626;
+    --red-light: #fef2f2;
+    --font-serif: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-code: 'JetBrains Mono', 'SF Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  
+  header {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: var(--font-code);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--accent-hover); }
+
+  .nav-link {
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover { color: var(--text); }
+
+  
+  .article-header {
+    padding: 80px 0 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .article-header__eyebrow {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--teal);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .article-header h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+
+  .article-header__sub {
+    font-size: 17px;
+    color: var(--text-body);
+    max-width: 640px;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .article-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: var(--font-code);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.01em;
+  }
+
+  .article-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .article-meta__dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--teal);
+    flex-shrink: 0;
+  }
+
+  
+  .article-body {
+    padding: 48px 0 72px;
+  }
+
+  .article-body h2 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-top: 48px;
+    margin-bottom: 16px;
+    line-height: 1.3;
+    color: var(--text);
+  }
+
+  .article-body h3 {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 32px;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+
+  .article-body p {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .article-body ul, .article-body ol {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+    padding-left: 24px;
+  }
+
+  .article-body li {
+    margin-bottom: 6px;
+  }
+
+  .article-body a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+  }
+
+  .article-body a:hover {
+    color: var(--accent-hover);
+  }
+
+  .article-body strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .article-body code {
+    font-family: var(--font-code);
+    font-size: 13px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--accent);
+  }
+
+  
+  .callout {
+    margin: 28px 0;
+    padding: 24px 28px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .callout p {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .callout p:last-child {
+    margin-bottom: 0;
+  }
+
+  .callout--warning {
+    background: var(--red-light);
+    border: 1px solid #fecaca;
+  }
+
+  .callout--warning .callout__label {
+    color: var(--red);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--info {
+    background: var(--accent-light);
+    border: 1px solid #c7d5e8;
+  }
+
+  .callout--info .callout__label {
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--teal {
+    background: var(--teal-light);
+    border: 1px solid #bbf7d0;
+  }
+
+  .callout--teal .callout__label {
+    color: var(--teal);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  
+  .comparison-wrapper {
+    margin: 28px 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .comparison th, .comparison td {
+    padding: 13px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .comparison tr:last-child td { border-bottom: none; }
+
+  .comparison th {
+    color: var(--text-muted);
+    font-family: var(--font-code);
+    font-weight: 500;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--bg-alt);
+  }
+
+  .comparison td:first-child {
+    color: var(--text);
+    font-weight: 500;
+    font-size: 13px;
+  }
+
+  .comparison th:last-child {
+    color: var(--accent);
+  }
+
+  .comparison td:last-child {
+    background: var(--accent-light);
+  }
+
+  .check { color: var(--teal); font-weight: 600; }
+  .cross { color: var(--red); font-weight: 600; }
+  .na { color: var(--text-muted); }
+
+  
+  blockquote {
+    margin: 24px 0;
+    padding: 20px 24px;
+    border-left: 3px solid var(--border-strong);
+    background: var(--bg-alt);
+    border-radius: 0 8px 8px 0;
+  }
+
+  blockquote p {
+    font-size: 14px;
+    color: var(--text-body);
+    font-style: italic;
+    margin-bottom: 0;
+  }
+
+  blockquote cite {
+    display: block;
+    margin-top: 8px;
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-style: normal;
+    color: var(--text-muted);
+  }
+
+  
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  
+  .cta-banner {
+    margin: 48px 0;
+    padding: 40px 36px;
+    background: var(--code-bg);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .cta-banner h3 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: #f1f5f9;
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .cta-banner p {
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 24px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 28px;
+    background: #fff;
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary:hover {
+    background: #f1f5f9;
+    color: var(--accent);
+  }
+
+  
+  .sources {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .sources h3 {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .sources ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sources li {
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 4px 0;
+    line-height: 1.6;
+  }
+
+  .sources li a {
+    color: var(--text-body);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .sources li a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--text); }
+
+  
+  .comparison .total-row td {
+    font-weight: 600;
+    color: var(--text);
+    border-top: 2px solid var(--border-strong);
+    background: var(--bg-alt);
+  }
+
+  .comparison .total-row td:last-child {
+    background: var(--accent-light);
+  }
+
+  
+  .comparison .highlight-row td {
+    background: var(--teal-light);
+  }
+
+  .comparison .highlight-row td:last-child {
+    background: var(--teal-light);
+  }
+
+  
+  @media (max-width: 640px) {
+    .article-header { padding: 48px 0 32px; }
+    .article-header h1 { font-size: 1.8rem; }
+    .article-body h2 { font-size: 20px; }
+    .article-meta { gap: 12px; }
+    .comparison { font-size: 11px; }
+    .comparison th, .comparison td { padding: 8px 10px; }
+    .callout { padding: 20px; }
+    .cta-banner { padding: 32px 24px; }
+  }
+
+  
+  .breadcrumb { padding: 12px 0; border-bottom: 1px solid var(--border); background: var(--bg-alt); }
+  .breadcrumb a, .breadcrumb span { font-family: var(--font-code); font-size: 11px; letter-spacing: 0.01em; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb__sep { color: #cbd5e1; margin: 0 6px; }
+  .breadcrumb__current { color: var(--text-body); }
+
+  
+  .nav-links { display: flex; align-items: center; gap: 20px; }
+  .nav-link.active { color: var(--text); }
+  @media (max-width: 640px) { .nav-links { gap: 12px; } .nav-link { font-size: 11px; } }
+
+  
+  .related-articles { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+  .related-articles h3 { font-family: var(--font-code); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 16px; margin-top: 0; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .related-card { display: flex; flex-direction: column; gap: 8px; padding: 20px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; transition: border-color 0.2s; }
+  .related-card:hover { border-color: var(--accent); }
+  .related-card__tag { font-family: var(--font-code); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--teal); }
+  .related-card__title { font-family: var(--font-serif); font-size: 15px; color: var(--text); line-height: 1.35; }
+  .related-card__arrow { font-family: var(--font-code); font-size: 12px; color: var(--text-muted); margin-top: auto; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="/" class="logo">chain<span>screen</span></a>
+    <nav class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/regulations/" class="nav-link">Regulations</a>
+      <a href="/operations/" class="nav-link active">Operations</a>
+      <a href="/tools/" class="nav-link">Tools</a>
+      <a href="/technical/" class="nav-link">Technical</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <div class="container">
+    <a href="/">Home</a><span class="breadcrumb__sep">/</span>
+    <a href="/operations/">Operations</a><span class="breadcrumb__sep">/</span>
+    <span class="breadcrumb__current">Compliance on a Startup Budget</span>
+  </div>
+</nav>
+
+<section class="article-header">
+  <div class="container">
+    <div class="article-header__eyebrow">Affordable AML for MiCA</div>
+    <h1>Crypto Compliance on a Startup Budget: What Small CASPs Actually Need vs What Enterprise Vendors Sell</h1>
+    <p class="article-header__sub">
+      Enterprise AML vendors often publish feature pages but not list prices. Small CASPs need a budget built from official vendor pricing, regulator fee schedules, and labelled assumptions &#8212; not anonymous contract benchmarks. Updated July 10, 2026.
+    </p>
+    <div class="article-meta">
+      <span><div class="article-meta__dot"></div> Updated July 2026</span>
+      <span><div class="article-meta__dot"></div> 6 min read</span>
+      <span><div class="article-meta__dot"></div> Katerina Bletsch</span>
+      <span><div class="article-meta__dot"></div> Sources: MiCA, EBA GL/2024/15, CySEC PS-03-2024, vendor pricing pages</span>
+    </div>
+  </div>
+</section>
+
+<article class="article-body">
+  <div class="container">
+
+    <p>
+      If you've ever requested a demo from a blockchain analytics vendor, you know the routine: a sales call, a scoped use case, and a quote that depends on products, chains, users, transaction volume, and support terms.
+    </p>
+
+    <p>
+      Many products were built for large exchanges, financial institutions, and law-enforcement investigation teams. A small CASP should not use unsourced average contract values as its budget baseline. Use public vendor prices where they exist, and treat every other number as either a signed quote or a clearly labelled planning assumption.
+    </p>
+
+    <p>
+      This article separates three things: what MiCA and EBA GL/2024/15 actually require, what vendors publicly price, and which budget figures remain assumptions until a vendor or regulator confirms them.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>What do compliance vendors publicly price?</h2>
+
+    <p>
+      Start with the numbers you can defend. As of July 10, 2026, the official public pricing picture is limited:
+    </p>
+
+    <div class="comparison-wrapper">
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th>Vendor</th>
+            <th>Pricing model</th>
+            <th>Public price</th>
+            <th>Use in budget?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Chainalysis Reactor</td>
+            <td>Investigation suite</td>
+            <td><strong>Not published</strong></td>
+            <td><span class="cross">&#10007; Get quote</span></td>
+          </tr>
+          <tr>
+            <td>Chainalysis KYT</td>
+            <td>Transaction monitoring</td>
+            <td><strong>Not published</strong></td>
+            <td><span class="cross">&#10007; Get quote</span></td>
+          </tr>
+          <tr>
+            <td>TRM Labs</td>
+            <td>Blockchain intelligence</td>
+            <td><strong>Not published</strong></td>
+            <td><span class="cross">&#10007; Get quote</span></td>
+          </tr>
+          <tr>
+            <td>Elliptic</td>
+            <td>Blockchain analytics</td>
+            <td><strong>Quote-based</strong></td>
+            <td><span class="cross">&#10007; Get quote</span></td>
+          </tr>
+          <tr>
+            <td>Crystal Intelligence</td>
+            <td>Blockchain analytics</td>
+            <td><strong>Quote-based</strong></td>
+            <td><span class="cross">&#10007; Get quote</span></td>
+          </tr>
+          <tr>
+            <td>ComplyAdvantage</td>
+            <td>Customer screening</td>
+            <td><strong>From $99/mo</strong> (100 monitored entities)</td>
+            <td><span class="check">&#10003; Public price</span></td>
+          </tr>
+          <tr>
+            <td>Scorechain</td>
+            <td>Crypto AML</td>
+            <td><strong>Pricing page, no monthly fee shown</strong></td>
+            <td><span class="cross">&#10007; Get quote</span></td>
+          </tr>
+          <tr class="highlight-row">
+            <td>Sumsub</td>
+            <td>KYC / AML checks</td>
+            <td><strong>$1.35&#8211;$1.85/check</strong>; $149&#8211;$299 monthly minimum</td>
+            <td><span class="check">&#10003; Public price</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Chainalysis, TRM, Elliptic, Crystal, and Scorechain may still be appropriate vendors. The point is narrower: if the vendor does not publish a price, do not put a third-party average into a board budget as fact. Use a signed quote, or mark the number as an assumption.
+    </p>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">The mismatch problem</div>
+      <p>
+        Enterprise AML tools can include investigation workbenches, proprietary intelligence layers, multi-user case management, and high-volume APIs. A small CASP may need some of those features, but the need should come from its risk assessment and service model, not from a vendor's default enterprise package.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>What do MiCA and EBA GL/2024/15 actually require?</h2>
+
+    <p>
+      Before deciding what to buy, you need to know exactly what regulators require. The rules are specific &#8212; and they specify outcomes, not vendors.
+    </p>
+
+    <h3>Sanctions screening: the non-negotiables</h3>
+
+    <p>
+      Under EBA GL/2024/15 (final guidelines on internal policies and controls for implementing restrictive measures), CASPs must screen customers and transfers against applicable restrictive measures. For an EU CASP, that means:
+    </p>
+
+    <ul>
+      <li><strong>EU restrictive measures</strong> &#8212; the EU Consolidated Financial Sanctions List is the baseline for EU-regulated entities</li>
+      <li><strong>National restrictive measures</strong> &#8212; any sanctions or measures applicable in the CASP's home Member State</li>
+      <li><strong>UN, OFAC, UK OFSI and other third-country lists</strong> &#8212; not universal EBA mandates, but often necessary where the CASP has the relevant legal nexus, counterparty exposure, currency exposure, correspondent relationship, or national-supervisor expectation</li>
+    </ul>
+
+    <p>
+      EBA GL/2024/15 requires regular customer-base screening, risk-based trigger events, and screening of crypto-asset transfers before making crypto-assets available to the beneficiary. The system must retain usable evidence: what data was screened, which restrictive measures dataset was used, when screening happened, the result, and the action taken.
+    </p>
+
+    <h3>Transaction monitoring</h3>
+
+    <p>
+      You must monitor crypto-asset transfers for restrictive-measures exposure and circumvention risk. EBA GL/2024/15 says CASPs should consider blockchain analysis for transaction monitoring where appropriate based on the volume and number of transfers. That is a risk-based technology decision, not a mandate to buy a named investigation platform.
+    </p>
+
+    <h3>KYC / customer due diligence</h3>
+
+    <p>
+      Identity verification at onboarding (government ID + liveness check), ongoing monitoring for changes in risk profile, and enhanced due diligence for high-risk customers. This is a separate function from sanctions screening &#8212; you need both, but they can be handled by different tools.
+    </p>
+
+    <div class="callout callout--info">
+      <div class="callout__label">What regulators assess</div>
+      <p>
+        When a national competent authority inspects your compliance program, expect questions about applicable list coverage, re-screening triggers, transfer-screening timing, system testing, alert handling, outsourcing controls, and record quality. They do not require a specific vendor brand, but they can reject a system that cannot demonstrate adequate coverage and evidence.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>What do enterprise vendors sell on top of what’s required?</h2>
+
+    <p>
+      Here's what you may be paying for when you buy a full enterprise blockchain analytics suite &#8212; capabilities that can be valuable, but are separate from the baseline control question:
+    </p>
+
+    <ul>
+      <li><strong>Deep blockchain investigation tools</strong> &#8212; multi-hop tracing, network graph visualization, address clustering. Useful for fraud investigation teams at large exchanges. Overkill for a small CASP's compliance workflow.</li>
+      <li><strong>Proprietary intelligence databases</strong> &#8212; labeled addresses, entity databases built from years of on-chain data collection. These are genuinely valuable for sophisticated threat hunting. Not required by MiCA.</li>
+      <li><strong>Analyst workbench environments</strong> &#8212; multi-analyst collaborative investigation platforms with case management. You need one compliance officer, not an investigation department.</li>
+      <li><strong>Dark web monitoring and threat intelligence feeds</strong> &#8212; emerging risk alerts from illicit markets. Relevant for law enforcement partners and large exchange security teams.</li>
+      <li><strong>Custom API integrations at enterprise scale</strong> &#8212; useful when your measured throughput, latency, and workflow requirements justify them. Do not buy capacity against a generic enterprise default.</li>
+    </ul>
+
+    <p>
+      EBA GL/2024/15 requires an effective, tested screening framework and appropriate controls for circumvention risk. It does not prescribe a commercial investigation workbench. If you run a large exchange or custody platform, those features may be justified by risk and volume. If you are a narrow-scope CASP, prove the need before buying them.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>What can you budget from public prices?</h2>
+
+    <p>
+      Here is the narrow version you can defend from official vendor pages. The on-chain line is a planning assumption until you have either an internal build estimate or a signed vendor quote.
+    </p>
+
+    <div class="comparison-wrapper">
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th>Function</th>
+            <th>Tool</th>
+            <th>What it covers</th>
+            <th>Annual cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>On-chain sanctions screening + transfer monitoring</td>
+            <td>Build or quote-based vendor</td>
+            <td>Applicable restrictive measures; wallet-address screening where available in official lists; audit evidence; alert workflow</td>
+            <td><strong>$0&#8211;$10,000/yr assumption</strong> (software only; quote or build scope required)</td>
+          </tr>
+          <tr>
+            <td>Name / PEP / adverse media screening</td>
+            <td>ComplyAdvantage</td>
+            <td>Customer and company screening, sanctions/watchlists, PEPs/RCAs, adverse media, ongoing monitoring</td>
+            <td><strong>From $1,188/yr</strong> (official $99/mo starter price)</td>
+          </tr>
+          <tr>
+            <td>KYC / identity verification</td>
+            <td>Sumsub Compliance</td>
+            <td>ID verification, liveness, AML screening, ongoing AML monitoring, proof of address</td>
+            <td><strong>From $3,588/yr</strong> minimum + usage (official $299/mo minimum; $1.85/check)</td>
+          </tr>
+          <tr class="total-row">
+            <td>Total tool spend</td>
+            <td></td>
+            <td>Public-priced lines plus labelled on-chain assumption</td>
+            <td><strong>$4,776&#8211;$14,776/yr</strong> + usage / engineering</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      This is not a market average. It is a budget envelope made from two public vendor minimums plus a labelled assumption for on-chain screening. If your CASP needs high-volume API monitoring, multi-chain investigations, travel-rule tooling, or outsourced alert handling, get quotes and replace the assumption.
+    </p>
+
+    <div class="callout callout--teal">
+      <div class="callout__label">The key insight</div>
+      <p>
+        MiCA and EBA guidelines specify controls and evidence, not a minimum software budget. Your system has to cover the restrictive measures that apply to your business, screen the required data before release of crypto-assets, retain records, and withstand testing. The brand name is secondary to those outputs.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>What must you pay for with no shortcuts?</h2>
+
+    <p>
+      Budget optimization doesn't mean cutting corners on the things that actually matter. These are the items where trying to save money creates real regulatory and legal risk:
+    </p>
+
+    <h3>The MLRO</h3>
+
+    <p>
+      Budget for a named AML/CFT compliance officer function with enough authority, time, tools, and access to management. EBA's AML/CFT compliance officer guidelines allow proportionality, but they do not let a firm outsource away ultimate responsibility. Treat salary or retainer figures as local hiring assumptions unless you have a signed employment offer or service agreement.
+    </p>
+
+    <h3>Applicable sanctions coverage</h3>
+
+    <p>
+      EBA GL/2024/15 is explicit about applicable Union and national restrictive measures. Do not overstate that into a universal EU mandate to screen OFAC and UK OFSI for every CASP. Do document why each list is in or out of scope. For a Cyprus CASP, CySEC thematic work and circulars can make UN, U.S., and UK coverage a practical supervisory expectation even where the legal basis is not the same as EU restrictive measures.
+    </p>
+
+    <h3>Complete audit trails</h3>
+
+    <p>
+      Every screen must be logged: what data was screened, against which dataset or list version, when, what the result was, and what action was taken. "We screened but the logs weren't retained" is weak evidence. MiCA Article 68 record-keeping and EBA GL/2024/15 both push toward durable, retrievable records that a supervisor can inspect.
+    </p>
+
+    <h3>External AML audit</h3>
+
+    <p>
+      Do not rely on vendor dashboards as your only assurance. Budget for periodic independent or internal control testing of your AML/CFT and restrictive-measures framework. Exact audit fees are jurisdiction- and scope-specific; use a signed proposal, not a generic market average.
+    </p>
+
+    <h3>CASP authorization itself</h3>
+
+    <p>
+      Before any of this, you need authorization or a valid notification route. MiCA Article 67 and Annex IV require prudential safeguards of at least the higher of one quarter of fixed overheads or EUR 50,000, EUR 125,000, or EUR 150,000 depending on the services. That is capital, not a software cost. In Cyprus, CySEC PS-03-2024 sets CASP application fees by service: EUR 5,000 for exchange and transfer services, EUR 8,000 for execution/placing/reception/advice/portfolio services, EUR 10,000 for custody, and EUR 30,000 for operating a trading platform, with cumulative fees where several services coexist. Annual fixed supervision fees under the same schedule are EUR 5,000, EUR 8,000, EUR 10,000, or EUR 20,000 by service type, plus a variable turnover surcharge above EUR 500,000 in crypto-asset-services revenue, capped at EUR 500,000.
+    </p>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">Do not budget from penalty statistics</div>
+      <p>
+        Generic "crypto compliance penalties" statistics are not a sound budget input. For sanctions failures, exposure depends on the EU restrictive measure, Directive (EU) 2024/1226 as implemented nationally, and local enforcement powers. For MiCA breaches, exposure depends on the specific Article 111 category and national rules. The practical budgeting point is simpler: weak screening evidence can create supervisory, licensing, and enforcement risk that no cheap tool can paper over.
+      </p>
+      <p style="margin-top: 12px; font-size: 13px; color: var(--text-muted);">
+        Use primary legal sources and national fee schedules for penalty and regulatory-cost assumptions.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>What can you skip entirely?</h2>
+
+    <p>
+      Just as important as knowing what you must have is knowing what you don't need &#8212; especially when vendors will try to sell you everything:
+    </p>
+
+    <ul>
+      <li><strong>Blockchain investigation workbenches</strong> &#8212; multi-hop address tracing and network graph tools. Useful for fraud and source-of-funds investigations, but not a named MiCA requirement for every CASP.</li>
+      <li><strong>Real-time threat intelligence feeds</strong> &#8212; emerging dark web market wallets and ransomware address databases. Valuable for high-risk business models; justify them from the risk assessment.</li>
+      <li><strong>Enterprise API quotas</strong> &#8212; buy capacity against measured transfer volume and latency requirements, not against an enterprise default.</li>
+      <li><strong>Dedicated account management and SLAs</strong> &#8212; you're paying for an enterprise relationship. A small team can operate with self-serve tooling and standard support.</li>
+      <li><strong>Proprietary entity databases</strong> &#8212; Chainalysis and TRM Labs have spent years building labeled address databases from law enforcement partners and proprietary data. These are genuinely powerful for investigations. They're not what MiCA requires from you.</li>
+    </ul>
+
+    <hr class="section-divider">
+
+    <h2>The bottom line</h2>
+
+    <p>
+      The crypto AML vendor market is split between public self-serve pricing, quote-based compliance platforms, and enterprise investigation suites. A small CASP should budget each line according to source quality: official price, regulator fee schedule, signed quote, or labelled assumption.
+    </p>
+
+    <p>
+      What you actually need is customer due diligence, screening against applicable restrictive measures, pre-transfer controls for crypto-asset transfers, alert handling, record retention, and evidence that the system is adequate for your size, nature, complexity, and exposure. The public-priced parts of that stack can be under $5,000/yr before usage, on-chain tooling, engineering, and audit work. The rest needs quotes or explicit assumptions.
+    </p>
+
+    <p>
+      The non-negotiables &#8212; AML/CFT responsibility, legal/regulatory work, control testing, authorization, capital, and evidence retention &#8212; are where your compliance budget actually goes. Tools are only defensible when their coverage, limitations, testing, and records are documented.
+    </p>
+
+    <div class="cta-banner">
+      <h3>Keep the tool budget proportional to the real compliance need</h3>
+      <p>Small CASPs need list coverage, durable audit trails, and clear procedures. They do not need to buy an enterprise investigation suite just to satisfy basic sanctions screening evidence requirements.</p>
+      <a href="/regulations/" class="btn-primary">
+        Check your compliance gaps &rarr;
+      </a>
+    </div>
+
+    <h2>Frequently asked questions</h2>
+
+    <h3>What is the minimum AML software cost for a MiCA-compliant CASP?</h3>
+    <p>
+      There is no universal minimum software cost in MiCA. Public prices that can be used as inputs include ComplyAdvantage Starter from $99/month and Sumsub Compliance from a $299/month minimum plus $1.85 per verification. Crypto wallet and transfer monitoring must be priced from a signed quote, an internal build estimate, or a clearly labelled assumption.
+    </p>
+
+    <h3>Should a small CASP buy Chainalysis Reactor for baseline compliance?</h3>
+    <p>
+      Not solely for baseline list screening. Chainalysis describes Reactor as an investigations product that works with KYT to escalate risk-based alerts into full investigations. If you need investigation capability, evaluate it. If you need baseline restrictive-measures screening and audit evidence, price that specific scope first.
+    </p>
+
+    <h3>What AML tools do small CASPs actually need under MiCA?</h3>
+    <p>
+      A small CASP needs identity verification and customer due diligence, customer and beneficial-owner screening, pre-transfer screening of crypto-asset transfers against applicable restrictive measures, documented alert handling, and records that can be produced to the supervisor. OFAC, UK OFSI, and UN screening may be necessary, but the basis should be legal nexus, national-supervisor expectation, or documented risk assessment &#8212; not a blanket statement that EBA mandates all three for every EU CASP.
+    </p>
+
+    <h3>What is the difference between affordable AML software and enterprise AML software for crypto?</h3>
+    <p>
+      Affordable tools usually focus on a narrow control: identity verification, customer screening, wallet checks, alert logs, or reporting. Enterprise platforms add investigation workbenches, proprietary intelligence, analyst collaboration, high-volume APIs, and premium support. The right choice depends on service type, transfer volume, chain coverage, custody risk, and how much investigation work your team actually performs.
+    </p>
+
+    <h3>Can regulators require a CASP to use specific AML software vendors?</h3>
+    <p>
+      No specific commercial vendor is mandated. Regulators assess whether the system is adequate: applicable restrictive measures coverage, required data fields, timing before release of crypto-assets, testing, calibration, outsourcing controls, alert handling, and records. A cheap tool with weak evidence fails; an expensive tool with poor configuration can fail too.
+    </p>
+
+    <div class="sources">
+      <h3>Sources</h3>
+      <ul>
+        <li><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32023R1114" target="_blank" rel="noopener">MiCA Regulation 2023/1114 &#8212; EUR-Lex</a></li>
+        <li><a href="https://www.esma.europa.eu/publications-and-data/interactive-single-rulebook/mica/minimum-capital-requirements-crypto-asset" target="_blank" rel="noopener">ESMA Interactive Single Rulebook &#8212; MiCA Annex IV minimum capital requirements</a></li>
+        <li><a href="https://www.eba.europa.eu/sites/default/files/2024-11/eaeae49d-81a5-4154-8af9-5014f6ee8881/Final%20Report%20Guidelines%20restrictive%20measures%20.pdf" target="_blank" rel="noopener">EBA/GL/2024/15 &#8212; restrictive measures screening for PSPs and CASPs</a></li>
+        <li><a href="https://www.eba.europa.eu/activities/single-rulebook/regulatory-activities/anti-money-laundering-and-countering-financing-1" target="_blank" rel="noopener">EBA Guidelines on the role of AML/CFT compliance officers</a></li>
+        <li><a href="https://eur-lex.europa.eu/eli/dir/2024/1226/oj/eng" target="_blank" rel="noopener">Directive (EU) 2024/1226 &#8212; criminal offences and penalties for violation of Union restrictive measures</a></li>
+        <li><a href="https://www.cysec.gov.cy/CMSPages/GetFile.aspx?guid=469c135e-e93c-4579-99cb-da541a8377db" target="_blank" rel="noopener">CySEC PS-03-2024 &#8212; MiCAR fees payable and information to be submitted</a></li>
+        <li><a href="https://complyadvantage.com/pricing/" target="_blank" rel="noopener">ComplyAdvantage pricing &#8212; Starter plan public price</a></li>
+        <li><a href="https://sumsub.com/pricing/" target="_blank" rel="noopener">Sumsub pricing &#8212; Basic and Compliance verification public prices</a></li>
+        <li><a href="https://www.chainalysis.com/product/reactor/" target="_blank" rel="noopener">Chainalysis Reactor official product page</a></li>
+        <li><a href="https://www.chainalysis.com/product/kyt/" target="_blank" rel="noopener">Chainalysis KYT official product page</a></li>
+        <li><a href="https://www.trmlabs.com/" target="_blank" rel="noopener">TRM Labs official product site</a></li>
+        <li><a href="https://www.scorechain.com/resources/crypto-glossary/scorechain-pricing" target="_blank" rel="noopener">Scorechain pricing page</a></li>
+        <li><a href="https://www.elliptic.co/contact" target="_blank" rel="noopener">Elliptic contact page</a></li>
+        <li><a href="https://crystalintelligence.com/get-crystal/" target="_blank" rel="noopener">Crystal Intelligence demo/pricing contact page</a></li>
+      </ul>
+    </div>
+
+    <div class="related-articles">
+      <h3>Related articles</h3>
+      <div class="related-grid">
+        <a href="/operations/crypto-compliance-cost-small-casp" class="related-card">
+          <span class="related-card__tag">Operations</span>
+          <span class="related-card__title">How Much Does Crypto Compliance Cost for a Small EU CASP?</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+        <a href="/tools/sanctions-screening-tools-comparison" class="related-card">
+          <span class="related-card__tag">Tools</span>
+          <span class="related-card__title">Sanctions Screening Tools Comparison: ChainScreen vs Chainalysis vs Elliptic</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+<div style="margin: 40px 0; padding: 24px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; text-align: center;">
+  <p style="font-size: 15px; color: #475569; margin-bottom: 12px;">Need screening records and audit-ready evidence, not just a binary check?</p>
+  <a href="mailto:info@chainscreen.io" style="display: inline-block; padding: 12px 24px; background: #0c2340; color: #fff; border-radius: 8px; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600;">Contact ChainScreen</a>
+</div>
+
+
+<footer>
+  <div class="container">
+    &copy; 2026 DailyMind LTD &middot; HE 439959 &middot; Limassol, Cyprus
+    &nbsp;&middot;&nbsp;
+    <span>Information only; not legal advice</span>
+    &nbsp;&middot;&nbsp;
+    <a href="/privacy">Privacy</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://dailymind.eu">dailymind.eu</a>
+  </div>
+</footer>
+<script data-goatcounter="https://gc-chainscreen.vigilcom.dev/count"
+        async src="//gc.vigilcom.dev/count.js"></script>
+<script src="/nav.js" defer></script>
+</body>
+</html>

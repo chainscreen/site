@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Which Sanctions Lists Does MiCA Require? | ChainScreen</title>
+<meta name="description" content="MiCA does not name a sanctions-list checklist. EBA GL/2024/15 requires screening for applicable Union and national restrictive measures.">
+<link rel="canonical" href="https://chainscreen.io/regulations/which-sanctions-lists-mica-requires">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Which Sanctions Lists Does MiCA Require?">
+<meta property="og:description" content="MiCA does not name EU+UN+OFAC+UK as a universal requirement. EBA GL/2024/15 requires controls for applicable Union and national restrictive measures.">
+<meta property="og:url" content="https://chainscreen.io/regulations/which-sanctions-lists-mica-requires">
+<meta property="og:site_name" content="ChainScreen">
+<meta property="og:image" content="https://chainscreen.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Which Sanctions Lists Does MiCA Require?","description":"MiCA does not name a sanctions-list checklist. EBA GL/2024/15 requires CASPs to screen for applicable Union and national restrictive measures; third-country lists depend on legal nexus, supervisory expectations, contracts, and risk assessment.","datePublished":"2026-03-15","dateModified":"2026-08-17","wordCount":1955,"author":{"@type":"Person","name":"Katerina Bletsch","url":"https://chainscreen.io","jobTitle":"Founder","sameAs":["https://www.linkedin.com/in/katerina-bletsch/"]},"publisher":{"@type":"Organization","name":"ChainScreen","url":"https://chainscreen.io","logo":{"@type":"ImageObject","url":"https://chainscreen.io/og-image.png"}}}
+</script>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chainscreen.io/og-image.png">
+<script defer src="https://u.vigilcom.dev/script.js" data-website-id="df019ee1-bf37-42db-be6c-93671ff213ec"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://chainscreen.io"},{"@type":"ListItem","position":2,"name":"Regulations","item":"https://chainscreen.io/regulations/"},{"@type":"ListItem","position":3,"name":"Which Sanctions Lists Does MiCA Require?"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which sanctions lists does MiCA require CASPs to screen?","acceptedAnswer":{"@type":"Answer","text":"MiCA itself does not specify a sanctions list. For transfers of crypto-assets, EBA GL/2024/15 under Regulation (EU) 2023/1113 requires CASPs to screen against applicable Union and national restrictive measures. In practice, EU CASPs need an up-to-date source for EU restrictive measures, such as the European Commission consolidated financial sanctions data, plus any applicable national measures. MiCA and EBA do not universally require every EU CASP to screen EU, UN, OFAC, and UK lists as a single four-list package."}},{"@type":"Question","name":"Is OFAC screening enough for MiCA compliance?","acceptedAnswer":{"@type":"Answer","text":"No. OFAC is a US Treasury regime and does not substitute for screening against applicable Union and national restrictive measures. OFAC screening may be legally necessary where a firm has a US nexus, or commercially required by partners, or justified by risk assessment, but it is not the MiCA/EBA baseline for EU sanctions compliance."}},{"@type":"Question","name":"What is the EU Consolidated Financial Sanctions List?","acceptedAnswer":{"@type":"Answer","text":"The EU Consolidated Financial Sanctions List is a European Commission data source for persons, groups and entities subject to EU financial sanctions. The Commission says it reflects officially adopted texts published in the Official Journal and updates it whenever necessary. It is the practical source many firms use for EU financial-sanctions screening, while the legal obligations remain the underlying Council decisions and regulations."}},{"@type":"Question","name":"What is the MiCA timeline for sanctions screening compliance?","acceptedAnswer":{"@type":"Answer","text":"The MiCA CASP regime applied from December 30, 2024. EBA GL/2024/15 applies from December 30, 2025. The maximum MiCA Article 143 transitional period for existing CASPs ended on July 1, 2026, although some Member States chose shorter periods. As of July 10, 2026, both the EBA application date and maximum MiCA transition date have passed."}},{"@type":"Question","name":"Does the UN Consolidated List need to be screened separately from the EU list?","acceptedAnswer":{"@type":"Answer","text":"Not as a universal standalone MiCA/EBA list requirement. EU law implements many UN Security Council sanctions, and national law or supervisor guidance may require direct UN screening. Direct UN screening can also be a documented risk control, including for designations not yet transposed into EU measures, but it should be framed separately from the EU legal baseline."}}]}
+</script>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-alt: #f8fafc;
+    --surface: #ffffff;
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --text: #0c1d36;
+    --text-body: #475569;
+    --text-muted: #94a3b8;
+    --accent: #0c2340;
+    --accent-hover: #143a65;
+    --accent-light: #edf2f9;
+    --teal: #0f766e;
+    --teal-light: #f0fdf4;
+    --code-bg: #091a30;
+    --code-surface: #0c2340;
+    --red: #dc2626;
+    --red-light: #fef2f2;
+    --font-serif: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-code: 'JetBrains Mono', 'SF Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  
+  header {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: var(--font-code);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--accent-hover); }
+
+  .nav-link {
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover { color: var(--text); }
+
+  
+  .article-header {
+    padding: 80px 0 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .article-header__eyebrow {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--teal);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .article-header h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+
+  .article-header__sub {
+    font-size: 17px;
+    color: var(--text-body);
+    max-width: 640px;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .article-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: var(--font-code);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.01em;
+  }
+
+  .article-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .article-meta__dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--teal);
+    flex-shrink: 0;
+  }
+
+  
+  .article-body {
+    padding: 48px 0 72px;
+  }
+
+  .article-body h2 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-top: 48px;
+    margin-bottom: 16px;
+    line-height: 1.3;
+    color: var(--text);
+  }
+
+  .article-body h3 {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 32px;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+
+  .article-body p {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .article-body ul, .article-body ol {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+    padding-left: 24px;
+  }
+
+  .article-body li {
+    margin-bottom: 6px;
+  }
+
+  .article-body a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+  }
+
+  .article-body a:hover {
+    color: var(--accent-hover);
+  }
+
+  .article-body strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .article-body code {
+    font-family: var(--font-code);
+    font-size: 13px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--accent);
+  }
+
+  
+  .callout {
+    margin: 28px 0;
+    padding: 24px 28px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .callout p {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .callout p:last-child {
+    margin-bottom: 0;
+  }
+
+  .callout--warning {
+    background: var(--red-light);
+    border: 1px solid #fecaca;
+  }
+
+  .callout--warning .callout__label {
+    color: var(--red);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--info {
+    background: var(--accent-light);
+    border: 1px solid #c7d5e8;
+  }
+
+  .callout--info .callout__label {
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--teal {
+    background: var(--teal-light);
+    border: 1px solid #bbf7d0;
+  }
+
+  .callout--teal .callout__label {
+    color: var(--teal);
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  
+  .comparison-wrapper {
+    margin: 28px 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .comparison {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .comparison th, .comparison td {
+    padding: 13px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .comparison tr:last-child td { border-bottom: none; }
+
+  .comparison th {
+    color: var(--text-muted);
+    font-family: var(--font-code);
+    font-weight: 500;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--bg-alt);
+  }
+
+  .comparison td:first-child {
+    color: var(--text);
+    font-weight: 500;
+    font-size: 13px;
+  }
+
+  .comparison th:last-child {
+    color: var(--accent);
+  }
+
+  .comparison td:last-child {
+    background: var(--accent-light);
+  }
+
+  .check { color: var(--teal); font-weight: 600; }
+  .cross { color: var(--red); font-weight: 600; }
+  .na { color: var(--text-muted); }
+
+  
+  blockquote {
+    margin: 24px 0;
+    padding: 20px 24px;
+    border-left: 3px solid var(--border-strong);
+    background: var(--bg-alt);
+    border-radius: 0 8px 8px 0;
+  }
+
+  blockquote p {
+    font-size: 14px;
+    color: var(--text-body);
+    font-style: italic;
+    margin-bottom: 0;
+  }
+
+  blockquote cite {
+    display: block;
+    margin-top: 8px;
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-style: normal;
+    color: var(--text-muted);
+  }
+
+  
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  
+  .cta-banner {
+    margin: 48px 0;
+    padding: 40px 36px;
+    background: var(--code-bg);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .cta-banner h3 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: #f1f5f9;
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .cta-banner p {
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 24px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 28px;
+    background: #fff;
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary:hover {
+    background: #f1f5f9;
+    color: var(--accent);
+  }
+
+  
+  .sources {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .sources h3 {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    margin-top: 0;
+  }
+
+  .sources ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sources li {
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 4px 0;
+    line-height: 1.6;
+  }
+
+  .sources li a {
+    color: var(--text-body);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .sources li a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--text); }
+
+  
+  @media (max-width: 640px) {
+    .article-header { padding: 48px 0 32px; }
+    .article-header h1 { font-size: 1.8rem; }
+    .article-body h2 { font-size: 20px; }
+    .article-meta { gap: 12px; }
+    .comparison { font-size: 11px; }
+    .comparison th, .comparison td { padding: 8px 10px; }
+    .callout { padding: 20px; }
+    .cta-banner { padding: 32px 24px; }
+  }
+
+  
+  .breadcrumb { padding: 12px 0; border-bottom: 1px solid var(--border); background: var(--bg-alt); }
+  .breadcrumb a, .breadcrumb span { font-family: var(--font-code); font-size: 11px; letter-spacing: 0.01em; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb__sep { color: #cbd5e1; margin: 0 6px; }
+  .breadcrumb__current { color: var(--text-body); }
+
+  
+  .nav-links { display: flex; align-items: center; gap: 20px; }
+  .nav-link.active { color: var(--text); }
+  @media (max-width: 640px) { .nav-links { gap: 12px; } .nav-link { font-size: 11px; } }
+
+  
+  .related-articles { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+  .related-articles h3 { font-family: var(--font-code); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 16px; margin-top: 0; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .related-card { display: flex; flex-direction: column; gap: 8px; padding: 20px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; transition: border-color 0.2s; }
+  .related-card:hover { border-color: var(--accent); }
+  .related-card__tag { font-family: var(--font-code); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--teal); }
+  .related-card__title { font-family: var(--font-serif); font-size: 15px; color: var(--text); line-height: 1.35; }
+  .related-card__arrow { font-family: var(--font-code); font-size: 12px; color: var(--text-muted); margin-top: auto; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="/" class="logo">chain<span>screen</span></a>
+    <nav class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/regulations/" class="nav-link active">Regulations</a>
+      <a href="/operations/" class="nav-link">Operations</a>
+      <a href="/tools/" class="nav-link">Tools</a>
+      <a href="/technical/" class="nav-link">Technical</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <div class="container">
+    <a href="/">Home</a><span class="breadcrumb__sep">/</span>
+    <a href="/regulations/">Regulations</a><span class="breadcrumb__sep">/</span>
+    <span class="breadcrumb__current">Which Sanctions Lists Does MiCA Require?</span>
+  </div>
+</nav>
+
+<section class="article-header">
+  <div class="container">
+    <div class="article-header__eyebrow">Regulations &middot; EBA GL/2024/15</div>
+    <h1>Which Sanctions Lists Does MiCA Require? EU, UN, OFAC, UK</h1>
+    <p class="article-header__sub">
+      MiCA does not publish a sanctions-list checklist. For CASPs, EBA GL/2024/15 requires controls for applicable Union and national restrictive measures; UN, OFAC, and UK screening depend on national law, legal nexus, supervisory expectations, contracts, and documented risk assessment.
+    </p>
+    <div class="article-meta">
+      <span><div class="article-meta__dot"></div> Updated July 10, 2026</span>
+      <span><div class="article-meta__dot"></div> 6 min read</span>
+      <span><div class="article-meta__dot"></div> Sources: EBA GL/2024/15, MiCA Reg 2023/1114, Reg 2023/1113, EC FSF, UN, OFAC, UK Sanctions List</span>
+    </div>
+  </div>
+</section>
+
+<article class="article-body">
+  <div class="container">
+
+    <p><strong>Short answer: MiCA itself does not specify a sanctions list. The operative EU screening rule for transfers comes from EBA GL/2024/15 under Regulation (EU) 2023/1113: CASPs must screen against applicable Union and national restrictive measures.</strong> For EU financial sanctions, the European Commission consolidated financial sanctions data is the practical official source. MiCA and EBA do not universally require every EU CASP to screen an EU+UN+OFAC+UK bundle.</p>
+
+    <h2>Why does sanctions list coverage matter?</h2>
+
+    <p>
+      When small CASPs set up sanctions screening, the first question is often "which lists does the tool cover?" That question is too blunt. The regulatory question is which restrictive measures apply to the firm and transfer, and whether the screening process can demonstrate that those measures were implemented.
+    </p>
+
+    <p>
+      EBA GL/2024/15 expects policies, procedures, list management, customer and transfer screening, alert handling, documentation of decisions, system testing, and oversight of outsourced providers. A tool can cover many lists and still be weak if those controls are missing.
+    </p>
+
+    <p>
+      The confusion is compounded because MiCA (Regulation (EU) 2023/1114) does not enumerate sanctions lists. The sanctions-screening control requirement for crypto-asset transfers sits in Regulation (EU) 2023/1113 and the EBA guidelines issued under it.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>How does the regulatory chain flow from MiCA to specific lists?</h2>
+
+    <p>
+      Understanding which lists are required means following the regulatory chain from the framework regulation down to the operational guidance.
+    </p>
+
+    <h3>1. MiCA — the framework</h3>
+
+    <p>
+      Regulation (EU) 2023/1114 on Markets in Crypto-Assets created the CASP authorisation and operating framework. It does not contain a table of sanctions lists. Do not cite MiCA Article 72 for sanctions-list coverage: Article 72 concerns conflicts of interest. The specific screening controls for transfers are in the Transfer of Funds Regulation and EBA GL/2024/15.
+    </p>
+
+    <h3>2. EBA GL/2024/15 — the operative requirement</h3>
+
+    <p>
+      EBA Guidelines on internal policies, procedures, and controls to ensure the implementation of Union and national restrictive measures under Regulation (EU) 2023/1113 (GL/2024/15) apply from <strong>December 30, 2025</strong>. They are addressed to payment service providers and crypto-asset service providers performing transfers of funds or crypto-assets.
+    </p>
+
+    <p>
+      GL/2024/15 is explicit about the legal category, not a four-list vendor package: PSPs and CASPs must screen against <strong>applicable restrictive measures</strong>, including Union measures adopted under Article 29 TEU and Article 215 TFEU and, where relevant, national restrictive measures. The European Commission's consolidated financial sanctions data at <code>sanctions.ec.europa.eu</code> is the practical official source for EU financial-sanctions designations.
+    </p>
+
+    <p>
+      The guidelines also define procedural requirements: CASPs should screen crypto-asset transfers before making the crypto-assets available to the beneficiary, update their internal dataset immediately after a restrictive measure enters into force, is updated, or is lifted, and document alert decisions under their record-keeping policy.
+    </p>
+
+    <h3>3. National supervisors — additional expectations</h3>
+
+    <p>
+      National competent authorities can add supervisory expectations or point firms to national sanctions obligations. Cyprus is a useful example because CySEC Circular C685 applies to CASPs among other regulated entities, but it should not be read as an EU-wide MiCA rule.
+    </p>
+
+    <p>
+      C685 says CySEC's thematic inspections focused on legal requirements from UN Security Council resolutions and EU Council decisions and regulations, with relevant screening practices for US and UK sanctions lists also reviewed. It tells regulated entities to consider the guidance as a benchmark and implement best practices in a risk-based and proportionate manner.
+    </p>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">Critical distinction</div>
+      <p>
+        EBA GL/2024/15 requires controls for applicable Union and national restrictive measures. It does not say every EU CASP must screen EU, UN, OFAC, and UK lists as a universal package.
+      </p>
+      <p>
+        Third-country lists can still be necessary because of legal nexus, national supervisor guidance, contractual requirements, banking or stablecoin partner requirements, or documented risk assessment. Keep that rationale separate from the EU legal baseline.
+      </p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>What does each sanctions source contain — and why does it matter operationally?</h2>
+
+    <p>
+      The main sources are not duplicates of each other. Each belongs to a different legal regime, and the reason to screen it should be stated clearly.
+    </p>
+
+    <h3>EU Consolidated Financial Sanctions List</h3>
+
+    <p>
+      Published by the European Commission through the Financial Sanctions Files service, the EU consolidated financial sanctions data covers persons, groups, and entities subject to EU financial sanctions. The Commission describes the consolidated list as reflecting officially adopted texts published in the Official Journal and updated whenever necessary.
+    </p>
+
+    <p>
+      For an EU CASP, this is the core operational source for EU financial-sanctions screening. It does not remove the need to understand the underlying Council regulations, especially where sectoral measures, ownership and control rules, territorial restrictions, or service prohibitions require more than a name or wallet-address match.
+    </p>
+
+    <p>
+      Do not treat the EU Consolidated Financial Sanctions List as the whole sanctions control. EU Russia sectoral measures can prohibit transactions with categories of crypto providers or platforms even where no exact name-list match exists.
+    </p>
+
+    <h3>UN Consolidated List</h3>
+
+    <p>
+      Maintained by the UN Security Council, the UN Consolidated List covers individuals and entities subject to Security Council sanctions measures. EU law implements many UN measures through EU legal acts, and national law or supervisor guidance may also require direct UN-list screening.
+    </p>
+
+    <p>
+      Direct UN screening is therefore best framed as a national-law, supervisor, or risk-control question, not as a universal standalone MiCA/EBA list. It can be prudent where a firm wants to catch UN designations that have not yet been transposed into EU measures.
+    </p>
+
+    <h3>US OFAC SDN List</h3>
+
+    <p>
+      The OFAC Specially Designated Nationals list is maintained by the US Treasury Department. OFAC may include digital currency addresses on the SDN List, but OFAC also states that those digital-currency address listings are not likely to be exhaustive.
+    </p>
+
+    <p>
+      OFAC screening is not an EU MiCA/EBA requirement by itself. It may be legally required where there is a US nexus, commercially required by counterparties, or justified by the CASP's risk assessment. It does not substitute for screening applicable EU and national restrictive measures.
+    </p>
+
+    <h3>UK Sanctions List</h3>
+
+    <p>
+      As of January 28, 2026, the UK Sanctions List is the single source for current UK sanctions designations. The former OFSI Consolidated List of Asset Freeze Targets has closed and is no longer updated.
+    </p>
+
+    <p>
+      UK screening is a UK-law, UK-nexus, contractual, or risk question for an EU CASP. It is not a universal MiCA/EBA requirement, but it can be mandatory or commercially unavoidable for firms with UK customers, UK entities, UK banking exposure, or UK-regulated partners.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>Where do third-party screening tools fit?</h2>
+
+    <p>
+      The official legal sources do not certify a particular free oracle, API, or vendor as sufficient. A third-party tool can be useful, but the CASP remains responsible for compliance with applicable restrictive measures even when screening or data enrichment is outsourced.
+    </p>
+
+    <p>
+      Under EBA GL/2024/15, a defensible setup should let the CASP demonstrate:
+    </p>
+
+    <ul>
+      <li>which Union, national, and any third-country measures are in scope;</li>
+      <li>how the screening dataset is updated when measures enter into force, change, or are lifted;</li>
+      <li>which customer and transfer data fields are screened, including wallet addresses where available in official lists;</li>
+      <li>the screening system's capabilities, limitations, calibration, and testing results;</li>
+      <li>how potential matches are investigated, decided, documented, escalated, frozen, or reported;</li>
+      <li>what controls govern any outsourced provider or vendor feed.</li>
+    </ul>
+
+    <p>
+      A binary "hit/no hit" result is therefore not enough on its own unless the surrounding process preserves the evidence your regulator will ask for.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>What sanctions list coverage do the regulations require?</h2>
+
+    <div class="comparison-wrapper">
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th>Source</th>
+            <th>Regime</th>
+            <th>EBA GL/2024/15</th>
+            <th>When to include</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>EU consolidated financial sanctions data</td>
+            <td>EU restrictive measures</td>
+            <td class="check">&#10003; Applicable Union measures</td>
+            <td class="check">&#10003; EU CASPs</td>
+          </tr>
+          <tr>
+            <td>National restrictive measures</td>
+            <td>Member State law</td>
+            <td class="check">&#10003; Where applicable</td>
+            <td class="check">&#10003; Home/host state scope</td>
+          </tr>
+          <tr>
+            <td>UN Consolidated List</td>
+            <td>UN Security Council</td>
+            <td class="na">Not a universal standalone list</td>
+            <td>National law, NCA guidance, risk control</td>
+          </tr>
+          <tr>
+            <td>US OFAC SDN</td>
+            <td>US Treasury OFAC</td>
+            <td class="na">Not an EU/MiCA list</td>
+            <td>US nexus, contracts, risk control</td>
+          </tr>
+          <tr>
+            <td>UK Sanctions List</td>
+            <td>UK government</td>
+            <td class="na">Not an EU/MiCA list</td>
+            <td>UK nexus, contracts, risk control</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      "Not an EU/MiCA list" does not mean "ignore it." It means the legal basis is different. A CASP may still need UN, OFAC, or UK screening because of national law, extraterritorial exposure, banking or issuer relationships, customer geography, contractual covenants, or its own restrictive-measures exposure assessment.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>What is the timeline — when did these requirements take effect?</h2>
+
+    <p>
+      A common misunderstanding was that sanctions screening could wait until the end of the MiCA transition. That was incorrect before July 2026 and is now outdated.
+    </p>
+
+    <p>
+      <strong>EBA GL/2024/15 applies from December 30, 2025.</strong> The maximum MiCA Article 143 transitional period for existing CASPs ended on July 1, 2026, although Member States could choose shorter transitional periods. As of July 10, 2026, the EBA application date and the maximum MiCA transition date have both passed.
+    </p>
+
+    <div class="callout callout--info">
+      <div class="callout__label">Timeline summary</div>
+      <p><strong>Dec 30, 2024</strong> — MiCA CASP regime applies</p>
+      <p><strong>Dec 30, 2025</strong> — EBA GL/2024/15 applies to PSPs and CASPs under Regulation (EU) 2023/1113</p>
+      <p><strong>Jul 1, 2026</strong> — Maximum MiCA Article 143 transitional period ended</p>
+    </div>
+
+    <p>
+      If a screening tool gives you only a binary result without evidence of list management, calibration, alert handling, and documented decisions, the issue is not solved by adding more list names. The EBA requirement is controls for applicable restrictive measures, backed by evidence.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>What are the practical steps to meet the requirement?</h2>
+
+    <p>
+      Closing the gap starts with a legal inventory, not a vendor checklist. Identify the Union restrictive measures, national restrictive measures, and any third-country regimes that actually apply to your business.
+    </p>
+
+    <p>
+      A minimum viable EBA-aligned setup includes:
+    </p>
+
+    <ul>
+      <li>An inventory of applicable Union and national restrictive measures, with official sources for each;</li>
+      <li>an up-to-date EU financial-sanctions data source, such as the European Commission Financial Sanctions Files;</li>
+      <li>a documented basis for any UN, OFAC, UK, or other third-country list coverage;</li>
+      <li>screening of customers at onboarding and relevant trigger events;</li>
+      <li>screening of crypto-asset transfers before making crypto-assets available to the beneficiary;</li>
+      <li>screening of wallet addresses where available in official restrictive-measures lists;</li>
+      <li>documented alert investigation, decision, escalation, freezing, and reporting procedures;</li>
+      <li>documented system capabilities, limitations, calibration, testing, and vendor controls.</li>
+    </ul>
+
+    <p>
+      Treat list additions as documented decisions. Adding OFAC or the UK Sanctions List may be the right call, but the article should say why: US or UK nexus, partner requirements, national supervisor expectations, or risk appetite.
+    </p>
+
+    <hr class="section-divider">
+
+    <h2>Bottom line</h2>
+
+    <p>
+      MiCA does not contain a universal sanctions-list checklist. EBA GL/2024/15 requires CASPs to maintain controls for applicable Union and national restrictive measures and to screen crypto-asset transfers before making crypto-assets available to the beneficiary.
+    </p>
+
+    <p>
+      For EU financial sanctions, the European Commission consolidated financial sanctions data is the practical official source. UN, OFAC, and UK screening can be necessary, but the legal basis is not "MiCA requires all four." The basis is national law, supervisory guidance, legal nexus, contractual commitments, or documented risk assessment.
+    </p>
+
+    <p>
+      As of July 10, 2026, the EBA application date and the maximum MiCA transitional period have both passed. The remaining compliance question is whether your process can show which measures applied, which data was screened, what the result was, and how alerts were handled.
+    </p>
+
+    <div class="cta-banner">
+      <h3>Document the lists your sanctions process must cover</h3>
+      <p>Use the ChainScreen guidance library to map Union, national, and third-country list decisions into audit-ready screening evidence for MiCA and NCA reviews.</p>
+      <a href="/regulations/" class="btn-primary">
+        Read regulatory guides &rarr;
+      </a>
+    </div>
+
+    <div class="sources">
+      <h3>Sources</h3>
+      <ul>
+        <li><a href="https://www.eba.europa.eu/publications-and-media/press-releases/eba-publishes-final-guidelines-internal-policies-procedures-and-controls-ensure-implementation" target="_blank" rel="noopener">EBA Final Guidelines on Restrictive Measures (GL/2024/15), December 2024</a></li>
+        <li><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32023R1114" target="_blank" rel="noopener">Regulation (EU) 2023/1114 on Markets in Crypto-Assets (MiCA)</a></li>
+        <li><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32023R1113" target="_blank" rel="noopener">Regulation (EU) 2023/1113 on information accompanying transfers of funds and certain crypto-assets</a></li>
+        <li><a href="https://www.esma.europa.eu/sites/default/files/2024-12/ESMA75-453128700-1269_MiCA_-_Transitional_measures.pdf" target="_blank" rel="noopener">ESMA MiCA transitional measures list</a></li>
+        <li><a href="https://www.cysec.gov.cy/CMSPages/GetFile.aspx?guid=72f9c65f-79c3-480b-8801-58d506f05f3e" target="_blank" rel="noopener">CySEC Circular C685 -- Thematic review of sanctions screening systems</a></li>
+        <li><a href="https://sanctions.ec.europa.eu/latest/1_financial-sanctions_en.json" target="_blank" rel="noopener">EU Consolidated Financial Sanctions List -- European Commission Financial Sanctions Files</a></li>
+        <li><a href="https://finance.ec.europa.eu/eu-and-world/sanctions-restrictive-measures/overview-sanctions-and-related-resources_en" target="_blank" rel="noopener">European Commission sanctions overview and consolidated list resources</a></li>
+        <li><a href="https://www.consilium.europa.eu/en/policies/sanctions/" target="_blank" rel="noopener">Council of the European Union -- EU sanctions</a></li>
+        <li><a href="https://www.sanctionsmap.eu/" target="_blank" rel="noopener">EU Sanctions Map</a></li>
+        <li><a href="https://scsanctions.un.org/" target="_blank" rel="noopener">UN Security Council Consolidated Sanctions List</a></li>
+        <li><a href="https://ofac.treasury.gov/specially-designated-nationals-and-blocked-persons-list-sdn-human-readable-lists" target="_blank" rel="noopener">OFAC Specially Designated Nationals (SDN) List -- US Treasury</a></li>
+        <li><a href="https://ofac.treasury.gov/faqs/559" target="_blank" rel="noopener">OFAC FAQ 559 -- Digital currency addresses and the SDN List</a></li>
+        <li><a href="https://www.gov.uk/government/publications/the-uk-sanctions-list" target="_blank" rel="noopener">UK Sanctions List -- GOV.UK</a></li>
+        <li><a href="https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets" target="_blank" rel="noopener">Withdrawn OFSI Consolidated List notice -- GOV.UK</a></li>
+      </ul>
+    </div>
+
+    <div class="related-articles">
+      <h3>Related articles</h3>
+      <div class="related-grid">
+        <a href="/tools/chainalysis-oracle-limitations" class="related-card">
+          <span class="related-card__tag">Tools</span>
+          <span class="related-card__title">Chainalysis Free Oracle: What It Covers and What It Doesn't</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+        <a href="/regulations/eba-guidelines-casps" class="related-card">
+          <span class="related-card__tag">Regulations</span>
+          <span class="related-card__title">EBA Guidelines on Restrictive Measures: What Every Small CASP Must Do</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+        <a href="/operations/sanctions-screening-implementation-guide" class="related-card">
+          <span class="related-card__tag">Operations</span>
+          <span class="related-card__title">Sanctions Screening Implementation Guide: From Excel to API in 30 Days</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+<div style="margin: 40px 0; padding: 24px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; text-align: center;">
+  <p style="font-size: 15px; color: #475569; margin-bottom: 12px;">Need screening records and audit-ready evidence, not just a binary check?</p>
+  <a href="mailto:info@chainscreen.io" style="display: inline-block; padding: 12px 24px; background: #0c2340; color: #fff; border-radius: 8px; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600;">Contact ChainScreen</a>
+</div>
+
+
+<footer>
+  <div class="container">
+    &copy; 2026 DailyMind LTD &middot; HE 439959 &middot; Limassol, Cyprus
+    &nbsp;&middot;&nbsp;
+    <span>Information only; not legal advice</span>
+    &nbsp;&middot;&nbsp;
+    <a href="/privacy">Privacy</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://dailymind.eu">dailymind.eu</a>
+  </div>
+</footer>
+<script data-goatcounter="https://gc-chainscreen.vigilcom.dev/count"
+        async src="//gc.vigilcom.dev/count.js"></script>
+<script src="/nav.js" defer></script>
+</body>
+</html>

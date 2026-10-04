@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wallet Risk Score vs Sanctions Screening | ChainScreen</title>
+<meta name="description" content="Sanctions screening and crypto wallet risk scoring are separate controls. What EU rules and EBA guidance require from CASPs as of July 2026.">
+<link rel="canonical" href="https://chainscreen.io/tools/screening-vs-risk-scoring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sanctions Screening vs. Transaction Monitoring: What Does Your EU Regulator Actually Require?">
+<meta property="og:description" content="Two separate legal regimes. EBA guidance, EU sanctions rules, Travel Rule controls, and what CASPs need for each.">
+<meta property="og:url" content="https://chainscreen.io/tools/screening-vs-risk-scoring">
+<meta property="og:image" content="https://chainscreen.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="ChainScreen">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Sanctions Screening vs. Transaction Monitoring: What Does Your EU Regulator Actually Require?","description":"Two separate legal obligations with different regulatory frameworks for EU CASPs.","datePublished":"2026-03-09","dateModified":"2026-07-10","wordCount":2100,"author":{"@type":"Person","name":"Katerina Bletsch","url":"https://chainscreen.io","jobTitle":"Founder","sameAs":["https://www.linkedin.com/in/katerina-bletsch/"]},"publisher":{"@type":"Organization","name":"ChainScreen","url":"https://chainscreen.io","logo":{"@type":"ImageObject","url":"https://chainscreen.io/og-image.png"}}}
+</script>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chainscreen.io/og-image.png">
+<script defer src="https://u.vigilcom.dev/script.js" data-website-id="df019ee1-bf37-42db-be6c-93671ff213ec"></script>
+<meta name="twitter:title" content="Sanctions Screening vs. Transaction Monitoring: What Does Your EU Regulator Actually Require?">
+<meta name="twitter:description" content="Two separate legal regimes. EBA guidance, EU sanctions rules, Travel Rule controls, and what CASPs need for each.">
+<meta name="article:published_time" content="2026-03-01">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://chainscreen.io"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://chainscreen.io/tools/"},{"@type":"ListItem","position":3,"name":"Sanctions Screening vs. Transaction Monitoring: What Does Your EU Regulator Actually Require?"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the difference between sanctions screening and transaction monitoring for CASPs?","acceptedAnswer":{"@type":"Answer","text":"Sanctions screening checks customers, counterparties and transfer data against applicable restrictive measures and sanctions data. It is governed by EU Council sanctions regulations, national restrictive measures where applicable, and EBA GL/2024/14-15. Transaction monitoring is behavioral analysis: does this customer or transaction pattern look suspicious? It falls under the AML/CFT framework, with EBA GL/2024/01 already applicable and AMLR Article 26 directly applicable from 10 July 2027. Neither can substitute for the other."}},{"@type":"Question","name":"Does the risk-based approach allow small CASPs to skip sanctions screening?","acceptedAnswer":{"@type":"Answer","text":"No. The risk-based approach determines how intensely you apply controls, not whether core controls exist. EU CASPs still need sanctions controls, CDD, Travel Rule compliance, ongoing monitoring, suspicious activity reporting capability and record-keeping where those obligations apply. The governance and tooling can be proportionate to the firm's risk profile."}},{"@type":"Question","name":"Is there a minimum transaction threshold for the EU Travel Rule?","acceptedAnswer":{"@type":"Answer","text":"No for CASP-to-CASP transfers: the EU requires originator and beneficiary information for every in-scope crypto-asset transfer between CASPs, regardless of amount. For transfers to or from self-hosted addresses above EUR 1,000, the CASP must verify whether the address is effectively owned or controlled by the CASP's customer."}},{"@type":"Question","name":"Does the EBA expect CASPs to use blockchain analytics tools?","acceptedAnswer":{"@type":"Answer","text":"EBA GL/2024/01 is risk-based. It says firms should assess whether advanced analytics tools, including distributed ledger or blockchain analytics tools, are necessary in light of ML/TF risk, and says CASPs should apply them particularly for transactions involving self-hosted addresses. It is not a one-size-fits-all vendor mandate, but a no-analytics posture needs a documented risk rationale."}},{"@type":"Question","name":"What is the minimum viable compliance stack for a small EU CASP?","acceptedAnswer":{"@type":"Answer","text":"At minimum: sanctions controls for EU and applicable national restrictive measures, with other lists such as OFAC or UK where legally applicable or adopted by policy; CDD/KYC; Travel Rule controls; ongoing transaction monitoring; on-chain analytics where warranted by ML/TF risk; suspicious reporting capability; a designated compliance function; and 5-year record-keeping. Sophistication can scale with risk and volume."}}]}
+</script>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-alt: #f8fafc;
+    --surface: #ffffff;
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --text: #0c1d36;
+    --text-body: #475569;
+    --text-muted: #94a3b8;
+    --accent: #0c2340;
+    --accent-hover: #143a65;
+    --accent-light: #edf2f9;
+    --teal: #0f766e;
+    --teal-light: #f0fdf4;
+    --code-bg: #091a30;
+    --code-surface: #0c2340;
+    --font-serif: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+    --font-code: 'JetBrains Mono', 'SF Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  
+  header {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: var(--font-code);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--accent-hover); }
+
+  nav a {
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  nav a:hover { color: var(--text); }
+
+  
+  .article-header {
+    padding: 80px 0 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .article-header__eyebrow {
+    font-family: var(--font-code);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--teal);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .article-header h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    font-family: var(--font-code);
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .article-meta__sep {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--border-strong);
+  }
+
+  .article-body {
+    padding: 48px 0;
+  }
+
+  .article-body h2 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin: 48px 0 16px;
+    line-height: 1.3;
+    color: var(--text);
+  }
+
+  .article-body h2:first-child {
+    margin-top: 0;
+  }
+
+  .article-body h3 {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+    margin: 32px 0 12px;
+    color: var(--text);
+  }
+
+  .article-body p {
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .article-body strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .article-body ul, .article-body ol {
+    margin: 0 0 16px 24px;
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  .article-body li {
+    margin-bottom: 8px;
+  }
+
+  .article-body a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-color: var(--border-strong);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.2s;
+  }
+
+  .article-body a:hover {
+    text-decoration-color: var(--accent);
+  }
+
+  
+  .article-body blockquote {
+    margin: 28px 0;
+    padding: 24px 28px;
+    background: var(--bg-alt);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+  }
+
+  .article-body blockquote p {
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 8px;
+  }
+
+  .article-body blockquote p:last-child {
+    margin-bottom: 0;
+  }
+
+  .article-body blockquote cite {
+    display: block;
+    font-family: var(--font-code);
+    font-size: 11px;
+    color: var(--text-muted);
+    font-style: normal;
+    margin-top: 8px;
+  }
+
+  
+  .table-wrapper {
+    margin: 24px 0 32px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .article-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .article-table th,
+  .article-table td {
+    padding: 13px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .article-table tr:last-child td { border-bottom: none; }
+
+  .article-table th {
+    color: var(--text-muted);
+    font-family: var(--font-code);
+    font-weight: 500;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--bg-alt);
+    white-space: nowrap;
+  }
+
+  .article-table td {
+    color: var(--text-body);
+    line-height: 1.6;
+    vertical-align: top;
+  }
+
+  .article-table td:first-child {
+    color: var(--text);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .article-table .highlight-col {
+    background: var(--accent-light);
+  }
+
+  
+  .callout {
+    margin: 28px 0;
+    padding: 24px 28px;
+    border-radius: 8px;
+    border: 1px solid;
+  }
+
+  .callout--warning {
+    background: #fffbeb;
+    border-color: #fde68a;
+  }
+
+  .callout--info {
+    background: var(--accent-light);
+    border-color: #c7d9f0;
+  }
+
+  .callout--danger {
+    background: #fef2f2;
+    border-color: #fecaca;
+  }
+
+  .callout__label {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .callout--warning .callout__label { color: #92400e; }
+  .callout--info .callout__label { color: var(--accent); }
+  .callout--danger .callout__label { color: #991b1b; }
+
+  .callout p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--text-body);
+    margin-bottom: 8px;
+  }
+
+  .callout p:last-child { margin-bottom: 0; }
+
+  .callout ul {
+    margin: 8px 0 8px 20px;
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--text-body);
+  }
+
+  .callout li { margin-bottom: 4px; }
+
+  
+  .article-body code {
+    font-family: var(--font-code);
+    font-size: 12px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--accent);
+  }
+
+  
+  .article-cta {
+    margin: 48px 0;
+    padding: 40px 36px;
+    background: var(--code-bg);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .article-cta h3 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: #f1f5f9;
+    margin: 0 0 12px;
+  }
+
+  .article-cta p {
+    font-size: 14px;
+    color: #94a3b8;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 28px;
+    background: #fff;
+    color: var(--accent);
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary:hover {
+    background: #f1f5f9;
+    color: var(--accent);
+  }
+
+  
+  .sources {
+    padding: 32px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .sources__title {
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  .sources ol {
+    margin: 0 0 0 20px;
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+
+  .sources a {
+    color: var(--text-muted);
+    text-decoration: underline;
+    text-decoration-color: var(--border);
+    text-underline-offset: 2px;
+  }
+
+  .sources a:hover { color: var(--text-body); }
+
+  
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--text); }
+
+  
+  @media (max-width: 640px) {
+    .article-header { padding: 48px 0 32px; }
+    .article-header h1 { font-size: 1.75rem; }
+    .article-body { padding: 32px 0; }
+    .article-body h2 { font-size: 20px; margin-top: 36px; }
+    .article-table th, .article-table td { padding: 10px 14px; font-size: 12px; }
+    .article-cta { padding: 32px 24px; }
+    .callout { padding: 20px 20px; }
+    .article-meta { gap: 12px; }
+  }
+
+  
+  .breadcrumb { padding: 12px 0; border-bottom: 1px solid var(--border); background: var(--bg-alt); }
+  .breadcrumb a, .breadcrumb span { font-family: var(--font-code); font-size: 11px; letter-spacing: 0.01em; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb__sep { color: #cbd5e1; margin: 0 6px; }
+  .breadcrumb__current { color: var(--text-body); }
+
+  
+  .nav-links { display: flex; align-items: center; gap: 20px; }
+  .nav-link.active { color: var(--text); }
+  @media (max-width: 640px) { .nav-links { gap: 12px; } .nav-link { font-size: 11px; } }
+
+  
+  .related-articles { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+  .related-articles h3 { font-family: var(--font-code); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 16px; margin-top: 0; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .related-card { display: flex; flex-direction: column; gap: 8px; padding: 20px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; transition: border-color 0.2s; }
+  .related-card:hover { border-color: var(--accent); }
+  .related-card__tag { font-family: var(--font-code); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--teal); }
+  .related-card__title { font-family: var(--font-serif); font-size: 15px; color: var(--text); line-height: 1.35; }
+  .related-card__arrow { font-family: var(--font-code); font-size: 12px; color: var(--text-muted); margin-top: auto; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="/" class="logo">chain<span>screen</span></a>
+    <nav class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/regulations/" class="nav-link">Regulations</a>
+      <a href="/operations/" class="nav-link">Operations</a>
+      <a href="/tools/" class="nav-link active">Tools</a>
+      <a href="/technical/" class="nav-link">Technical</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <div class="container">
+    <a href="/">Home</a><span class="breadcrumb__sep">/</span>
+    <a href="/tools/">Tools</a><span class="breadcrumb__sep">/</span>
+    <span class="breadcrumb__current">Screening vs. Monitoring</span>
+  </div>
+</nav>
+
+<section class="article-header">
+  <div class="container">
+    <div class="article-header__eyebrow">Regulatory analysis</div>
+    <h1>Sanctions Screening vs. Transaction Monitoring: What Does Your EU Regulator Actually Require?</h1>
+    <div class="article-meta">
+      <span>Published: March 2026</span>
+      <div class="article-meta__sep"></div>
+      <span>Reading time: 9 min</span>
+      <div class="article-meta__sep"></div>
+      <span>Sources: EUR-Lex, EBA, CySEC, AMLA, FATF, OFAC, Chainalysis</span>
+    </div>
+  </div>
+</section>
+
+<article class="article-body">
+  <div class="container">
+
+    <h2>What confusion do compliance officers keep making?</h2>
+
+    <p>If you run a small crypto-asset service provider in the EU, you've probably heard both terms thrown around interchangeably: <strong>sanctions screening</strong> and <strong>transaction monitoring</strong>. Compliance consultants bundle them. Vendors sell them together. Regulators mention them in the same breath.</p>
+
+    <p>But they are <strong>legally separate obligations</strong> with different legal bases, different triggers, different outputs, and different consequences when you get them wrong. Conflating the two is not just imprecise — it creates real compliance gaps that regulators will find.</p>
+
+    <p>This article breaks down what each obligation requires, where the legal authority comes from, and what a minimum viable compliance stack looks like for a small CASP operating in the EU as of 10 July 2026.</p>
+
+    <h2>What are the two separate legal regimes?</h2>
+
+    <p>The distinction matters because these obligations come from entirely different parts of EU law.</p>
+
+    <h3>Sanctions screening</h3>
+
+    <p>Sanctions screening is governed by <strong>EU Council sanctions regulations</strong> — the individual restrictive measures adopted under the Common Foreign and Security Policy (CFSP). The implementing guidance comes from two EBA guidelines published in 2024:</p>
+
+    <ul>
+      <li><strong>EBA GL/2024/14</strong> — Guidelines on internal policies, procedures and controls to ensure the implementation of Union and national restrictive measures</li>
+      <li><strong>EBA GL/2024/15</strong> — Guidelines on internal policies, procedures and controls to ensure the implementation of Union and national restrictive measures under Regulation (EU) 2023/1113</li>
+    </ul>
+
+    <p>These guidelines apply from <strong>30 December 2025</strong>. EBA GL/2024/14 applies across financial institutions in the EBA's supervisory remit; EBA GL/2024/15 is specific to PSPs and CASPs carrying out transfers of funds or crypto-assets.</p>
+
+    <h3>AML transaction monitoring</h3>
+
+    <p>Transaction monitoring falls under the anti-money laundering framework. Current obligations come from the AML/CFT framework and national implementation, while <strong>AMLR 2024/1624 Article 26</strong> will apply directly from <strong>10 July 2027</strong>. The main EBA guidance for CASP ML/TF risk is:</p>
+
+    <ul>
+      <li><strong>EBA GL/2024/01</strong> — Guidelines amending the ML/TF Risk Factors Guidelines to add CASP-specific risk factors and mitigating measures</li>
+    </ul>
+
+    <p>These are different legal instruments, drafted by different EBA working groups, with different compliance timelines.</p>
+
+    <h2>How do sanctions screening and risk scoring compare side by side?</h2>
+
+    <p>Here is what each obligation actually requires:</p>
+
+    <div class="table-wrapper">
+      <table class="article-table">
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th>Sanctions screening</th>
+            <th>AML transaction monitoring</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Legal basis</td>
+            <td>EU sanctions regs + EBA GL/2024/14-15</td>
+            <td>AML/CFT framework + EBA GL/2024/01; AMLR Art 26 from 10 Jul 2027</td>
+          </tr>
+          <tr>
+            <td>What it does</td>
+            <td>Checks customers, counterparties, ownership/control links, and transfer data against applicable restrictive measures</td>
+            <td>Analyzes patterns to detect suspicious activity</td>
+          </tr>
+          <tr>
+            <td>Trigger</td>
+            <td>Potential match to a designated person, entity, ownership/control link, or listed identifier</td>
+            <td>Deviation from expected customer behavior</td>
+          </tr>
+          <tr>
+            <td>When</td>
+            <td>At onboarding, during the relationship, before or during relevant transfers, and when lists update</td>
+            <td>Continuously throughout the business relationship</td>
+          </tr>
+          <tr>
+            <td>Output</td>
+            <td>Potential match / confirmed match / no match</td>
+            <td>Risk score, alert, STR</td>
+          </tr>
+          <tr>
+            <td>Required action</td>
+            <td>Freeze or avoid making assets available where applicable; report as required</td>
+            <td>Investigate, apply enhanced due diligence where appropriate, file an STR when suspicion threshold is met</td>
+          </tr>
+          <tr>
+            <td>Can you skip it?</td>
+            <td>No, for in-scope CASPs.</td>
+            <td>No, for in-scope CASPs.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>The key distinction: sanctions screening is a <strong>binary check</strong> (is this entity on a list or not?), while transaction monitoring is <strong>behavioral analysis</strong> (does this pattern look suspicious?). Both are mandatory. Neither can substitute for the other.</p>
+
+    <h2>Does the EBA explicitly expect blockchain analytics?</h2>
+
+    <blockquote>
+      <p>"CASPs should apply <strong>advanced analytics tools</strong> to assess the risk associated with transactions, particularly transactions involving self-hosted addresses."</p>
+      <cite>EBA GL/2024/01 — Guidelines amending the ML/TF Risk Factors Guidelines</cite>
+    </blockquote>
+
+    <p>The important nuance: EBA GL/2024/01 is still risk-based. It also says firms should assess whether advanced analytics tools, including distributed ledger or blockchain analytics tools, are necessary in light of their business and customer transaction risk. A small CASP can calibrate the tooling, but a decision to use no on-chain analytics should be backed by a documented ML/TF risk assessment.</p>
+
+    <h2>Does a "risk-based approach" mean small CASPs can skip things?</h2>
+
+    <p>The most dangerous misunderstanding in CASP compliance is the belief that the "risk-based approach" allows small firms to skip obligations entirely. It does not.</p>
+
+    <h3>What scales with the risk-based approach</h3>
+
+    <ul>
+      <li>The <strong>intensity and frequency</strong> of ongoing monitoring</li>
+      <li>The <strong>sophistication</strong> of your monitoring tools (a 10-person CASP doesn't need the same system as Binance)</li>
+      <li>The <strong>depth</strong> of enhanced due diligence measures</li>
+    </ul>
+
+    <h3>What does NOT disappear — core obligations for EU CASPs</h3>
+
+    <ul>
+      <li>Sanctions screening</li>
+      <li>Customer due diligence (CDD)</li>
+      <li>Ongoing monitoring of the business relationship</li>
+      <li>Travel Rule compliance</li>
+      <li>STR filing with your national FIU</li>
+      <li>Maintaining a designated compliance function</li>
+      <li>Record-keeping for a minimum of 5 years</li>
+    </ul>
+
+    <div class="callout callout--warning">
+      <div class="callout__label">Common mistake</div>
+      <p>"We're small, so we use a risk-based approach" is not a valid reason to skip sanctions screening, CDD, or Travel Rule compliance where those obligations apply. A risk-based approach determines <em>how intensely</em> you apply these controls — not <em>whether</em> you apply them.</p>
+    </div>
+
+    <h2>Is there a threshold for CASP-to-CASP transfers under the Travel Rule?</h2>
+
+    <p>The Transfer of Funds Regulation (TFR, Regulation 2023/1113) has applied since <strong>30 December 2024</strong>. The EU implementation differs from the FATF minimum in two important ways:</p>
+
+    <ul>
+      <li><strong>No de minimis threshold</strong> for CASP-to-CASP transfers. Unlike the FATF threshold option of no higher than USD/EUR 1,000, the EU requires originator and beneficiary information for <em>every</em> in-scope CASP-to-CASP transfer, regardless of amount.</li>
+      <li><strong>Self-hosted wallet verification threshold: EUR 1,000.</strong> For transfers to or from self-hosted addresses exceeding EUR 1,000, the CASP must verify whether the address is effectively owned or controlled by the CASP's customer.</li>
+    </ul>
+
+    <p>If your Travel Rule solution only sends or checks originator and beneficiary data above the FATF threshold, it is not aligned with the EU implementation.</p>
+
+    <h2>What does the Chainalysis free oracle cover — and what doesn't it?</h2>
+
+    <p>Many small CASPs use the Chainalysis free sanctions oracle as their screening solution. It's important to understand exactly what this covers.</p>
+
+    <div class="callout callout--danger">
+      <div class="callout__label">Limitations of free tools</div>
+      <p>Chainalysis says its sanctions data includes, but is not limited to, lists imposed by the <strong>US, EU, or UN</strong>. That list scope is not the same as a complete EU compliance control. The free oracle provides:</p>
+      <ul>
+        <li><strong>No built-in audit trail for your firm</strong> -- you still need timestamped records of screening activity</li>
+        <li><strong>No inspection pack</strong> -- you still need evidence explaining your process, escalation, and decisions</li>
+        <li><strong>No risk scoring</strong> -- binary yes/no only, no graduated risk assessment</li>
+        <li><strong>No list version tracking</strong> -- no proof of which list version was current when you screened</li>
+      </ul>
+      <p>Its own disclaimer states it cannot guarantee the accuracy, timeliness, suitability, or validity of the data. If this is your sole screening tool without additional audit infrastructure, you have a significant evidence gap for any EU-regulated CASP.</p>
+    </div>
+
+    <p>This doesn't mean the free oracle is useless. It can serve as a screening layer in a multi-tool setup. But relying on a binary check without your own audit trails, escalation workflow, and list/version evidence means you may not be able to prove to your regulator what you screened, when, or against which data source.</p>
+
+    <h2>What do regulators actually check?</h2>
+
+    <p>The theory is one thing. Here's what primary supervisory material shows regulators are checking in practice.</p>
+
+    <h3>CySEC (Circular C685)</h3>
+
+    <p>CySEC published Circular C685 on <strong>27 February 2025</strong> to regulated entities including CASPs. It reported thematic inspections of sanctions screening systems, focused on UN and EU sanctions lists and relevant U.S. and UK screening practices. CySEC said overall effectiveness and efficiency required improvement, and pointed firms to guidance on ongoing screening, screening-system management, quality assurance, testing, tuning, and optimisation.</p>
+
+    <h3>EBA supervisory expectations</h3>
+
+    <p>The EBA's Travel Rule Guidelines require CASPs to have policies and procedures for detecting missing or incomplete transfer information and for managing transfers that lack required information. EBA GL/2024/01 separately points CASPs toward advanced analytics tools for assessing transaction risk, particularly where self-hosted addresses are involved.</p>
+
+    <h3>AMLA</h3>
+
+    <p>The EU's new Anti-Money Laundering Authority started operations in <strong>summer 2025</strong>. As of 10 July 2026, direct supervision has not yet started: AMLA says the first selection process will take place in 2027 and selected entities will transfer to EU-level supervision from 2028. CASPs can be in scope if they meet the cross-border and risk criteria.</p>
+
+    <div class="callout callout--info">
+      <div class="callout__label">Inspection reality</div>
+      <p>Supervisors are testing systems and evidence, not just written policies. CySEC's C685 circular is a useful example: it discusses thematic inspections, common weaknesses, ongoing screening practices, system management, and testing methodologies.</p>
+    </div>
+
+    <h2>What is the minimum viable compliance stack for a small CASP?</h2>
+
+    <p>If you're a CASP with 5-30 employees operating under MiCA or transitional provisions, here is the minimum set of tools and processes you need:</p>
+
+    <div class="table-wrapper">
+      <table class="article-table">
+        <thead>
+          <tr>
+            <th>Obligation</th>
+            <th>What you need</th>
+            <th>Example providers</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Sanctions controls</td>
+            <td>Screening against EU and applicable national restrictive measures; other lists such as OFAC/UK where legally applicable or adopted by policy; audit trail</td>
+            <td>Scorechain, Crystal, sanctions.io, focused screening vendors</td>
+          </tr>
+          <tr>
+            <td>Transaction monitoring</td>
+            <td>Automated system detecting unusual patterns</td>
+            <td>Varies by volume and complexity</td>
+          </tr>
+          <tr>
+            <td>Blockchain analytics</td>
+            <td>On-chain address risk analysis where warranted, especially self-hosted address exposure</td>
+            <td>Chainalysis, Elliptic, Crystal, Scorechain</td>
+          </tr>
+          <tr>
+            <td>Travel Rule</td>
+            <td>Originator/beneficiary data exchange, CASP-to-CASP</td>
+            <td>Notabene, Sygna</td>
+          </tr>
+          <tr>
+            <td>CDD / KYC</td>
+            <td>Identity verification, document checks, liveness</td>
+            <td>Sumsub, Jumio, Onfido</td>
+          </tr>
+          <tr>
+            <td>STR filing</td>
+            <td>Suspicious transaction reports to national FIU</td>
+            <td>Manual process + FIU templates</td>
+          </tr>
+          <tr>
+            <td>Compliance officer</td>
+            <td>Designated compliance function for AML/sanctions controls</td>
+            <td>In-house or outsourced MLRO</td>
+          </tr>
+          <tr>
+            <td>Record-keeping</td>
+            <td>All CDD, transactions, screening logs</td>
+            <td>5 years minimum retention</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>You don't need every tool on day one, and the risk-based approach allows you to calibrate sophistication to your actual transaction volume and risk profile. But each line needs either operational coverage or a documented risk-based rationale for the chosen control level.</p>
+
+    <h2>What is the key regulatory timeline?</h2>
+
+    <p>Here is where things stand as of 10 July 2026, and what's still coming:</p>
+
+    <div class="table-wrapper">
+      <table class="article-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>What happened / what's coming</th>
+            <th>Impact</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>30 Dec 2024</td>
+            <td>MiCA CASP regime, TFR, EBA GL/2024/01, and EBA GL/2024/11 apply</td>
+            <td>MiCA authorisation framework and EU Travel Rule controls apply</td>
+          </tr>
+          <tr>
+            <td>Feb 2025</td>
+            <td>CySEC Circular C685 published</td>
+            <td>Cyprus-specific CASP supervision expectations clarified</td>
+          </tr>
+          <tr>
+            <td>Summer 2025</td>
+            <td>AMLA becomes operational</td>
+            <td>Policy, convergence, FIU support, and set-up work begin; direct supervision has not started</td>
+          </tr>
+          <tr>
+            <td>30 Dec 2025</td>
+            <td>EBA GL/2024/14-15 (sanctions guidelines) apply</td>
+            <td>Detailed sanctions screening requirements enforceable</td>
+          </tr>
+          <tr>
+            <td>10 Jul 2027</td>
+            <td>AMLR 2024/1624 directly applicable</td>
+            <td>Single EU AML rulebook replaces national transpositions</td>
+          </tr>
+          <tr>
+            <td>2028</td>
+            <td>AMLA direct supervision starts for selected high-risk financial entities</td>
+            <td>Large cross-border CASPs can be selected if they meet the criteria</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>If you are reading this on 10 July 2026, the first four rows are already in effect. The AMLR is one year away, and AMLA direct supervision is scheduled to begin in 2028.</p>
+
+    <h2>What does this mean for your compliance program?</h2>
+
+    <p>Stop treating sanctions screening and transaction monitoring as one thing. They are two separate obligations, from two separate legal regimes, with separate EBA guidance. Your compliance program needs distinct policies, procedures, and controls for each.</p>
+
+    <p>The risk-based approach is not a loophole. It lets you calibrate the intensity of controls, not eliminate them. A 10-person CASP doesn't need the same transaction monitoring system as a major exchange — but it does need <em>a</em> system.</p>
+
+    <p>Free tools can be part of the stack, but they cannot be the whole stack. Even if a free tool includes data from multiple sanctions regimes, it gives you a binary result without your firm's audit trail. If you have no timestamped records, you have no durable proof of what you screened.</p>
+
+    <p>The regulatory environment is live, but not every future element has started. MiCA and the Travel Rule apply. EBA sanctions guidelines are in effect. AMLA is operational, with direct supervision scheduled for 2028. The question is not whether you need to comply — it's whether you can demonstrate compliance when your regulator asks.</p>
+
+    <div class="article-cta">
+      <h3>Check which obligations you're covering</h3>
+      <p>Take the 2-minute compliance self-check. See where you stand against all 10 EBA sanctions screening requirements.</p>
+      <a href="/regulations/" class="btn-primary">
+        Take the self-check &rarr;
+      </a>
+    </div>
+
+    <div class="sources">
+      <div class="sources__title">Sources &amp; references</div>
+      <ol>
+        <li>Regulation (EU) 2023/1114 (MiCA) — Markets in Crypto-Assets Regulation. <a href="https://eur-lex.europa.eu/eli/reg/2023/1114">EUR-Lex</a></li>
+        <li>Regulation (EU) 2023/1113 (TFR) — Transfer of Funds Regulation, recast. <a href="https://eur-lex.europa.eu/eli/reg/2023/1113">EUR-Lex</a></li>
+        <li>Regulation (EU) 2024/1624 (AMLR) — Anti-Money Laundering Regulation. <a href="https://eur-lex.europa.eu/eli/reg/2024/1624">EUR-Lex</a></li>
+        <li>Regulation (EU) 2024/1620 — AMLA Regulation. <a href="https://eur-lex.europa.eu/eli/reg/2024/1620">EUR-Lex</a></li>
+        <li>EBA GL/2024/01 — Guidelines amending the ML/TF Risk Factors Guidelines for CASPs. <a href="https://www.eba.europa.eu/legacy/regulation-and-policy/regulatory-activities/anti-money-laundering-and-countering-financing-1">EBA</a></li>
+        <li>EBA GL/2024/11 — Travel Rule Guidelines under Regulation (EU) 2023/1113. <a href="https://www.eba.europa.eu/activities/single-rulebook/regulatory-activities/anti-money-laundering-and-countering-financing-terrorism/guidelines-information-requirements-relation-transfers-funds-and-certain-crypto-assets-transfers">EBA</a></li>
+        <li>EBA GL/2024/14 and EBA GL/2024/15 — Guidelines on internal policies, procedures and controls to ensure the implementation of Union and national restrictive measures. <a href="https://www.eba.europa.eu/activities/single-rulebook/regulatory-activities/anti-money-laundering-and-countering-financing-terrorism/guidelines-internal-policies-procedures-and-controls-ensure-implementation-union-and-national">EBA</a></li>
+        <li>CySEC Circular C685 — Guidance on Sanctions Screening Systems (27 February 2025). <a href="https://www.cysec.gov.cy/en-GB/public-info/circulars/supervised/casp-circulars/99064/">CySEC</a></li>
+        <li>AMLA — FAQs on mandate, timeline, and direct supervision. <a href="https://www.amla.europa.eu/faqs_en">AMLA</a></li>
+        <li>FATF — Updated Guidance for a Risk-Based Approach to Virtual Assets and VASPs (2021) and Recommendation 16 updates. <a href="https://www.fatf-gafi.org/en/publications/Fatfrecommendations/Guidance-rba-virtual-assets-2021.html">FATF</a></li>
+        <li>OFAC — Basic Information on OFAC and sanctions compliance. <a href="https://ofac.treasury.gov/faqs/11">OFAC</a></li>
+        <li>Chainalysis Oracle documentation — sanctions data definition and disclaimer. <a href="https://go.chainalysis.com/chainalysis-oracle-docs.html">Chainalysis</a></li>
+      </ol>
+    </div>
+
+  
+
+    <div class="related-articles">
+      <h3>Related articles</h3>
+      <div class="related-grid">
+        <a href="/tools/sanctions-screening-tools-comparison" class="related-card">
+          <span class="related-card__tag">Tools</span>
+          <span class="related-card__title">Sanctions Screening Tools: Price and Feature Comparison</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+        <a href="/technical/blockchain-analytics-address-clustering" class="related-card">
+          <span class="related-card__tag">Technical</span>
+          <span class="related-card__title">Address Clustering, Mixing Detection, and Source of Funds</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+        <a href="/regulations/eba-guidelines-casps" class="related-card">
+          <span class="related-card__tag">Regulations</span>
+          <span class="related-card__title">EBA Guidelines on Restrictive Measures: What Every Small CASP Must Do</span>
+          <span class="related-card__arrow">Read &rarr;</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+<div style="margin: 40px 0; padding: 24px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; text-align: center;">
+  <p style="font-size: 15px; color: #475569; margin-bottom: 12px;">Need screening records and audit-ready evidence, not just a binary check?</p>
+  <a href="mailto:info@chainscreen.io" style="display: inline-block; padding: 12px 24px; background: #0c2340; color: #fff; border-radius: 8px; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600;">Contact ChainScreen</a>
+</div>
+
+
+<footer>
+  <div class="container">
+    &copy; 2026 DailyMind LTD &middot; HE 439959 &middot; Limassol, Cyprus
+    &nbsp;&middot;&nbsp;
+    <span>Information only; not legal advice</span>
+    &nbsp;&middot;&nbsp;
+    <a href="/privacy">Privacy</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://dailymind.eu">dailymind.eu</a>
+  </div>
+</footer>
+<script data-goatcounter="https://gc-chainscreen.vigilcom.dev/count"
+        async src="//gc.vigilcom.dev/count.js"></script>
+<script src="/nav.js" defer></script>
+</body>
+</html>
